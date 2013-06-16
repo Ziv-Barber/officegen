@@ -10,10 +10,13 @@ pptx.startNewDoc ();
 pptx.setDocTitle ( 'Sample PPTX Document' );
 
 slide = pptx.makeNewSlide ();
-slide.name = 'Ziv!';
-slide.addText ( 'Ziv Barber', { x: 600000, y: 10000, font_size: 56, cx: 10000000 } );
-slide.addText ( '222', { y: 850000, font_size: 48 } );
+slide.name = 'The first slide!';
+slide.back = 'ff0000';
+// slide.fill = 'ffffff';
+slide.addText ( 'Hello World!', { x: 600000, y: 10000, font_size: 56, cx: 10000000 } );
+slide.addText ( 'Office generator', { y: 850000, font_size: 48 } );
 slide = pptx.makeNewSlide ();
+slide.back = { type: 'solid', color: '00ff00' };
 slide = pptx.makeNewSlide ();
 slide = pptx.makeNewSlide ();
 

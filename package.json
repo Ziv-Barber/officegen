@@ -1,7 +1,7 @@
 {
 	"name": "officegen",
 	"description": "Standalone Office Open XML files (Microsoft Office 2007 and later) generator for Word (docx), PowerPoint (pptx) and Excell (xlsx)",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"repository": "git://github.com/Ziv-Barber/officegen.git",
 	"main": "./index.js",
 	"directories" : {

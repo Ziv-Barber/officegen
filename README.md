@@ -19,17 +19,20 @@ better to wait for more stable releases if you want to improve it.
 - [Installation](#a2)
 - [Public API](#a3)
 - [Examples](#a4)
-- [Hackers' Wonderland] (#a5)
-- [License](#a6)
+- [Hackers Wonderland] (#a5)
+- [Support] (#a6)
+- [License](#a7)
 
 <a name="a1"/>
 ## Features: ##
 
 - Generating Microsoft PowerPoint document (.pptx file):
-  - Basic features working.
-- Generating Microsoft Word document (.docx file):
-  - Not yet there.
+  - Create PowerPoint document with one or more slides.
+  - Add text objects to each slide.
+  - Can declare fonts, colors and background.
 - Generating Microsoft Excel document (.xlsx file):
+  - Create Excel document with one or more sheets (still needs some work).
+- Generating Microsoft Word document (.docx file):
   - Not yet there.
 
 <a name="a2"/>
@@ -78,13 +81,42 @@ var out = fs.createWriteStream ( 'out.pptx' );
 pptx.generate ( out );
 ```
 
+Generating HTTP stream (no file been created):
+
+```js
+var http = require("http");
+
+http.createServer ( function ( request, response ) {
+	var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
+		// ... (called after finishing to serve the user)
+	} } );
+
+	// ... (fill pptx with data)
+
+	pptx.generate ( response );
+}).listen ( 3000 );
+```
+
 Creating new slides for pptx:
 
 ```js
 slide = pptx.makeNewSlide ();
+slide.back = '000088';
 ```
 
-Example to put text line inside the new slide:
+Changing the background color of a slide:
+
+```js
+slide.back = '000088';
+```
+
+or:
+
+```js
+slide.back = { type: 'solid', color: '008800' };
+```
+
+Example to put text inside the new slide:
 
 ```js
 slide.addText ( 'Hello World!!!', { x: 600000, y: 10000, font_size: 56, cx: 10000000 } );
@@ -94,13 +126,23 @@ slide.addText ( 'Hello World!!!', { x: 600000, y: 10000, font_size: 56, cx: 1000
 ## Examples: ##
 
 - examples/make_pptx.js - Example how to create a PowerPoint 2007 presentation and save it into file.
+- examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
+- examples/make_xlsx.js - Example how to create a Excel 2007 sheet and save it into file.
 
 <a name="a5"/>
-## Hackers' Wonderland: ##
+## Hackers Wonderland: ##
 
-Right now please refer to the code. More information will be added later.
+This section on the readme file will describe how to hack into the code. 
+Right now please refer to the code itself. More information will be added later.
 
 <a name="a6"/>
+## Support: ##
+
+Please visit the officegen Google Group:
+
+https://groups.google.com/forum/?fromgroups#!forum/node-officegen
+
+<a name="a7"/>
 ## License: ##
 
 (The MIT License)

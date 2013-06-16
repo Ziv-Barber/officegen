@@ -360,60 +360,158 @@ officegen = function ( options ) {
 		return outString;
 	}
 
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data Ignored by this callback function.
+	///
 	function cbMakePptxSlideMasters ( data ) {
 		return cbMakeMsOfficeBasicXml ( data ) + '<p:sldMaster xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:cSld><p:bg><p:bgRef idx="1001"><a:schemeClr val="bg1"/></p:bgRef></p:bg><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr><p:sp><p:nvSpPr><p:cNvPr id="2" name="Title Placeholder 1"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="457200" y="274638"/><a:ext cx="8229600" cy="1143000"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="91440" tIns="45720" rIns="91440" bIns="45720" rtlCol="0" anchor="ctr"><a:normAutofit/></a:bodyPr><a:lstStyle/><a:p><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Click to edit Master title style</a:t></a:r><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="3" name="Text Placeholder 2"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="1"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="457200" y="1600200"/><a:ext cx="8229600" cy="4525963"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="91440" tIns="45720" rIns="91440" bIns="45720" rtlCol="0"><a:normAutofit/></a:bodyPr><a:lstStyle/><a:p><a:pPr lvl="0"/><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Click to edit Master text styles</a:t></a:r></a:p><a:p><a:pPr lvl="1"/><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Second level</a:t></a:r></a:p><a:p><a:pPr lvl="2"/><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Third level</a:t></a:r></a:p><a:p><a:pPr lvl="3"/><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Fourth level</a:t></a:r></a:p><a:p><a:pPr lvl="4"/><a:r><a:rPr lang="en-US" smtClean="0"/><a:t>Fifth level</a:t></a:r><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="4" name="Date Placeholder 3"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="dt" sz="half" idx="2"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="457200" y="6356350"/><a:ext cx="2133600" cy="365125"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="91440" tIns="45720" rIns="91440" bIns="45720" rtlCol="0" anchor="ctr"/><a:lstStyle><a:lvl1pPr algn="l"><a:defRPr sz="1200"><a:solidFill><a:schemeClr val="tx1"><a:tint val="75000"/></a:schemeClr></a:solidFill></a:defRPr></a:lvl1pPr></a:lstStyle><a:p><a:fld id="{F8166F1F-CE9B-4651-A6AA-CD717754106B}" type="datetimeFigureOut"><a:rPr lang="en-US" smtClean="0"/><a:t>6/13/2013</a:t></a:fld><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="5" name="Footer Placeholder 4"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="ftr" sz="quarter" idx="3"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="3124200" y="6356350"/><a:ext cx="2895600" cy="365125"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="91440" tIns="45720" rIns="91440" bIns="45720" rtlCol="0" anchor="ctr"/><a:lstStyle><a:lvl1pPr algn="ctr"><a:defRPr sz="1200"><a:solidFill><a:schemeClr val="tx1"><a:tint val="75000"/></a:schemeClr></a:solidFill></a:defRPr></a:lvl1pPr></a:lstStyle><a:p><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="6" name="Slide Number Placeholder 5"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="sldNum" sz="quarter" idx="4"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="6553200" y="6356350"/><a:ext cx="2133600" cy="365125"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="91440" tIns="45720" rIns="91440" bIns="45720" rtlCol="0" anchor="ctr"/><a:lstStyle><a:lvl1pPr algn="r"><a:defRPr sz="1200"><a:solidFill><a:schemeClr val="tx1"><a:tint val="75000"/></a:schemeClr></a:solidFill></a:defRPr></a:lvl1pPr></a:lstStyle><a:p><a:fld id="{F7021451-1387-4CA6-816F-3879F97B5CBC}" type="slidenum"><a:rPr lang="en-US" smtClean="0"/><a:t>‹#›</a:t></a:fld><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp></p:spTree></p:cSld><p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/><p:sldLayoutIdLst><p:sldLayoutId id="2147483649" r:id="rId1"/></p:sldLayoutIdLst><p:txStyles><p:titleStyle><a:lvl1pPr algn="ctr" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="0"/></a:spcBef><a:buNone/><a:defRPr sz="4400" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mj-lt"/><a:ea typeface="+mj-ea"/><a:cs typeface="+mj-cs"/></a:defRPr></a:lvl1pPr></p:titleStyle><p:bodyStyle><a:lvl1pPr marL="342900" indent="-342900" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="3200" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl1pPr><a:lvl2pPr marL="742950" indent="-285750" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="–"/><a:defRPr sz="2800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl2pPr><a:lvl3pPr marL="1143000" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="2400" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl3pPr><a:lvl4pPr marL="1600200" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="–"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl4pPr><a:lvl5pPr marL="2057400" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="»"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl5pPr><a:lvl6pPr marL="2514600" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl6pPr><a:lvl7pPr marL="2971800" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl7pPr><a:lvl8pPr marL="3429000" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl8pPr><a:lvl9pPr marL="3886200" indent="-228600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:spcBef><a:spcPct val="20000"/></a:spcBef><a:buFont typeface="Arial" pitchFamily="34" charset="0"/><a:buChar char="•"/><a:defRPr sz="2000" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl9pPr></p:bodyStyle><p:otherStyle><a:defPPr><a:defRPr lang="en-US"/></a:defPPr><a:lvl1pPr marL="0" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl1pPr><a:lvl2pPr marL="457200" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl2pPr><a:lvl3pPr marL="914400" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl3pPr><a:lvl4pPr marL="1371600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl4pPr><a:lvl5pPr marL="1828800" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl5pPr><a:lvl6pPr marL="2286000" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl6pPr><a:lvl7pPr marL="2743200" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl7pPr><a:lvl8pPr marL="3200400" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl8pPr><a:lvl9pPr marL="3657600" algn="l" defTabSz="914400" rtl="0" eaLnBrk="1" latinLnBrk="0" hangingPunct="1"><a:defRPr sz="1800" kern="1200"><a:solidFill><a:schemeClr val="tx1"/></a:solidFill><a:latin typeface="+mn-lt"/><a:ea typeface="+mn-ea"/><a:cs typeface="+mn-cs"/></a:defRPr></a:lvl9pPr></p:otherStyle></p:txStyles></p:sldMaster>';
 	}
 
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	function cMakePptxColorSelection ( color_info, back_info )
+	{
+		var outText = '';
+		var colorVal;
+		var fillType = 'solid';
+
+		if ( back_info ) {
+			outText += '<p:bg><p:bgPr>';
+
+			outText += cMakePptxColorSelection ( back_info, false );
+
+			outText += '<a:effectLst/>';
+			// BMK_TODO:
+			
+			outText += '</p:bgPr></p:bg>';
+		} // Endif.
+
+		if ( color_info ) {
+			if ( typeof color_info == 'string' ) {
+				colorVal = color_info;
+
+			} else {
+				if ( color_info.type ) {
+					fillType = color_info.type;
+				} // Endif.
+
+				if ( color_info.color ) {
+					colorVal = color_info.color;
+				} // Endif.
+			} // Endif.
+
+			switch ( fillType )
+			{
+				case 'solid':
+					outText += '<a:solidFill><a:srgbClr val="' + colorVal + '"/></a:solidFill>';
+					break;
+			} // End of switch.
+		} // Endif.
+
+		return outText;
+	}
+
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	function cMakePptxOutTextData ( text_info ) {
+		// BMK_TODO:
+	}
+
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data The main slide object.
+	///
 	function cbMakePptxSlide ( data ) {
 		var outString = cbMakeMsOfficeBasicXml ( data ) + '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:cSld>';
+		var objs_list = data.data;
 
-		// BMK_TODO: background code:
-		// '<p:bg><p:bgPr><a:solidFill><a:srgbClr val="FF0000"/></a:solidFill><a:effectLst/></p:bgPr></p:bg>';
+		if ( data.slide.back ) {
+			outString += cMakePptxColorSelection ( false, data.slide.back );
+		} // Endif.
 
 		outString += '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>';
 
-		for ( var i = 0, total_size = data.length; i < total_size; i++ ) {
+		for ( var i = 0, total_size = objs_list.length; i < total_size; i++ ) {
 			var x = 0;
 			var y = 0;
 			var cx = 2819400;
 			var cy = 369332;
+
+			// General selection for all blocks:
 			var font_size = '';
+			var bold = '';
+			var underline = '';
+			var font_face = '/>';
 
 			var in_val;
 
-			if ( data[i].options )
-			{
-				if ( data[i].options.x )
-				{
-					x = data[i].options.x;
+			if ( objs_list[i].options ) {
+				if ( objs_list[i].options.x ) {
+					x = objs_list[i].options.x;
 				} // Endif.
 
-				if ( data[i].options.y )
-				{
-					y = data[i].options.y;
+				if ( objs_list[i].options.y ) {
+					y = objs_list[i].options.y;
 				} // Endif.
 
-				if ( data[i].options.cx )
-				{
-					cx = data[i].options.cx;
+				if ( objs_list[i].options.cx ) {
+					cx = objs_list[i].options.cx;
 				} // Endif.
 
-				if ( data[i].options.cy )
-				{
-					cy = data[i].options.cy;
+				if ( objs_list[i].options.cy ) {
+					cy = objs_list[i].options.cy;
 				} // Endif.
 
-				if ( data[i].options.font_size )
-				{
-					in_val = data[i].options.font_size;
+				if ( objs_list[i].options.bold ) {
+					bold = ' b="1"';
+				} // Endif.
+
+				if ( objs_list[i].options.underline ) {
+					underline = ' u="sng"';
+				} // Endif.
+
+				if ( objs_list[i].options.font_size ) {
+					in_val = objs_list[i].options.font_size;
 					font_size = ' sz="' + in_val + '00"';
+				} // Endif.
+
+				if ( objs_list[i].options.font_face ) {
+					in_val = objs_list[i].options.font_face;
+					font_face = '><a:latin typeface="' + in_val + '" pitchFamily="34" charset="0"/><a:cs typeface="' + in_val + '" pitchFamily="34" charset="0"/></a:rPr>';
 				} // Endif.
 			} // Endif.
 
-			switch ( data[i].type )
+			switch ( objs_list[i].type )
 			{
 				case 'text':
-					outString += '<p:sp><p:nvSpPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p><a:r><a:rPr lang="en-US"' + font_size + ' dirty="0" smtClean="0"/><a:t>' + data[i].text + '</a:t></a:r><a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody></p:sp>';
+					outString += '<p:sp><p:nvSpPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>';
+
+					if ( typeof objs_list[i].text == 'string' ) {
+						outString += '<a:r><a:rPr lang="en-US"' + font_size + bold + underline + ' dirty="0" smtClean="0"' + font_face + '<a:t>' + objs_list[i].text + '</a:t></a:r>';
+
+					} else {
+						for ( var j = 0, total_size_j = objs_list[i].text.length; j < total_size_j; j++ ) {
+							if ( objs_list[i].text[j] ) {
+								// objs_list[i].text[j]
+								// BMK_TODO:
+							} // Endif.
+						} // Endif.
+					} // Endif.
+
+					outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody></p:sp>';
 					break;
 			} // End of switch.
 		} // End of for loop.
@@ -424,15 +522,23 @@ officegen = function ( options ) {
 		return outString;
 	}
 
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data Ignored by this callback function.
+	///
 	function cbMakePptxApp ( data ) {
 		var slidesCount = gen_private.thisDoc.pages.length;
+		var userName = genobj.options.creator || 'officegen';
 		var outString = cbMakeMsOfficeBasicXml ( data ) + '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><TotalTime>0</TotalTime><Words>0</Words><Application>Microsoft Office PowerPoint</Application><PresentationFormat>On-screen Show (4:3)</PresentationFormat><Paragraphs>0</Paragraphs><Slides>' + slidesCount + '</Slides><Notes>0</Notes><HiddenSlides>0</HiddenSlides><MMClips>0</MMClips><ScaleCrop>false</ScaleCrop><HeadingPairs><vt:vector size="4" baseType="variant"><vt:variant><vt:lpstr>Theme</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant><vt:variant><vt:lpstr>Slide Titles</vt:lpstr></vt:variant><vt:variant><vt:i4>' + slidesCount + '</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="' + (slidesCount + 1) + '" baseType="lpstr"><vt:lpstr>Office Theme</vt:lpstr>';
 
 		for ( var i = 0, total_size = gen_private.thisDoc.pages.length; i < total_size; i++ ) {
 			outString += '<vt:lpstr>' + gen_private.thisDoc.pages[i].slide.name + '</vt:lpstr>';
 		} // End of for loop.
 
-		outString += '</vt:vector></TitlesOfParts><Company>home.org.il</Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>12.0000</AppVersion></Properties>';
+		outString += '</vt:vector></TitlesOfParts><Company>' + userName + '</Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>12.0000</AppVersion></Properties>';
 		return outString;
 	}
 
@@ -445,8 +551,21 @@ officegen = function ( options ) {
 	///
 	/// @param[in] data Ignored by this callback function.
 	///
-	function cbMakeFontsTable ( data ) {
-		return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:fonts xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:font w:name="Calibri"><w:panose1 w:val="020F0502020204030204"/><w:charset w:val="00"/><w:family w:val="swiss"/><w:pitch w:val="variable"/><w:sig w:usb0="A00002EF" w:usb1="4000207B" w:usb2="00000000" w:usb3="00000000" w:csb0="0000009F" w:csb1="00000000"/></w:font><w:font w:name="Arial"><w:panose1 w:val="020B0604020202020204"/><w:charset w:val="00"/><w:family w:val="swiss"/><w:pitch w:val="variable"/><w:sig w:usb0="20002A87" w:usb1="80000000" w:usb2="00000008" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/></w:font><w:font w:name="Times New Roman"><w:panose1 w:val="02020603050405020304"/><w:charset w:val="00"/><w:family w:val="roman"/><w:pitch w:val="variable"/><w:sig w:usb0="20002A87" w:usb1="80000000" w:usb2="00000008" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/></w:font><w:font w:name="Cambria"><w:panose1 w:val="02040503050406030204"/><w:charset w:val="00"/><w:family w:val="roman"/><w:pitch w:val="variable"/><w:sig w:usb0="A00002EF" w:usb1="4000004B" w:usb2="00000000" w:usb3="00000000" w:csb0="0000009F" w:csb1="00000000"/></w:font></w:fonts>';
+	function cbMakeDocxFontsTable ( data ) {
+		return cbMakeMsOfficeBasicXml ( data ) + '<w:fonts xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:font w:name="Calibri"><w:panose1 w:val="020F0502020204030204"/><w:charset w:val="00"/><w:family w:val="swiss"/><w:pitch w:val="variable"/><w:sig w:usb0="A00002EF" w:usb1="4000207B" w:usb2="00000000" w:usb3="00000000" w:csb0="0000009F" w:csb1="00000000"/></w:font><w:font w:name="Arial"><w:panose1 w:val="020B0604020202020204"/><w:charset w:val="00"/><w:family w:val="swiss"/><w:pitch w:val="variable"/><w:sig w:usb0="20002A87" w:usb1="80000000" w:usb2="00000008" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/></w:font><w:font w:name="Times New Roman"><w:panose1 w:val="02020603050405020304"/><w:charset w:val="00"/><w:family w:val="roman"/><w:pitch w:val="variable"/><w:sig w:usb0="20002A87" w:usb1="80000000" w:usb2="00000008" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/></w:font><w:font w:name="Cambria"><w:panose1 w:val="02040503050406030204"/><w:charset w:val="00"/><w:family w:val="roman"/><w:pitch w:val="variable"/><w:sig w:usb0="A00002EF" w:usb1="4000004B" w:usb2="00000000" w:usb3="00000000" w:csb0="0000009F" w:csb1="00000000"/></w:font></w:fonts>';
+	}
+
+	// Excel only:
+	
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data Ignored by this callback function.
+	///
+	function cbMakeXlsStyles ( data ) {
+		return cbMakeMsOfficeBasicXml ( data ) + '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="1"><font><sz val="11"/><color theme="1"/><name val="Calibri"/><family val="2"/><scheme val="minor"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles><dxfs count="0"/><tableStyles count="0" defaultTableStyle="TableStyleMedium9" defaultPivotStyle="PivotStyleLight16"/></styleSheet>';
 	}
 
 	///
@@ -456,10 +575,130 @@ officegen = function ( options ) {
 	///
 	/// @param[in] data Ignored by this callback function.
 	///
-	function cbMakeTestStream ( data ) {
-		return 'some stuff';
+	function cbMakeXlsApp ( data ) {
+		var pagesCount = gen_private.thisDoc.pages.length;
+		var userName = genobj.options.creator || 'officegen';
+		var outString = cbMakeMsOfficeBasicXml ( data ) + '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>Microsoft Excel</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>Worksheets</vt:lpstr></vt:variant><vt:variant><vt:i4>' + pagesCount + '</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="' + pagesCount + '" baseType="lpstr">';
+
+		for ( var i = 0, total_size = gen_private.thisDoc.pages.length; i < total_size; i++ ) {
+			outString += '<vt:lpstr>Sheet' + (i + 1) + '</vt:lpstr>';
+		} // End of for loop.
+
+		outString += '</vt:vector></TitlesOfParts><Company>' + userName + '</Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>12.0000</AppVersion></Properties>';
+		return outString;
 	}
 
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data Ignored by this callback function.
+	///
+	function cbMakeXlsWorkbook ( data ) {
+		var outString = cbMakeMsOfficeBasicXml ( data ) + '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><fileVersion appName="xl" lastEdited="4" lowestEdited="4" rupBuild="4507"/><workbookPr defaultThemeVersion="124226"/><bookViews><workbookView xWindow="120" yWindow="75" windowWidth="19095" windowHeight="7485"/></bookViews><sheets>';
+
+		for ( var i = 0, total_size = gen_private.thisDoc.pages.length; i < total_size; i++ ) {
+			var sheetName = gen_private.thisDoc.pages[i].name || 'Sheet' + (i + 1);
+			outString += '<sheet name="' + sheetName + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>';
+		} // End of for loop.
+
+		outString += '</sheets><calcPr calcId="125725"/></workbook>';
+		return outString;
+	}
+
+	function cbCellToNumber ( cell_string ) {
+		var cellNumber = 0;
+		var cellIndex = 0;
+		var cellMax = cell_string.length;
+
+		// Converted from C++ (from DuckWriteC++):
+		while ( cellIndex < cellMax )
+		{
+			var curChar = cell_string.charCodeAt ( cellIndex );
+			if ( (curChar >= 0x30) && (curChar <= 0x39) )
+			{
+				break;
+
+			} else if ( (curChar >= 0x41) && (curChar <= 0x5A) )
+			{
+				if ( cellIndex > 0 )
+				{
+					cellNumber++;
+					cellNumber *= (0x5B-0x41);
+				} // Endif.
+
+				cellNumber += (curChar - 0x41);
+
+			} else if ( (curChar >= 0x61) && (curChar <= 0x7A) )
+			{
+				if ( cellIndex > 0 )
+				{
+					cellNumber++;
+					cellNumber *= (0x5B-0x41);
+				} // Endif.
+
+				cellNumber += (curChar - 0x61);
+			} // Endif.
+
+			cellIndex++;
+		} // End of while loop.
+
+		return cellNumber;
+	}
+	
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] data The main sheet object.
+	///
+	function cbMakeXlsSheet ( data ) {
+		var outString = cbMakeMsOfficeBasicXml ( data ) + '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">';
+		var maxX = 'A';
+		var maxY = '1';
+		var maxAsNum = 0;
+		var curColNum;
+		var rowId;
+		var columnId;
+
+		for ( rowId in data.sheet.data ) {
+			maxY = (rowId > maxY) ? rowId : maxY;
+
+			for ( columnId in data.sheet.data[rowId] ) {
+				curColNum = cbCellToNumber ( columnId );
+				if ( curColNum > maxAsNum ) {
+					maxAsNum = curColNum;
+					maxX = columnId;
+				} // Endif.
+			} // End of for loop.
+		} // End of for loop.
+
+		outString += '<dimension ref="A1:' + maxX + '' + maxY + '"/><sheetViews>';
+		outString += '<sheetView tabSelected="1" workbookViewId="0"/>';
+		// outString += '<selection activeCell="A1" sqref="A1"/>';
+		outString += '</sheetViews><sheetFormatPr defaultRowHeight="15"/><sheetData>';
+
+		for ( rowId in data.sheet.data ) {
+			outString += '<row r="' + rowId + '" spans="1:2">';
+
+			for ( columnId in data.sheet.data[rowId] ) {
+				var isString = ''; // ' t="s"'
+				outString += '<c r="' + columnId + '' + rowId + '"' + isString + '><v>' + data.sheet.data[rowId][columnId] + '</v></c>';
+			} // End of for loop.
+
+			outString += '</row>';
+		} // End of for loop.
+
+		outString += '</sheetData><pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/></worksheet>';
+		return outString;
+	}
+
+	//
+	// Create all types:
+	//
+	
 	///
 	/// @brief ???.
 	///
@@ -516,8 +755,6 @@ officegen = function ( options ) {
 		intAddAnyResourceToParse ( '[Content_Types].xml', 'buffer', null, cbMakeMainFilesList, true );
 		intAddAnyResourceToParse ( 'docProps\\core.xml', 'buffer', null, cbMakeCore, true );
 		intAddAnyResourceToParse ( genobj.res_data.main_path + '\\theme\\theme1.xml', 'buffer', null, cbMakeTheme, true );
-
-		// BMK_TODO:
 	};
 
 	///
@@ -595,24 +832,6 @@ officegen = function ( options ) {
 		intAddAnyResourceToParse ( 'docProps\\app.xml', 'buffer', null, cbMakePptxApp, true );
 
 		genobj.rels_app.push (
-		/*
-			{
-				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/viewProps',
-				target: 'viewProps.xml'
-			},
-			{
-				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme',
-				target: 'theme/theme1.xml'
-			},
-			{
-				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/tableStyles',
-				target: 'tableStyles.xml'
-			},
-			{
-				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/presProps',
-				target: 'presProps.xml'
-			},
-		*/
 			{
 				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster',
 				target: 'slideMasters/slideMaster1.xml'
@@ -662,11 +881,7 @@ officegen = function ( options ) {
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = opt;
 			};
 
-			// BMK_TODO: add here all the functions of the slider
-			// pageNumber = the page number of this slide
-			// slideObj = the slide object
-
-			intAddAnyResourceToParse ( 'ppt\\slides\\slide' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber].data, cbMakePptxSlide, false );
+			intAddAnyResourceToParse ( 'ppt\\slides\\slide' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber], cbMakePptxSlide, false );
 			intAddAnyResourceToParse ( 'ppt\\slides\\_rels\\slide' + (pageNumber + 1) + '.xml.rels', 'buffer', gen_private.thisDoc.pages[pageNumber].rels, cbMakeRels, false );		
 			return slideObj;
 		};
@@ -698,7 +913,49 @@ officegen = function ( options ) {
 
 		gen_private.perment.features.page_name = 'sheets'; // This document type must have pages.
 
-		// BMK_TODO:
+		genobj.files_list.push (
+			{
+				name: '/xl/styles.xml',
+				type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml'
+			},
+			{
+				name: '/xl/workbook.xml',
+				type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml'
+			}
+		);
+
+		intAddAnyResourceToParse ( 'docProps\\app.xml', 'buffer', null, cbMakeXlsApp, true );
+		intAddAnyResourceToParse ( 'xl\\styles.xml', 'buffer', null, cbMakeXlsStyles, true );
+		intAddAnyResourceToParse ( 'xl\\workbook.xml', 'buffer', null, cbMakeXlsWorkbook, true );
+
+		intAddAnyResourceToParse ( 'xl\\_rels\\workbook.xml.rels', 'buffer', genobj.rels_app, cbMakeRels, true );
+
+		genobj.makeNewSheet = function () {
+			var pageNumber = gen_private.thisDoc.pages.length;
+			var sheetObj = {}; // The sheet object that the user will use.
+
+			sheetObj.data = {}; // Place here all the data.
+
+			gen_private.thisDoc.pages[pageNumber] = {};
+			gen_private.thisDoc.pages[pageNumber].sheet = sheetObj;
+
+			genobj.rels_app.push (
+				{
+					type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet',
+					target: 'worksheets/sheet' + (pageNumber + 1) + '.xml'
+				}
+			);
+
+			genobj.files_list.push (
+				{
+					name: '/xl/worksheets/sheet' + (pageNumber + 1) + '.xml',
+					type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml'
+				}
+			);
+
+			intAddAnyResourceToParse ( 'xl\\worksheets\\sheet' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber], cbMakeXlsSheet, false );
+			return sheetObj;
+		};
 	};
 
 	// ***PUBLIC_CODE***
