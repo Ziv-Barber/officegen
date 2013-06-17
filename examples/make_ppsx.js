@@ -1,7 +1,7 @@
 var fs = require('fs');
 
-var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
-	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+var pptx = require('../officegen.js').makegen ( { 'type': 'ppsx', 'onend': function ( written ) {
+	console.log ( 'Finish to create a PowerPoint slideshow file.\nTotal bytes created: ' + written + '\n' );
 } } );
 
 // You don't really have to call it:
@@ -19,7 +19,7 @@ slide.back = { type: 'solid', color: '00ff00' };
 slide = pptx.makeNewSlide ();
 slide = pptx.makeNewSlide ();
 
-var out = fs.createWriteStream ( 'out.pptx' );
+var out = fs.createWriteStream ( 'out.ppsx' );
 
 pptx.generate ( out );
 

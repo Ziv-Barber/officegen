@@ -19,9 +19,10 @@ better to wait for more stable releases if you want to improve it.
 - [Installation](#a2)
 - [Public API](#a3)
 - [Examples](#a4)
-- [Hackers Wonderland] (#a5)
-- [Support] (#a6)
-- [License](#a7)
+- [FAQ](#a5)
+- [Hackers Wonderland](#a6)
+- [Support](#a7)
+- [License](#a8)
 
 <a name="a1"/>
 ## Features: ##
@@ -87,7 +88,8 @@ Generating HTTP stream (no file been created):
 var http = require("http");
 
 http.createServer ( function ( request, response ) {
-	var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
+	var pptx = require('../officegen.js').makegen (
+		{ 'type': 'pptx', 'onend': function ( written ) {
 		// ... (called after finishing to serve the user)
 	} } );
 
@@ -119,7 +121,9 @@ slide.back = { type: 'solid', color: '008800' };
 Example to put text inside the new slide:
 
 ```js
-slide.addText ( 'Hello World!!!', { x: 600000, y: 10000, font_size: 56, cx: 10000000 } );
+slide.addText ( 'Hello World!!!', {
+	x: 600000, y: 10000, font_size: 56, cx: 10000000
+	} );
 ```
 
 <a name="a4"/>
@@ -136,13 +140,31 @@ This section on the readme file will describe how to hack into the code.
 Right now please refer to the code itself. More information will be added later.
 
 <a name="a6"/>
+## FAQ: ##
+
+- Q: Do you support also PPSX files?
+- A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
+
+<a name="a7"/>
 ## Support: ##
 
 Please visit the officegen Google Group:
 
 https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
-<a name="a7"/>
+<a name="a8"/>
+## History: ##
+
+- Version 0.1.3:
+  - Can generate also ppsx files.
+  - Minor bug fixes.
+- Version 0.1.2:
+  - HTTP server demo.
+  - Can generate very limited Excel file.
+  - You can change the background color of slides.
+  - Minor bug fixes.
+
+<a name="a9"/>
 ## License: ##
 
 (The MIT License)
