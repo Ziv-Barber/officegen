@@ -218,7 +218,7 @@ officegen = function ( options ) {
 
 		var realRel = 1;
 		for ( var i = 0, total_size = data.length; i < total_size; i++ ) {
-			if ( typeof data[i] != 'undefinded' ) {
+			if ( typeof data[i] != 'undefined' ) {
 				outString += '<Relationship Id="rId' + realRel + '" Type="' + data[i].type + '" Target="' + data[i].target + '"/>';
 				realRel++;
 			} // Endif.
@@ -240,7 +240,7 @@ officegen = function ( options ) {
 		outString += '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">';
 
 		for ( var i = 0, total_size = genobj.files_list.length; i < total_size; i++ ) {
-			if ( typeof genobj.files_list[i] != 'undefinded' ) {
+			if ( typeof genobj.files_list[i] != 'undefined' ) {
 				if ( genobj.files_list[i].ext )
 				{
 					outString += '<Default Extension="' + genobj.files_list[i].ext + '" ContentType="' + genobj.files_list[i].type + '"/>';
@@ -424,8 +424,118 @@ officegen = function ( options ) {
 	///
 	/// ???.
 	///
-	function cMakePptxOutTextData ( text_info ) {
-		// BMK_TODO:
+	/// @param[in] text_info Information how to display the text.
+	///
+	function cMakePptxOutTextData ( text_info, slide_obj ) {
+		var out_obj = {};
+
+		out_obj.font_size = '';
+		out_obj.bold = '';
+		out_obj.underline = '';
+		out_obj.rpr_info = '';
+
+		if ( typeof text_info == 'object' )
+		{
+			if ( text_info.bold ) {
+				out_obj.bold = ' b="1"';
+			} // Endif.
+
+			if ( text_info.underline ) {
+				out_obj.underline = ' u="sng"';
+			} // Endif.
+
+			if ( text_info.font_size ) {
+				out_obj.font_size = ' sz="' + text_info.font_size + '00"';
+			} // Endif.
+
+			if ( text_info.color ) {
+				out_obj.rpr_info += cMakePptxColorSelection ( text_info.color );
+
+			} else if ( slide_obj && slide_obj.color )
+			{
+				out_obj.rpr_info += cMakePptxColorSelection ( slide_obj.color );
+			} // Endif.
+
+			if ( text_info.font_face ) {
+				out_obj.rpr_info += '<a:latin typeface="' + text_info.font_face + '" pitchFamily="34" charset="0"/><a:cs typeface="' + text_info.font_face + '" pitchFamily="34" charset="0"/>';
+			} // Endif.
+
+		} else {
+			if ( slide_obj && slide_obj.color )
+			{
+				out_obj.rpr_info += cMakePptxColorSelection ( slide_obj.color );
+			} // Endif.
+		} // Endif.
+
+		if ( out_obj.rpr_info != '' )
+			out_obj.rpr_info += '</a:rPr>';
+
+		return out_obj;
+	}
+
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] text_info Information how to display the text.
+	/// @param[in] text_string The text string.
+	/// @return The PPTX code.
+	///
+	function cMakePptxOutTextCommand ( text_info, text_string, slide_obj ) {
+		var area_opt_data = cMakePptxOutTextData ( text_info, slide_obj );
+		return '<a:r><a:rPr lang="en-US"' + area_opt_data.font_size + area_opt_data.bold + area_opt_data.underline + ' dirty="0" smtClean="0"' + (area_opt_data.rpr_info != '' ? ('>' + area_opt_data.rpr_info) : '/>') + '<a:t>' + text_string + '</a:t></a:r>';
+	}
+
+	///
+	/// @brief ???.
+	///
+	/// ???.
+	///
+	/// @param[in] in_data_val ???.
+	/// @param[in] max_value ???.
+	/// @param[in] def_value ???.
+	/// @param[in] auto_val ???.
+	///
+	function parseSmartNumber ( in_data_val, max_value, def_value, auto_val, mul_val ) {
+		var realNum = mul_val ? in_data_val * mul_val : in_data_val;
+	
+		if ( typeof in_data_val == 'undefined' ) {
+			return (typeof def_value == 'number') ? def_value : 0;
+		} // Endif.
+	
+		if ( typeof in_data_val == 'string' ) {
+			if ( in_data_val.indexOf ( '%' ) != -1 ) {
+				var realMax = (typeof max_value == 'number') ? max_value : 0;
+				if ( realMax <= 0 ) return 0;
+
+				var realVal = parseInt ( in_data_val, 10 );
+				return (realMax / 100) * realVal;
+			} // Endif.
+
+			if ( in_data_val.indexOf ( '#' ) != -1 ) {
+				var realVal = parseInt ( in_data_val, 10 );
+				return realMax;
+			} // Endif.
+
+			var realAuto = (typeof auto_val == 'number') ? auto_val : 0;
+
+			if ( in_data_val == '*' ) {
+				return realAuto;
+			} // Endif.
+
+			if ( in_data_val == 'c' ) {
+				return realAuto / 2;
+			} // Endif.
+
+			return (typeof def_value == 'number') ? def_value : 0;
+		} // Endif.
+	
+		if ( typeof in_data_val == 'number' ) {
+			return realNum;
+		} // Endif.
+
+		return (typeof def_value == 'number') ? def_value : 0;
 	}
 
 	///
@@ -451,65 +561,65 @@ officegen = function ( options ) {
 			var cx = 2819400;
 			var cy = 369332;
 
-			// General selection for all blocks:
-			var font_size = '';
-			var bold = '';
-			var underline = '';
-			var font_face = '/>';
-
-			var in_val;
-
 			if ( objs_list[i].options ) {
-				if ( objs_list[i].options.x ) {
-					x = objs_list[i].options.x;
-				} // Endif.
-
-				if ( objs_list[i].options.y ) {
-					y = objs_list[i].options.y;
-				} // Endif.
+				// Position:
 
 				if ( objs_list[i].options.cx ) {
-					cx = objs_list[i].options.cx;
+					cx = parseSmartNumber ( objs_list[i].options.cx, 9144000, 2819400, 9144000, 10000 );
 				} // Endif.
 
 				if ( objs_list[i].options.cy ) {
-					cy = objs_list[i].options.cy;
+					cy = parseSmartNumber ( objs_list[i].options.cy, 6858000, 369332, 6858000, 10000 );
 				} // Endif.
 
-				if ( objs_list[i].options.bold ) {
-					bold = ' b="1"';
+				if ( objs_list[i].options.x ) {
+					x = parseSmartNumber ( objs_list[i].options.x, 9144000, 0, 9144000 - cx, 10000 );
 				} // Endif.
 
-				if ( objs_list[i].options.underline ) {
-					underline = ' u="sng"';
-				} // Endif.
-
-				if ( objs_list[i].options.font_size ) {
-					in_val = objs_list[i].options.font_size;
-					font_size = ' sz="' + in_val + '00"';
-				} // Endif.
-
-				if ( objs_list[i].options.font_face ) {
-					in_val = objs_list[i].options.font_face;
-					font_face = '><a:latin typeface="' + in_val + '" pitchFamily="34" charset="0"/><a:cs typeface="' + in_val + '" pitchFamily="34" charset="0"/></a:rPr>';
+				if ( objs_list[i].options.y ) {
+					y = parseSmartNumber ( objs_list[i].options.y, 6858000, 0, 6858000 - cy, 10000 );
 				} // Endif.
 			} // Endif.
 
-			switch ( objs_list[i].type )
-			{
+			switch ( objs_list[i].type ) {
 				case 'text':
 					outString += '<p:sp><p:nvSpPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>';
 
+					if ( objs_list[i].options )
+					{	
+						if ( objs_list[i].options.align )
+						{
+							switch ( objs_list[i].options.align )
+							{
+								case 'right':
+									outString += '<a:pPr algn="r"/>';
+									break;
+
+								case 'center':
+									outString += '<a:pPr algn="ctr"/>';
+									break;
+
+								case 'justify':
+									outString += '<a:pPr algn="just"/>';
+									break;
+							} // End of switch.
+						} // Endif.
+					} // Endif.
+
 					if ( typeof objs_list[i].text == 'string' ) {
-						outString += '<a:r><a:rPr lang="en-US"' + font_size + bold + underline + ' dirty="0" smtClean="0"' + font_face + '<a:t>' + objs_list[i].text + '</a:t></a:r>';
+						outString += cMakePptxOutTextCommand ( objs_list[i].options, objs_list[i].text, data.slide );
 
 					} else {
 						for ( var j = 0, total_size_j = objs_list[i].text.length; j < total_size_j; j++ ) {
 							if ( objs_list[i].text[j] ) {
-								// objs_list[i].text[j]
-								// BMK_TODO:
+								outString += cMakePptxOutTextCommand ( objs_list[i].text[j].options, objs_list[i].text[j].text, data.slide );
 							} // Endif.
 						} // Endif.
+					} // Endif.
+
+					var font_size = '';
+					if ( objs_list[i].options && objs_list[i].options.font_size ) {
+						font_size = ' sz="' + objs_list[i].options.font_size + '00"';
 					} // Endif.
 
 					outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody></p:sp>';
@@ -947,13 +1057,26 @@ officegen = function ( options ) {
 
 			slideObj.name = 'Slide ' + (pageNumber + 1);
 
-			slideObj.addText = function ( text, opt ) {
+			slideObj.addText = function ( text, opt, y_pos, x_size, y_size ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'text';
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].text = text;
-				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = opt;
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+
+				if ( typeof opt == 'string' ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
+
+				} else if ( (typeof opt != 'object') && (typeof y_pos != 'undefined') ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.x = opt;
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.y = y_pos;
+
+					if ( (typeof x_size != 'undefined') && (typeof y_size != 'undefined') ) {
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx = x_size;
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
+					} // Endif.
+				} // Endif.
 			};
 
 			intAddAnyResourceToParse ( 'ppt\\slides\\slide' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber], cbMakePptxSlide, false );
@@ -1189,7 +1312,7 @@ officegen = function ( options ) {
 							break;
 					} // End of switch.
 
-					if ( typeof resStream != 'undefinded' ) {
+					if ( typeof resStream != 'undefined' ) {
 						archive.append ( resStream, { name: genobj.res_list[cur_index].name }, function () {
 							setImmediate ( function() { generateNextResource ( cur_index + 1 ); });
 						});

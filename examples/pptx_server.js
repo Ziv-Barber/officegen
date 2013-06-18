@@ -65,8 +65,18 @@ http.createServer ( function ( request, response ) {
 			} } );
 
 			slide = pptx.makeNewSlide ();
-			slide.back = 'cc88cc';
-			slide.addText ( 'Hello ' + response.post.name + '!', { x: 600000, y: 10000, font_size: 56, cx: 10000000 } );
+			slide.back = '000000';
+			slide.color = 'ffffff';
+
+			slide.addText ( 'Hello ' + response.post.name + '!', { y: 20, cx: '100%', font_size: 56, font_face: 'Arial', bold: true, color: 'ffff00', align: 'center' } );
+
+			slide.addText ( 'Requested URL', { y: 150, cx: '50%' } );
+			slide.addText ( request.url, { y: 150, x: '50%', cx: '50%', color: '0000ff' } );
+			slide.addText ( 'Request Method', { y: 180, cx: '50%' } );
+			slide.addText ( request.method, { y: 180, x: '50%', cx: '50%', color: '0000ff' } );
+			slide.addText ( 'Request Dara', { y: 210, cx: '50%' } );
+			slide.addText ( response.post.name, { y: 210, x: '50%', cx: '50%', color: '0000ff' } );
+
 			pptx.generate ( response );
 		});
 	} // Endif.

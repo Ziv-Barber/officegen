@@ -22,7 +22,9 @@ better to wait for more stable releases if you want to improve it.
 - [FAQ](#a5)
 - [Hackers Wonderland](#a6)
 - [Support](#a7)
-- [License](#a8)
+- [History](#a8)
+- [License](#a9)
+- [Credit](#a10)
 
 <a name="a1"/>
 ## Features: ##
@@ -30,7 +32,7 @@ better to wait for more stable releases if you want to improve it.
 - Generating Microsoft PowerPoint document (.pptx file):
   - Create PowerPoint document with one or more slides.
   - Add text objects to each slide.
-  - Can declare fonts, colors and background.
+  - Can declare fonts, alignment, colors and background.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets (still needs some work).
 - Generating Microsoft Word document (.docx file):
@@ -118,12 +120,35 @@ or:
 slide.back = { type: 'solid', color: '008800' };
 ```
 
-Example to put text inside the new slide:
+Examples how to put text inside the new slide:
 
 ```js
-slide.addText ( 'Hello World!!!', {
-	x: 600000, y: 10000, font_size: 56, cx: 10000000
-	} );
+// Change the background color:
+slide.back = '000000';
+
+// Declare the default color to use on this slide (default is black):
+slide.color = 'ffffff';
+
+// Basic way to add text string:
+slide.addText ( 'This is a test' );
+slide.addText ( 'Fast position', 0, 20 );
+slide.addText ( 'Full line', 0, 40, '100%', 20 );
+
+// Add text box with multi colors and fonts:
+slide.addText ( [
+	{ text: 'Hello ', options: { font_size: 56 } },
+	{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+	], { cx: '75%', cy: 66, y: 150 } );
+// Please note that you can pass object as the text parameter to addText.
+
+slide.addText ( 'Office generator', {
+	y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48, 
+	color: '0000ff' } );
+
+slide.addText ( 'Boom!!!', {
+	y: 250, x: 10, cx: '70%', 
+	font_face: 'Wide Latin', font_size: 54, 
+	color: 'cc0000', bold: true, underline: true } );
 ```
 
 <a name="a4"/>
@@ -155,6 +180,10 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.4:
+  - WARNING: The addText function for PowerPoint been changed since version 0.1.3.
+  - Many new features for PowerPoint.
+  - Minor bug fixes.
 - Version 0.1.3:
   - Can generate also ppsx files.
   - Minor bug fixes.
@@ -189,4 +218,9 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+<a name="a10"/>
+## Credit: ##
+
+- For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
 
