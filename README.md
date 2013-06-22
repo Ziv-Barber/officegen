@@ -33,10 +33,10 @@ better to wait for more stable releases if you want to improve it.
   - Create PowerPoint document with one or more slides.
   - Add text objects to each slide.
   - Can declare fonts, alignment, colors and background.
+- Generating Microsoft Word document (.docx file):
+  - Create Word document. You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets (still needs some work).
-- Generating Microsoft Word document (.docx file):
-  - Not yet there.
 
 <a name="a2"/>
 ## Installation: ##
@@ -54,6 +54,8 @@ This module is depending on:
 
 <a name="a3"/>
 ## Public API: ##
+
+### Creating the document object: ###
 
 Generating PowerPoint 2007 object:
 
@@ -100,6 +102,10 @@ http.createServer ( function ( request, response ) {
 	pptx.generate ( response );
 }).listen ( 3000 );
 ```
+
+### Put data inside the document object: ###
+
+#### PowerPoint: ####
 
 Creating new slides for pptx:
 
@@ -151,6 +157,54 @@ slide.addText ( 'Boom!!!', {
 	color: 'cc0000', bold: true, underline: true } );
 ```
 
+#### Word: ####
+
+All the text data in Word is saved in paragraphs. To add a new paragraph:
+
+```js
+var pObj = docx.createP ();
+```
+
+Paragraph options:
+
+```js
+pObj.options.align = 'center'; // Also 'right' or 'jestify'.
+```
+
+Every list item is also a paragraph so:
+
+```js
+var pObj = docx.createListOfDots ();
+
+var pObj = docx.createListOfNumbers ();
+```
+
+Now you can fill the paragraph object with one or more text strings using the addText method:
+
+```js
+pObj.addText ( 'Simple' );
+
+pObj.addText ( ' with color', { color: '000088' } );
+
+pObj.addText ( ' and back color.', { color: '00ffff', back: '000088' } );
+
+pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
+
+pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
+
+pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
+```
+
+To add a page break:
+
+```js
+docx.putPageBreak ();
+```
+
+#### Excel: ####
+
+While the API to Excel is working, it'll be changed soon so the API is undocumented right now, sory :(
+
 <a name="a4"/>
 ## Examples: ##
 
@@ -180,6 +234,8 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.5:
+  - Word 2007 basic API now working.
 - Version 0.1.4:
   - WARNING: The addText function for PowerPoint been changed since version 0.1.3.
   - Many new features for PowerPoint.

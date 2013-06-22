@@ -720,8 +720,94 @@ officegen = function ( options ) {
 	/// @param[in] data Ignored by this callback function.
 	///
 	function cbMakeDocument ( data ) {
-		var outString = cbMakeMsOfficeBasicXml ( data ) + '<w:document xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"><w:body><w:p w:rsidR="00A02F19" w:rsidRDefault="00A02F19"/><w:sectPr w:rsidR="00A02F19" w:rsidSect="00A02F19"><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>';
-		// BMK_TODO:
+		var outString = cbMakeMsOfficeBasicXml ( data ) + '<w:document xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"><w:body>';
+		var objs_list = data.data;
+
+		for ( var i = 0, total_size = objs_list.length; i < total_size; i++ ) {
+			outString += '<w:p w:rsidR="00A77427" w:rsidRDefault="00A77427">';
+			var pPrData = '';
+
+			if ( objs_list[i].options ) {
+				if ( objs_list[i].options.align ) {
+					switch ( objs_list[i].options.align ) {
+						case 'center':
+							pPrData += '<w:jc w:val="center"/>';
+							break;
+
+						case 'right':
+							pPrData += '<w:jc w:val="right"/>';
+							break;
+
+						case 'justify':
+							pPrData += '<w:jc w:val="both"/>';
+							break;
+					} // End of switch.
+				} // Endif.
+
+				if ( objs_list[i].options.list_type ) {
+					pPrData += '<w:pStyle w:val="ListParagraph"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="' + objs_list[i].options.list_type + '"/></w:numPr>';
+				} // Endif.
+			} // Endif.
+
+			if ( pPrData ) {
+				outString += '<w:pPr>' + pPrData + '</w:pPr>';
+			} // Endif.
+
+			for ( var j = 0, total_size_j = objs_list[i].data.length; j < total_size_j; j++ ) {
+				if ( objs_list[i].data[j] ) {
+					var rExtra = '';
+					var tExtra = '';
+					var rPrData = '';
+
+					if ( objs_list[i].data[j].options ) {
+						if ( objs_list[i].data[j].options.color ) {
+							rPrData += '<w:color w:val="' + objs_list[i].data[j].options.color + '"/>';
+						} // Endif.
+
+						if ( objs_list[i].data[j].options.back ) {
+							rPrData += '<w:shd w:val="clear" w:color="auto" w:fill="' + objs_list[i].data[j].options.back + '"/>';
+						} // Endif.
+
+						if ( objs_list[i].data[j].options.bold ) {
+							rPrData += '<w:b/><w:bCs/>';
+						} // Endif.
+
+						if ( objs_list[i].data[j].options.underline ) {
+							rPrData += '<w:u w:val="single"/>';
+						} // Endif.
+
+						if ( objs_list[i].data[j].options.font_face ) {
+							rPrData += '<w:rFonts w:ascii="' + objs_list[i].data[j].options.font_face + '" w:hAnsi="' + objs_list[i].data[j].options.font_face + '" w:cs="' + objs_list[i].data[j].options.font_face + '"/>';
+						} // Endif.
+
+						if ( objs_list[i].data[j].options.font_size ) {
+							rPrData += '<w:sz w:val="' + objs_list[i].data[j].options.font_size + '"/><w:szCs w:val="' + objs_list[i].data[j].options.font_size + '"/>';
+						} // Endif.
+					} // Endif.
+
+					if ( objs_list[i].data[j].text ) {
+						if ( objs_list[i].data[j].text[0] == ' ' ) {
+							tExtra += ' xml:space="preserve"';
+						} // Endif.
+
+						outString += '<w:r' + rExtra + '>';
+
+						if ( rPrData ) {
+							outString += '<w:rPr>' + rPrData + '</w:rPr>';
+						} // Endif.
+
+						outString += '<w:t' + tExtra + '>' + objs_list[i].data[j].text + '</w:t></w:r>';
+
+					} else if ( objs_list[i].data[j].page_break ) {
+						outString += '<w:r><w:br w:type="page"/></w:r>';
+					} // Endif.
+				} // Endif.
+			} // Endif.
+
+			outString += '</w:p>';
+		} // End of for loop.
+
+		outString += '<w:p w:rsidR="00A02F19" w:rsidRDefault="00A02F19"/><w:sectPr w:rsidR="00A02F19" w:rsidSect="00A02F19"><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>';
 		return outString;
 	}
 
@@ -1105,19 +1191,19 @@ officegen = function ( options ) {
 			},
 			{
 				name: '/word/fontTable.xml',
-				type: 'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml'
+				type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml'
 			},
 			{
 				name: '/word/webSettings.xml',
-				type: 'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml'
+				type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml'
 			},
 			{
 				name: '/word/styles.xml',
-				type: 'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml'
+				type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml'
 			},
 			{
 				name: '/word/document.xml',
-				type: 'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
+				type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'
 			}
 		);
 
@@ -1144,16 +1230,55 @@ officegen = function ( options ) {
 			}
 		);
 
+		genobj.data = []; // All the data will be placed here.
+
 		intAddAnyResourceToParse ( 'docProps\\app.xml', 'buffer', null, cbMakeDocxApp, true );
 		intAddAnyResourceToParse ( 'word\\fontTable.xml', 'buffer', null, cbMakeDocxFontsTable, true );
 		intAddAnyResourceToParse ( 'word\\settings.xml', 'buffer', null, cbMakeDocxSettings, true );
 		intAddAnyResourceToParse ( 'word\\webSettings.xml', 'buffer', null, cbMakeDocxWeb, true );
 		intAddAnyResourceToParse ( 'word\\styles.xml', 'buffer', null, cbMakeDocxStyles, true );
-		intAddAnyResourceToParse ( 'word\\document.xml', 'buffer', null, cbMakeDocument, true );
+		intAddAnyResourceToParse ( 'word\\document.xml', 'buffer', genobj, cbMakeDocument, true );
 
 		intAddAnyResourceToParse ( 'word\\_rels\\document.xml.rels', 'buffer', genobj.rels_app, cbMakeRels, true );
 
-		// BMK_TODO: Add API to write something in the Word document.
+		genobj.createP = function ( options ) {
+			var newP = {};
+
+			newP.data = [];
+			newP.options = options || {};
+
+			newP.addText = function ( text_msg, opt, flag_data ) {
+				newP.data[newP.data.length] = { text: text_msg, options: opt, ext_data: flag_data };
+			};
+
+			genobj.data[genobj.data.length] = newP;
+			return newP;
+		};
+
+		genobj.createListOfDots = function ( options ) {
+			var newP = genobj.createP ( options );
+
+			newP.options.list_type = '1';
+
+			return newP;
+		};
+
+		genobj.createListOfNumbers = function ( options ) {
+			var newP = genobj.createP ( options );
+
+			newP.options.list_type = '2';
+
+			return newP;
+		};
+
+		genobj.putPageBreak = function () {
+			var newP = {};
+
+			newP.data = [ { 'page_break': true } ];
+
+			genobj.data[genobj.data.length] = newP;
+			return newP;
+		};
 	};
 
 	///
