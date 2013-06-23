@@ -9,6 +9,8 @@ This module is a Javascript porting of my 'DuckWriteC++' library which doing the
 
 ## Announcement: ##
 
+Please refer to the roadmap section for information on what will be added in the next versions.
+
 This version only implementing basic features and there is no plugins API yet. You can fork this code if you 
 want to but please beware that I'm in the middle of huge changing in the design of this module and it'll be 
 better to wait for more stable releases if you want to improve it.
@@ -23,8 +25,9 @@ better to wait for more stable releases if you want to improve it.
 - [Hackers Wonderland](#a6)
 - [Support](#a7)
 - [History](#a8)
-- [License](#a9)
-- [Credit](#a10)
+- [Roadmap](#a9)
+- [License](#a10)
+- [Credit](#a11)
 
 <a name="a1"/>
 ## Features: ##
@@ -36,7 +39,7 @@ better to wait for more stable releases if you want to improve it.
 - Generating Microsoft Word document (.docx file):
   - Create Word document. You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
 - Generating Microsoft Excel document (.xlsx file):
-  - Create Excel document with one or more sheets (still needs some work).
+  - Create Excel document with one or more sheets. Supporting cells of type both number and string.
 
 <a name="a2"/>
 ## Installation: ##
@@ -203,7 +206,15 @@ docx.putPageBreak ();
 
 #### Excel: ####
 
-While the API to Excel is working, it'll be changed soon so the API is undocumented right now, sory :(
+```js
+sheet.data[0] = [];
+sheet.data[0][0] = 1;
+sheet.data[0][1] = 2;
+sheet.data[1] = [];
+sheet.data[1][3] = 'abc';
+
+// NOTE: While this direct filling of sheet.data will always be supported, more methods will be added in the next version.
+```
 
 <a name="a4"/>
 ## Examples: ##
@@ -234,22 +245,54 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.6:
+	- Excel 2007: finished supporting shared strings.
+	- Excel 2007: The interface been changed.
+	- A lot of changes in the design of this module.
 - Version 0.1.5:
-  - Word 2007 basic API now working.
+	- Word 2007 basic API now working.
 - Version 0.1.4:
-  - WARNING: The addText function for PowerPoint been changed since version 0.1.3.
-  - Many new features for PowerPoint.
-  - Minor bug fixes.
+	- WARNING: The addText function for PowerPoint been changed since version 0.1.3.
+	- Many new features for PowerPoint.
+	- Minor bug fixes.
 - Version 0.1.3:
-  - Can generate also ppsx files.
-  - Minor bug fixes.
+	- Can generate also ppsx files.
+	- Minor bug fixes.
 - Version 0.1.2:
-  - HTTP server demo.
-  - Can generate very limited Excel file.
-  - You can change the background color of slides.
-  - Minor bug fixes.
+	- HTTP server demo.
+	- Can generate very limited Excel file.
+	- You can change the background color of slides.
+	- Minor bug fixes.
 
 <a name="a9"/>
+## Roadmap: ##
+
+### Version 0.2.x: ###
+
+- Excel basic styling.
+
+### Version 0.3.x: ###
+
+- Word tables.
+- PowerPoint lists and tables.
+
+### Version 0.4.x: ###
+
+- Supporting images.
+
+### Version 0.5.x: ###
+
+- TBD
+
+### Version 0.9.x: ###
+
+- Unit tests and lots of testing.
+
+### Version 1.0.x: ###
+
+- Stable release with stable API.
+
+<a name="a10"/>
 ## License: ##
 
 (The MIT License)
@@ -275,7 +318,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-<a name="a10"/>
+<a name="a11"/>
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.

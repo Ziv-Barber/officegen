@@ -4,9 +4,6 @@ var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': funct
 	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
 } } );
 
-// You don't really have to call it:
-pptx.startNewDoc ();
-
 pptx.setDocTitle ( 'Sample PPTX Document' );
 
 // Let's create a new slide:
