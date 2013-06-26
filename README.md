@@ -207,21 +207,32 @@ docx.putPageBreak ();
 #### Excel: ####
 
 ```js
+sheet = xlsx.makeNewSheet ();
+sheet.name = 'My Excel Data';
+```
+
+Fill cells:
+
+```js
+// Using setCell:
+sheet.setCell ( 'E7', 340 );
+sheet.setCell ( 'G102', 'Hello World!' );
+
+// Direct way:
 sheet.data[0] = [];
 sheet.data[0][0] = 1;
 sheet.data[0][1] = 2;
 sheet.data[1] = [];
 sheet.data[1][3] = 'abc';
-
-// NOTE: While this direct filling of sheet.data will always be supported, more methods will be added in the next version.
 ```
 
 <a name="a4"/>
 ## Examples: ##
 
-- examples/make_pptx.js - Example how to create a PowerPoint 2007 presentation and save it into file.
+- examples/make_pptx.js - Example how to create PowerPoint 2007 presentation and save it into file.
+- examples/make_xlsx.js - Example how to create Excel 2007 sheet and save it into file.
+- examples/make_docx.js - Example how to create Word 2007 document and save it into file.
 - examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
-- examples/make_xlsx.js - Example how to create a Excel 2007 sheet and save it into file.
 
 <a name="a5"/>
 ## Hackers Wonderland: ##
@@ -245,6 +256,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.7:
+	- Excel 2007: addCell.
+	- Many internal changes that are not effecting the user API.
 - Version 0.1.6:
 	- Excel 2007: finished supporting shared strings.
 	- Excel 2007: The interface been changed.
@@ -267,20 +281,23 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a9"/>
 ## Roadmap: ##
 
-### Version 0.2.x: ###
+Features todo:
+
+### Version 0.1.x: ###
 
 - Excel basic styling.
-
-### Version 0.3.x: ###
-
 - Word tables.
 - PowerPoint lists and tables.
-
-### Version 0.4.x: ###
-
 - Supporting images.
 
-### Version 0.5.x: ###
+### Version 0.2.x: ###
+
+- API for addons:
+  - Document Type API
+  - Office 2007 Document Type API
+  - Generic Input API
+
+### Version 0.3.x: ###
 
 - TBD
 

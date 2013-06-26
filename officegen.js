@@ -29,9 +29,18 @@
 //
 
 require("setimmediate"); // To be compatible with all versions of node.js
+
+var officegen_info = require('./package.json');
 var archiver = require('archiver');
 var fs = require('fs');
 var Stream = require('stream'); // BMK_STREAM:
+
+// Globals:
+
+var int_officegen_globals = {}; // Our internal globals.
+
+int_officegen_globals.types = {};
+int_officegen_globals.common_obj = {};
 
 // *********************************************************************
 // Private functions: (search for ***PUBLIC_CODE*** for the public API):
@@ -160,6 +169,14 @@ officegen = function ( options ) {
 					break;
 
 				default:
+					// BMK_TODO: One day all the code above will be moved to here:
+					for ( var cur_type in int_officegen_globals.types ) {
+						if ( (cur_type == new_type) && int_officegen_globals.types[cur_type] && int_officegen_globals.types[cur_type].create_obj ) {
+							int_officegen_globals.types[cur_type].create_obj ( new_type, genobj.options, gen_private, int_officegen_globals.types[cur_type] );
+							break;
+						} // Endif.
+					} // End of for loop.
+
 					console.error ( '\nFATAL ERROR: Either unknown or unsupported file type - %s\n', options.type );
 					throw 'FATAL ERROR: Invalid file type.';
 			} // End of switch.
@@ -665,6 +682,12 @@ officegen = function ( options ) {
 
 					outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody></p:sp>';
 					break;
+
+				// Image:
+				case 'image':
+					// BMK_TODO:
+					// <p:pic><p:nvPicPr><p:cNvPr id="3" name="Picture 2" descr="taste_in_music.png"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId2" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="1905333" y="1562333"/><a:ext cx="5333334" cy="3733334"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>
+					break;
 			} // End of switch.
 		} // End of for loop.
 		
@@ -1020,10 +1043,11 @@ officegen = function ( options ) {
 	/// @param[in] cell_string Either the cell displayed position or the row displayed position.
 	/// @return The cell's row Id.
 	///
-	function cbCellToNumber ( cell_string ) {
+	function cbCellToNumber ( cell_string, ret_also_column ) {
 		var cellNumber = 0;
 		var cellIndex = 0;
 		var cellMax = cell_string.length;
+		var rowId = 0;
 
 		// Converted from C++ (from DuckWriteC++):
 		while ( cellIndex < cellMax )
@@ -1031,6 +1055,8 @@ officegen = function ( options ) {
 			var curChar = cell_string.charCodeAt ( cellIndex );
 			if ( (curChar >= 0x30) && (curChar <= 0x39) )
 			{
+				rowId = parseInt ( cell_string.slice ( cellIndex ), 10 );
+				rowId = (rowId > 0) ? (rowId - 1) : 0;
 				break;
 
 			} else if ( (curChar >= 0x41) && (curChar <= 0x5A) )
@@ -1056,6 +1082,10 @@ officegen = function ( options ) {
 
 			cellIndex++;
 		} // End of while loop.
+
+		if ( ret_also_column ) {
+			return { row: rowId, column: cellNumber };
+		} // Endif.
 
 		return cellNumber;
 	}
@@ -1112,7 +1142,11 @@ officegen = function ( options ) {
 		outString += '<dimension ref="A1:' + cbNumberToCell ( maxX ) + '' + (maxY + 1) + '"/><sheetViews>';
 		outString += '<sheetView tabSelected="1" workbookViewId="0"/>';
 		// outString += '<selection activeCell="A1" sqref="A1"/>';
-		outString += '</sheetViews><sheetFormatPr defaultRowHeight="15"/><sheetData>';
+		outString += '</sheetViews><sheetFormatPr defaultRowHeight="15"/>';
+
+		// BMK_TODO: <cols><col min="2" max="2" width="19" customWidth="1"/></cols>
+
+		outString += '<sheetData>';
 
 		for ( var rowId = 0, total_size_y = data.sheet.data.length; rowId < total_size_y; rowId++ ) {
 			if ( data.sheet.data[rowId] ) {
@@ -1391,6 +1425,7 @@ officegen = function ( options ) {
 			gen_private.thisDoc.pages[pageNumber] = {};
 			gen_private.thisDoc.pages[pageNumber].slide = slideObj;
 			gen_private.thisDoc.pages[pageNumber].data = [];
+			gen_private.thisDoc.pages[pageNumber].images = [];
 			gen_private.thisDoc.pages[pageNumber].rels = [
 				{
 					type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout',
@@ -1433,6 +1468,48 @@ officegen = function ( options ) {
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'text';
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].text = text;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+
+				if ( typeof opt == 'string' ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
+
+				} else if ( (typeof opt != 'object') && (typeof y_pos != 'undefined') ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.x = opt;
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.y = y_pos;
+
+					if ( (typeof x_size != 'undefined') && (typeof y_size != 'undefined') ) {
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx = x_size;
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
+					} // Endif.
+				} // Endif.
+			};
+
+			///
+			/// @brief ???.
+			///
+			/// ???.
+			///
+			/// @param[in] ??? ???.
+			///
+			slideObj.addImage = function ( image_path, opt, y_pos, x_size, y_size ) {
+				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
+
+				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'image';
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].image = image_path;
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.pages[pageNumber].images.length;
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length;
+				// gen_private.thisDoc.pages[pageNumber].images[gen_private.thisDoc.pages[pageNumber].images.length]
+				// BMK_TODO:
+				/*
+					.images .rels
+					{
+						type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+						target: '../media/image1.png',
+						clear: 'data'
+					}
+				*/
 
 				if ( typeof opt == 'string' ) {
 					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
@@ -1671,7 +1748,18 @@ officegen = function ( options ) {
 				}
 			);
 
+			sheetObj.setCell = function ( position, data_val ) {
+				var rel_pos = cbCellToNumber ( position, true );
+
+				if ( !sheetObj.data[rel_pos.row] ) {
+					sheetObj.data[rel_pos.row] = [];
+				} // Endif.
+
+				sheetObj.data[rel_pos.row][rel_pos.column] = data_val;
+			};
+
 			intAddAnyResourceToParse ( 'xl\\worksheets\\sheet' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber], cbMakeXlsSheet, false );
+
 			return sheetObj;
 		};
 	};
@@ -1850,5 +1938,7 @@ function makegen ( options ) {
 };
 
 exports.makegen = makegen;
-
+// exports.registerDocType = ???;
+exports.schema = int_officegen_globals.types;
+exports.version = officegen_info.version;
 
