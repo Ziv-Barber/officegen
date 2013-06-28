@@ -618,10 +618,14 @@ officegen = function ( options ) {
 			var y = 0;
 			var cx = 2819400;
 			var cy = 369332;
+			var moreStyles = '';
+			var styleData = '';
+			var shapeType = null;
+					// ellipse
+					// rect
+					// line
 
 			if ( objs_list[i].options ) {
-				// Position:
-
 				if ( objs_list[i].options.cx ) {
 					cx = parseSmartNumber ( objs_list[i].options.cx, 9144000, 2819400, 9144000, 10000 );
 				} // Endif.
@@ -637,37 +641,65 @@ officegen = function ( options ) {
 				if ( objs_list[i].options.y ) {
 					y = parseSmartNumber ( objs_list[i].options.y, 6858000, 0, 6858000 - cy, 10000 );
 				} // Endif.
+
+				if ( objs_list[i].options.shape && (typeof objs_list[i].options.shape == 'string') ) {
+					shapeType = objs_list[i].options.shape;
+				} // Endif.
 			} // Endif.
 
 			switch ( objs_list[i].type ) {
 				case 'text':
-					outString += '<p:sp><p:nvSpPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>';
+				case 'cxn':
+					if ( shapeType == null ) shapeType = 'rect';
+
+					if ( objs_list[i].type == 'cxn' ) {
+						outString += '<p:cxnSp><p:nvCxnSpPr>';
+						outString += '<p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:nvPr/></p:nvCxnSpPr>';
+
+					} else {
+						outString += '<p:sp><p:nvSpPr>';
+						outString += '<p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>';
+					} // Endif.
+
+					outString += '<p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
+					outString += '<a:noFill/>';
+					outString += '</p:spPr>';
 
 					if ( objs_list[i].options )
 					{	
-						if ( objs_list[i].options.align )
-						{
+						if ( objs_list[i].options.line ) {
+							// BMK_TODO:
+						} // Endif.
+
+						if ( objs_list[i].options.align ) {
 							switch ( objs_list[i].options.align )
 							{
 								case 'right':
-									outString += '<a:pPr algn="r"/>';
+									moreStyles += '<a:pPr algn="r"/>';
 									break;
 
 								case 'center':
-									outString += '<a:pPr algn="ctr"/>';
+									moreStyles += '<a:pPr algn="ctr"/>';
 									break;
 
 								case 'justify':
-									outString += '<a:pPr algn="just"/>';
+									moreStyles += '<a:pPr algn="just"/>';
 									break;
 							} // End of switch.
 						} // Endif.
 					} // Endif.
 
+					if ( styleData != '' ) {
+						outString += '<p:style>' + styleData + '</p:style>';
+					} // Endif.
+
 					if ( typeof objs_list[i].text == 'string' ) {
+						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + moreStyles;
 						outString += cMakePptxOutTextCommand ( objs_list[i].options, objs_list[i].text, data.slide );
 
-					} else {
+					} else if ( objs_list[i].text ) {
+						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + moreStyles;
+
 						for ( var j = 0, total_size_j = objs_list[i].text.length; j < total_size_j; j++ ) {
 							if ( objs_list[i].text[j] ) {
 								outString += cMakePptxOutTextCommand ( objs_list[i].text[j].options, objs_list[i].text[j].text, data.slide );
@@ -675,18 +707,21 @@ officegen = function ( options ) {
 						} // Endif.
 					} // Endif.
 
-					var font_size = '';
-					if ( objs_list[i].options && objs_list[i].options.font_size ) {
-						font_size = ' sz="' + objs_list[i].options.font_size + '00"';
+					if ( objs_list[i].text != 'undefined' ) {
+						var font_size = '';
+						if ( objs_list[i].options && objs_list[i].options.font_size ) {
+							font_size = ' sz="' + objs_list[i].options.font_size + '00"';
+						} // Endif.
+
+						outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody>';
 					} // Endif.
 
-					outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p></p:txBody></p:sp>';
+					outString += objs_list[i].type == 'cxn' ? '</p:cxnSp>' : '</p:sp>';
 					break;
 
 				// Image:
 				case 'image':
-					// BMK_TODO:
-					// <p:pic><p:nvPicPr><p:cNvPr id="3" name="Picture 2" descr="taste_in_music.png"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId2" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="1905333" y="1562333"/><a:ext cx="5333334" cy="3733334"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>
+					outString += '<p:pic><p:nvPicPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId' + objs_list[i].rel_id + '" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
 					break;
 			} // End of switch.
 		} // End of for loop.
@@ -1461,7 +1496,7 @@ officegen = function ( options ) {
 			///
 			/// @param[in] ??? ???.
 			///
-			slideObj.addText = function ( text, opt, y_pos, x_size, y_size ) {
+			slideObj.addText = function ( text, opt, y_pos, x_size, y_size, opt_b ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
@@ -1481,6 +1516,49 @@ officegen = function ( options ) {
 						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
 					} // Endif.
 				} // Endif.
+
+				if ( typeof opt_b == 'object' ) {
+					for ( var attrname in opt_b ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = opt_b[attrname]; }
+
+				} else if ( (typeof x_size == 'object') && (typeof y_size == 'undefined') ) {
+					for ( var attrname in x_size ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = x_size[attrname]; }
+				} // Endif.
+			};
+
+			///
+			/// @brief ???.
+			///
+			/// ???.
+			///
+			/// @param[in] ??? ???.
+			///
+			slideObj.addShape = function ( shape, opt, y_pos, x_size, y_size, opt_b ) {
+				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
+
+				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'cxn';
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].options.shape = shape;
+
+				if ( typeof opt == 'string' ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
+
+				} else if ( (typeof opt != 'object') && (typeof y_pos != 'undefined') ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.x = opt;
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.y = y_pos;
+
+					if ( (typeof x_size != 'undefined') && (typeof y_size != 'undefined') ) {
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx = x_size;
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
+					} // Endif.
+				} // Endif.
+
+				if ( typeof opt_b == 'object' ) {
+					for ( var attrname in opt_b ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = opt_b[attrname]; }
+
+				} else if ( (typeof x_size == 'object') && (typeof y_size == 'undefined') ) {
+					for ( var attrname in x_size ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = x_size[attrname]; }
+				} // Endif.
 			};
 
 			///
@@ -1492,6 +1570,7 @@ officegen = function ( options ) {
 			///
 			slideObj.addImage = function ( image_path, opt, y_pos, x_size, y_size ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
+				var image_type = 'png'; // BMK_TODO:
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'image';
@@ -1499,17 +1578,17 @@ officegen = function ( options ) {
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.pages[pageNumber].images.length;
-				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length;
-				// gen_private.thisDoc.pages[pageNumber].images[gen_private.thisDoc.pages[pageNumber].images.length]
-				// BMK_TODO:
-				/*
-					.images .rels
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length + 1;
+
+				intAddAnyResourceToParse ( 'ppt\\media\\image' + (gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id + 1) + '.' + image_type, (typeof image_path == 'string') ? 'file' : 'stream', image_path, null, false );
+
+				gen_private.thisDoc.pages[pageNumber].rels.push (
 					{
 						type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-						target: '../media/image1.png',
+						target: '../media/image' + (gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id + 1) + '.' + image_type,
 						clear: 'data'
 					}
-				*/
+				);
 
 				if ( typeof opt == 'string' ) {
 					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
@@ -1827,7 +1906,12 @@ officegen = function ( options ) {
 
 						// Just copy the file as is:
 						case 'file':
-							resStream = fs.createReadStream ( gen_private.mixed.res_list[cur_index].name );
+							resStream = fs.createReadStream ( gen_private.mixed.res_list[cur_index].data || gen_private.mixed.res_list[cur_index].name );
+							break;
+
+						// Just use this stream:
+						case 'stream':
+							resStream = gen_private.mixed.res_list[cur_index].data;
 							break;
 					} // End of switch.
 

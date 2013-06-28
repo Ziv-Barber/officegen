@@ -34,7 +34,7 @@ better to wait for more stable releases if you want to improve it.
 
 - Generating Microsoft PowerPoint document (.pptx file):
   - Create PowerPoint document with one or more slides.
-  - Add text objects to each slide.
+  - Add text and image (png only) based objects to each slide.
   - Can declare fonts, alignment, colors and background.
 - Generating Microsoft Word document (.docx file):
   - Create Word document. You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
@@ -256,6 +256,8 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.8:
+	- PowerPoint: Allow adding images (png only).
 - Version 0.1.7:
 	- Excel 2007: addCell.
 	- Many internal changes that are not effecting the user API.
@@ -285,10 +287,10 @@ Features todo:
 
 ### Version 0.1.x: ###
 
+- PowerPoint shapes (need to finish coding the shapes support).
 - Excel basic styling.
 - Word tables.
 - PowerPoint lists and tables.
-- Supporting images.
 
 ### Version 0.2.x: ###
 

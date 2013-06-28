@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 
 var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
 	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
@@ -44,8 +45,11 @@ slide.addText ( 'Office generator', { y: 'c', x: 0, cx: '100%', cy: 66, font_siz
 slide = pptx.makeNewSlide ();
 
 slide.addText ( 'Red line', 'ff0000' );
+// slide.addShape ( 'ellipse' );
 
 slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'image1.png' ), { y: 'c', x: 'c', cy: 294, cx: 420 } );
 
 var out = fs.createWriteStream ( 'out.pptx' );
 
