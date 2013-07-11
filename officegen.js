@@ -621,9 +621,6 @@ officegen = function ( options ) {
 			var moreStyles = '';
 			var styleData = '';
 			var shapeType = null;
-					// ellipse
-					// rect
-					// line
 
 			if ( objs_list[i].options ) {
 				if ( objs_list[i].options.cx ) {
@@ -661,16 +658,47 @@ officegen = function ( options ) {
 						outString += '<p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>';
 					} // Endif.
 
-					outString += '<p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
-					outString += '<a:noFill/>';
-					outString += '</p:spPr>';
+					outString += '<p:spPr>';
 
-					if ( objs_list[i].options )
-					{	
-						if ( objs_list[i].options.line ) {
-							// BMK_TODO:
+					if ( objs_list[i].options && objs_list[i].options.flip_vertical ) {
+						outString += '<a:xfrm flipV="1">';
+
+					} else {
+						outString += '<a:xfrm>';
+					} // Endif.
+
+					outString += '<a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
+
+					if ( objs_list[i].options ) {
+						if ( objs_list[i].options.fill ) {
+							outString += cMakePptxColorSelection ( objs_list[i].options.fill );
+
+						} else {
+							outString += '<a:noFill/>';
 						} // Endif.
 
+						if ( objs_list[i].options.line ) {
+							outString += '<a:ln>';
+							outString += cMakePptxColorSelection ( objs_list[i].options.line );
+
+							if ( objs_list[i].options.line_head ) {
+								outString += '<a:headEnd type="' + objs_list[i].options.line_head + '"/>';
+							} // Endif.
+
+							if ( objs_list[i].options.line_tail ) {
+								outString += '<a:tailEnd type="' + objs_list[i].options.line_tail + '"/>';
+							} // Endif.
+
+							outString += '</a:ln>';
+						} // Endif.
+
+					} else {
+						outString += '<a:noFill/>';
+					} // Endif.
+
+					outString += '</p:spPr>';
+
+					if ( objs_list[i].options ) {
 						if ( objs_list[i].options.align ) {
 							switch ( objs_list[i].options.align )
 							{
@@ -707,7 +735,7 @@ officegen = function ( options ) {
 						} // Endif.
 					} // Endif.
 
-					if ( objs_list[i].text != 'undefined' ) {
+					if ( typeof objs_list[i].text != 'undefined' ) {
 						var font_size = '';
 						if ( objs_list[i].options && objs_list[i].options.font_size ) {
 							font_size = ' sz="' + objs_list[i].options.font_size + '00"';
@@ -1298,6 +1326,7 @@ officegen = function ( options ) {
 		gen_private.mixed.rels_main = [];
 		gen_private.mixed.rels_app = [];
 		gen_private.mixed.files_list = [];
+		gen_private.thisDoc.embeddings = [];
 
 		genobj.info = {};
 
@@ -1536,7 +1565,7 @@ officegen = function ( options ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
-				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'cxn';
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'text';
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options.shape = shape;
 
