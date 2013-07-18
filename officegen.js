@@ -33,6 +33,7 @@ require("setimmediate"); // To be compatible with all versions of node.js
 var officegen_info = require('./package.json');
 var archiver = require('archiver');
 var fs = require('fs');
+var path = require('path');
 var Stream = require('stream'); // BMK_STREAM:
 
 // Globals:
@@ -83,6 +84,15 @@ function compactArray ( arr ) {
 		arr[i] && arr.push ( arr[i] );  // Copy non-empty values to the end of the array.
 
 	arr.splice ( 0 , len ); // Cut the array and leave only the non-empty values.
+}
+
+if ( !String.prototype.encodeHTML ) {
+	String.prototype.encodeHTML = function () {
+		return this.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;');
+	};
 }
 
 // ----------------------
@@ -540,7 +550,7 @@ officegen = function ( options ) {
 	///
 	function cMakePptxOutTextCommand ( text_info, text_string, slide_obj ) {
 		var area_opt_data = cMakePptxOutTextData ( text_info, slide_obj );
-		return '<a:r><a:rPr lang="en-US"' + area_opt_data.font_size + area_opt_data.bold + area_opt_data.underline + ' dirty="0" smtClean="0"' + (area_opt_data.rpr_info != '' ? ('>' + area_opt_data.rpr_info) : '/>') + '<a:t>' + text_string + '</a:t></a:r>';
+		return '<a:r><a:rPr lang="en-US"' + area_opt_data.font_size + area_opt_data.bold + area_opt_data.underline + ' dirty="0" smtClean="0"' + (area_opt_data.rpr_info != '' ? ('>' + area_opt_data.rpr_info) : '/>') + '<a:t>' + text_string.encodeHTML () + '</a:t></a:r>';
 	}
 
 	///
@@ -604,8 +614,14 @@ officegen = function ( options ) {
 	/// @return Text string.
 	///
 	function cbMakePptxSlide ( data ) {
-		var outString = cbMakeMsOfficeBasicXml ( data ) + '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:cSld>';
+		var outString = cbMakeMsOfficeBasicXml ( data ) + '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"';
 		var objs_list = data.data;
+
+		if ( !data.slide.show ) {
+			outString += ' show="0"';
+		} // Endif.
+
+		outString += '><p:cSld>';
 
 		if ( data.slide.back ) {
 			outString += cMakePptxColorSelection ( false, data.slide.back );
@@ -613,12 +629,16 @@ officegen = function ( options ) {
 
 		outString += '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>';
 
+		// Loop on all the objects inside the slide to add it into the slide:
 		for ( var i = 0, total_size = objs_list.length; i < total_size; i++ ) {
 			var x = 0;
 			var y = 0;
 			var cx = 2819400;
 			var cy = 369332;
+
 			var moreStyles = '';
+			var moreStylesAttr = '';
+			var outStyles = '';
 			var styleData = '';
 			var shapeType = null;
 
@@ -703,18 +723,29 @@ officegen = function ( options ) {
 							switch ( objs_list[i].options.align )
 							{
 								case 'right':
-									moreStyles += '<a:pPr algn="r"/>';
+									moreStylesAttr += ' algn="r"';
 									break;
 
 								case 'center':
-									moreStyles += '<a:pPr algn="ctr"/>';
+									moreStylesAttr += ' algn="ctr"';
 									break;
 
 								case 'justify':
-									moreStyles += '<a:pPr algn="just"/>';
+									moreStylesAttr += ' algn="just"';
 									break;
 							} // End of switch.
 						} // Endif.
+
+						if ( objs_list[i].options.indentLevel > 0 ) {
+								moreStylesAttr += ' lvl="' + objs_list[i].options.indentLevel + '"';
+						} // Endif.
+					} // Endif.
+
+					if ( moreStyles != '' ) {
+						outStyles = '<a:pPr' + moreStylesAttr + '>' + moreStyles + '</a:pPr>';
+
+					} else if ( moreStylesAttr != '' ) {
+						outStyles = '<a:pPr' + moreStylesAttr + '/>';
 					} // Endif.
 
 					if ( styleData != '' ) {
@@ -722,11 +753,11 @@ officegen = function ( options ) {
 					} // Endif.
 
 					if ( typeof objs_list[i].text == 'string' ) {
-						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + moreStyles;
+						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + outStyles;
 						outString += cMakePptxOutTextCommand ( objs_list[i].options, objs_list[i].text, data.slide );
 
 					} else if ( objs_list[i].text ) {
-						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + moreStyles;
+						outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/><a:p>' + outStyles;
 
 						for ( var j = 0, total_size_j = objs_list[i].text.length; j < total_size_j; j++ ) {
 							if ( objs_list[i].text[j] ) {
@@ -751,6 +782,116 @@ officegen = function ( options ) {
 				case 'image':
 					outString += '<p:pic><p:nvPicPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId' + objs_list[i].rel_id + '" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
 					break;
+
+				// Paragraph:
+				case 'p':
+					if ( shapeType == null ) shapeType = 'rect';
+
+					outString += '<p:sp><p:nvSpPr>';
+					outString += '<p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>';
+					outString += '<p:spPr>';
+
+					if ( objs_list[i].options && objs_list[i].options.flip_vertical ) {
+						outString += '<a:xfrm flipV="1">';
+
+					} else {
+						outString += '<a:xfrm>';
+					} // Endif.
+
+					outString += '<a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
+
+					if ( objs_list[i].options ) {
+						if ( objs_list[i].options.fill ) {
+							outString += cMakePptxColorSelection ( objs_list[i].options.fill );
+
+						} else {
+							outString += '<a:noFill/>';
+						} // Endif.
+
+						if ( objs_list[i].options.line ) {
+							outString += '<a:ln>';
+							outString += cMakePptxColorSelection ( objs_list[i].options.line );
+
+							if ( objs_list[i].options.line_head ) {
+								outString += '<a:headEnd type="' + objs_list[i].options.line_head + '"/>';
+							} // Endif.
+
+							if ( objs_list[i].options.line_tail ) {
+								outString += '<a:tailEnd type="' + objs_list[i].options.line_tail + '"/>';
+							} // Endif.
+
+							outString += '</a:ln>';
+						} // Endif.
+
+					} else {
+						outString += '<a:noFill/>';
+					} // Endif.
+
+					outString += '</p:spPr>';
+
+					if ( styleData != '' ) {
+						outString += '<p:style>' + styleData + '</p:style>';
+					} // Endif.
+
+					outString += '<p:txBody><a:bodyPr wrap="square" rtlCol="0"><a:spAutoFit/></a:bodyPr><a:lstStyle/>';
+
+					for ( var j = 0, total_size_j = objs_list[i].data.length; j < total_size_j; j++ ) {
+						if ( objs_list[i].data[j] ) {
+							moreStylesAttr = '';
+							moreStyles = '';
+							
+							if ( objs_list[i].data[j].options ) {
+								if ( objs_list[i].data[j].options.align ) {
+									switch ( objs_list[i].data[j].options.align )
+									{
+										case 'right':
+											moreStylesAttr += ' algn="r"';
+											break;
+
+										case 'center':
+											moreStylesAttr += ' algn="ctr"';
+											break;
+
+										case 'justify':
+											moreStylesAttr += ' algn="just"';
+											break;
+									} // End of switch.
+								} // Endif.
+
+								if ( objs_list[i].data[j].options.indentLevel > 0 ) {
+									moreStylesAttr += ' lvl="' + objs_list[i].data[j].options.indentLevel + '"';
+								} // Endif.
+
+								if ( objs_list[i].data[j].options.listType == 'number' ) {
+									moreStyles += '<a:buFont typeface="+mj-lt"/><a:buAutoNum type="arabicPeriod"/>';
+								} // Endif.
+							} // Endif.
+
+							if ( moreStyles != '' ) {
+								outStyles = '<a:pPr' + moreStylesAttr + '>' + moreStyles + '</a:pPr>';
+
+							} else if ( moreStylesAttr != '' ) {
+								outStyles = '<a:pPr' + moreStylesAttr + '/>';
+							} // Endif.
+
+							outString += '<a:p>' + outStyles;
+
+							// if ( typeof objs_list[i].data[j].text == 'string' ) {
+							outString += cMakePptxOutTextCommand ( objs_list[i].data[j].options, objs_list[i].data[j].text, data.slide );
+							// BMK_TODO:
+						} // Endif.
+					} // Endif.
+
+					var font_size = '';
+					if ( objs_list[i].options && objs_list[i].options.font_size ) {
+						font_size = ' sz="' + objs_list[i].options.font_size + '00"';
+					} // Endif.
+
+					outString += '<a:endParaRPr lang="en-US"' + font_size + ' dirty="0"/></a:p>';
+					outString += '</p:txBody>';
+
+					outString += '</p:sp>';
+					break;
 			} // End of switch.
 		} // End of for loop.
 		
@@ -772,7 +913,7 @@ officegen = function ( options ) {
 		var outString = cbMakeMsOfficeBasicXml ( data ) + '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><TotalTime>0</TotalTime><Words>0</Words><Application>Microsoft Office PowerPoint</Application><PresentationFormat>On-screen Show (4:3)</PresentationFormat><Paragraphs>0</Paragraphs><Slides>' + slidesCount + '</Slides><Notes>0</Notes><HiddenSlides>0</HiddenSlides><MMClips>0</MMClips><ScaleCrop>false</ScaleCrop><HeadingPairs><vt:vector size="4" baseType="variant"><vt:variant><vt:lpstr>Theme</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant><vt:variant><vt:lpstr>Slide Titles</vt:lpstr></vt:variant><vt:variant><vt:i4>' + slidesCount + '</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="' + (slidesCount + 1) + '" baseType="lpstr"><vt:lpstr>Office Theme</vt:lpstr>';
 
 		for ( var i = 0, total_size = gen_private.thisDoc.pages.length; i < total_size; i++ ) {
-			outString += '<vt:lpstr>' + gen_private.thisDoc.pages[i].slide.name + '</vt:lpstr>';
+			outString += '<vt:lpstr>' + gen_private.thisDoc.pages[i].slide.name.encodeHTML () + '</vt:lpstr>';
 		} // End of for loop.
 
 		outString += '</vt:vector></TitlesOfParts><Company>' + userName + '</Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>12.0000</AppVersion></Properties>';
@@ -938,7 +1079,7 @@ officegen = function ( options ) {
 							outString += '<w:rPr>' + rPrData + '</w:rPr>';
 						} // Endif.
 
-						outString += '<w:t' + tExtra + '>' + objs_list[i].data[j].text + '</w:t></w:r>';
+						outString += '<w:t' + tExtra + '>' + objs_list[i].data[j].text.encodeHTML () + '</w:t></w:r>';
 
 					} else if ( objs_list[i].data[j].page_break ) {
 						outString += '<w:r><w:br w:type="page"/></w:r>';
@@ -967,7 +1108,7 @@ officegen = function ( options ) {
 		var outString = cbMakeMsOfficeBasicXml ( data ) + '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="' + genobj.generate_data.total_strings + '" uniqueCount="' + genobj.generate_data.shared_strings.length + '">';
 
 		for ( var i = 0, total_size = genobj.generate_data.shared_strings.length; i < total_size; i++ ) {
-			outString += '<si><t>' + genobj.generate_data.shared_strings[i] + '</t></si>';
+			outString += '<si><t>' + genobj.generate_data.shared_strings[i].encodeHTML () + '</t></si>';
 		} // Endif.
 
 		return outString + '</sst>';
@@ -1484,7 +1625,7 @@ officegen = function ( options ) {
 		///
 		genobj.makeNewSlide = function () {
 			var pageNumber = gen_private.thisDoc.pages.length;
-			var slideObj = {}; // The slide object that the user will use.
+			var slideObj = { show: true }; // The slide object that the user will use.
 
 			gen_private.thisDoc.pages[pageNumber] = {};
 			gen_private.thisDoc.pages[pageNumber].slide = slideObj;
@@ -1597,9 +1738,36 @@ officegen = function ( options ) {
 			///
 			/// @param[in] ??? ???.
 			///
-			slideObj.addImage = function ( image_path, opt, y_pos, x_size, y_size ) {
+			slideObj.addImage = function ( image_path, opt, y_pos, x_size, y_size, image_format_type ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
-				var image_type = 'png'; // BMK_TODO:
+				var image_type = (typeof image_format_type == 'string') ? image_format_type : 'png';
+
+				if ( typeof image_path == 'string' ) {
+					var image_ext = path.extname ( image_path );
+
+					switch ( image_ext ) {
+						case '.bmp':
+							image_type = 'bmp';
+							break;
+
+						case '.gif':
+							image_type = 'gif';
+							break;
+
+						case '.jpg':
+						case '.jpeg':
+							image_type = 'jpeg';
+							break;
+
+						case '.emf':
+							image_type = 'emf';
+							break;
+
+						case '.tiff':
+							image_type = 'tiff';
+							break;
+					} // End of switch.
+				} // Endif.
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'image';
@@ -1631,6 +1799,45 @@ officegen = function ( options ) {
 						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
 					} // Endif.
 				} // Endif.
+			};
+
+			///
+			/// @brief ???.
+			///
+			/// ???.
+			///
+			/// @param[in] ??? ???.
+			///
+			slideObj.addP = function ( text, opt, y_pos, x_size, y_size, opt_b ) {
+				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
+
+				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'p';
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].data = [];
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+
+				if ( typeof opt == 'string' ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.color = opt;
+
+				} else if ( (typeof opt != 'object') && (typeof y_pos != 'undefined') ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.x = opt;
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.y = y_pos;
+
+					if ( (typeof x_size != 'undefined') && (typeof y_size != 'undefined') ) {
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx = x_size;
+						gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = y_size;
+					} // Endif.
+				} // Endif.
+
+				if ( typeof opt_b == 'object' ) {
+					for ( var attrname in opt_b ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = opt_b[attrname]; }
+
+				} else if ( (typeof x_size == 'object') && (typeof y_size == 'undefined') ) {
+					for ( var attrname in x_size ) { gen_private.thisDoc.pages[pageNumber].data[objNumber].options[attrname] = x_size[attrname]; }
+				} // Endif.
+
+				// BMK_TODO:
+				return gen_private.thisDoc.pages[pageNumber].data[objNumber].data;
 			};
 
 			intAddAnyResourceToParse ( 'ppt\\slides\\slide' + (pageNumber + 1) + '.xml', 'buffer', gen_private.thisDoc.pages[pageNumber], cbMakePptxSlide, false );

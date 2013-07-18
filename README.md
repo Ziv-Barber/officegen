@@ -34,9 +34,12 @@ better to wait for more stable releases if you want to improve it.
 
 - Generating Microsoft PowerPoint document (.pptx file):
   - Create PowerPoint document with one or more slides.
-  - Add text and images (png only) based objects to each slide.
+  - Support both PPT and PPS.
+  - Add text blocks.
+  - Add images.
   - Can declare fonts, alignment, colors and background.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
+  - Support hidden slides.
 - Generating Microsoft Word document (.docx file):
   - Create Word document. You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
 - Generating Microsoft Excel document (.xlsx file):
@@ -257,6 +260,12 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.10:
+	- PowerPoint:
+		- Supporting more image types.
+		- Supporting hidden slides.
+		- Allow changing the indent for text.
+	- Bug: All the text messages for all type of documents can now have '<', '>', etc.
 - Version 0.1.9:
 	- Bug: Fix the invalid package.json main file.
 	- PowerPoint: Allow adding shapes.

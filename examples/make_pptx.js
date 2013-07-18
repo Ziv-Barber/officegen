@@ -44,6 +44,7 @@ slide.addText ( 'Office generator', { y: 'c', x: 0, cx: '100%', cy: 66, font_siz
 
 slide = pptx.makeNewSlide ();
 
+slide.show = false;
 slide.addText ( 'Red line', 'ff0000' );
 slide.addShape ( 'ellipse', { fill: 'ff0000', line: 'ffff00', y: 50, x: 50 } );
 slide.addText ( 'Red box', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 100 } );
@@ -52,11 +53,13 @@ slide.addShape ( 'line', { line: '000088', y: 170, x: 150, line_head: 'triangle'
 slide.addShape ( 'line', { line: '000088', y: 190, x: 150, line_tail: 'triangle' } );
 slide.addShape ( 'line', { line: '000088', y: 210, x: 150, line_head: 'stealth', line_tail: 'stealth' } );
 slide.addShape ( 'line', { line: '008888', y: 210, x: 150, line_head: 'stealth', line_tail: 'stealth', flip_vertical: true } );
-slide.addText ( 'Red box', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 350, x: 200, shape: 'roundRect' } );
+slide.addText ( 'Red box', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 350, x: 200, shape: 'roundRect', indentLevel: 1 } );
 
 slide = pptx.makeNewSlide ();
 
 slide.addImage ( path.resolve(__dirname, 'image1.png' ), { y: 'c', x: 'c', cy: 294, cx: 420 } );
+
+slide = pptx.makeNewSlide ();
 
 var out = fs.createWriteStream ( 'out.pptx' );
 
