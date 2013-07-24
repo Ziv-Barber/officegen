@@ -445,6 +445,7 @@ officegen = function ( options ) {
 		var outText = '';
 		var colorVal;
 		var fillType = 'solid';
+		var internalElements = '';
 
 		if ( back_info ) {
 			outText += '<p:bg><p:bgPr>';
@@ -469,12 +470,16 @@ officegen = function ( options ) {
 				if ( color_info.color ) {
 					colorVal = color_info.color;
 				} // Endif.
+
+				if ( color_info.alpha ) {
+					internalElements += '<a:alpha val="' + (100 - color_info.alpha) + '000"/>';
+				} // Endif.
 			} // Endif.
 
 			switch ( fillType )
 			{
 				case 'solid':
-					outText += '<a:solidFill><a:srgbClr val="' + colorVal + '"/></a:solidFill>';
+					outText += '<a:solidFill><a:srgbClr val="' + colorVal + '">' + internalElements + '</a:srgbClr></a:solidFill>';
 					break;
 			} // End of switch.
 		} // Endif.
@@ -641,6 +646,7 @@ officegen = function ( options ) {
 			var outStyles = '';
 			var styleData = '';
 			var shapeType = null;
+			var locationAttr = '';
 
 			if ( objs_list[i].options ) {
 				if ( objs_list[i].options.cx ) {
@@ -662,6 +668,16 @@ officegen = function ( options ) {
 				if ( objs_list[i].options.shape && (typeof objs_list[i].options.shape == 'string') ) {
 					shapeType = objs_list[i].options.shape;
 				} // Endif.
+
+				if ( objs_list[i].options.flip_vertical ) {
+					locationAttr += ' flipV="1"';
+				} // Endif.
+
+				if ( objs_list[i].options.rotate ) {
+					var rotateVal = objs_list[i].options.rotate > 360 ? (objs_list[i].options.rotate - 360) : objs_list[i].options.rotate;
+					rotateVal *= 60000;
+					locationAttr += ' rot="' + rotateVal + '"';
+				} // Endif.
 			} // Endif.
 
 			switch ( objs_list[i].type ) {
@@ -680,12 +696,7 @@ officegen = function ( options ) {
 
 					outString += '<p:spPr>';
 
-					if ( objs_list[i].options && objs_list[i].options.flip_vertical ) {
-						outString += '<a:xfrm flipV="1">';
-
-					} else {
-						outString += '<a:xfrm>';
-					} // Endif.
+					outString += '<a:xfrm' + locationAttr + '>';
 
 					outString += '<a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
 
@@ -698,7 +709,15 @@ officegen = function ( options ) {
 						} // Endif.
 
 						if ( objs_list[i].options.line ) {
-							outString += '<a:ln>';
+							var lineAttr = '';
+
+							if ( objs_list[i].options.line_size ) {
+								lineAttr += ' w="' + (objs_list[i].options.line_size * 12700) + '"';
+							} // Endif.
+
+							// cmpd="dbl"
+
+							outString += '<a:ln' + lineAttr + '>';
 							outString += cMakePptxColorSelection ( objs_list[i].options.line );
 
 							if ( objs_list[i].options.line_head ) {
@@ -780,7 +799,7 @@ officegen = function ( options ) {
 
 				// Image:
 				case 'image':
-					outString += '<p:pic><p:nvPicPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId' + objs_list[i].rel_id + '" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
+					outString += '<p:pic><p:nvPicPr><p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId' + objs_list[i].rel_id + '" cstate="print"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm' + locationAttr + '><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
 					break;
 
 				// Paragraph:
@@ -791,12 +810,7 @@ officegen = function ( options ) {
 					outString += '<p:cNvPr id="' + (i + 2) + '" name="Object ' + (i + 1) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>';
 					outString += '<p:spPr>';
 
-					if ( objs_list[i].options && objs_list[i].options.flip_vertical ) {
-						outString += '<a:xfrm flipV="1">';
-
-					} else {
-						outString += '<a:xfrm>';
-					} // Endif.
+					outString += '<a:xfrm' + locationAttr + '>';
 
 					outString += '<a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + cx + '" cy="' + cy + '"/></a:xfrm><a:prstGeom prst="' + shapeType + '"><a:avLst/></a:prstGeom>';
 

@@ -164,6 +164,13 @@ Text alignment properties:
 - align - can be either 'left' (default), 'right', 'center' or 'justify'.
 - indentLevel - indent level (number: 0+, default = 0).
 
+Line/border extra properties:
+
+- 'line_size' - line width in pixels.
+- 'line_head' - the shape name of the line's head side (either: 'triangle', 'stealth', etc).
+- 'line_tail' - the shape name of the line's tail side (either: 'triangle', 'stealth', etc).
+- 'flip_vertical': true - flip the line drawing from top/left-bottom/right into bottom/left-top/right.
+
 The 'shape' property:
 
 Normally every object is a rectangle but you can change that for every object using the shape property, or in case that 
@@ -175,14 +182,13 @@ Shapes list:
 - 'rect' (default) - rectangle.
 - 'ellipse'
 - 'roundRect' - round rectangle.
+- 'triangle'
 - 'line' - draw line (see below).
+- 'cloud'
+- 'hexagon'
+- 'flowChartInputOutput'
+- 'wedgeEllipseCallout'
 - (much more shapes already supported - I'll update this list later)
-
-Line shape only extra properties:
-
-- 'line_head' - the shape name of the line's head side (either: 'triangle', 'stealth', etc).
-- 'line_tail' - the shape name of the line's tail side (either: 'triangle', 'stealth', etc).
-- 'flip_vertical': true - flip the line drawing from top/left-bottom/right into bottom/left-top/right.
 
 Please note that every color property can be either:
 
@@ -190,6 +196,7 @@ Please note that every color property can be either:
 - Color object:
   - 'type' - The type of the color fill to use. Right now only 'solid' supported.
   - 'color' - String with the color code to use.
+  - 'alpha' - transparent level (0-100).
 
 Adding images:
 
@@ -338,6 +345,10 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 ## History: ##
 
 - Version 0.1.11:
+	- PowerPoint:
+		- Transparent level for solid color.
+		- Rotate any object.
+		- Flip vertical now working for any kind of object.
 	- Bugs:
 		- Invalid PPTX file when adding more then one image of the same type.
 - Version 0.1.10:
