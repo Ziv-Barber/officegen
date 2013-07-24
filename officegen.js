@@ -1526,6 +1526,8 @@ officegen = function ( options ) {
 	function makePptxGenerator ( new_type ) {
 		makeOfficeGenerator ( 'ppt', 'presentation', {} );
 
+		gen_private.thisDoc.images_count = 0;
+
 		gen_private.perment.features.page_name = 'slides'; // This document type must have pages.
 
 		addInfoType ( 'dc:title', '', 'title', 'setDocTitle' );
@@ -1630,7 +1632,6 @@ officegen = function ( options ) {
 			gen_private.thisDoc.pages[pageNumber] = {};
 			gen_private.thisDoc.pages[pageNumber].slide = slideObj;
 			gen_private.thisDoc.pages[pageNumber].data = [];
-			gen_private.thisDoc.pages[pageNumber].images = [];
 			gen_private.thisDoc.pages[pageNumber].rels = [
 				{
 					type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout',
@@ -1774,7 +1775,7 @@ officegen = function ( options ) {
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].image = image_path;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
 
-				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.pages[pageNumber].images.length;
+				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.images_count++;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length + 1;
 
 				intAddAnyResourceToParse ( 'ppt\\media\\image' + (gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id + 1) + '.' + image_type, (typeof image_path == 'string') ? 'file' : 'stream', image_path, null, false );

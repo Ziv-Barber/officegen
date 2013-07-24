@@ -114,13 +114,90 @@ http.createServer ( function ( request, response ) {
 
 #### PowerPoint: ####
 
-Creating new slides for pptx:
+Creating a new slide:
 
 ```js
 slide = pptx.makeNewSlide ();
-slide.back = '000088';
 ```
 
+The returned object of makeNewSlide representing a single slide. Use it to add objects into this slide. 
+You must create at last one slide on your pptx/ppsx document.
+
+Inside each slide you can place objects, for example: text box, shapes, images, etc.
+
+Properties of the slide object itself:
+
+- "name" - name for this slide.
+- "back" - the background color.
+- "color" - the default font color to use.
+- "show" - change this property to false if you want to disable this slide.
+
+The slide object supporting the following methods:
+
+- addText ( text, options )
+- addShape ( shape, options )
+- addImage ( image, options )
+
+Read only methods:
+
+- getPageNumber - return the ID of this slide.
+
+Common properties that can be added to the options object for all the add methods:
+
+- x - start horizontal position. Can be either number, percentage or 'c' to center this object (horizontal).
+- y - start vertical position. Can be either number, percentage or 'c' to center this object (vertical).
+- cx - the horizontal size of this object. Can be either number or percentage of the total horizontal size.
+- cy - the vertical size of this object. Can be either number or percentage of the total vertical size.
+- color - the font color for text.
+- fill - the background color.
+- line - border color / line color.
+
+Font properties:
+
+- font_face
+- font_size
+- bold: true
+- underline: true
+
+Text alignment properties:
+
+- align - can be either 'left' (default), 'right', 'center' or 'justify'.
+- indentLevel - indent level (number: 0+, default = 0).
+
+The 'shape' property:
+
+Normally every object is a rectangle but you can change that for every object using the shape property, or in case that 
+you don't need to write any text inside that object, you can use the addShape method instead of addText. Use the shape 
+property only if you want to use a shape other then the default and you also want to add text inside it.
+
+Shapes list:
+
+- 'rect' (default) - rectangle.
+- 'ellipse'
+- 'roundRect' - round rectangle.
+- 'line' - draw line (see below).
+- (much more shapes already supported - I'll update this list later)
+
+Line shape only extra properties:
+
+- 'line_head' - the shape name of the line's head side (either: 'triangle', 'stealth', etc).
+- 'line_tail' - the shape name of the line's tail side (either: 'triangle', 'stealth', etc).
+- 'flip_vertical': true - flip the line drawing from top/left-bottom/right into bottom/left-top/right.
+
+Please note that every color property can be either:
+
+- String of the color code. For example: 'ffffff', '000000', '888800', etc.
+- Color object:
+  - 'type' - The type of the color fill to use. Right now only 'solid' supported.
+  - 'color' - String with the color code to use.
+
+Adding images:
+
+Just pass the image file name as the first parameter or addImage and the 2nd parameter, which is optional, is normal options objects 
+and you can use all the common properties ('cx', 'cy', 'y', 'x', etc).
+  
+Examples:
+  
 Changing the background color of a slide:
 
 ```js
@@ -260,6 +337,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.11:
+	- Bugs:
+		- Invalid PPTX file when adding more then one image of the same type.
 - Version 0.1.10:
 	- PowerPoint:
 		- Supporting more image types.
