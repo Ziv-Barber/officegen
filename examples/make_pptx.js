@@ -46,20 +46,26 @@ slide = pptx.makeNewSlide ();
 
 slide.show = false;
 slide.addText ( 'Red line', 'ff0000' );
-slide.addShape ( 'ellipse', { fill: 'ff0000', line: 'ffff00', y: 50, x: 50 } );
-slide.addText ( 'Red box', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 100 } );
+slide.addShape ( 'ellipse', { fill: { type: 'solid', color: 'ff0000', alpha: 50 }, line: 'ffff00', y: 50, x: 50 } );
+slide.addText ( 'Red box 1', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', line_size: 5, y: 100, rotate: 45 } );
 slide.addShape ( 'line', { line: '000088', y: 150, x: 150 } );
 slide.addShape ( 'line', { line: '000088', y: 170, x: 150, line_head: 'triangle' } );
 slide.addShape ( 'line', { line: '000088', y: 190, x: 150, line_tail: 'triangle' } );
 slide.addShape ( 'line', { line: '000088', y: 210, x: 150, line_head: 'stealth', line_tail: 'stealth' } );
 slide.addShape ( 'line', { line: '008888', y: 210, x: 150, line_head: 'stealth', line_tail: 'stealth', flip_vertical: true } );
-slide.addText ( 'Red box', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 350, x: 200, shape: 'roundRect', indentLevel: 1 } );
+slide.addText ( 'Red box 2', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', y: 350, x: 200, shape: 'roundRect', indentLevel: 1 } );
 
 slide = pptx.makeNewSlide ();
 
-slide.addImage ( path.resolve(__dirname, 'image1.png' ), { y: 'c', x: 'c', cy: 294, cx: 420 } );
+slide.addImage ( path.resolve(__dirname, 'image1.png' ), { y: 'c', x: 'c' } );
 
 slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
+
+slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'image3.png' ), { y: 'c', x: 'c' } );
 
 var out = fs.createWriteStream ( 'out.pptx' );
 

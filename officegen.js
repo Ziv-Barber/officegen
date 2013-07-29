@@ -32,6 +32,7 @@ require("setimmediate"); // To be compatible with all versions of node.js
 
 var officegen_info = require('./package.json');
 var archiver = require('archiver');
+var fast_image_size = require('fast-image-size');
 var fs = require('fs');
 var path = require('path');
 var Stream = require('stream'); // BMK_STREAM:
@@ -40,6 +41,7 @@ var Stream = require('stream'); // BMK_STREAM:
 
 var int_officegen_globals = {}; // Our internal globals.
 
+int_officegen_globals.settings = {};
 int_officegen_globals.types = {};
 int_officegen_globals.common_obj = {};
 
@@ -1756,38 +1758,67 @@ officegen = function ( options ) {
 			slideObj.addImage = function ( image_path, opt, y_pos, x_size, y_size, image_format_type ) {
 				var objNumber = gen_private.thisDoc.pages[pageNumber].data.length;
 				var image_type = (typeof image_format_type == 'string') ? image_format_type : 'png';
+				var defWidth, defHeight = 0;
 
 				if ( typeof image_path == 'string' ) {
-					var image_ext = path.extname ( image_path );
+					var ret_data = fast_image_size ( image_path );
+					if ( ret_data.type == 'unknown' ) {
+						var image_ext = path.extname ( image_path );
 
-					switch ( image_ext ) {
-						case '.bmp':
-							image_type = 'bmp';
-							break;
+						switch ( image_ext ) {
+							case '.bmp':
+								image_type = 'bmp';
+								break;
 
-						case '.gif':
-							image_type = 'gif';
-							break;
+							case '.gif':
+								image_type = 'gif';
+								break;
 
-						case '.jpg':
-						case '.jpeg':
+							case '.jpg':
+							case '.jpeg':
+								image_type = 'jpeg';
+								break;
+
+							case '.emf':
+								image_type = 'emf';
+								break;
+
+							case '.tiff':
+								image_type = 'tiff';
+								break;
+						} // End of switch.
+
+					} else {
+						if ( ret_data.width ) {
+							defWidth = ret_data.width;
+						} // Endif.
+
+						if ( ret_data.height ) {
+							defHeight = ret_data.height;
+						} // Endif.
+
+						image_type = ret_data.type;
+						if ( image_type == 'jpg' ) {
 							image_type = 'jpeg';
-							break;
-
-						case '.emf':
-							image_type = 'emf';
-							break;
-
-						case '.tiff':
-							image_type = 'tiff';
-							break;
-					} // End of switch.
+						} // Endif.
+					} // Endif.
 				} // Endif.
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber] = {};
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].type = 'image';
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].image = image_path;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].options = typeof opt == 'object' ? opt : {};
+
+				if ( !gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx && defWidth ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx = defWidth;
+				} // Endif.
+
+				if ( !gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy && defHeight ) {
+					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = defHeight;
+				} // Endif.
+
+				console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy );
+				console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx );
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.images_count++;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length + 1;
@@ -2167,6 +2198,10 @@ officegen = function ( options ) {
 					} // End of switch.
 
 					if ( typeof resStream != 'undefined' ) {
+						if ( int_officegen_globals.settings.verbose ) {
+							console.log ( 'Adding "' + gen_private.mixed.res_list[cur_index].name + '" (' + gen_private.mixed.res_list[cur_index].type + ')...' );
+						} // Endif.
+
 						archive.append ( resStream, { name: gen_private.mixed.res_list[cur_index].name }, function () {
 							setImmediate ( function() { generateNextResource ( cur_index + 1 ); });
 						});
@@ -2272,7 +2307,22 @@ function makegen ( options ) {
 	}
 };
 
+///
+/// @brief ???.
+///
+/// ???.
+///
+/// @b Example:
+///
+/// @code
+/// @endcode
+///
+function setVerboseMode ( new_state ) {
+	int_officegen_globals.settings.verbose = new_state;
+};
+
 exports.makegen = makegen;
+exports.setVerboseMode = setVerboseMode;
 // exports.registerDocType = ???;
 exports.schema = int_officegen_globals.types;
 exports.version = officegen_info.version;

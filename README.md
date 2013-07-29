@@ -120,7 +120,7 @@ Creating a new slide:
 slide = pptx.makeNewSlide ();
 ```
 
-The returned object of makeNewSlide representing a single slide. Use it to add objects into this slide. 
+The returned object from makeNewSlide representing a single slide. Use it to add objects into this slide. 
 You must create at last one slide on your pptx/ppsx document.
 
 Inside each slide you can place objects, for example: text box, shapes, images, etc.
@@ -142,7 +142,7 @@ Read only methods:
 
 - getPageNumber - return the ID of this slide.
 
-Common properties that can be added to the options object for all the add methods:
+Common properties that can be added to the options object for all the add based methods:
 
 - x - start horizontal position. Can be either number, percentage or 'c' to center this object (horizontal).
 - y - start vertical position. Can be either number, percentage or 'c' to center this object (vertical).
@@ -151,6 +151,8 @@ Common properties that can be added to the options object for all the add method
 - color - the font color for text.
 - fill - the background color.
 - line - border color / line color.
+- flip_vertical: true - flip the object vertical.
+- shape - see below.
 
 Font properties:
 
@@ -164,12 +166,11 @@ Text alignment properties:
 - align - can be either 'left' (default), 'right', 'center' or 'justify'.
 - indentLevel - indent level (number: 0+, default = 0).
 
-Line/border extra properties:
+Line/border extra properties (only effecting if the 'line' property exist):
 
 - 'line_size' - line width in pixels.
 - 'line_head' - the shape name of the line's head side (either: 'triangle', 'stealth', etc).
 - 'line_tail' - the shape name of the line's tail side (either: 'triangle', 'stealth', etc).
-- 'flip_vertical': true - flip the line drawing from top/left-bottom/right into bottom/left-top/right.
 
 The 'shape' property:
 
@@ -183,7 +184,7 @@ Shapes list:
 - 'ellipse'
 - 'roundRect' - round rectangle.
 - 'triangle'
-- 'line' - draw line (see below).
+- 'line' - draw line.
 - 'cloud'
 - 'hexagon'
 - 'flowChartInputOutput'
@@ -349,6 +350,7 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 		- Transparent level for solid color.
 		- Rotate any object.
 		- Flip vertical now working for any kind of object.
+		- Line width.
 	- Bugs:
 		- Invalid PPTX file when adding more then one image of the same type.
 - Version 0.1.10:
