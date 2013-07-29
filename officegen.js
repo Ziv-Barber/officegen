@@ -1817,8 +1817,8 @@ officegen = function ( options ) {
 					gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy = defHeight;
 				} // Endif.
 
-				console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy );
-				console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx );
+				// console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cy );
+				// console.log ( gen_private.thisDoc.pages[pageNumber].data[objNumber].options.cx );
 
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].image_id = gen_private.thisDoc.images_count++;
 				gen_private.thisDoc.pages[pageNumber].data[objNumber].rel_id = gen_private.thisDoc.pages[pageNumber].rels.length + 1;
