@@ -1248,7 +1248,8 @@ officegen = function ( options ) {
 
 		for ( var i = 0, total_size = gen_private.thisDoc.pages.length; i < total_size; i++ ) {
 			var sheetName = gen_private.thisDoc.pages[i].sheet.name || 'Sheet' + (i + 1);
-			outString += '<sheet name="' + sheetName + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>';
+                        var rId = gen_private.thisDoc.pages[i].relId;
+			outString += '<sheet name="' + sheetName + '" sheetId="' + (i + 1) + '" r:id="rId' + rId + '"/>';
 		} // End of for loop.
 
 		outString += '</sheets><calcPr calcId="125725"/></workbook>';
@@ -2070,6 +2071,19 @@ officegen = function ( options ) {
 			}
 		);
 
+		gen_private.mixed.rels_app.push (
+			{
+				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles',
+				target: 'styles.xml',
+				clear: 'type'
+			},
+			{
+				type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme',
+				target: 'theme/theme1.xml',
+				clear: 'type'
+			}
+		);
+
 		intAddAnyResourceToParse ( 'docProps\\app.xml', 'buffer', null, cbMakeXlsApp, true );
 		intAddAnyResourceToParse ( 'xl\\styles.xml', 'buffer', null, cbMakeXlsStyles, true );
 		intAddAnyResourceToParse ( 'xl\\workbook.xml', 'buffer', null, cbMakeXlsWorkbook, true );
@@ -2091,6 +2105,7 @@ officegen = function ( options ) {
 
 			gen_private.thisDoc.pages[pageNumber] = {};
 			gen_private.thisDoc.pages[pageNumber].id = pageNumber;
+			gen_private.thisDoc.pages[pageNumber].relId = gen_private.mixed.rels_app.length + 1;
 			gen_private.thisDoc.pages[pageNumber].sheet = sheetObj;
 
 			gen_private.mixed.rels_app.push (
