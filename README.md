@@ -11,10 +11,6 @@ This module is a Javascript porting of my 'DuckWriteC++' library which doing the
 
 Please refer to the roadmap section for information on what will be added in the next versions.
 
-This version only implementing basic features and there is no plugins API yet. You can fork this code if you 
-want to but please beware that I'm in the middle of huge changing in the design of this module and it'll be 
-better to wait for more stable releases if you want to improve it.
-
 ## Contents: ##
 
 - [Features](#a1)
@@ -58,6 +54,7 @@ This module is depending on:
 
 - archiver
 - setimmediate
+- fast-image-size
 
 <a name="a3"/>
 ## Public API: ##
@@ -67,19 +64,19 @@ This module is depending on:
 Generating PowerPoint 2007 object:
 
 ```js
-var pptx = require('../officegen.js').makegen ( { 'type': 'pptx' } );
+var pptx = require('officegen').makegen ( { 'type': 'pptx' } );
 ```
 
 Generating Word 2007 object:
 
 ```js
-var docx = require('../officegen.js').makegen ( { 'type': 'docx' } );
+var docx = require('officegen').makegen ( { 'type': 'docx' } );
 ```
 
 Generating Excel 2007 object:
 
 ```js
-var xlsx = require('../officegen.js').makegen ( { 'type': 'xlsx' } );
+var xlsx = require('officegen').makegen ( { 'type': 'xlsx' } );
 ```
 
 Now you should fill the object with data (we'll see below) and then you should call generate with 
@@ -99,7 +96,7 @@ Generating HTTP stream (no file been created):
 var http = require("http");
 
 http.createServer ( function ( request, response ) {
-	var pptx = require('../officegen.js').makegen (
+	var pptx = require('officegen').makegen (
 		{ 'type': 'pptx', 'onend': function ( written ) {
 		// ... (called after finishing to serve the user)
 	} } );
@@ -201,9 +198,9 @@ Please note that every color property can be either:
 
 Adding images:
 
-Just pass the image file name as the first parameter or addImage and the 2nd parameter, which is optional, is normal options objects 
+Just pass the image file name as the first parameter to addImage and the 2nd parameter, which is optional, is normal options objects 
 and you can use all the common properties ('cx', 'cy', 'y', 'x', etc).
-  
+
 Examples:
   
 Changing the background color of a slide:
@@ -345,6 +342,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.1.12:
+	- Bugs:
+		-  Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
 - Version 0.1.11:
 	- PowerPoint:
 		- Transparent level for solid color.
