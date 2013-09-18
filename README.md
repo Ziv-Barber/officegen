@@ -342,9 +342,11 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
-- Version 0.1.12:
+- Version 0.2.0:
+	- Huge design change.
 	- Bugs:
-		-  Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
+		- Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
+		- Minor bug fixes on the examples and the documentation.
 - Version 0.1.11:
 	- PowerPoint:
 		- Transparent level for solid color.
@@ -391,18 +393,12 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 Features todo:
 
-### Version 0.1.x: ###
+### Version 0.2.x: ###
 
 - Excel basic styling.
 - Word tables.
 - PowerPoint lists and tables.
-
-### Version 0.2.x: ###
-
-- API for addons:
-  - Document Type API
-  - Office 2007 Document Type API
-  - Generic Input API
+- Integration with my Schema-API module.
 
 ### Version 0.3.x: ###
 
