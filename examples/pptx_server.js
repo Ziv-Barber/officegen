@@ -1,6 +1,8 @@
 // Simple server that displaying form to ask the user name and then generate PowerPoint stream with the user's name 
 // without using real files on the server side.
 
+var officegen = require('../lib/index.js');
+
 var fs = require('fs');
 var http = require("http");
 var querystring = require('querystring');
@@ -60,7 +62,7 @@ http.createServer ( function ( request, response ) {
 			// .xlam   application/vnd.ms-excel.addin.macroEnabled.12
 			// .xlsb   application/vnd.ms-excel.sheet.binary.macroEnabled.12
 
-			var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
+			var pptx = officegen.makegen ( { 'type': 'pptx', 'onend': function ( written ) {
 				console.log ( 'Finish to create the surprise PowerPoint stream and send it to ' + response.post.name + '.\nTotal bytes created: ' + written + '\n' );
 			} } );
 

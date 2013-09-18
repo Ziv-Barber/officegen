@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var officegen = require('../officegen.js');
+var officegen = require('../lib/index.js');
 var xlsx = officegen.makegen ( { 'type': 'xlsx', 'onend': function ( written ) {
 	console.log ( 'Finish to create an Excel file.\nTotal bytes created: ' + written + '\n' );
 } } );

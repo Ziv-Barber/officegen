@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var pptx = require('../officegen.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
+var pptx = require('../lib/index.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
 	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
 } } );
 
