@@ -44,7 +44,7 @@ Please refer to the roadmap section for information on what will be added in the
 <a name="a2"/>
 ## Installation: ##
 
-via git:
+via Git:
 
 ```bash
 $ git clone git://github.com/Ziv-Barber/officegen.git
@@ -68,7 +68,7 @@ This module is depending on:
 ### Creating the document object: ###
 
 ```js
-officegen = require('officegen');
+var officegen = require('officegen');
 ```
 
 Generating PowerPoint 2007 object:
@@ -124,6 +124,11 @@ var http = require("http");
 var officegen = require('officegen');
 
 http.createServer ( function ( request, response ) {
+	response.writeHead ( 200, {
+		"Content-Type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+		'Content-disposition': 'attachment; filename=surprise.pptx'
+		});
+
 	var pptx = officegen ( 'pptx' );
 
 	pptx.on ( 'finalize', function ( written ) {
