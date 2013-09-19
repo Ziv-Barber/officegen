@@ -61,22 +61,43 @@ This module is depending on:
 
 ### Creating the document object: ###
 
+```js
+officegen = require('officegen');
+```
+
 Generating PowerPoint 2007 object:
 
 ```js
-var pptx = require('officegen').makegen ( { 'type': 'pptx' } );
+var pptx = officegen ( 'pptx' );
 ```
 
 Generating Word 2007 object:
 
 ```js
-var docx = require('officegen').makegen ( { 'type': 'docx' } );
+var docx = officegen ( 'docx' );
 ```
 
 Generating Excel 2007 object:
 
 ```js
-var xlsx = require('officegen').makegen ( { 'type': 'xlsx' } );
+var xlsx = officegen ( 'xlsx' );
+```
+
+General events of officegen:
+
+- 'finalize' - been called after finishing to create the document.
+- 'error' - been called on error.
+
+Event examples:
+
+```js
+pptx.on ( 'finalize', function ( written ) {
+			console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+		});
+
+pptx.on ( 'error', function ( err ) {
+			console.log ( err );
+		});
 ```
 
 Now you should fill the object with data (we'll see below) and then you should call generate with 
@@ -94,12 +115,18 @@ Generating HTTP stream (no file been created):
 
 ```js
 var http = require("http");
+var officegen = require('officegen');
 
 http.createServer ( function ( request, response ) {
-	var pptx = require('officegen').makegen (
-		{ 'type': 'pptx', 'onend': function ( written ) {
-		// ... (called after finishing to serve the user)
-	} } );
+	var pptx = officegen ( 'pptx' );
+
+	pptx.on ( 'finalize', function ( written ) {
+			// ...
+			});
+
+	pptx.on ( 'error', function ( err ) {
+			// ...
+			});
 
 	// ... (fill pptx with data)
 
@@ -343,8 +370,10 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 ## History: ##
 
 - Version 0.2.0:
-	- Huge design change.
+	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
+	  the old API.
 	- Bugs:
+		- You can now listen on error events.
 		- Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
 		- Minor bug fixes on the examples and the documentation.
 - Version 0.1.11:

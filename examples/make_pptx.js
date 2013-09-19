@@ -1,9 +1,18 @@
+
+var officegen = require('../lib/index.js');
+
 var fs = require('fs');
 var path = require('path');
 
-var pptx = require('../lib/index.js').makegen ( { 'type': 'pptx', 'onend': function ( written ) {
-	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-} } );
+var pptx = officegen ( 'pptx' );
+
+pptx.on ( 'finalize', function ( written ) {
+			console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+		});
+
+pptx.on ( 'error', function ( err ) {
+			console.log ( err );
+		});
 
 pptx.setDocTitle ( 'Sample PPTX Document' );
 
@@ -19,7 +28,7 @@ slide.back = '000000';
 slide.color = 'ffffff';
 
 // Basic way to add text string:
-slide.addText ( 'This is a test' );
+slide.addText ( 'Created using Officegen version ' + officegen.version );
 slide.addText ( 'Fast position', 0, 20 );
 slide.addText ( 'Full line', 0, 40, '100%', 20 );
 
@@ -68,6 +77,10 @@ slide = pptx.makeNewSlide ();
 slide.addImage ( path.resolve(__dirname, 'image3.png' ), { y: 'c', x: 'c' } );
 
 var out = fs.createWriteStream ( 'out.pptx' );
+
+out.on ( 'error', function ( err ) {
+	console.log ( err );
+});
 
 pptx.generate ( out );
 

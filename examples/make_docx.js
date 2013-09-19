@@ -1,8 +1,17 @@
+
+var officegen = require('../lib/index.js');
+
 var fs = require('fs');
 
-var docx = require('../lib/index.js').makegen ( { 'type': 'docx', 'onend': function ( written ) {
-	console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );
-} } );
+var docx = officegen ( 'docx' );
+
+docx.on ( 'finalize', function ( written ) {
+			console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );
+		});
+
+docx.on ( 'error', function ( err ) {
+			console.log ( err );
+		});
 
 var pObj = docx.createP ();
 
@@ -41,6 +50,10 @@ var pObj = docx.createListOfNumbers ();
 pObj.addText ( 'Option 2' );
 
 var out = fs.createWriteStream ( 'out.docx' );
+
+out.on ( 'error', function ( err ) {
+	console.log ( err );
+});
 
 docx.generate ( out );
 

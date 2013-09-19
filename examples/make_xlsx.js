@@ -1,9 +1,16 @@
 var fs = require('fs');
 
 var officegen = require('../lib/index.js');
-var xlsx = officegen.makegen ( { 'type': 'xlsx', 'onend': function ( written ) {
-	console.log ( 'Finish to create an Excel file.\nTotal bytes created: ' + written + '\n' );
-} } );
+
+var xlsx = officegen ( 'xlsx' );
+
+xlsx.on ( 'finalize', function ( written ) {
+			console.log ( 'Finish to create an Excel file.\nTotal bytes created: ' + written + '\n' );
+		});
+
+xlsx.on ( 'error', function ( err ) {
+			console.log ( err );
+		});
 
 sheet = xlsx.makeNewSheet ();
 sheet.name = 'Excel Test';
@@ -29,6 +36,10 @@ sheet.setCell ( 'I2', 31.12 );
 sheet.setCell ( 'G102', 'Hello World!' );
 
 var out = fs.createWriteStream ( 'out.xlsx' );
+
+out.on ( 'error', function ( err ) {
+	console.log ( err );
+});
 
 xlsx.generate ( out );
 

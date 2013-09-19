@@ -62,9 +62,15 @@ http.createServer ( function ( request, response ) {
 			// .xlam   application/vnd.ms-excel.addin.macroEnabled.12
 			// .xlsb   application/vnd.ms-excel.sheet.binary.macroEnabled.12
 
-			var pptx = officegen.makegen ( { 'type': 'pptx', 'onend': function ( written ) {
-				console.log ( 'Finish to create the surprise PowerPoint stream and send it to ' + response.post.name + '.\nTotal bytes created: ' + written + '\n' );
-			} } );
+			var pptx = officegen ( 'pptx' );
+
+			pptx.on ( 'finalize', function ( written ) {
+						console.log ( 'Finish to create the surprise PowerPoint stream and send it to ' + response.post.name + '.\nTotal bytes created: ' + written + '\n' );
+					});
+
+			pptx.on ( 'error', function ( err ) {
+						console.log ( err );
+					});
 
 			slide = pptx.makeNewSlide ();
 			slide.back = '000000';
