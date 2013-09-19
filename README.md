@@ -44,6 +44,12 @@ Please refer to the roadmap section for information on what will be added in the
 <a name="a2"/>
 ## Installation: ##
 
+via git:
+
+```bash
+$ git clone git://github.com/Ziv-Barber/officegen.git
+```
+
 via npm:
 
 ```bash
