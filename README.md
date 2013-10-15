@@ -380,6 +380,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Last main git branch:
+	- Bugs:
+		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
 - Version 0.2.0:
 	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
 	  the old API.
