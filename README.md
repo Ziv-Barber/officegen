@@ -71,6 +71,17 @@ This module is depending on:
 var officegen = require('officegen');
 ```
 
+There are two ways to use the officegen function:
+
+```js
+officegen ( '<type of document to create>' );
+
+officegen ({
+	'type': '<type of document to create>'
+	// More options here (if needed)
+});
+```
+
 Generating PowerPoint 2007 object:
 
 ```js
@@ -104,6 +115,20 @@ pptx.on ( 'finalize', function ( written ) {
 pptx.on ( 'error', function ( err ) {
 			console.log ( err );
 		});
+```
+
+If you are preferring to use callbacks instead of events:
+
+```js
+var pptx = officegen ({
+    'type': 'pptx', // or 'xlsx', etc
+    'onend': function ( written ) {
+        console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+    },
+    'onerr': function ( err ) {
+        console.log ( err );
+    }
+});
 ```
 
 Now you should fill the object with data (we'll see below) and then you should call generate with 
@@ -146,6 +171,48 @@ http.createServer ( function ( request, response ) {
 ```
 
 ### Put data inside the document object: ###
+
+#### MS-Office document properties (for all document types): ###
+
+The default Author of all the documents been created by officegen is 'officegen'. If you want to put anything else please 
+use the 'creator' option when calling the officegen function:
+
+```js
+var pptx = officegen ({
+    'type': 'pptx', // or 'xlsx', etc
+	'creator': '<your project name here>'
+});
+```
+
+Change the document title (pptx,ppsx,docx):
+
+```js
+var pptx = officegen ({
+    'type': 'pptx',
+	'title': '<title>'
+});
+
+// or
+
+pptx.setDocTitle ( '<title>' );
+```
+
+For Word only:
+
+```js
+var docx = officegen ({
+    'type': 'docx',
+	'subject': '...',
+	'keywords': '...',
+	'description': '...'
+});
+
+// or
+
+docx.setDocSubject ( '...' );
+docx.setDocKeywords ( '...' );
+docx.setDescription ( '...' );
+```
 
 #### PowerPoint: ####
 
@@ -383,6 +450,7 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 - Last main git branch:
 	- Bugs:
 		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
+		- Generating invalid strings for MS-Office document properties.
 - Version 0.2.0:
 	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
 	  the old API.
