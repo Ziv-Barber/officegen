@@ -117,7 +117,7 @@ pptx.on ( 'error', function ( err ) {
 		});
 ```
 
-If you are preferring to use callbacks instead of events:
+Another way to register either 'finalize' or 'error' event:
 
 ```js
 var pptx = officegen ({
@@ -131,6 +131,9 @@ var pptx = officegen ({
 });
 ```
 
+If you are preferring to use callbacks instead of events you can pass your callbacks to the generate module
+(see below).
+
 Now you should fill the object with data (we'll see below) and then you should call generate with 
 an output stream to create the output Office document.
 
@@ -140,6 +143,21 @@ Example with pptx:
 var out = fs.createWriteStream ( 'out.pptx' );
 
 pptx.generate ( out );
+```
+
+Passing callbacks to generate:
+
+```js
+var out = fs.createWriteStream ( 'out.pptx' );
+
+pptx.generate ( out, {
+	'finalize': function ( written ) {
+		console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+	},
+	'error': function ( err ) {
+		console.log ( err );
+	}
+});
 ```
 
 Generating HTTP stream (no file been created):
@@ -448,6 +466,8 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 ## History: ##
 
 - Last main git branch:
+	- General features:
+		- You can now pass callbacks to generate() instead of using node events.
 	- Bugs:
 		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
 		- Generating invalid strings for MS-Office document properties.
@@ -506,10 +526,11 @@ Features todo:
 
 ### Version 0.2.x: ###
 
+- Images also for Word.
+- Better images support in pptx.
 - Excel basic styling.
 - Word tables.
 - PowerPoint lists and tables.
-- Integration with my Schema-API module.
 
 ### Version 0.3.x: ###
 
