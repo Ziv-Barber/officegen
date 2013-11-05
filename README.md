@@ -117,7 +117,7 @@ pptx.on ( 'error', function ( err ) {
 		});
 ```
 
-Another way to register either 'finalize' or 'error' event:
+Another way to register either 'finalize' or 'error' events:
 
 ```js
 var pptx = officegen ({
@@ -131,7 +131,7 @@ var pptx = officegen ({
 });
 ```
 
-If you are preferring to use callbacks instead of events you can pass your callbacks to the generate module
+If you are preferring to use callbacks instead of events you can pass your callbacks to the generate method
 (see below).
 
 Now you should fill the object with data (we'll see below) and then you should call generate with 
