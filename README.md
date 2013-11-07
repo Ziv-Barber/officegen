@@ -468,9 +468,10 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 - Last main git branch:
 	- General features:
 		- You can now pass callbacks to generate() instead of using node events.
-	- Bugs:
+	- Bugs / Optimization:
 		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
 		- Generating invalid strings for MS-Office document properties.
+		- Better shared string support in Excel (thanks vivocha!).
 - Version 0.2.0:
 	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
 	  the old API.
