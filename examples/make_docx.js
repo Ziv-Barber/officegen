@@ -48,6 +48,24 @@ pObj.addImage ( path.resolve(__dirname, 'images_for_examples/image3.png' ) );
 
 docx.putPageBreak ();
 
+var pObj = docx.createP ();
+
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/image1.png' ) );
+
+var pObj = docx.createP ();
+
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ) );
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ) );
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/sword_003.png' ) );
+pObj.addText ( '... some text here ...', { font_face: 'Arial' } );
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ) );
+
+var pObj = docx.createP ();
+
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/image1.png' ) );
+
+docx.putPageBreak ();
+
 var pObj = docx.createListOfNumbers ();
 
 pObj.addText ( 'Option 1' );

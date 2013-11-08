@@ -37,7 +37,9 @@ Please refer to the roadmap section for information on what will be added in the
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
 - Generating Microsoft Word document (.docx file):
-  - Create Word document. You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
+  - Create Word document.
+  - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
+  - You can add images.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells of type both number and string.
 
@@ -407,6 +409,13 @@ pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
 pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
 ```
 
+Add an image to a paragraph:
+
+var path = require('path');
+
+pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
+pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
+
 To add a page break:
 
 ```js
@@ -465,8 +474,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
-- Last main git branch:
-	- PowerPoint:
+- Version 0.2.1:
+	- Word:
+		- You can now put images inside your document.
 	- General features:
 		- You can now pass callbacks to generate() instead of using node events.
 	- Bugs / Optimization:
