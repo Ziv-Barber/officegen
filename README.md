@@ -466,10 +466,13 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 ## History: ##
 
 - Last main git branch:
+	- PowerPoint:
 	- General features:
 		- You can now pass callbacks to generate() instead of using node events.
 	- Bugs / Optimization:
+		- If you add the same image only one copy of it will be saved.
 		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
+		- Fix the bug when you put number as a string for properties like y, x, cy and cx.
 		- Generating invalid strings for MS-Office document properties.
 		- Better shared string support in Excel (thanks vivocha!).
 - Version 0.2.0:

@@ -66,15 +66,43 @@ slide.addText ( 'Red box 2', { color: 'ffffff', fill: 'ff0000', line: 'ffff00', 
 
 slide = pptx.makeNewSlide ();
 
-slide.addImage ( path.resolve(__dirname, 'image1.png' ), { y: 'c', x: 'c' } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image1.png' ), { y: 'c', x: 'c' } );
 
 slide = pptx.makeNewSlide ();
 
-slide.addImage ( path.resolve(__dirname, 'image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
 
 slide = pptx.makeNewSlide ();
 
-slide.addImage ( path.resolve(__dirname, 'image3.png' ), { y: 'c', x: 'c' } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image3.png' ), { y: 'c', x: 'c' } );
+
+slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
+
+slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ), { y: 10, x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ), { y: 10, x: 110 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ), { y: 110, x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ), { y: 110, x: 110 } );
+
+slide = pptx.makeNewSlide ();
+
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/image2.jpg' ), { y: 0, x: 0, cy: '100%', cx: '100%' } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ), { y: 10, x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ), 110, 10 );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_003.png' ), { y: 10, x: 210 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ), { y: 110, x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_001.png' ), { y: 110, x: 110 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_003.png' ), { y: 110, x: 210 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ), { y: 210, x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ), { y: 210, x: 110 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ), { y: 210, x: 210 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ), { y: '310', x: 10 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ), { y: 310, x: 110 } );
+slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_003.png' ), { y: 310, x: 210 } );
 
 var out = fs.createWriteStream ( 'out.pptx' );
 

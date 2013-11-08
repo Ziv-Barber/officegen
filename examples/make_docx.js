@@ -2,6 +2,7 @@
 var officegen = require('../lib/index.js');
 
 var fs = require('fs');
+var path = require('path');
 
 var docx = officegen ( 'docx' );
 
@@ -38,6 +39,12 @@ var pObj = docx.createP ();
 
 pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
 pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
+
+docx.putPageBreak ();
+
+var pObj = docx.createP ();
+
+pObj.addImage ( path.resolve(__dirname, 'images_for_examples/image3.png' ) );
 
 docx.putPageBreak ();
 
