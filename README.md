@@ -474,7 +474,11 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
-- Version 0.2.1:
+- Version 0.2.3:
+	- PowerPoint:
+		- You can now either read or change the options of a parahraph object after creating it.
+		- You can add shadow effects (both outher and inner).
+- Version 0.2.2:
 	- Word:
 		- You can now put images inside your document.
 	- General features:

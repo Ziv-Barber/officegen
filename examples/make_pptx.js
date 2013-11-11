@@ -6,6 +6,9 @@ var path = require('path');
 
 var pptx = officegen ( 'pptx' );
 
+var slide;
+var pObj;
+
 pptx.on ( 'finalize', function ( written ) {
 			console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
 		});
@@ -42,14 +45,16 @@ slide.addText ( [
 // For a single text just pass a text string to addText:
 slide.addText ( 'Office generator', { y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48, color: '0000ff' } );
 
-slide.addText ( 'Boom!!!', { y: 250, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true } );
+pObj = slide.addText ( 'Boom!!!', { y: 100, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true } );
+pObj.options.y += 150;
 
 // 2nd slide:
 slide = pptx.makeNewSlide ();
 
 // For every color property (including the back color property) you can pass object instead of the color string:
 slide.back = { type: 'solid', color: '004400' };
-slide.addText ( 'Office generator', { y: 'c', x: 0, cx: '100%', cy: 66, font_size: 48, align: 'center', color: { type: 'solid', color: '008800' } } );
+pObj = slide.addText ( 'Office generator', { y: 'c', x: 0, cx: '100%', cy: 66, font_size: 48, align: 'center', color: { type: 'solid', color: '008800' } } );
+pObj.setShadowEffect ( 'outerShadow', { top: true, left: true } );
 
 slide = pptx.makeNewSlide ();
 
