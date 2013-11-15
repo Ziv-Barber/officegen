@@ -474,6 +474,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.2.4:
+	- PowerPoint:
+		- You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
 - Version 0.2.3:
 	- PowerPoint:
 		- You can now either read or change the options of a parahraph object after creating it.
