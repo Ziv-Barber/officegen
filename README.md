@@ -9,6 +9,7 @@ This module is a Javascript porting of my 'DuckWriteC++' library which doing the
 
 ## Announcement: ##
 
+OpenOffice document generation support will be added in the future.
 Please refer to the roadmap section for information on what will be added in the next versions.
 
 ## Contents: ##
@@ -476,7 +477,11 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 - Version 0.2.4:
 	- PowerPoint:
+		- Body properties like autoFit and margin now supported for text objects (thanks Stefan Van Dyck!).
 		- You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
+	- Plugins developers:
+		- You can now generate also tar and gzip based documents (or archive files).
+		- You can generate your document resources using template engines (like jade, haml*, CoffeeKup, etc).
 - Version 0.2.3:
 	- PowerPoint:
 		- You can now either read or change the options of a parahraph object after creating it.
