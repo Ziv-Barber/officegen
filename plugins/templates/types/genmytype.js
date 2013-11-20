@@ -28,7 +28,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-var baseobj = require("./basicgen.js");
+var baseobj = require("officegen");
 
 ///
 /// @brief Extend officegen object with ??? support.
