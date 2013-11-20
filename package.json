@@ -35,6 +35,9 @@
 		"lib": "lib",
 		"examples": "examples"
 	},
+	"scripts": {
+		"test": "node examples/make_pptx.js"
+	},
 	"dependencies": {
 		"setimmediate": ">= 1.0.1",
 		"archiver": ">= 0.4.4",
