@@ -481,7 +481,7 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 		- You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
 	- Plugins developers:
 		- You can now generate also tar and gzip based documents (or archive files).
-		- You can generate your document resources using template engines (like jade, haml*, CoffeeKup, etc).
+		- You can generate your document resources using template engines (like jade, ejs, haml*, CoffeeKup, etc).
 - Version 0.2.3:
 	- PowerPoint:
 		- You can now either read or change the options of a parahraph object after creating it.
