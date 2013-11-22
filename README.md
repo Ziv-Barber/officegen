@@ -475,6 +475,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.2.5:
+	- Bugs:
+		- Small typo which makes it crash. oobjOptions should be objOptions on line 464 in genpptx.js (thanks Stefan Van Dyck!).
 - Version 0.2.4:
 	- PowerPoint:
 		- Body properties like autoFit and margin now supported for text objects (thanks Stefan Van Dyck!).
@@ -552,15 +555,14 @@ Features todo:
 
 ### Version 0.2.x: ###
 
-- Images also for Word.
-- Better images support in pptx.
 - Excel basic styling.
 - Word tables.
 - PowerPoint lists and tables.
 
 ### Version 0.3.x: ###
 
-- TBD
+- Better interface: (officegen will be a steam).
+- Embedded document inside another document.
 
 ### Version 0.9.x: ###
 
