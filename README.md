@@ -476,6 +476,7 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 ## History: ##
 
 - Version 0.2.5:
+	- Internal design changes that should not effect current implementations. To support future features.
 	- Bugs:
 		- Small typo which makes it crash. oobjOptions should be objOptions on line 464 in genpptx.js (thanks Stefan Van Dyck!).
 - Version 0.2.4:
