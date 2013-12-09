@@ -475,6 +475,12 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.2.6:
+	- PowerPoint:
+		- Automatically support line breaks.
+		- Fixed a bug when using effects (shadows).
+	- Excell:
+		- Patch by arnesten: Automatically support line breaks if used in cell and also set appropriate row height depending on the number of line breaks.
 - Version 0.2.5:
 	- Internal design changes that should not effect current implementations. To support future features.
 	- Bugs:

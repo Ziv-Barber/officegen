@@ -45,7 +45,7 @@ slide.addText ( [
 // For a single text just pass a text string to addText:
 slide.addText ( 'Office generator', { y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48, color: '0000ff' } );
 
-pObj = slide.addText ( 'Boom!!!', { y: 100, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true } );
+pObj = slide.addText ( 'Boom\nBoom!!!', { y: 100, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true } );
 pObj.options.y += 150;
 
 // 2nd slide:
@@ -54,7 +54,7 @@ slide = pptx.makeNewSlide ();
 // For every color property (including the back color property) you can pass object instead of the color string:
 slide.back = { type: 'solid', color: '004400' };
 pObj = slide.addText ( 'Office generator', { y: 'c', x: 0, cx: '100%', cy: 66, font_size: 48, align: 'center', color: { type: 'solid', color: '008800' } } );
-pObj.setShadowEffect ( 'outerShadow', { top: true, left: true } );
+pObj.setShadowEffect ( 'outerShadow', { bottom: true, right: true } );
 
 slide = pptx.makeNewSlide ();
 
