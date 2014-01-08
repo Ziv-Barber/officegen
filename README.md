@@ -412,10 +412,12 @@ pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
 
 Add an image to a paragraph:
 
+```js
 var path = require('path');
 
 pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
 pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
+```
 
 To add a page break:
 
