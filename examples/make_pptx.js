@@ -19,6 +19,21 @@ pptx.on ( 'error', function ( err ) {
 
 pptx.setDocTitle ( 'Sample PPTX Document' );
 
+// Create a chart slide
+slide = pptx.makeNewSlide();
+slide.name = 'Chart slide';
+slide.back = '000000';
+slide.addColumnChart( 'eSurvey chart', {
+	'colheaders' : ['Series 1', 'Series 2', 'Series 3'],
+	'rowheaders' : ['Cat 1', 'Cat 2', 'Cat 3', 'Cat 4'],
+	'values' : [
+		[5, 3, 4],
+		[2, 3, 2],
+		[4, 6, 8],
+		[3, 6, 9]
+	]
+})
+
 // Let's create a new slide:
 slide = pptx.makeNewSlide ();
 
