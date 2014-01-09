@@ -9,6 +9,10 @@ This module is a Javascript porting of my 'DuckWriteC++' library which doing the
 
 ## Announcement: ##
 
+Donations:
+
+I'm accepting tips through Gittip: https://www.gittip.com/Ziv-Barber/
+
 OpenOffice document generation support will be added in the future.
 Please refer to the roadmap section for information on what will be added in the next versions.
 
@@ -25,6 +29,7 @@ Please refer to the roadmap section for information on what will be added in the
 - [Roadmap](#a9)
 - [License](#a10)
 - [Credit](#a11)
+- [Donations] (#a12)
 
 <a name="a1"/>
 ## Features: ##
@@ -37,6 +42,7 @@ Please refer to the roadmap section for information on what will be added in the
   - Can declare fonts, alignment, colors and background.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
+  - Support automatic fields like date, time and current slide number.
 - Generating Microsoft Word document (.docx file):
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
@@ -412,12 +418,10 @@ pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
 
 Add an image to a paragraph:
 
-```js
 var path = require('path');
 
 pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
 pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
-```
 
 To add a line break;
 
@@ -484,6 +488,15 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a8"/>
 ## History: ##
 
+- Version 0.2.7:
+	- PowerPoint:
+		- Automatic updated fields support: date and time, slide number.
+		- Bug fix: The text parameter of addText now supporting also numbers.
+		- addText: simple array support then before (just pass list of strings to add as a text paragraph).
+	- Word:
+		- putPageBreak changed to addPageBreak but you can still use the old name.
+		- Patch by Antoine Proulx: fix the font size converting.
+		- Patch by Antoine Proulx: Proposition for the addition of a line break inside a paragraph.
 - Version 0.2.6:
 	- PowerPoint:
 		- Automatically support line breaks.
@@ -618,4 +631,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
+
+<a name="a12"/>
+## Donations: ##
+
+I'm accepting tips through Gittip: https://www.gittip.com/Ziv-Barber/
 

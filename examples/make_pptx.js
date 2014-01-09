@@ -122,6 +122,17 @@ slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_004.png' ), 
 slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_002.png' ), { y: 310, x: 110 } );
 slide.addImage ( path.resolve(__dirname, 'images_for_examples/sword_003.png' ), { y: 310, x: 210 } );
 
+slide = pptx.makeNewSlide ();
+
+slide.addText ( 'Test newline\nAnother line', { y: 10 } );
+slide.addText ( 456, { y: 100 } );
+slide.addText ( [ '123', ' ', 567 ], { y: 150 } );
+slide.addText ( { 'field': 'DATE_TIME' }, { y: 200 } );
+slide.addText ( { 'field': 'SLIDE_NUM' }, { y: 240 } );
+slide.addText ( { 'field': 'DATE_WD_MN_DD_YYYY' }, { y: 280 } );
+slide.addText ( { 'field': 'DATE_DD_SMN_YY' }, { y: 320 } );
+// see pptxfields.js for the list of field types.
+
 var out = fs.createWriteStream ( 'out.pptx' );
 
 out.on ( 'error', function ( err ) {
