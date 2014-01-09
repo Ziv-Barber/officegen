@@ -22,18 +22,108 @@ pptx.setDocTitle ( 'Sample PPTX Document' );
 // Create a chart slide
 slide = pptx.makeNewSlide();
 slide.name = 'Chart slide';
-slide.back = '000000';
-slide.addColumnChart( 'eSurvey chart', {
-	'colheaders' : ['Series 1', 'Series 2', 'Series 3'],
-	'rowheaders' : ['Cat 1', 'Cat 2', 'Cat 3', 'Cat 4'],
-	'values' : [
-		[5, 3, 4],
-		[2, 3, 2],
-		[4, 6, 8],
-		[3, 6, 9]
-	]
-})
+slide.back = 'ffffff';
+slide.addColumnChart(
+	{ 	title: 'eSurvey chart',
+		data:  [
+		{
+			name: 'Income',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [23.5, 26.2, 30.1, 29.5, 24.6]
+		},
+		{
+			name: 'Expense',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [18.1, 22.8, 23.9, 25.1, 25]
+		}]
+	}
+)
 
+slide = pptx.makeNewSlide();
+slide.name = 'Pie Chart slide';
+slide.back = 'ffff00';
+slide.addPieChart(
+	{ 	title: 'My production',
+		data:  [
+		{
+			name: 'Oil',
+			labels: ['x1', 'x2', 'x3', 'x4', 'x5'],
+			values: [23.5, 26.2, 30.1, 29.5, 24.6]
+		}]
+	}
+)
+
+/*
+var chartData = [{
+                country: "Czech Republic",
+                litres: 301.90
+            }, {
+                country: "Ireland",
+                litres: 201.10
+            }, {
+                country: "Germany",
+                litres: 165.80
+            }, {
+                country: "Australia",
+                litres: 139.90
+            }, {
+                country: "Austria",
+                litres: 128.30
+            }, {
+                country: "UK",
+                litres: 99.00
+            }, {
+                country: "Belgium",
+                litres: 60.00
+            }];
+			
+var barStack = var chartData = [
+                {
+                    "year": 2003,
+                    "europe": 2.5,
+                    "namerica": 2.5,
+                    "asia": 2.1,
+                    "lamerica": 0.3,
+                    "meast": 0.2,
+                    "africa": 0.1
+                },
+                {
+                    "year": 2004,
+                    "europe": 2.6,
+                    "namerica": 2.7,
+                    "asia": 2.2,
+                    "lamerica": 0.3,
+                    "meast": 0.3,
+                    "africa": 0.1
+                },
+                {
+                    "year": 2005,
+                    "europe": 2.8,
+                    "namerica": 2.9,
+                    "asia": 2.4,
+                    "lamerica": 0.3,
+                    "meast": 0.3,
+                    "africa": 0.1
+                }
+            ];
+*/
+/*
+slide.addPieChart(
+	{ title: 'eSurvey pie chart',
+		data:  [
+		{
+			name: 'Income',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [23.5, 26.2, 30.1, 29.5, 24.6]
+		},
+		{
+			name: 'Expense',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [18.1, 22.8, 23.9, 25.1, 25]
+		}]
+	}
+)
+*/
 // Let's create a new slide:
 slide = pptx.makeNewSlide ();
 

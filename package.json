@@ -42,7 +42,10 @@
 		"setimmediate": ">= 1.0.1",
 		"readable-stream": "~1.0.0",
 		"archiver": ">= 0.4.4",
-		"fast-image-size": "*"
+		"fast-image-size": "*",
+		"underscore" : "*",
+		"xmlbuilder" : "*",
+		"msexcel-builder" : "*"
 	},
     "author": {
         "name": "Ziv Barber",
