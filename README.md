@@ -419,6 +419,13 @@ pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
 pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
 ```
 
+To add a line break;
+
+```js
+var pObj = docx.createP ();
+pObj.addLineBreak ();
+```
+
 To add a page break:
 
 ```js
