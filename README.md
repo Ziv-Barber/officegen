@@ -280,7 +280,7 @@ Common properties that can be added to the options object for all the add based 
 Font properties:
 
 - font_face
-- font_size
+- font_size (in points)
 - bold: true
 - underline: true
 
