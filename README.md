@@ -1,4 +1,4 @@
-# officegen #
+# officegen # [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen)
 
 This module can generate Office Open XML files (the files been created by Microsoft Office 2007 and later). 
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
@@ -11,7 +11,7 @@ This module is a Javascript porting of my 'DuckWriteC++' library which doing the
 
 Donations:
 
-I'm accepting tips through Gittip: https://www.gittip.com/Ziv-Barber/
+I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
 OpenOffice document generation support will be added in the future.
 Please refer to the roadmap section for information on what will be added in the next versions.
@@ -29,7 +29,7 @@ Please refer to the roadmap section for information on what will be added in the
 - [Roadmap](#a9)
 - [License](#a10)
 - [Credit](#a11)
-- [Donations] (#a12)
+- [Donations](#a12)
 
 <a name="a1"/>
 ## Features: ##
@@ -40,6 +40,7 @@ Please refer to the roadmap section for information on what will be added in the
   - Add text blocks.
   - Add images.
   - Can declare fonts, alignment, colors and background.
+  - You can rotate objects.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
   - Support automatic fields like date, time and current slide number.
@@ -635,5 +636,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 <a name="a12"/>
 ## Donations: ##
 
-I'm accepting tips through Gittip: https://www.gittip.com/Ziv-Barber/
+I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
