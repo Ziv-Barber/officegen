@@ -47,35 +47,13 @@ slide.addPieChart(
 		data:  [
 		{
 			name: 'Oil',
-			labels: ['x1', 'x2', 'x3', 'x4', 'x5'],
-			values: [23.5, 26.2, 30.1, 29.5, 24.6]
+			labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+			values: [301, 201, 165, 139, 128,  99, 60]
 		}]
 	}
 )
 
 /*
-var chartData = [{
-                country: "Czech Republic",
-                litres: 301.90
-            }, {
-                country: "Ireland",
-                litres: 201.10
-            }, {
-                country: "Germany",
-                litres: 165.80
-            }, {
-                country: "Australia",
-                litres: 139.90
-            }, {
-                country: "Austria",
-                litres: 128.30
-            }, {
-                country: "UK",
-                litres: 99.00
-            }, {
-                country: "Belgium",
-                litres: 60.00
-            }];
 			
 var barStack = var chartData = [
                 {
