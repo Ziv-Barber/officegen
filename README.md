@@ -564,7 +564,11 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 <a name="a8"/>
 ## History: ##
-
+- Version 0.3.*:
+  - PowerPoint:
+    - Add pie chart
+    - Add bar chart
+    - Add column chart
 - Version 0.2.6:
 	- PowerPoint:
 		- Automatically support line breaks.
