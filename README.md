@@ -1,4 +1,9 @@
-# officegen #
+# officegen-2 #
+
+This module were built up-on the original module officegen which weren't published by me. 
+In this module, I've support the feature of exporting chart ( pie, bar, column ). 
+But the code is a bit hacky, that's why I've published this module separately. 
+Used it for your own risks.
 
 This module can generate Office Open XML files (the files been created by Microsoft Office 2007 and later). 
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
@@ -37,6 +42,7 @@ Please refer to the roadmap section for information on what will be added in the
   - Can declare fonts, alignment, colors and background.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
+  - Support
 - Generating Microsoft Word document (.docx file):
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
@@ -50,13 +56,13 @@ Please refer to the roadmap section for information on what will be added in the
 via Git:
 
 ```bash
-$ git clone git://github.com/Ziv-Barber/officegen.git
+$ git clone git://github.com/vtloc/officegen.git
 ```
 
 via npm:
 
 ```bash
-$ npm install officegen
+$ npm install officegen-2
 ```
 
 This module is depending on:
@@ -64,6 +70,8 @@ This module is depending on:
 - archiver
 - setimmediate
 - fast-image-size
+- underscore
+- xmlbuilder
 
 <a name="a3"/>
 ## Public API: ##
@@ -260,6 +268,9 @@ The slide object supporting the following methods:
 - addText ( text, options )
 - addShape ( shape, options )
 - addImage ( image, options )
+- addPieChart ( data )
+- addColumnChart ( data )
+- addBarChart ( data )
 
 Read only methods:
 
@@ -370,6 +381,85 @@ slide.addText ( 'Boom!!!', {
 	y: 250, x: 10, cx: '70%', 
 	font_face: 'Wide Latin', font_size: 54, 
 	color: 'cc0000', bold: true, underline: true } );
+```
+Examples how to add chart into the slide:
+```js
+// Column chart
+slide = pptx.makeNewSlide();
+slide.name = 'Chart slide';
+slide.back = 'ffffff';
+slide.addColumnChart(
+	{ 	title: 'Column chart',
+		data:  [ // each item is one serie
+		{
+			name: 'Income',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [23.5, 26.2, 30.1, 29.5, 24.6]
+		},
+		{
+			name: 'Expense',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [18.1, 22.8, 23.9, 25.1, 25]
+		}]
+	}
+)
+
+// Pie chart
+slide = pptx.makeNewSlide();
+slide.name = 'Pie Chart slide';
+slide.back = 'ffff00';
+slide.addPieChart(
+	{ 	title: 'My production',
+		data:  [ // each item is one serie
+		{
+			name: 'Oil',
+			labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+			values: [301, 201, 165, 139, 128,  99, 60]
+		}]
+	}
+)
+
+// Bar Chart
+slide = pptx.makeNewSlide();
+slide.name = 'Bar Chart slide';
+slide.back = 'ff00ff';
+slide.addBarChart(
+	{ title: 'Sample bar chart',
+		data:  [ // each item is one serie
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.6, 2.8]
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.7, 2.9]
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.1, 2.2, 2.4]
+      },
+      {
+        name: 'lamerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.3, 0.3, 0.3]
+      },
+      {
+        name: 'meast',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.2, 0.3, 0.3]
+      },
+      {
+        name: 'africa',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.1, 0.1, 0.1]
+      }
+    
+    ]
+	}
+)
 ```
 
 #### Word: ####
