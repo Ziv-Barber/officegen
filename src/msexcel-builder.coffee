@@ -379,7 +379,7 @@ class Workbook
     @id = ''+parseInt(Math.random()*9999999)
     
     # create temp folder & copy template data
-    target = @fpath + '/' + @id + '/'
+    target = path.join(path.resolve(@fpath),@id)
     fs.rmdirSync(target) if existsSync(target)
     tool.copy (opt.tmpl_path + '/tmpl'),target
     # init
@@ -451,7 +451,7 @@ class Workbook
     fs.writeFileSync(target+'\\xl\\styles.xml',@st.toxml(),'utf8')    
     
     # 8 - compress temp folder to target file
-    args = ' a -tzip "' + '..' + '\\' + @fname+ '" "*"'
+    args = ' a -tzip "' + path.join(path.resolve(@fpath),@fname) + '" "*"'
     opts = {cwd:target}
 
     exec.exec '"'+opt.tmpl_path+'\\tool\\7za.exe"' + args, opts, (err,stdout,stderr)->
