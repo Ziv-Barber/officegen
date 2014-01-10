@@ -10,8 +10,10 @@ var slide;
 var pObj;
 
 pptx.on ( 'finalize', function ( written ) {
-			console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-		});
+	console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+  
+  // clear the temporatory files
+});
 
 pptx.on ( 'error', function ( err ) {
 			console.log ( err );
