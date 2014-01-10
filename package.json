@@ -1,8 +1,8 @@
 {
 	"name": "officegen-2",
 	"description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
-	"version": "0.3.1",
-	"url": "https://github.com/Ziv-Barber/officegen",
+	"version": "0.3.2",
+	"url": "https://github.com/vtloc/officegen",
 	"keywords": [
 		"officegen",
 		"office",
@@ -25,10 +25,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/Ziv-Barber/officegen.git"
+		"url": "https://github.com/vtloc/officegen.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Ziv-Barber/officegen/issues"
+		"url": "https://github.com/vtloc/officegen/issues"
 	},
 	"main": "lib/index.js",
 	"directories": {
