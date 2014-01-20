@@ -141,9 +141,9 @@ class Sheet
 
   set: (col, row, value) ->
     if (typeof value) is "string"
-      console.log "Found string " + value
+      #console.log "Found string " + value
       @data[row][col].v = @book.ss.str2id(''+value) if value? and value isnt ''
-      console.log "id=" + @data[row][col].v
+      #console.log "id=" + @data[row][col].v
       @data[row][col].dataType = 'string'
     else
       @data[row][col].v = value
@@ -222,7 +222,7 @@ class Sheet
           c.att('s',''+(sid-1)) if sid isnt 1
           if ix.v isnt 0
             # comment out for test generating number
-            console.log @data[i][j]
+            #console.log @data[i][j]
             if ix.dataType is "string"
               
               c.att('t','s')
@@ -402,6 +402,7 @@ class Workbook
     # 1 - build [Content_Types].xml
     if not fs.existsSync(target)
       fs.mkdirSync target, (e) ->
+        return
         if !e or (e and e.code is 'EEXIST')
             console.log path + 'created'
         else
@@ -412,6 +413,7 @@ class Workbook
     # 2 - build docProps/app.xml
     if not fs.existsSync(path.join(target,'docProps'))
       fs.mkdirSync path.join(target,'docProps'), (e) ->
+        return
         if !e or (e and e.code is 'EEXIST')
             console.log path + 'created'
         else
@@ -421,6 +423,7 @@ class Workbook
     # 3 - build xl/workbook.xml
     if not fs.existsSync(path.join(target,'xl'))
       fs.mkdirSync path.join(target,'xl'), (e) ->
+        return
         if !e or (e and e.code is 'EEXIST')
             console.log path + 'created'
         else
@@ -432,6 +435,7 @@ class Workbook
     
     # 5 - build xl/_rels/workbook.xml.rels
     fs.mkdirSync path.join(target,path.join('xl','_rels')), (e) ->
+        return
         if !e or (e and e.code is 'EEXIST')
             console.log path + 'created'
         else
@@ -440,6 +444,7 @@ class Workbook
     
     # 6 - build xl/worksheets/sheet(1-N).xml
     fs.mkdirSync path.join(target,path.join('xl', 'worksheets')), (e) ->
+        return
         if !e or (e and e.code is 'EEXIST')
             console.log path + 'created'
         else
