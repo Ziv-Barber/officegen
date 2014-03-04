@@ -379,6 +379,13 @@ slide.addText ( 'Boom!!!', {
 	color: 'cc0000', bold: true, underline: true } );
 ```
 
+Set the aspect ratio of the presentation using the `setWidescreen` method:
+
+```js
+pptx.setWidescreen(true);
+```
+
+
 #### Word: ####
 
 All the text data in Word is saved in paragraphs. To add a new paragraph:
