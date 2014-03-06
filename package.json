@@ -43,7 +43,7 @@
 		"readable-stream": "~1.0.0",
 		"archiver": "~0.4.10",
 		"fast-image-size": "*",
-		"underscore": "x",
+		"underscore": "~1.4.4",
 		"stream-buffers": "x",
 		"async": "x",
 		"startpoint": "x"

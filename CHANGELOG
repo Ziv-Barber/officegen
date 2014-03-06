@@ -1,3 +1,6 @@
+- Version 0.2.8:
+	- New generate engine.
+	- Support 16:9 presentations (thanks redders6600).
 - Version 0.2.7:
 	- PowerPoint:
 		- Automatic updated fields support: date and time, slide number.
