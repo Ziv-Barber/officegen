@@ -1,6 +1,8 @@
 - Version 0.2.8:
+	- Drop the support for node 0.8.x for now ("startpoint" not supporting node 0.8.x).
 	- New generate engine.
 	- Support 16:9 presentations (thanks redders6600).
+	- Fix the required archiver version to 0.4.10.
 - Version 0.2.7:
 	- PowerPoint:
 		- Automatic updated fields support: date and time, slide number.

@@ -3,9 +3,7 @@
 This module can generate Office Open XML files (the files been created by Microsoft Office 2007 and later). 
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
 web based. Also the output is a stream and not a file. This module should work on any environment that supporting 
-node.js including Linux, OS-X and Windows and it's not depending on any output tool.
-
-This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
+node.js 0.10 including Linux, OS-X and Windows and it's not depending on any output tool.
 
 ## Announcement: ##
 

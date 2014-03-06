@@ -45,7 +45,7 @@
 		"fast-image-size": "*",
 		"underscore": "~1.4.4",
 		"stream-buffers": "x",
-		"async": "x",
+		"async": "~0.2.8",
 		"startpoint": "x"
 	},
     "author": {
