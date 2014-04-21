@@ -41,13 +41,12 @@
 	"dependencies": {
 		"setimmediate": ">= 1.0.1",
 		"readable-stream": "~1.0.0",
-		"archiver": ">= 0.4.4",
+		"archiver": "~0.4.10",
 		"fast-image-size": "*",
 		"underscore" : "*",
 		"xmlbuilder" : "*",
-    
-    "coffee-script": "*",
-    "moment": "~2.5.0"
+		"coffee-script": "*",
+		"moment": "~2.5.0"
 	},
     "author": {
         "name": "Ziv Barber",

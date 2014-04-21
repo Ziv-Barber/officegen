@@ -30,12 +30,14 @@ var chartsData = [
 			{
 				name: 'Income',
 				labels: ['2005', '2006', '2007', '2008', '2009'],
-				values: [23.5, 26.2, 30.1, 29.5, 24.6]
+				values: [23.5, 26.2, 30.1, 29.5, 24.6],
+				color: 'ff0000'
 			},
 			{
 				name: 'Expense',
 				labels: ['2005', '2006', '2007', '2008', '2009'],
-				values: [18.1, 22.8, 23.9, 25.1, 25]
+				values: [18.1, 22.8, 23.9, 25.1, 25],
+				color: '00ff00'
 			}
 		]
 	},
@@ -47,7 +49,8 @@ var chartsData = [
 		{
 			name: 'Oil',
 			labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
-			values: [301, 201, 165, 139, 128,  99, 60]
+			values: [301, 201, 165, 139, 128,  99, 60],
+			colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
 		}]
 	},
 	
@@ -58,32 +61,38 @@ var chartsData = [
 		  {
 			name: 'europe',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.5, 2.6, 2.8]
+			values: [2.5, 2.6, 2.8],
+			color: 'ff0000'
 		  },
 		  {
 			name: 'namerica',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.5, 2.7, 2.9]
+			values: [2.5, 2.7, 2.9],
+			color: '00ff00'
 		  },
 		  {
 			name: 'asia',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.1, 2.2, 2.4]
+			values: [2.1, 2.2, 2.4],
+			color: '0000ff'
 		  },
 		  {
 			name: 'lamerica',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.3, 0.3, 0.3]
+			values: [0.3, 0.3, 0.3],
+			color: 'ffff00'
 		  },
 		  {
 			name: 'meast',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.2, 0.3, 0.3]
+			values: [0.2, 0.3, 0.3],
+			color: 'ff00ff'
 		  },
 		  {
 			name: 'africa',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.1, 0.1, 0.1]
+			values: [0.1, 0.1, 0.1],
+			color: '00ffff'
 		  }
     
 		]
@@ -96,32 +105,38 @@ var chartsData = [
 		  {
 			name: 'europe',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.5, 2.6, 2.8]
+			values: [2.5, 2.6, 2.8],
+			color: 'ff0000'
 		  },
 		  {
 			name: 'namerica',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.5, 2.7, 2.9]
+			values: [2.5, 2.7, 2.9],
+			color: '00ff00'
 		  },
 		  {
 			name: 'asia',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [2.1, 2.2, 2.4]
+			values: [2.1, 2.2, 2.4],
+			color: '0000ff'
 		  },
 		  {
 			name: 'lamerica',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.3, 0.3, 0.3]
+			values: [0.3, 0.3, 0.3],
+			color: 'ffff00'
 		  },
 		  {
 			name: 'meast',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.2, 0.3, 0.3]
+			values: [0.2, 0.3, 0.3],
+			color: 'ff00ff'
 		  },
 		  {
 			name: 'africa',
 			labels: ['Y2003', 'Y2004', 'Y2005'],
-			values: [0.1, 0.1, 0.1]
+			values: [0.1, 0.1, 0.1],
+			color: '00ffff'
 		  }
     
 		]
@@ -135,7 +150,7 @@ function generateNextChart(cb)
 	slide.name = 'Chart slide';
 	slide.back = 'ffffff';
 	console.log('generate chart ' + currentIndex);
-	slide.addChart(chartsData[0], chartsData[0].renderType, function() {
+	slide.addChart(chartsData[currentIndex], chartsData[currentIndex].renderType, function() {
 		currentIndex++;
 		if( currentIndex == chartsData.length )
 			cb();
