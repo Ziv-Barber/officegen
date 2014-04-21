@@ -135,7 +135,7 @@ function generateNextChart(cb)
 	slide.name = 'Chart slide';
 	slide.back = 'ffffff';
 	console.log('generate chart ' + currentIndex);
-	slide.addChart(chartsData[0], chartsData[0].renderType, function() {
+	slide.addChart(chartsData[currentIndex], chartsData[currentIndex].renderType, function() {
 		currentIndex++;
 		if( currentIndex == chartsData.length )
 			cb();
