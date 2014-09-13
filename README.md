@@ -1,9 +1,13 @@
 # officegen-2 #
 
+- by vtloc -
+
 This module were built up-on the original module officegen which weren't published by me. 
 In this module, I've support the feature of exporting chart ( pie, bar, column ). 
 But the code is a bit hacky, that's why I've published this module separately. 
 Used it for your own risks.
+
+- end by vtloc -
 
 This module can generate Office Open XML files (the files been created by Microsoft Office 2007 and later). 
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
