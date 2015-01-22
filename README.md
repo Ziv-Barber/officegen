@@ -9,7 +9,7 @@ This module should work on any environment that supports Node.js 0.10 including 
 This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
 
 
-### by protobi
+### by @protobi
 This module is a fork of @Ziv-Barber 's  [officegen](https://github.com/vtloc/officegen/) as of January 2015.
 It incorporates all pending pull requests, including @vtloc's work enabling Office Charts with embedded Excel data,
 and additional extensions by @nimbus154 and @jbergknoff.
@@ -32,16 +32,6 @@ There are two ways to customize chart properties:
 This module also provides a nascent ability to specify Tables in PowerPoint documents.
 Tables are specified as an array of rows, with each row an array of values.
 
-
-
-## Announcement: ##
-
-Donations:
-
-The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
-
-OpenOffice document generation support will be added in the future.
-Please refer to the roadmap section for information on what will be added in the next versions.
 
 ## Contents: ##
 
