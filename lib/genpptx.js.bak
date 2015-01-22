@@ -282,7 +282,6 @@ function makePptx ( genobj, new_type, options, gen_private, type_info ) {
 		out_obj.bold = '';
 		out_obj.underline = '';
 		out_obj.rpr_info = '';
-        out_obj.char_spacing = '';
 
 		if ( typeof text_info == 'object' )
 		{
@@ -1598,7 +1597,7 @@ function makePptx ( genobj, new_type, options, gen_private, type_info ) {
       //-- psv 2015-01-21 Manually copied change below from https://github.com/Ziv-Barber/officegen/pull/39/files?w=1
 			if ((opt || {}).link) {
   				var link_rel_id = gen_private.pages[pageNumber].rels.length + 1;
-
+  
       				gen_private.pages[pageNumber].rels.push (
           					{
               						type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
@@ -1610,11 +1609,11 @@ function makePptx ( genobj, new_type, options, gen_private, type_info ) {
     				gen_private.pages[pageNumber].data[objNumber].link_rel_id = link_rel_id;
 			} // Endif.
       //-- psv 2015-01-21 end edits
-
-
-
-
-
+  
+      
+      
+      
+      
 
 			gen_private.pages[pageNumber].data[objNumber].image_id = image_id;
 			gen_private.pages[pageNumber].data[objNumber].rel_id = image_rel_id;

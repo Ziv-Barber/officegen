@@ -288,6 +288,7 @@ Font properties:
 - font_size (in points)
 - bold: true
 - underline: true
+- char_spacing: floating point number (kerning)
 
 Text alignment properties:
 
