@@ -7,27 +7,24 @@ This module is not depend on any framework so you can use it for any kind of nod
 web based. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 including Linux, OSX and Windows.
 This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
+I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
 
-### by @protobi
-This module is a fork of @Ziv-Barber 's  [officegen](https://github.com/vtloc/officegen/) as of January 2015.
+
+### Current extensions
+This module is a fork of @Ziv-Barber's  [officegen](https://github.com/vtloc/officegen/) as of January 2015.
 It incorporates all pending pull requests, including @vtloc's work enabling Office Charts with embedded Excel data,
-and additional extensions by @nimbus154 and @jbergknoff.
-
+and additional extensions by @nimbus154, @jbergknoff and @spect88.
 
 This module further extends the code to allow Tables in PowerPoint and to specify detailed Chart options.
 Charts are significantly refactored such that they are specified as Javascript objects (rather than as XML strings).
 These objects are converted to XML at the final step when the PowerPoint XML stream is generated, using xmlbuilder.
 This allows the user to specify common chart options (e.g. `catAxisTitle` and `valAxisMajorGridlines`).
 
-Obviously, there are a great many potential chart options.  While we expect that the Chart API here will extend over time that an API,
-for it to cover all possible options it would be as complex as the OpenXML standard itself.  Thus this library provides a way for
-advanced users to intercept the Chart object modify the XML directly, allowing any feature possible within the Office OpenXML specification.
-
-There are two ways to customize chart properties:
-   (a) passing them as optional attributes on the object passed to `slide.makeChart()`
-   (b) modifying the XML object directly, via the object returned by `slide.createChart(chartInfo)`
-
+Obviously, there are a great many potential chart options. A number of standard options are included here.
+But for it to cover all possible options it would be as complex as the OpenXML standard itself.  Thus this library provides a way for
+advanced users to specify XML directly as objects that are mixed in to the chart and/or series objects,
+allowing any feature possible within the Office OpenXML specification.
 
 This module also provides a nascent ability to specify Tables in PowerPoint documents.
 Tables are specified as an array of rows, with each row an array of values.
@@ -831,4 +828,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
+
+<a name="a12"/>
+## Donations: ##
+
+The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
