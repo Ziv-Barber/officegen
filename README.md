@@ -1,18 +1,34 @@
 # officegen [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen)
 
-This module can generate Office Open XML files (the files been created by Microsoft Office 2007 and later). 
+### by original author (@Ziv-Barber)
+
+This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
-web based. Also the output is a stream and not a file. This module should work on any environment that supporting 
-node.js 0.10 including Linux, OS-X and Windows and it's not depending on any output tool.
-
-## Announcement: ##
-
-Donations:
-
+web based. Also the output is a stream and not a file, not dependent on any output tool.
+This module should work on any environment that supports Node.js 0.10 including Linux, OSX and Windows.
+This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
 I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
-OpenOffice document generation support will be added in the future.
-Please refer to the roadmap section for information on what will be added in the next versions.
+
+
+### Current extensions
+This module is a fork of @Ziv-Barber's  [officegen](https://github.com/vtloc/officegen/) as of January 2015.
+It incorporates all pending pull requests, including @vtloc's work enabling Office Charts with embedded Excel data,
+and additional extensions by @nimbus154, @jbergknoff and @spect88.
+
+This module further extends the code to allow Tables in PowerPoint and to specify detailed Chart options.
+Charts are significantly refactored such that they are specified as Javascript objects (rather than as XML strings).
+These objects are converted to XML at the final step when the PowerPoint XML stream is generated, using xmlbuilder.
+This allows the user to specify common chart options (e.g. `catAxisTitle` and `valAxisMajorGridlines`).
+
+Obviously, there are a great many potential chart options. A number of standard options are included here.
+But for it to cover all possible options it would be as complex as the OpenXML standard itself.  Thus this library provides a way for
+advanced users to specify XML directly as objects that are mixed in to the chart and/or series objects,
+allowing any feature possible within the Office OpenXML specification.
+
+This module also provides a nascent ability to specify Tables in PowerPoint documents.
+Tables are specified as an array of rows, with each row an array of values.
+
 
 ## Contents: ##
 
@@ -55,13 +71,13 @@ Please refer to the roadmap section for information on what will be added in the
 via Git:
 
 ```bash
-$ git clone git://github.com/Ziv-Barber/officegen.git
+$ git clone git://github.com/protobi/officegen.git
 ```
 
 via npm:
 
 ```bash
-$ npm install officegen
+$ npm install protobi/officegen
 ```
 
 This module is depending on:
@@ -69,6 +85,8 @@ This module is depending on:
 - archiver
 - setimmediate
 - fast-image-size
+- xmlbuilder
+- lodash (not underscore)
 
 <a name="a3"/>
 ## Public API: ##
@@ -282,12 +300,87 @@ Common properties that can be added to the options object for all the add based 
 - flip_vertical: true - flip the object vertical.
 - shape - see below.
 
+The `chartInfo` object takes the following attributes:
+
+ - `data` -  an array of data, see examples below
+ - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column"`
+ - `title` -  chart title
+ - `valAxisTitle` -  value axis title
+ - `catAxisTitle` - category axis title
+ - `valAxisMinValue` - value axis min value
+ - `valAxisMaxValue` - vlaue axis max value
+ - `valAxisNumFmt` - value axis format, e.g `"$0"` or `"0%"`
+ - `valAxisMajorGridlines` - true|false (false)
+ - `valAxisMinorGridlines` - true|false (false)
+ - `valAxisCrossAtMaxCategory` - true|false (false)
+ - `catAxisReverseOrder` - true|false (false)
+ - `fontSize` - text size for chart, e.g. "1200" for 12pt type
+ - `xml` - optional XML overrides to `<c:chart>` as a Javascript object that is mixed in
+
+
+Also, the overall chart and  each data series take an an optional `xml` attribute, which specifies XML overrides to the `<c:series>` attribute.
+* The `xml` argument for the chart is mixed in to the `c:chartSpace` attribute.
+* The `xml` argument for the series is mixed into the `c:ser` attribute.
+
+For instance, to specify the overall text size, you can specify the following on the `chartInfo` object.
+The snippet below is what happens under the scenes when you specify `fontSize: 1200`
+
+```javascript
+chartInfo = {
+ // ....
+ "xml": {
+      "c:txPr": {
+        "a:bodyPr": {},
+        "a:listStyle": {},
+        "a:p": {
+          "a:pPr": {
+            "a:defRPr": {
+              "@sz": "1200"
+            }
+          },
+          "a:endParaRPr": {
+            "@lang": "en-US"
+          }
+        }
+      }
+    }
+```
+
+If you really want control over the XML, you can access the chart object:
+
+```javascript
+
+var chart = slide.createChart(chartInfo);
+
+_.merge(chart.chartSpec['c:chartSpace'],
+    {
+       "c:txPr": {
+         "a:bodyPr": {},
+         "a:listStyle": {},
+         "a:p": {
+           "a:pPr": {
+             "a:defRPr": {
+               "@sz": "1200"
+             }
+           },
+           "a:endParaRPr": {
+             "@lang": "en-US"
+           }
+         }
+       }
+    }
+);
+
+slide.addChart(chart);
+
+
 Font properties:
 
 - font_face
 - font_size (in points)
 - bold: true
 - underline: true
+- char_spacing: floating point number (kerning)
 
 Text alignment properties:
 
@@ -376,15 +469,116 @@ slide.addText ( 'Boom!!!', {
 	font_face: 'Wide Latin', font_size: 54, 
 	color: 'cc0000', bold: true, underline: true } );
 ```
-
-Set the aspect ratio of the presentation using the `setWidescreen` method:
-
+Examples how to add chart into the slide:
 ```js
-pptx.setWidescreen(true);
+// Column chart
+slide = pptx.makeNewSlide();
+slide.name = 'Chart slide';
+slide.back = 'ffffff';
+slide.addChart(
+	{ 	title: 'Column chart',
+	        renderType: 'column',
+	        valAxisTitle: 'Costs/Revenues ($)',
+	        catAxisTitle: 'Category',
+	        valAxisNumFmt: '$0
+		data:  [ // each item is one serie
+		{
+			name: 'Income',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [23.5, 26.2, 30.1, 29.5, 24.6],
+			color: 'ff0000' // optional
+		},
+		{
+			name: 'Expense',
+			labels: ['2005', '2006', '2007', '2008', '2009'],
+			values: [18.1, 22.8, 23.9, 25.1, 25],
+			color: '00ff00' // optional
+		}]
+	}
+)
+
+// Pie chart
+slide = pptx.makeNewSlide();
+slide.name = 'Pie Chart slide';
+slide.back = 'ffff00';
+slide.addPieChart(
+	{ 	title: 'My production',
+		data:  [ // each item is one serie
+		{
+			name: 'Oil',
+			labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+			values: [301, 201, 165, 139, 128,  99, 60],
+			colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000'] // optional
+		}]
+	}
+)
+
+// Bar Chart
+slide = pptx.makeNewSlide();
+slide.name = 'Bar Chart slide';
+slide.back = 'ff00ff';
+slide.addBarChart(
+	{ title: 'Sample bar chart',
+		data:  [ // each item is one serie
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.6, 2.8],
+        color: 'ff0000' // optional
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.7, 2.9],
+        color: '00ff00' // optional
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.1, 2.2, 2.4],
+        color: '0000ff' // optional
+      },
+      {
+        name: 'lamerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.3, 0.3, 0.3],
+        color: 'ffff00' // optional
+      },
+      {
+        name: 'meast',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.2, 0.3, 0.3],
+        color: 'ff00ff' // optional
+      },
+      {
+        name: 'africa',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.1, 0.1, 0.1],
+        color: '00ffff' // optional
+      }
+
+    ]
+	}
+)
 ```
 
+#### Tables:
 
-#### Word: ####
+Add a table to a PowerPoint slide:
+
+```javascript
+ var rows = [];
+  for (var i = 0; i < 12; i++) {
+    var row = [];
+    for (var j = 0; j < 5; j++) {
+      row.push("[" + i + "," + j + "]");
+    }
+    rows.push(row);
+  }
+  slide.addTable(rows, {});
+```
+
+## Word: ##
 
 All the text data in Word is saved in paragraphs. To add a new paragraph:
 
@@ -492,9 +686,93 @@ Please visit the officegen Google Group:
 https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 <a name="a8"/>
-## Changelog: ##
+## History: ##
+- Version 0.3.*:
+  - PowerPoint:
+    - Add pie chart
+    - Add bar chart
+    - Add column chart
+- Version 0.2.6:
+	- PowerPoint:
+		- Automatically support line breaks.
+		- Fixed a bug when using effects (shadows).
+	- Excell:
+		- Patch by arnesten: Automatically support line breaks if used in cell and also set appropriate row height depending on the number of line breaks.
+- Version 0.2.5:
+	- Internal design changes that should not effect current implementations. To support future features.
+	- Bugs:
+		- Small typo which makes it crash. oobjOptions should be objOptions on line 464 in genpptx.js (thanks Stefan Van Dyck!).
+- Version 0.2.4:
+	- PowerPoint:
+		- Body properties like autoFit and margin now supported for text objects (thanks Stefan Van Dyck!).
+		- You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
+	- Plugins developers:
+		- You can now generate also tar and gzip based documents (or archive files).
+		- You can generate your document resources using template engines (like jade, ejs, haml*, CoffeeKup, etc).
+- Version 0.2.3:
+	- PowerPoint:
+		- You can now either read or change the options of a parahraph object after creating it.
+		- You can add shadow effects (both outher and inner).
+- Version 0.2.2:
+	- Word:
+		- You can now put images inside your document.
+	- General features:
+		- You can now pass callbacks to generate() instead of using node events.
+	- Bugs / Optimization:
+		- If you add the same image only one copy of it will be saved.
+		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
+		- Fix the bug when you put number as a string for properties like y, x, cy and cx.
+		- Generating invalid strings for MS-Office document properties.
+		- Better shared string support in Excel (thanks vivocha!).
+- Version 0.2.0:
+	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also
+	  the old API.
+	- Bugs:
+		- You can now listen on error events.
+		- Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
+		- Minor bug fixes on the examples and the documentation.
+- Version 0.1.11:
+	- PowerPoint:
+		- Transparent level for solid color.
+		- Rotate any object.
+		- Flip vertical now working for any kind of object.
+		- Line width.
+	- Bugs:
+		- Invalid PPTX file when adding more then one image of the same type.
+- Version 0.1.10:
+	- PowerPoint:
+		- Supporting more image types.
+		- Supporting hidden slides.
+		- Allow changing the indent for text.
+	- Bug: All the text messages for all type of documents can now have '<', '>', etc.
+- Version 0.1.9:
+	- Bug: Fix the invalid package.json main file.
+	- PowerPoint: Allow adding shapes.
+- Version 0.1.8:
+	- PowerPoint: Allow adding images (png only).
+- Version 0.1.7:
+	- Excel 2007: addCell.
+	- Many internal changes that are not effecting the user API.
+- Version 0.1.6:
+	- Excel 2007: finished supporting shared strings.
+	- Excel 2007: The interface been changed.
+	- A lot of changes in the design of this module.
+- Version 0.1.5:
+	- Word 2007 basic API now working.
+- Version 0.1.4:
+	- WARNING: The addText function for PowerPoint been changed since version 0.1.3.
+	- Many new features for PowerPoint.
+	- Minor bug fixes.
+- Version 0.1.3:
+	- Can generate also ppsx files.
+	- Minor bug fixes.
+- Version 0.1.2:
+	- HTTP server demo.
+	- Can generate very limited Excel file.
+	- You can change the background color of slides.
+	- Minor bug fixes.
 
-[Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
+[Changelog](https://github.com/protobi/officegen/blob/master/CHANGELOG)
 
 <a name="a9"/>
 ## Roadmap: ##
@@ -554,5 +832,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 <a name="a12"/>
 ## Donations: ##
 
-I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
+The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
