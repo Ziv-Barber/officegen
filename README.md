@@ -1,6 +1,5 @@
 # officegen [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen)
 
-### by original author (@Ziv-Barber)
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework so you can use it for any kind of node.js application, even not 
@@ -9,26 +8,7 @@ This module should work on any environment that supports Node.js 0.10 including 
 This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
 I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
-
-
-### Current extensions
-This module is a fork of @Ziv-Barber's  [officegen](https://github.com/vtloc/officegen/) as of January 2015.
-It incorporates all pending pull requests, including @vtloc's work enabling Office Charts with embedded Excel data,
-and additional extensions by @nimbus154, @jbergknoff and @spect88.
-
-This module further extends the code to allow Tables in PowerPoint and to specify detailed Chart options.
-Charts are significantly refactored such that they are specified as Javascript objects (rather than as XML strings).
-These objects are converted to XML at the final step when the PowerPoint XML stream is generated, using xmlbuilder.
-This allows the user to specify common chart options (e.g. `catAxisTitle` and `valAxisMajorGridlines`).
-
-Obviously, there are a great many potential chart options. A number of standard options are included here.
-But for it to cover all possible options it would be as complex as the OpenXML standard itself.  Thus this library provides a way for
-advanced users to specify XML directly as objects that are mixed in to the chart and/or series objects,
-allowing any feature possible within the Office OpenXML specification.
-
-This module also provides a nascent ability to specify Tables in PowerPoint documents.
-Tables are specified as an array of rows, with each row an array of values.
-
+This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.pptx) documents.  PowerPoint charts are native objects with embedded data.
 
 ## Contents: ##
 
@@ -283,6 +263,7 @@ The slide object supporting the following methods:
 - addText ( text, options )
 - addShape ( shape, options )
 - addImage ( image, options )
+- createChart (chartInfo ) 
 
 Read only methods:
 
@@ -300,78 +281,6 @@ Common properties that can be added to the options object for all the add based 
 - flip_vertical: true - flip the object vertical.
 - shape - see below.
 
-The `chartInfo` object takes the following attributes:
-
- - `data` -  an array of data, see examples below
- - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column"`
- - `title` -  chart title
- - `valAxisTitle` -  value axis title
- - `catAxisTitle` - category axis title
- - `valAxisMinValue` - value axis min value
- - `valAxisMaxValue` - vlaue axis max value
- - `valAxisNumFmt` - value axis format, e.g `"$0"` or `"0%"`
- - `valAxisMajorGridlines` - true|false (false)
- - `valAxisMinorGridlines` - true|false (false)
- - `valAxisCrossAtMaxCategory` - true|false (false)
- - `catAxisReverseOrder` - true|false (false)
- - `fontSize` - text size for chart, e.g. "1200" for 12pt type
- - `xml` - optional XML overrides to `<c:chart>` as a Javascript object that is mixed in
-
-
-Also, the overall chart and  each data series take an an optional `xml` attribute, which specifies XML overrides to the `<c:series>` attribute.
-* The `xml` argument for the chart is mixed in to the `c:chartSpace` attribute.
-* The `xml` argument for the series is mixed into the `c:ser` attribute.
-
-For instance, to specify the overall text size, you can specify the following on the `chartInfo` object.
-The snippet below is what happens under the scenes when you specify `fontSize: 1200`
-
-```javascript
-chartInfo = {
- // ....
- "xml": {
-      "c:txPr": {
-        "a:bodyPr": {},
-        "a:listStyle": {},
-        "a:p": {
-          "a:pPr": {
-            "a:defRPr": {
-              "@sz": "1200"
-            }
-          },
-          "a:endParaRPr": {
-            "@lang": "en-US"
-          }
-        }
-      }
-    }
-```
-
-If you really want control over the XML, you can access the chart object:
-
-```javascript
-
-var chart = slide.createChart(chartInfo);
-
-_.merge(chart.chartSpec['c:chartSpace'],
-    {
-       "c:txPr": {
-         "a:bodyPr": {},
-         "a:listStyle": {},
-         "a:p": {
-           "a:pPr": {
-             "a:defRPr": {
-               "@sz": "1200"
-             }
-           },
-           "a:endParaRPr": {
-             "@lang": "en-US"
-           }
-         }
-       }
-    }
-);
-
-slide.addChart(chart);
 
 
 Font properties:
@@ -469,6 +378,58 @@ slide.addText ( 'Boom!!!', {
 	font_face: 'Wide Latin', font_size: 54, 
 	color: 'cc0000', bold: true, underline: true } );
 ```
+
+#### Charts ####
+PowerPoint slides can contain charts with embedded data.  To create a chart:
+ 
+   `slide.createChart( chartInfo) `
+   
+Where `chartInfo` object is an object that takes the following attributes:
+
+ - `data` -  an array of data, see examples below
+ - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column"`
+ - `title` -  chart title (default: none)
+ - `valAxisTitle` -  value axis title (default: none)
+ - `catAxisTitle` - category axis title (default: none)
+ - `valAxisMinValue` - value axis min  (default: none)
+ - `valAxisMaxValue` - vlaue axis max value (default: none)
+ - `valAxisNumFmt` - value axis format, e.g `"$0"` or `"0%"` (default: none)
+ - `valAxisMajorGridlines` - true|false (false)
+ - `valAxisMinorGridlines` - true|false (false)
+ - `valAxisCrossAtMaxCategory` - true|false (false)
+ - `catAxisReverseOrder` - true|false (false)
+ - `fontSize` - text size for chart, e.g. "1200" for 12pt type
+ - `xml` - optional XML overrides to `<c:chart>` as a Javascript object that is mixed in 
+
+Also, the overall chart and  each data series take an an optional `xml` attribute, which specifies XML overrides to the `<c:series>` attribute.
+* The `xml` argument for the `chartInfo` is mixed in to the `c:chartSpace` attribute.
+* The `xml` argument for the `data` series is mixed into the `c:ser` attribute.
+
+For instance, to specify the overall text size, you can specify the following on the `chartInfo` object.
+The snippet below is what happens under the scenes when you specify `fontSize: 1200`
+
+```javascript
+chartInfo = {
+ // ....
+ "xml": {
+      "c:txPr": {
+        "a:bodyPr": {},
+        "a:listStyle": {},
+        "a:p": {
+          "a:pPr": {
+            "a:defRPr": {
+              "@sz": "1200"
+            }
+          },
+          "a:endParaRPr": {
+            "@lang": "en-US"
+          }
+        }
+      }
+    }
+```
+
+
 Examples how to add chart into the slide:
 ```js
 // Column chart
