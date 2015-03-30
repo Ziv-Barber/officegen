@@ -628,6 +628,13 @@ sheet.data[1][3] = 'abc';
 - examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
 <a name="a5"/>
+
+## Testing ##
+A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
+To run the tests, run the following at the command line within the project root:
+
+`npm test`
+
 ## Hackers Wonderland: ##
 
 This section on the readme file will describe how to hack into the code. 
