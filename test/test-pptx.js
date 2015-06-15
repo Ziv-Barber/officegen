@@ -26,6 +26,7 @@ var pptxEquivalent = function (path1, path2, subdocs) {
   var left = new AdmZip(path1);
   var right = new AdmZip(path2);
   for (var i = 0; i < subdocs.length; i++) {
+    //console.log([subdocs[i], left.readAsText(subdocs[i]).length,right.readAsText(subdocs[i]).length])
     if (left.readAsText(subdocs[i]) != right.readAsText(subdocs[i])) return false;
   }
   return true;
@@ -249,8 +250,7 @@ describe("PPTX generator", function () {
         }, 50); // give OS time to close the file
       }
     });
-
-  })
+  });
 
   it ("creates a native table", function(done) {
 
@@ -274,7 +274,7 @@ describe("PPTX generator", function () {
     pptx.generate(out, {
       'finalize': function (written) {
         setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml", "ppt/charts/chart1.xml"]))
+          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]))
           done()
         }, 50); // give OS time to close the file
       },
@@ -284,7 +284,7 @@ describe("PPTX generator", function () {
 
   chartsData.forEach(function (chartInfo, chartIdx) {
     it("creates a presentation with charts", function (done) {
-
+      var officegen = require('../');
       var pptx = officegen('pptx');
       pptx.setDocTitle('Sample PPTX Document');
       var slide = pptx.makeNewSlide();
@@ -293,7 +293,6 @@ describe("PPTX generator", function () {
 
       slide.addChart(
           chartInfo,
-          null,
           function () {
 
             var FILENAME = "test-ppt-chart" + chartIdx + ".pptx";
@@ -301,7 +300,7 @@ describe("PPTX generator", function () {
             pptx.generate(out, {
               'finalize': function (written) {
                 setTimeout(function () {
-                  assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml", "ppt/charts/chart1.xml"]))
+                  assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml", "ppt/charts/chart" + (chartIdx+1) + ".xml"]))
                   done()
                 }, 50); // give OS time to close the file
               },
