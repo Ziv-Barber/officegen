@@ -41,8 +41,8 @@ var chart0 = new OfficeChart({
       name: 'Income',
       labels: ['2005', '2006', '2007', '2008', '2009'],
       values: [23.5, 26.2, 30.1, 29.5, 24.6],
-//            schemeColor: 'accent1'
-//            color: 'ff0000',
+      // schemeColor: 'accent1'
+      // color: 'ff0000',
       xml: {
         "c:spPr": {
           "a:solidFill": {
@@ -60,6 +60,8 @@ var chart0 = new OfficeChart({
       name: 'Expense',
       labels: ['2005', '2006', '2007', '2008', '2009'],
       values: [18.1, 22.8, 23.9, 25.1, 25],
+      // color: '00ff00',
+      // schemeColor: 'bg2'
       xml: {
         "c:spPr": {
           "a:solidFill": {
@@ -71,28 +73,26 @@ var chart0 = new OfficeChart({
             }
           }
         }
-        //            color: '00ff00',
-        //            schemeColor: 'bg2'
       }
     }
   ],
-  fontSize: "1200"
-//  xml: {
-//      "c:txPr": {
-//        "a:bodyPr": {},
-//        "a:listStyle": {},
-//        "a:p": {
-//          "a:pPr": {
-//            "a:defRPr": {
-//              "@sz": "1200"
-//            }
-//          },
-//          "a:endParaRPr": {
-//            "@lang": "en-US"
-//          }
-//        }
-//      }
-//    }
+  fontSize: "1200", // equivalent to specifying the xml below
+  xml: {
+      "c:txPr": {
+        "a:bodyPr": {},
+        "a:listStyle": {},
+        "a:p": {
+          "a:pPr": {
+            "a:defRPr": {
+              "@sz": "1200"
+            }
+          },
+          "a:endParaRPr": {
+            "@lang": "en-US"
+          }
+        }
+      }
+    }
 });
 
 var chartsData = [
@@ -346,7 +346,6 @@ function generateOneChart(chartInfo, callback) {
   slide.back = 'ffffff';
   slide.addChart(chartInfo, null, callback, callback);
 }
-
 
 function generateCharts(callback) {
   async.each(chartsData, generateOneChart, callback);

@@ -260,10 +260,10 @@ Properties of the slide object itself:
 
 The slide object supporting the following methods:
 
-- addText ( text, options )
+- addText (  text, options )
 - addShape ( shape, options )
 - addImage ( image, options )
-- createChart (chartInfo ) 
+- addChart ( chartInfo )
 
 Read only methods:
 
@@ -382,7 +382,7 @@ slide.addText ( 'Boom!!!', {
 #### Charts ####
 PowerPoint slides can contain charts with embedded data.  To create a chart:
  
-   `slide.createChart( chartInfo) `
+   `slide.addChart( chartInfo) `
    
 Where `chartInfo` object is an object that takes the following attributes:
 
@@ -462,8 +462,9 @@ slide.addChart(
 slide = pptx.makeNewSlide();
 slide.name = 'Pie Chart slide';
 slide.back = 'ffff00';
-slide.addPieChart(
+slide.addChart(
 	{ 	title: 'My production',
+	    renderType: 'pie',
 		data:  [ // each item is one serie
 		{
 			name: 'Oil',
@@ -478,9 +479,10 @@ slide.addPieChart(
 slide = pptx.makeNewSlide();
 slide.name = 'Bar Chart slide';
 slide.back = 'ff00ff';
-slide.addBarChart(
+slide.addChart(
 	{ title: 'Sample bar chart',
-		data:  [ // each item is one serie
+	  renderType: 'bar',
+      data:  [ // each item is one serie
       {
         name: 'europe',
         labels: ['Y2003', 'Y2004', 'Y2005'],
@@ -628,6 +630,13 @@ sheet.data[1][3] = 'abc';
 - examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
 <a name="a5"/>
+
+## Testing ##
+A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
+To run the tests, run the following at the command line within the project root:
+
+`npm test`
+
 ## Hackers Wonderland: ##
 
 This section on the readme file will describe how to hack into the code. 
