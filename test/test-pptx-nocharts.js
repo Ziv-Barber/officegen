@@ -11,7 +11,6 @@
 var assert = require('assert');
 var officegen = require('../');
 var fs = require('fs');
-var chartsData = require('../test_files/charts-data.js');
 var path = require('path');
 
 
@@ -281,32 +280,4 @@ describe("PPTX generator", function () {
       'error': onError
     });
   });
-
-  chartsData.forEach(function (chartInfo, chartIdx) {
-    it("creates a presentation with charts", function (done) {
-      var officegen = require('../');
-      var pptx = officegen('pptx');
-      pptx.setDocTitle('Sample PPTX Document');
-      var slide = pptx.makeNewSlide();
-      slide.name = 'OfficeChart slide';
-      slide.back = 'ffffff';
-
-      slide.addChart(
-          chartInfo,
-          function () {
-
-            var FILENAME = "test-ppt-chart" + chartIdx + ".pptx";
-            var out = fs.createWriteStream(OUTDIR + FILENAME);
-            pptx.generate(out, {
-              'finalize': function (written) {
-                setTimeout(function () {
-                  assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml", "ppt/charts/chart" + (chartIdx+1) + ".xml"]))
-                  done()
-                }, 50); // give OS time to close the file
-              },
-              'error': onError
-            });
-          }, onError);
-    })
-  })
 });
