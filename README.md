@@ -441,7 +441,7 @@ slide.addChart(
 	        renderType: 'column',
 	        valAxisTitle: 'Costs/Revenues ($)',
 	        catAxisTitle: 'Category',
-	        valAxisNumFmt: '$0
+	        valAxisNumFmt: '$0',
 		data:  [ // each item is one serie
 		{
 			name: 'Income',
