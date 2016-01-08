@@ -57,7 +57,7 @@ $ git clone git://github.com/protobi/officegen.git
 via npm:
 
 ```bash
-$ npm install protobi/officegen
+$ npm install officegen
 ```
 
 This module is depending on:
