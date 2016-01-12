@@ -8,7 +8,7 @@ This module should work on any environment that supports Node.js 0.10 including 
 This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
 I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
-This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.pptx) documents.  PowerPoint charts are native objects with embedded data.
+This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.  PowerPoint charts are native objects with embedded data.
 
 ## Contents: ##
 
