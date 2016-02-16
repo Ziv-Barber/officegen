@@ -625,10 +625,10 @@ sheet.data[1][3] = 'abc';
 <a name="a4"/>
 ## Examples: ##
 
-- examples/make_pptx.js - Example how to create PowerPoint 2007 presentation and save it into file.
-- examples/make_xlsx.js - Example how to create Excel 2007 sheet and save it into file.
-- examples/make_docx.js - Example how to create Word 2007 document and save it into file.
-- examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
+- [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
+- [make_xlsx.js](examples/make_xlsx.js) - Example how to create Excel 2007 sheet and save it into file.
+- [make_docx.js](examples/make_docx.js) - Example how to create Word 2007 document and save it into file.
+- [pptx_server.js](examples/pptx_server.js) - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
 <a name="a5"/>
 
