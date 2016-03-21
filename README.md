@@ -57,7 +57,7 @@ $ git clone git://github.com/protobi/officegen.git
 via npm:
 
 ```bash
-$ npm install protobi/officegen
+$ npm install officegen
 ```
 
 This module is depending on:
@@ -441,7 +441,8 @@ slide.addChart(
 	        renderType: 'column',
 	        valAxisTitle: 'Costs/Revenues ($)',
 	        catAxisTitle: 'Category',
-	        valAxisNumFmt: '$0
+	        valAxisNumFmt: '$0',
+                valAxisMaxValue: 24,
 		data:  [ // each item is one serie
 		{
 			name: 'Income',

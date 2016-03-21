@@ -79,6 +79,7 @@ describe("PPTX generator", function () {
     pptx.generate(out, {
       'finalize': function (written) {
         setTimeout(function () {
+          console.log("open \""+OUTDIR+FILENAME+"\"");
           assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]));
           done()
         }, 50); // give OS time to close the file
@@ -273,6 +274,7 @@ describe("PPTX generator", function () {
     pptx.generate(out, {
       'finalize': function (written) {
         setTimeout(function () {
+
           assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]))
           done()
         }, 50); // give OS time to close the file
