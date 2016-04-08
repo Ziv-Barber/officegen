@@ -607,6 +607,14 @@ var pObj = docx.createP ();
 pObj.addHorizontalLine ();
 ```
 
+To add a back line:
+
+```js
+var pObj = docx.createP ({ backline: 'E0E0E0' });
+pObj.addText ( 'Backline text1' );
+pObj.addText ( ' text2' );
+```
+
 #### Excel: ####
 
 ```js

@@ -82,6 +82,12 @@ pObj.addText ( 'Option 2' );
 
 pObj.addHorizontalLine ();
 
+var pObj = docx.createP ({ backline: 'E0E0E0' });
+
+pObj.addText ( 'Backline text1' );
+
+pObj.addText ( ' text2' );
+
 var out = fs.createWriteStream ( 'out.docx' );
 
 out.on ( 'error', function ( err ) {
