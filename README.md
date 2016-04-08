@@ -615,6 +615,63 @@ pObj.addText ( 'Backline text1' );
 pObj.addText ( ' text2' );
 ```
 
+To Create Word Document by json:
+
+```js
+var data = [[{
+        type: "text",
+        val: "Simple"
+    }, {
+        type: "text",
+        val: " with color",
+        opt: { color: '000088' }
+    }, {
+        type: "text",
+        val: "  and back color.",
+        opt: { color: '00ffff', back: '000088' }
+    }, {
+        type: "linebreak"
+    }, {
+        type: "text",
+        val: "Bold + underline",
+        opt: { bold: true, underline: true }
+    }], {
+        type: "text",
+        val: "Left this text.",
+        lopt: { align: 'left' }
+    }, {
+        type: "text",
+        val: "Center this text.",
+        lopt: { align: 'center' }
+    }, {
+        type: "text",
+        val: "Right this text.",
+        lopt: { align: 'right' }
+    }, {
+        type: "text",
+        val: "Fonts face only.",
+        opt: { font_face: 'Arial' }
+    }, {
+        type: "text",
+        val: "Fonts face and size.",
+        opt: { font_face: 'Arial', font_size: 40 }
+    }, [{ // arr[0] is common option.
+        align: 'right'
+    }, {
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_001.png')
+    },{
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_002.png')
+    }], {
+        type: "pagebreak"
+    }
+]
+
+
+docx.createByJson(data);
+```
+
 #### Excel: ####
 
 ```js
@@ -819,4 +876,3 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Donations: ##
 
 The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
-
