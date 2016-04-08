@@ -600,6 +600,12 @@ To add a page break:
 docx.putPageBreak ();
 ```
 
+To add a horizontal line:
+
+```js
+docx.addHorizontalLine ();
+```
+
 #### Excel: ####
 
 ```js

@@ -80,6 +80,8 @@ var pObj = docx.createListOfNumbers ();
 
 pObj.addText ( 'Option 2' );
 
+pObj.addHorizontalLine ();
+
 var out = fs.createWriteStream ( 'out.docx' );
 
 out.on ( 'error', function ( err ) {
