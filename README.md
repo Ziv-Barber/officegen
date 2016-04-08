@@ -600,6 +600,65 @@ To add a page break:
 docx.putPageBreak ();
 ```
 
+To add a table:
+
+```js
+var table = [
+	[{
+		val: "No.",
+		opts: {
+			cellColWidth: 4261,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "7F7F7F",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			},
+			fontFamily: "Avenir Book"
+		}
+	},{
+		val: "Title1",
+		opts: {
+			b:true,
+			color: "A00000",
+			align: "right",
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	},{
+		val: "Title2",
+		opts: {
+			align: "center",
+			cellColWidth: 42,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	}],
+	[1,'All grown-ups were once children',''],
+	[2,'there is no harm in putting off a piece of work until another day.',''],
+	[3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+	[4,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+	tableColWidth: 4261,
+	tableSize: 24,
+	tableColor: "ada",
+	tableAlign: "left",
+	tableFontFamily: "Comic Sans MS"
+}
+
+docx.createTable (table, tableStyle);
+```
 #### Excel: ####
 
 ```js
