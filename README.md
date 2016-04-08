@@ -603,7 +603,8 @@ docx.putPageBreak ();
 To add a horizontal line:
 
 ```js
-docx.addHorizontalLine ();
+var pObj = docx.createP ();
+pObj.addHorizontalLine ();
 ```
 
 #### Excel: ####
