@@ -14,6 +14,61 @@ docx.on ( 'error', function ( err ) {
 			console.log ( err );
 		});
 
+
+var table = [
+	[{
+		val: "No.",
+		opts: {
+			cellColWidth: 4261,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "7F7F7F",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			},
+			fontFamily: "Avenir Book"
+		}
+	},{
+		val: "Title1",
+		opts: {
+			b:true,
+			color: "A00000",
+			align: "right",
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	},{
+		val: "Title2",
+		opts: {
+			align: "center",
+			cellColWidth: 42,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	}],
+	[1,'All grown-ups were once children',''],
+	[2,'there is no harm in putting off a piece of work until another day.',''],
+	[3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+	[4,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+	tableColWidth: 4261,
+	tableSize: 24,
+	tableColor: "ada",
+	tableAlign: "left",
+	tableFontFamily: "Comic Sans MS"
+}
+
 var data = [[{ align: 'right' }, {
 		type: "text",
 		val: "Simple"
@@ -31,6 +86,16 @@ var data = [[{ align: 'right' }, {
 		type: "text",
 		val: "Bold + underline",
 		opt: { bold: true, underline: true }
+	}], {
+		type: "horizontalline"
+	}, [{ backline: 'EDEDED' }, {
+		type: "text",
+		val: "  backline text1.",
+		opt: { bold: true }
+	}, {
+		type: "text",
+		val: "  backline text2.",
+		opt: { color: '000088' }
 	}], {
 		type: "text",
 		val: "Left this text.",
@@ -51,6 +116,10 @@ var data = [[{ align: 'right' }, {
 		type: "text",
 		val: "Fonts face and size.",
 		opt: { font_face: 'Arial', font_size: 40 }
+	}, {
+		type: "table",
+		val: table,
+		opt: tableStyle
 	}, [{}, {
 		type: "image",
 		path: path.resolve(__dirname, 'images_for_examples/sword_001.png')
@@ -93,4 +162,3 @@ out.on ( 'error', function ( err ) {
 });
 
 docx.generate ( out );
-
