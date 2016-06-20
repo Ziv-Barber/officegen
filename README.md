@@ -2,7 +2,7 @@
 
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
-This module is not depend on any framework so you can use it for any kind of node.js application, even not 
+This module is not depend on any framework so you can use it for any kind of node.js application, even not
 web based. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 including Linux, OSX and Windows.
 This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
@@ -140,7 +140,7 @@ var pptx = officegen ({
 If you are preferring to use callbacks instead of events you can pass your callbacks to the generate method
 (see below).
 
-Now you should fill the object with data (we'll see below) and then you should call generate with 
+Now you should fill the object with data (we'll see below) and then you should call generate with
 an output stream to create the output Office document.
 
 Example with pptx:
@@ -198,7 +198,7 @@ http.createServer ( function ( request, response ) {
 
 #### MS-Office document properties (for all document types): ###
 
-The default Author of all the documents been created by officegen is 'officegen'. If you want to put anything else please 
+The default Author of all the documents been created by officegen is 'officegen'. If you want to put anything else please
 use the 'creator' option when calling the officegen function:
 
 ```js
@@ -246,7 +246,7 @@ Creating a new slide:
 slide = pptx.makeNewSlide ();
 ```
 
-The returned object from makeNewSlide representing a single slide. Use it to add objects into this slide. 
+The returned object from makeNewSlide representing a single slide. Use it to add objects into this slide.
 You must create at last one slide on your pptx/ppsx document.
 
 Inside each slide you can place objects, for example: text box, shapes, images, etc.
@@ -304,8 +304,8 @@ Line/border extra properties (only effecting if the 'line' property exist):
 
 The 'shape' property:
 
-Normally every object is a rectangle but you can change that for every object using the shape property, or in case that 
-you don't need to write any text inside that object, you can use the addShape method instead of addText. Use the shape 
+Normally every object is a rectangle but you can change that for every object using the shape property, or in case that
+you don't need to write any text inside that object, you can use the addShape method instead of addText. Use the shape
 property only if you want to use a shape other then the default and you also want to add text inside it.
 
 Shapes list:
@@ -331,11 +331,11 @@ Please note that every color property can be either:
 
 Adding images:
 
-Just pass the image file name as the first parameter to addImage and the 2nd parameter, which is optional, is normal options objects 
+Just pass the image file name as the first parameter to addImage and the 2nd parameter, which is optional, is normal options objects
 and you can use all the common properties ('cx', 'cy', 'y', 'x', etc).
 
 Examples:
-  
+
 Changing the background color of a slide:
 
 ```js
@@ -370,20 +370,20 @@ slide.addText ( [
 // Please note that you can pass object as the text parameter to addText.
 
 slide.addText ( 'Office generator', {
-	y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48, 
+	y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
 	color: '0000ff' } );
 
 slide.addText ( 'Boom!!!', {
-	y: 250, x: 10, cx: '70%', 
-	font_face: 'Wide Latin', font_size: 54, 
+	y: 250, x: 10, cx: '70%',
+	font_face: 'Wide Latin', font_size: 54,
 	color: 'cc0000', bold: true, underline: true } );
 ```
 
 #### Charts ####
 PowerPoint slides can contain charts with embedded data.  To create a chart:
- 
+
    `slide.addChart( chartInfo) `
-   
+
 Where `chartInfo` object is an object that takes the following attributes:
 
  - `data` -  an array of data, see examples below
@@ -399,7 +399,7 @@ Where `chartInfo` object is an object that takes the following attributes:
  - `valAxisCrossAtMaxCategory` - true|false (false)
  - `catAxisReverseOrder` - true|false (false)
  - `fontSize` - text size for chart, e.g. "1200" for 12pt type
- - `xml` - optional XML overrides to `<c:chart>` as a Javascript object that is mixed in 
+ - `xml` - optional XML overrides to `<c:chart>` as a Javascript object that is mixed in
 
 Also, the overall chart and  each data series take an an optional `xml` attribute, which specifies XML overrides to the `<c:series>` attribute.
 * The `xml` argument for the `chartInfo` is mixed in to the `c:chartSpace` attribute.
@@ -600,6 +600,205 @@ To add a page break:
 docx.putPageBreak ();
 ```
 
+To add a horizontal line:
+
+```js
+var pObj = docx.createP ();
+pObj.addHorizontalLine ();
+```
+
+To add a back line:
+
+```js
+var pObj = docx.createP ({ backline: 'E0E0E0' });
+pObj.addText ( 'Backline text1' );
+pObj.addText ( ' text2' );
+```
+
+To add a table:
+
+```js
+var table = [
+	[{
+		val: "No.",
+		opts: {
+			cellColWidth: 4261,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "7F7F7F",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			},
+			fontFamily: "Avenir Book"
+		}
+	},{
+		val: "Title1",
+		opts: {
+			b:true,
+			color: "A00000",
+			align: "right",
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	},{
+		val: "Title2",
+		opts: {
+			align: "center",
+			cellColWidth: 42,
+			b:true,
+			sz: '48',
+			shd: {
+				fill: "92CDDC",
+				themeFill: "text1",
+				"themeFillTint": "80"
+			}
+		}
+	}],
+	[1,'All grown-ups were once children',''],
+	[2,'there is no harm in putting off a piece of work until another day.',''],
+	[3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+	[4,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+	tableColWidth: 4261,
+	tableSize: 24,
+	tableColor: "ada",
+	tableAlign: "left",
+	tableFontFamily: "Comic Sans MS"
+}
+
+docx.createTable (table, tableStyle);
+```
+
+To Create Word Document by json:
+
+```js
+var table = [
+    [{
+        val: "No.",
+        opts: {
+            cellColWidth: 4261,
+            b:true,
+            sz: '48',
+            shd: {
+                fill: "7F7F7F",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            },
+            fontFamily: "Avenir Book"
+        }
+    },{
+        val: "Title1",
+        opts: {
+            b:true,
+            color: "A00000",
+            align: "right",
+            shd: {
+                fill: "92CDDC",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            }
+        }
+    },{
+        val: "Title2",
+        opts: {
+            align: "center",
+            cellColWidth: 42,
+            b:true,
+            sz: '48',
+            shd: {
+                fill: "92CDDC",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            }
+        }
+    }],
+    [1,'All grown-ups were once children',''],
+    [2,'there is no harm in putting off a piece of work until another day.',''],
+    [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+    [4,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+    tableColWidth: 4261,
+    tableSize: 24,
+    tableColor: "ada",
+    tableAlign: "left",
+    tableFontFamily: "Comic Sans MS"
+}
+
+var data = [[{
+        type: "text",
+        val: "Simple"
+    }, {
+        type: "text",
+        val: " with color",
+        opt: { color: '000088' }
+    }, {
+        type: "text",
+        val: "  and back color.",
+        opt: { color: '00ffff', back: '000088' }
+    }, {
+        type: "linebreak"
+    }, {
+        type: "text",
+        val: "Bold + underline",
+        opt: { bold: true, underline: true }
+    }], {
+        type: "horizontalline"
+    }, [{ backline: 'EDEDED' }, {
+        type: "text",
+        val: "  backline text1.",
+        opt: { bold: true }
+    }, {
+        type: "text",
+        val: "  backline text2.",
+        opt: { color: '000088' }
+    }], {
+        type: "text",
+        val: "Left this text.",
+        lopt: { align: 'left' }
+    }, {
+        type: "text",
+        val: "Center this text.",
+        lopt: { align: 'center' }
+    }, {
+        type: "text",
+        val: "Right this text.",
+        lopt: { align: 'right' }
+    }, {
+        type: "text",
+        val: "Fonts face only.",
+        opt: { font_face: 'Arial' }
+    }, {
+        type: "text",
+        val: "Fonts face and size.",
+        opt: { font_face: 'Arial', font_size: 40 }
+    }, {
+        type: "table",
+        val: table,
+        opt: tableStyle
+    }, [{ // arr[0] is common option.
+        align: 'right'
+    }, {
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_001.png')
+    },{
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_002.png')
+    }], {
+        type: "pagebreak"
+    }
+]
+
+docx.createByJson(data);
+```
+
 #### Excel: ####
 
 ```js
@@ -640,7 +839,7 @@ To run the tests, run the following at the command line within the project root:
 
 ## Hackers Wonderland: ##
 
-This section on the readme file will describe how to hack into the code. 
+This section on the readme file will describe how to hack into the code.
 Right now please refer to the code itself. More information will be added later.
 
 <a name="a6"/>
@@ -804,4 +1003,3 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Donations: ##
 
 The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
-
