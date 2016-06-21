@@ -1,3 +1,4 @@
+var async = require ( 'async' );
 var officegen = require('../lib/index.js');
 var _ = require('lodash');
 var async = require('async');

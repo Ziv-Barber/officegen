@@ -1,4 +1,3 @@
-
 var officegen = require('../lib/index.js');
 
 var fs = require('fs');
@@ -6,9 +5,12 @@ var path = require('path');
 
 var docx = officegen ( 'docx' );
 
+// Remove this comment in case of debugging Officegen:
+// officegen.setVerboseMode ( true );
+
 docx.on ( 'finalize', function ( written ) {
-			console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );
-		});
+	console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );
+});
 
 docx.on ( 'error', function ( err ) {
 			console.log ( err );

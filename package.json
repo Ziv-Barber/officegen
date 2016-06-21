@@ -1,67 +1,65 @@
 {
-  "name": "officegen",
-  "description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
-  "version": "0.2.9",
-  "url": "https://github.com/Ziv-Barber/officegen",
-  "keywords": [
-    "officegen",
-    "office",
-    "microsoft",
-    "2007",
-    "word",
-    "powerpoint",
-    "excel",
-    "docx",
-    "pptx",
-    "ppsx",
-    "xlsx",
-    "Office Open XML",
-    "stream",
-    "generate",
-    "create",
-    "maker",
-    "generator",
-    "creator"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Ziv-Barber/officegen.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Ziv-Barber/officegen/issues"
-  },
-  "main": "lib/index.js",
-  "directories": {
-    "lib": "lib",
-    "examples": "examples"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "archiver": "~0.4.10",
-    "async": "~0.2.8",
-    "fast-image-size": "*",
-    "lodash": "^2.4.1",
-    "readable-stream": "~1.0.0",
-    "setimmediate": ">= 1.0.1",
-    "startpoint": "x",
-    "stream-buffers": "x",
-    "underscore": "~1.4.4",
-    "xmlbuilder": "^2.4.5"
-  },
-  "author": {
-    "name": "Ziv Barber",
-    "url": "http://code.zivbarber.com/"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/Ziv-Barber/officegen/blob/master/LICENSE-MIT"
-    }
-  ],
-  "devDependencies": {
-    "adm-zip": "^0.4.7",
-    "mocha": "^2.2.1"
-  }
+	"name": "officegen",
+	"description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
+	"version": "0.2.9",
+	"author": {
+		"name": "Ziv Barber",
+		"url": "https://github.com/Ziv-Barber"
+	},
+	"license": "MIT",
+	"url": "https://github.com/Ziv-Barber/officegen",
+	"engines": {
+		"node": ">= 0.10.0"
+	},
+	"keywords": [
+		"officegen",
+		"office",
+		"microsoft",
+		"2007",
+		"word",
+		"powerpoint",
+		"excel",
+		"docx",
+		"pptx",
+		"ppsx",
+		"xlsx",
+		"Office Open XML",
+		"stream",
+		"generate",
+		"create",
+		"maker",
+		"generator",
+		"creator"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Ziv-Barber/officegen.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Ziv-Barber/officegen/issues"
+	},
+	"main": "lib/index.js",
+	"directories": {
+		"lib": "lib",
+		"examples": "examples"
+	},
+	"scripts": {
+		"test": "mocha"
+	},
+	"dependencies": {
+		"archiver": "~1.0.0",
+		"async": "~0.2.8",
+		"fast-image-size": "*",
+		"lodash": "^2.4.1",
+		"readable-stream": "~1.0.0",
+		"setimmediate": ">= 1.0.1",
+		"startpoint": "x",
+		"stream-buffers": "x",
+		"underscore": "~1.4.4",
+		"xmlbuilder": "^2.4.5"
+	},
+	"devDependencies": {
+		"adm-zip": "^0.4.7",
+		"mocha": "^2.2.1"
+	}
 }
