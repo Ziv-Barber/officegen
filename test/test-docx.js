@@ -14,7 +14,7 @@ var fs = require('fs');
 var path = require('path');
 
 var IMAGEDIR = __dirname + "/../examples/";
-var OUTDIR = '/tmp/';
+var OUTDIR = __dirname + "/../tmp/";
 var TGTDIR = __dirname + '/../test_files/';
 
 var AdmZip = require('adm-zip');
@@ -40,10 +40,13 @@ var onError = function (err) {
 
 
 describe("DOCX generator", function () {
+	this.timeout(200);
 
   it("creates a document with text and styles", function (done) {
 
     var docx = officegen ( 'docx' );
+	docx.on ( 'error', onError );
+
     var pObj = docx.createP ();
 
     pObj.addText ( 'Simple' );
@@ -94,54 +97,26 @@ describe("DOCX generator", function () {
 
     var FILENAME = "test-doc-1.docx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    docx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(docxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "word/document.xml",
-                "word/styles.xml",
-                "word/media/image1.png",
-                "word/media/image2.png",
-                "word/media/image3.png",
-                "word/media/image4.png",
-                "word/media/image5.png"
-              ]
-          ));
-          done()
-        }, 50); // give OS time to close the file
-      }, 'error': onError
-    });
-
+    docx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   it("can handle text without spaces", function (done) {
 
     var docx = officegen ( 'docx' );
+	docx.on ( 'error', onError );
 
     var pObj = docx.createP();
     pObj.addText('Hello,World');
 
     var FILENAME = "test-doc-3.docx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    docx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(docxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "word/document.xml",
-                "word/styles.xml",
-                "word/media/image1.png",
-                "word/media/image2.png",
-                "word/media/image3.png",
-                "word/media/image4.png",
-                "word/media/image5.png"
-              ]
-          ));
-          done()
-        }, 50); // give OS time to close the file
-      }, 'error': onError
-    });
+    docx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
 
@@ -149,6 +124,8 @@ describe("DOCX generator", function () {
   it("creates a document with images", function (done) {
 
     var docx = officegen ( 'docx' );
+	docx.on ( 'error', onError );
+
     var pObj = docx.createP ();
 
 
@@ -176,23 +153,11 @@ describe("DOCX generator", function () {
 
     var FILENAME = "test-doc-2.docx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    docx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(docxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "word/document.xml",
-                "word/styles.xml",
-                "word/media/image1.png",
-                "word/media/image2.png",
-                "word/media/image3.png",
-                "word/media/image4.png",
-                "word/media/image5.png"
-              ]
-          ));
-          done()
-        }, 50); // give OS time to close the file
-      }, 'error': onError
-    });
+	out.on ( 'error', onError );
+
+    docx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 });

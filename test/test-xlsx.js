@@ -14,7 +14,7 @@ var fs = require('fs');
 var path = require('path');
 
 var IMAGEDIR = __dirname + "/../examples/";
-var OUTDIR = '/tmp/';
+var OUTDIR = __dirname + "/../tmp/";
 var TGTDIR = __dirname + '/../test_files/';
 
 
@@ -45,6 +45,8 @@ describe("XLSX generator", function () {
   it("creates a spreadsheet with text and numbers", function (done) {
 
     var xlsx = officegen ( 'xlsx' );
+	xlsx.on ( 'error', onError );
+
     sheet = xlsx.makeNewSheet ();
     sheet.name = 'Excel Test';
 
@@ -70,23 +72,9 @@ describe("XLSX generator", function () {
 
     var FILENAME = "test-xls-1.xlsx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    xlsx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(docxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "xl/theme/theme1.xml",
-                "docProps/app.xml",
-                "xl/styles.xml",
-                "xl/workbook.xml",
-               "xl/worksheets/sheet1.xml",
-               "xl/sharedStrings.xml"
-              ]
-          ));
-          done()
-        }, 50); // give OS time to close the file
-      }, 'error': onError
-    });
-
+    xlsx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 });

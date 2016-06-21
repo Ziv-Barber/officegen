@@ -15,7 +15,7 @@ var chartsData = require('../test_files/charts-data.js');
 var path = require('path');
 
 
-var OUTDIR = '/tmp/';
+var OUTDIR = __dirname + "/../tmp/";
 var TGTDIR = __dirname + '/../test_files/';
 
 
@@ -45,6 +45,8 @@ describe("PPTX generator", function () {
   it ("creates a slides with charts", function(done) {
 
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
     var slide = pptx.makeNewSlide();
 
@@ -61,21 +63,18 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt-table-1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]))
-          done()
-        }, 50); // give OS time to close the file
-      },
-      'error': onError
-    });
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   chartsData.forEach(function (chartInfo, chartIdx) {
     it("creates a presentation with charts", function (done) {
       var officegen = require('../');
       var pptx = officegen('pptx');
+		pptx.on ( 'error', onError );
+
       pptx.setDocTitle('Sample PPTX Document');
       var slide = pptx.makeNewSlide();
       slide.name = 'OfficeChart slide';
@@ -87,15 +86,10 @@ describe("PPTX generator", function () {
 
             var FILENAME = "test-ppt-chart" + chartIdx + ".pptx";
             var out = fs.createWriteStream(OUTDIR + FILENAME);
-            pptx.generate(out, {
-              'finalize': function (written) {
-                setTimeout(function () {
-                  assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml", "ppt/charts/chart" + (chartIdx+1) + ".xml"]))
-                  done()
-                }, 50); // give OS time to close the file
-              },
-              'error': onError
-            });
+			pptx.generate(out);
+			out.on ( 'close', function () {
+				done ();
+			});
           }, onError);
     })
   })

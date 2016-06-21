@@ -27,7 +27,7 @@ pptx.setDocTitle('Sample PPTX Document');
 
 function generateExampleSlides(callback) {
   // do the rest things here
-  console.log('finalize');
+  // console.log('finalize');
 
   // Let's create a new slide:
   slide = pptx.makeNewSlide();

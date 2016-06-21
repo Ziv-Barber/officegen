@@ -1,3 +1,4 @@
+var async = require ( 'async' );
 var officegen = require('../lib/index.js');
 
 var fs = require('fs');
@@ -7,10 +8,6 @@ var docx = officegen ( 'docx' );
 
 // Remove this comment in case of debugging Officegen:
 // officegen.setVerboseMode ( true );
-
-docx.on ( 'finalize', function ( written ) {
-	console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );
-});
 
 docx.on ( 'error', function ( err ) {
 			console.log ( err );
@@ -152,4 +149,17 @@ out.on ( 'error', function ( err ) {
 	console.log ( err );
 });
 
-docx.generate ( out );
+async.parallel ([
+	function ( done ) {
+		out.on ( 'close', function () {
+			console.log ( 'Finish to create a DOCX file.' );
+			done ( null );
+		});
+		docx.generate ( out );
+	}
+
+], function ( err ) {
+	if ( err ) {
+		console.log ( 'error: ' + err );
+	} // Endif.
+});

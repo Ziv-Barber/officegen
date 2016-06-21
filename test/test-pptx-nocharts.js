@@ -14,7 +14,7 @@ var fs = require('fs');
 var path = require('path');
 
 
-var OUTDIR = '/tmp/';
+var OUTDIR = __dirname + "/../tmp/";
 var TGTDIR = __dirname + '/../test_files/';
 
 
@@ -44,6 +44,8 @@ describe("PPTX generator", function () {
   it("creates a presentation with properties and text", function (done) {
 
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
 
     var slide = pptx.makeNewSlide();
@@ -76,19 +78,16 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]));
-          done()
-        }, 50); // give OS time to close the file
-      }, 'error': onError
-    });
-
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   it("creates slides with shapes", function (done) {
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
     pptx.setWidescreen(false);
     slide = pptx.makeNewSlide();
@@ -119,23 +118,16 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt2.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "ppt/slides/slide1.xml",
-                "ppt/presentation.xml"
-              ]));
-          done()
-        }, 50); // give OS time to close the file
-      }
-    });
-
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   it("creates presentation to widescreen", function (done) {
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
     pptx.setWidescreen(true);
     slide = pptx.makeNewSlide();
@@ -166,22 +158,16 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt3.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              [
-                "ppt/slides/slide1.xml",
-                "ppt/presentation.xml"
-              ]));
-          done()
-        }, 50); // give OS time to close the file
-      }
-    });
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   it("creates slides with images", function (done) {
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
     var IMAGEDIR = __dirname + "/../examples/";
     slide = pptx.makeNewSlide();
@@ -254,6 +240,8 @@ describe("PPTX generator", function () {
   it ("creates a native table", function(done) {
 
     var pptx = officegen('pptx');
+	pptx.on ( 'error', onError );
+
     pptx.setDocTitle('Sample PPTX Document');
     var slide = pptx.makeNewSlide();
 
