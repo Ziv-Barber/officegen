@@ -40,6 +40,7 @@ var onError = function (err) {
 
 
 describe("PPTX generator", function () {
+	this.slow ( 500 );
 
   it("creates a presentation with properties and text", function (done) {
 
@@ -213,28 +214,10 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt-images.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME,
-              ["ppt/slides/slide1.xml",
-                "ppt/slides/slide2.xml",
-                "ppt/slides/slide3.xml",
-                "ppt/slides/slide4.xml",
-                "ppt/slides/slide5.xml",
-                "ppt/slides/slide6.xml",
-                "ppt/media/image1.png",
-                "ppt/media/image2.png",
-                "ppt/media/image3.png",
-                "ppt/media/image4.png",
-                "ppt/media/image5.png",
-                "ppt/media/image6.png",
-                "ppt/media/image7.png"
-              ]));
-          done()
-        }, 50); // give OS time to close the file
-      }
-    });
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 
   it ("creates a native table", function(done) {
@@ -258,14 +241,9 @@ describe("PPTX generator", function () {
 
     var FILENAME = "test-ppt-table-1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out, {
-      'finalize': function (written) {
-        setTimeout(function () {
-          assert(pptxEquivalent(OUTDIR + FILENAME, TGTDIR + FILENAME, ["ppt/slides/slide1.xml"]))
-          done()
-        }, 50); // give OS time to close the file
-      },
-      'error': onError
-    });
+    pptx.generate(out);
+	out.on ( 'close', function () {
+		done ();
+	});
   });
 });

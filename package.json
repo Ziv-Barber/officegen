@@ -44,7 +44,7 @@
 		"examples": "examples"
 	},
 	"scripts": {
-		"test": "mocha"
+		"test": "mocha test/test-docx.js test/test-xlsx.js test/test-pptx-nocharts.js"
 	},
 	"dependencies": {
 		"archiver": "~1.0.0",
