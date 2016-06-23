@@ -149,6 +149,9 @@ Example with pptx:
 var out = fs.createWriteStream ( 'out.pptx' );
 
 pptx.generate ( out );
+out.on ( 'close', function () {
+	console.log ( 'Finished to create the PPTX file!' );
+});
 ```
 
 Passing callbacks to generate:

@@ -45,7 +45,7 @@ describe("PPTX generator", function () {
 
   it ("creates a slides with charts", function(done) {
 
-    var pptx = officegen('pptx');
+    var pptx = officegen({type: 'pptx', tempDir: '../tmp/'});
 	pptx.on ( 'error', onError );
 
     pptx.setDocTitle('Sample PPTX Document');
@@ -73,7 +73,7 @@ describe("PPTX generator", function () {
   chartsData.forEach(function (chartInfo, chartIdx) {
     it("creates a presentation with charts", function (done) {
       var officegen = require('../');
-      var pptx = officegen('pptx');
+    var pptx = officegen({type: 'pptx', tempDir: '../tmp/'});
 		pptx.on ( 'error', onError );
 
       pptx.setDocTitle('Sample PPTX Document');
