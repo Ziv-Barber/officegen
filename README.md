@@ -546,6 +546,11 @@ Add a table to a PowerPoint slide:
   slide.addTable(rows, {});
 ```
 
+Specific options for tables (in addition to standard : x, y, cx, cy, etc.) :
+- columnWidth : width of all columns (same size for all columns). Must be a number (~1 000 000)
+- columnWidths : list of width for each columns (custom size per column). Must be array of number. This param will overwrite columnWidth if both are given
+
+
 ## Word: ##
 
 All the text data in Word is saved in paragraphs. To add a new paragraph:
