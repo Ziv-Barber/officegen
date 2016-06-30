@@ -267,6 +267,7 @@ The slide object supporting the following methods:
 - addShape ( shape, options )
 - addImage ( image, options )
 - addChart ( chartInfo )
+- addTable ( rowsSpec, options )
 
 Read only methods:
 
