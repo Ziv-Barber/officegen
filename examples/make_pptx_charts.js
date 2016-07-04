@@ -213,7 +213,18 @@ var chartsData = [
       }
     ]
   },
-
+  {
+    title: 'My production',
+    renderType: 'doughnut',
+    data: [
+      {
+        name: 'Oil',
+        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        values: [301, 201, 165, 139, 128, 99, 60],
+        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+      }
+    ]
+  },
   {
     title: 'eSurvey chart',
     renderType: 'column',
@@ -236,7 +247,28 @@ var chartsData = [
       }
     ]
   },
-
+  {
+    title: 'eSurvey chart',
+    renderType: 'line',
+    overlap: 50,
+    gapWidth: 25,
+    valAxisNumFmt: '$0',
+    valAxisMaxValue: 24,
+    data: [
+      {
+        name: 'Income',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [23.5, 26.2, 30.1, 29.5, 24.6],
+        color: 'ff0000'
+      },
+      {
+        name: 'Expense',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [18.1, 22.8, 23.9, 25.1, 25],
+        color: '00ff00'
+      }
+    ]
+  },
   {
     title: 'Sample bar chart',
     renderType: 'bar',
