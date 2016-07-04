@@ -139,14 +139,17 @@ function generateTable(callback) {
   slide = pptx.makeNewSlide();
 
   var rows = [];
+  var columnWidths = [];
   for (var i = 0; i < 12; i++) {
     var row = [];
     for (var j = 0; j < 5; j++) {
       row.push("[" + i + "," + j + "]");
     }
     rows.push(row);
+    columnWidths.push( 300*1000 + Math.round(Math.random()*800*1000) );
   }
-  slide.addTable(rows, {});
+
+  slide.addTable(rows, {font_size:9, font_face:"Comic Sans MS", columnWidths:columnWidths});
   callback();
 }
 
