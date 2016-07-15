@@ -16,8 +16,8 @@ This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documen
 - [Installation](#a2)
 - [Public API](#a3)
 - [Examples](#a4)
-- [FAQ](#a5)
-- [Hackers Wonderland](#a6)
+- [Hackers Wonderland](#a5)
+- [FAQ](#a6)
 - [Support](#a7)
 - [Changelog](#a8)
 - [Roadmap](#a9)
@@ -838,18 +838,25 @@ sheet.data[1][3] = 'abc';
 - examples/make_docx.js - Example how to create Word 2007 document and save it into file.
 - examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
-<a name="a5"/>
 
-## Testing ##
+<a name="a5"/>
+## Hackers Wonderland: ##
+
+#### How to hack into the code ####
+Right now please refer to the code itself. More information will be added later.
+
+#### Testing ####
 A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
 To run the tests, run the following at the command line within the project root:
 
 `npm test`
 
-## Hackers Wonderland: ##
+#### Debugging ####
+If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
+```js
+officegen.setVerboseMode(true);
+```
 
-This section on the readme file will describe how to hack into the code.
-Right now please refer to the code itself. More information will be added later.
 
 <a name="a6"/>
 ## FAQ: ##
@@ -857,12 +864,14 @@ Right now please refer to the code itself. More information will be added later.
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
 
+
 <a name="a7"/>
 ## Support: ##
 
 Please visit the officegen Google Group:
 
 https://groups.google.com/forum/?fromgroups#!forum/node-officegen
+
 
 <a name="a8"/>
 ## History: ##
