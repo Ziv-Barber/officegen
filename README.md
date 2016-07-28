@@ -83,8 +83,8 @@ There are two ways to use the officegen function:
 officegen ( '<type of document to create>' );
 
 officegen ({
-	'type': '<type of document to create>'
-	// More options here (if needed)
+  'type': '<type of document to create>'
+  // More options here (if needed)
 });
 ```
 
@@ -115,12 +115,12 @@ Event examples:
 
 ```js
 pptx.on ( 'finalize', function ( written ) {
-			console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-		});
+      console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+    });
 
 pptx.on ( 'error', function ( err ) {
-			console.log ( err );
-		});
+      console.log ( err );
+    });
 ```
 
 Another way to register either 'finalize' or 'error' events:
@@ -150,7 +150,7 @@ var out = fs.createWriteStream ( 'out.pptx' );
 
 pptx.generate ( out );
 out.on ( 'close', function () {
-	console.log ( 'Finished to create the PPTX file!' );
+  console.log ( 'Finished to create the PPTX file!' );
 });
 ```
 
@@ -160,12 +160,12 @@ Passing callbacks to generate:
 var out = fs.createWriteStream ( 'out.pptx' );
 
 pptx.generate ( out, {
-	'finalize': function ( written ) {
-		console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-	},
-	'error': function ( err ) {
-		console.log ( err );
-	}
+  'finalize': function ( written ) {
+    console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+  },
+  'error': function ( err ) {
+    console.log ( err );
+  }
 });
 ```
 
@@ -176,24 +176,24 @@ var http = require("http");
 var officegen = require('officegen');
 
 http.createServer ( function ( request, response ) {
-	response.writeHead ( 200, {
-		"Content-Type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-		'Content-disposition': 'attachment; filename=surprise.pptx'
-		});
+  response.writeHead ( 200, {
+    "Content-Type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    'Content-disposition': 'attachment; filename=surprise.pptx'
+    });
 
-	var pptx = officegen ( 'pptx' );
+  var pptx = officegen ( 'pptx' );
 
-	pptx.on ( 'finalize', function ( written ) {
-			// ...
-			});
+  pptx.on ( 'finalize', function ( written ) {
+      // ...
+      });
 
-	pptx.on ( 'error', function ( err ) {
-			// ...
-			});
+  pptx.on ( 'error', function ( err ) {
+      // ...
+      });
 
-	// ... (fill pptx with data)
+  // ... (fill pptx with data)
 
-	pptx.generate ( response );
+  pptx.generate ( response );
 }).listen ( 3000 );
 ```
 
@@ -207,7 +207,7 @@ use the 'creator' option when calling the officegen function:
 ```js
 var pptx = officegen ({
     'type': 'pptx', // or 'xlsx', etc
-	'creator': '<your project name here>'
+  'creator': '<your project name here>'
 });
 ```
 
@@ -216,7 +216,7 @@ Change the document title (pptx,ppsx,docx):
 ```js
 var pptx = officegen ({
     'type': 'pptx',
-	'title': '<title>'
+  'title': '<title>'
 });
 
 // or
@@ -229,9 +229,9 @@ For Word only:
 ```js
 var docx = officegen ({
     'type': 'docx',
-	'subject': '...',
-	'keywords': '...',
-	'description': '...'
+  'subject': '...',
+  'keywords': '...',
+  'description': '...'
 });
 
 // or
@@ -368,19 +368,19 @@ slide.addText ( 'Full line', 0, 40, '100%', 20 );
 
 // Add text box with multi colors and fonts:
 slide.addText ( [
-	{ text: 'Hello ', options: { font_size: 56 } },
-	{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
-	], { cx: '75%', cy: 66, y: 150 } );
+  { text: 'Hello ', options: { font_size: 56 } },
+  { text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+  ], { cx: '75%', cy: 66, y: 150 } );
 // Please note that you can pass object as the text parameter to addText.
 
 slide.addText ( 'Office generator', {
-	y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
-	color: '0000ff' } );
+  y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
+  color: '0000ff' } );
 
 slide.addText ( 'Boom!!!', {
-	y: 250, x: 10, cx: '70%',
-	font_face: 'Wide Latin', font_size: 54,
-	color: 'cc0000', bold: true, underline: true } );
+  y: 250, x: 10, cx: '70%',
+  font_face: 'Wide Latin', font_size: 54,
+  color: 'cc0000', bold: true, underline: true } );
 ```
 
 #### Charts ####
@@ -441,26 +441,26 @@ slide = pptx.makeNewSlide();
 slide.name = 'Chart slide';
 slide.back = 'ffffff';
 slide.addChart(
-	{ 	title: 'Column chart',
-	        renderType: 'column',
-	        valAxisTitle: 'Costs/Revenues ($)',
-	        catAxisTitle: 'Category',
-	        valAxisNumFmt: '$0',
+  {   title: 'Column chart',
+          renderType: 'column',
+          valAxisTitle: 'Costs/Revenues ($)',
+          catAxisTitle: 'Category',
+          valAxisNumFmt: '$0',
                 valAxisMaxValue: 24,
-		data:  [ // each item is one serie
-		{
-			name: 'Income',
-			labels: ['2005', '2006', '2007', '2008', '2009'],
-			values: [23.5, 26.2, 30.1, 29.5, 24.6],
-			color: 'ff0000' // optional
-		},
-		{
-			name: 'Expense',
-			labels: ['2005', '2006', '2007', '2008', '2009'],
-			values: [18.1, 22.8, 23.9, 25.1, 25],
-			color: '00ff00' // optional
-		}]
-	}
+    data:  [ // each item is one serie
+    {
+      name: 'Income',
+      labels: ['2005', '2006', '2007', '2008', '2009'],
+      values: [23.5, 26.2, 30.1, 29.5, 24.6],
+      color: 'ff0000' // optional
+    },
+    {
+      name: 'Expense',
+      labels: ['2005', '2006', '2007', '2008', '2009'],
+      values: [18.1, 22.8, 23.9, 25.1, 25],
+      color: '00ff00' // optional
+    }]
+  }
 )
 
 // Pie chart
@@ -468,16 +468,16 @@ slide = pptx.makeNewSlide();
 slide.name = 'Pie Chart slide';
 slide.back = 'ffff00';
 slide.addChart(
-	{ 	title: 'My production',
-	    renderType: 'pie',
-		data:  [ // each item is one serie
-		{
-			name: 'Oil',
-			labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
-			values: [301, 201, 165, 139, 128,  99, 60],
-			colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000'] // optional
-		}]
-	}
+  {   title: 'My production',
+      renderType: 'pie',
+    data:  [ // each item is one serie
+    {
+      name: 'Oil',
+      labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+      values: [301, 201, 165, 139, 128,  99, 60],
+      colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000'] // optional
+    }]
+  }
 )
 
 // Bar Chart
@@ -485,8 +485,8 @@ slide = pptx.makeNewSlide();
 slide.name = 'Bar Chart slide';
 slide.back = 'ff00ff';
 slide.addChart(
-	{ title: 'Sample bar chart',
-	  renderType: 'bar',
+  { title: 'Sample bar chart',
+    renderType: 'bar',
       data:  [ // each item is one serie
       {
         name: 'europe',
@@ -526,7 +526,7 @@ slide.addChart(
       }
 
     ]
-	}
+  }
 )
 ```
 
@@ -628,57 +628,59 @@ To add a table:
 
 ```js
 var table = [
-	[{
-		val: "No.",
-		opts: {
-			cellColWidth: 4261,
-			b:true,
-			sz: '48',
-			shd: {
-				fill: "7F7F7F",
-				themeFill: "text1",
-				"themeFillTint": "80"
-			},
-			fontFamily: "Avenir Book"
-		}
-	},{
-		val: "Title1",
-		opts: {
-			b:true,
-			color: "A00000",
-			align: "right",
-			shd: {
-				fill: "92CDDC",
-				themeFill: "text1",
-				"themeFillTint": "80"
-			}
-		}
-	},{
-		val: "Title2",
-		opts: {
-			align: "center",
-			cellColWidth: 42,
-			b:true,
-			sz: '48',
-			shd: {
-				fill: "92CDDC",
-				themeFill: "text1",
-				"themeFillTint": "80"
-			}
-		}
-	}],
-	[1,'All grown-ups were once children',''],
-	[2,'there is no harm in putting off a piece of work until another day.',''],
-	[3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
-	[4,'watch out for the baobabs!','END'],
+  [{
+    val: "No.",
+    opts: {
+      cellColWidth: 4261,
+      b:true,
+      sz: '48',
+      shd: {
+        fill: "7F7F7F",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      },
+      fontFamily: "Avenir Book"
+    }
+  },{
+    val: "Title1",
+    opts: {
+      b:true,
+      color: "A00000",
+      align: "right",
+      shd: {
+        fill: "92CDDC",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      }
+    }
+  },{
+    val: "Title2",
+    opts: {
+      align: "center",
+      vAlign: "center",
+      cellColWidth: 42,
+      b:true,
+      sz: '48',
+      shd: {
+        fill: "92CDDC",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      }
+    }
+  }],
+  [1,'All grown-ups were once children',''],
+  [2,'there is no harm in putting off a piece of work until another day.',''],
+  [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+  [4,'watch out for the baobabs!','END'],
 ]
 
 var tableStyle = {
-	tableColWidth: 4261,
-	tableSize: 24,
-	tableColor: "ada",
-	tableAlign: "left",
-	tableFontFamily: "Comic Sans MS"
+  tableColWidth: 4261,
+  tableSize: 24,
+  tableColor: "ada",
+  tableAlign: "left",
+  tableFontFamily: "Comic Sans MS",
+  borders: true
 }
 
 docx.createTable (table, tableStyle);
@@ -881,84 +883,84 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
     - Add bar chart
     - Add column chart
 - Version 0.2.6:
-	- PowerPoint:
-		- Automatically support line breaks.
-		- Fixed a bug when using effects (shadows).
-	- Excell:
-		- Patch by arnesten: Automatically support line breaks if used in cell and also set appropriate row height depending on the number of line breaks.
+  - PowerPoint:
+    - Automatically support line breaks.
+    - Fixed a bug when using effects (shadows).
+  - Excell:
+    - Patch by arnesten: Automatically support line breaks if used in cell and also set appropriate row height depending on the number of line breaks.
 - Version 0.2.5:
-	- Internal design changes that should not effect current implementations. To support future features.
-	- Bugs:
-		- Small typo which makes it crash. oobjOptions should be objOptions on line 464 in genpptx.js (thanks Stefan Van Dyck!).
+  - Internal design changes that should not effect current implementations. To support future features.
+  - Bugs:
+    - Small typo which makes it crash. oobjOptions should be objOptions on line 464 in genpptx.js (thanks Stefan Van Dyck!).
 - Version 0.2.4:
-	- PowerPoint:
-		- Body properties like autoFit and margin now supported for text objects (thanks Stefan Van Dyck!).
-		- You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
-	- Plugins developers:
-		- You can now generate also tar and gzip based documents (or archive files).
-		- You can generate your document resources using template engines (like jade, ejs, haml*, CoffeeKup, etc).
+  - PowerPoint:
+    - Body properties like autoFit and margin now supported for text objects (thanks Stefan Van Dyck!).
+    - You can pass now 0 to either cx or cy (good when drawing either horizontal or vertical lines).
+  - Plugins developers:
+    - You can now generate also tar and gzip based documents (or archive files).
+    - You can generate your document resources using template engines (like jade, ejs, haml*, CoffeeKup, etc).
 - Version 0.2.3:
-	- PowerPoint:
-		- You can now either read or change the options of a parahraph object after creating it.
-		- You can add shadow effects (both outher and inner).
+  - PowerPoint:
+    - You can now either read or change the options of a parahraph object after creating it.
+    - You can add shadow effects (both outher and inner).
 - Version 0.2.2:
-	- Word:
-		- You can now put images inside your document.
-	- General features:
-		- You can now pass callbacks to generate() instead of using node events.
-	- Bugs / Optimization:
-		- If you add the same image only one copy of it will be saved.
-		- Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
-		- Fix the bug when you put number as a string for properties like y, x, cy and cx.
-		- Generating invalid strings for MS-Office document properties.
-		- Better shared string support in Excel (thanks vivocha!).
+  - Word:
+    - You can now put images inside your document.
+  - General features:
+    - You can now pass callbacks to generate() instead of using node events.
+  - Bugs / Optimization:
+    - If you add the same image only one copy of it will be saved.
+    - Missing requirement after the split of the code in version 0.2.x (thanks Seth Pollack!)
+    - Fix the bug when you put number as a string for properties like y, x, cy and cx.
+    - Generating invalid strings for MS-Office document properties.
+    - Better shared string support in Excel (thanks vivocha!).
 - Version 0.2.0:
-	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also
-	  the old API.
-	- Bugs:
-		- You can now listen on error events.
-		- Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
-		- Minor bug fixes on the examples and the documentation.
+  - Huge design change from 'quick patch' based code to real design with much better API while still supporting also
+    the old API.
+  - Bugs:
+    - You can now listen on error events.
+    - Missing files in the relationships list made the Excel files unreadable to the Numbers application on the Mac (lmalheiro).
+    - Minor bug fixes on the examples and the documentation.
 - Version 0.1.11:
-	- PowerPoint:
-		- Transparent level for solid color.
-		- Rotate any object.
-		- Flip vertical now working for any kind of object.
-		- Line width.
-	- Bugs:
-		- Invalid PPTX file when adding more then one image of the same type.
+  - PowerPoint:
+    - Transparent level for solid color.
+    - Rotate any object.
+    - Flip vertical now working for any kind of object.
+    - Line width.
+  - Bugs:
+    - Invalid PPTX file when adding more then one image of the same type.
 - Version 0.1.10:
-	- PowerPoint:
-		- Supporting more image types.
-		- Supporting hidden slides.
-		- Allow changing the indent for text.
-	- Bug: All the text messages for all type of documents can now have '<', '>', etc.
+  - PowerPoint:
+    - Supporting more image types.
+    - Supporting hidden slides.
+    - Allow changing the indent for text.
+  - Bug: All the text messages for all type of documents can now have '<', '>', etc.
 - Version 0.1.9:
-	- Bug: Fix the invalid package.json main file.
-	- PowerPoint: Allow adding shapes.
+  - Bug: Fix the invalid package.json main file.
+  - PowerPoint: Allow adding shapes.
 - Version 0.1.8:
-	- PowerPoint: Allow adding images (png only).
+  - PowerPoint: Allow adding images (png only).
 - Version 0.1.7:
-	- Excel 2007: addCell.
-	- Many internal changes that are not effecting the user API.
+  - Excel 2007: addCell.
+  - Many internal changes that are not effecting the user API.
 - Version 0.1.6:
-	- Excel 2007: finished supporting shared strings.
-	- Excel 2007: The interface been changed.
-	- A lot of changes in the design of this module.
+  - Excel 2007: finished supporting shared strings.
+  - Excel 2007: The interface been changed.
+  - A lot of changes in the design of this module.
 - Version 0.1.5:
-	- Word 2007 basic API now working.
+  - Word 2007 basic API now working.
 - Version 0.1.4:
-	- WARNING: The addText function for PowerPoint been changed since version 0.1.3.
-	- Many new features for PowerPoint.
-	- Minor bug fixes.
+  - WARNING: The addText function for PowerPoint been changed since version 0.1.3.
+  - Many new features for PowerPoint.
+  - Minor bug fixes.
 - Version 0.1.3:
-	- Can generate also ppsx files.
-	- Minor bug fixes.
+  - Can generate also ppsx files.
+  - Minor bug fixes.
 - Version 0.1.2:
-	- HTTP server demo.
-	- Can generate very limited Excel file.
-	- You can change the background color of slides.
-	- Minor bug fixes.
+  - HTTP server demo.
+  - Can generate very limited Excel file.
+  - You can change the background color of slides.
+  - Minor bug fixes.
 
 [Changelog](https://github.com/protobi/officegen/blob/master/CHANGELOG)
 
