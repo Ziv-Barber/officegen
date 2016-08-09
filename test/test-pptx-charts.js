@@ -85,7 +85,7 @@ describe("PPTX generator", function () {
         chartInfo,
         function () {
 
-          var FILENAME = "test-ppt-chart" + chartIdx + ".pptx";
+          var FILENAME = "test-ppt-chart-"+chartIdx +"-" + chartInfo.renderType+".pptx";
           var out = fs.createWriteStream(OUTDIR + FILENAME);
           pptx.generate(out);
           out.on('close', function () {
