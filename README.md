@@ -391,7 +391,7 @@ PowerPoint slides can contain charts with embedded data.  To create a chart:
 Where `chartInfo` object is an object that takes the following attributes:
 
  - `data` -  an array of data, see examples below
- - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column"`
+ - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column", "line"`
  - `title` -  chart title (default: none)
  - `valAxisTitle` -  value axis title (default: none)
  - `catAxisTitle` - category axis title (default: none)
@@ -525,6 +525,36 @@ slide.addChart(
         color: '00ffff' // optional
       }
 
+    ]
+  }
+)
+
+// Line Chart
+slide = pptx.makeNewSlide();
+slide.name = 'Line Chart slide';
+slide.back = 'ff00ff';
+slide.addChart(
+  { title: 'Sample line chart',
+    renderType: 'line',
+      data:  [ // each item is one serie
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005', 'Y2006'],
+        values: [2.5, 2.6, 2.8, 2.4],
+        color: 'ff0000' // optional
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005', 'Y2006'],
+        values: [2.5, 2.7, 2.9, 3.2],
+        color: '00ff00' // optional
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005', 'Y2006'],
+        values: [2.1, 2.2, 2.4, 2.2],
+        color: '0000ff' // optional
+      }
     ]
   }
 )

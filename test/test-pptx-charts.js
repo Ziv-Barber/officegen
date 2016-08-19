@@ -15,9 +15,9 @@ var chartsData = require('../test_files/charts-data.js');
 var path = require('path');
 
 
-var OUTDIR = __dirname + "/../tmp/";
-var TGTDIR = __dirname + '/../test_files/';
-
+var OUTDIR = path.join(__dirname, './../tmp/');
+var TGTDIR =  path.join(__dirname, './../test_files/');
+ 
 
 var AdmZip = require('adm-zip');
 
@@ -41,12 +41,12 @@ var onError = function (err) {
 
 
 describe("PPTX generator", function () {
-	this.slow ( 500 );
+  this.slow(500);
 
-  it ("creates a slides with charts", function(done) {
+  it("creates a slides with charts", function (done) {
 
-    var pptx = officegen({type: 'pptx', tempDir: '../tmp/'});
-	pptx.on ( 'error', onError );
+    var pptx = officegen({ type: 'pptx', tempDir: OUTDIR});
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
     var slide = pptx.makeNewSlide();
@@ -65,16 +65,16 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt-table-1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 
   chartsData.forEach(function (chartInfo, chartIdx) {
-    it("creates a presentation with charts", function (done) {
+    it("creates a presentation with charts >>" + chartInfo.renderType, function (done) {
       var officegen = require('../');
-    var pptx = officegen({type: 'pptx', tempDir: '../tmp/'});
-		pptx.on ( 'error', onError );
+      var pptx = officegen({ type: 'pptx', tempDir:OUTDIR });
+      pptx.on('error', onError);
 
       pptx.setDocTitle('Sample PPTX Document');
       var slide = pptx.makeNewSlide();
@@ -82,16 +82,16 @@ describe("PPTX generator", function () {
       slide.back = 'ffffff';
 
       slide.addChart(
-          chartInfo,
-          function () {
+        chartInfo,
+        function () {
 
-            var FILENAME = "test-ppt-chart" + chartIdx + ".pptx";
-            var out = fs.createWriteStream(OUTDIR + FILENAME);
-			pptx.generate(out);
-			out.on ( 'close', function () {
-				done ();
-			});
-          }, onError);
+          var FILENAME = "test-ppt-chart-"+chartIdx +"-" + chartInfo.renderType+".pptx";
+          var out = fs.createWriteStream(OUTDIR + FILENAME);
+          pptx.generate(out);
+          out.on('close', function () {
+            done();
+          });
+        }, onError);
     })
   })
 });
