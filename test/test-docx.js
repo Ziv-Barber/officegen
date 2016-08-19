@@ -89,12 +89,6 @@ describe("DOCX generator", function () {
 
     pObj.addText ( 'Option 2' );
 
-    var out = fs.createWriteStream ( 'out.docx' );
-
-    out.on ( 'error', function ( err ) {
-      console.log ( err );
-    });
-
     var FILENAME = "test-doc-1.docx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     docx.generate(out);

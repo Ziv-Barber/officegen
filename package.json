@@ -48,10 +48,10 @@
 	},
 	"dependencies": {
 		"archiver": "~1.0.0",
-		"async": "~0.2.8",
+		"async": "^2.0.1",
 		"fast-image-size": "*",
 		"lodash": "^2.4.1",
-		"readable-stream": "~1.0.0",
+		"readable-stream": "~2.1.5",
 		"setimmediate": ">= 1.0.1",
 		"startpoint": "x",
 		"stream-buffers": "x",
@@ -60,6 +60,13 @@
 	},
 	"devDependencies": {
 		"adm-zip": "^0.4.7",
-		"mocha": "^2.2.1"
+		"chai": "^3.5.0",
+		"grunt": "^0.4.5",
+		"grunt-contrib-jshint": "^0.10.0",
+		"grunt-contrib-watch": "^0.6.1",
+		"grunt-jsdoc": "^1.0.0",
+		"mocha": "^3.0.2",
+		"sinon": "^1.17.5",
+		"time-grunt": "^1.0.0"
 	}
 }

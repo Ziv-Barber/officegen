@@ -1,5 +1,4 @@
-# officegen [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen)
-
+# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework so you can use it for any kind of node.js application, even not
@@ -25,7 +24,7 @@ This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documen
 - [Credit](#a11)
 - [Donations](#a12)
 
-<a name="a1"/>
+<a name="a1"></a>
 ## Features: ##
 
 - Generating Microsoft PowerPoint document (.pptx file):
@@ -45,13 +44,13 @@ This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documen
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells of type both number and string.
 
-<a name="a2"/>
+<a name="a2"></a>
 ## Installation: ##
 
 via Git:
 
 ```bash
-$ git clone git://github.com/protobi/officegen.git
+$ git clone git://github.com/Ziv-Barber/officegen.git
 ```
 
 via npm:
@@ -65,10 +64,11 @@ This module is depending on:
 - archiver
 - setimmediate
 - fast-image-size
-- xmlbuilder
-- lodash (not underscore)
+- Power Points native charts:
+	- xmlbuilder
+	- lodash (not underscore)
 
-<a name="a3"/>
+<a name="a3"></a>
 ## Public API: ##
 
 ### Creating the document object: ###
@@ -77,12 +77,12 @@ This module is depending on:
 var officegen = require('officegen');
 ```
 
-There are two ways to use the officegen function:
+There are two ways to use the officegen returned function to create the document object:
 
 ```js
-officegen ( '<type of document to create>' );
+var myDoc = officegen ( '<type of document to create>' );
 
-officegen ({
+var myDoc = officegen ({
   'type': '<type of document to create>'
   // More options here (if needed)
 });
@@ -862,7 +862,7 @@ sheet.data[1] = [];
 sheet.data[1][3] = 'abc';
 ```
 
-<a name="a4"/>
+<a name="a4"></a>
 ## Examples: ##
 
 - examples/make_pptx.js - Example how to create PowerPoint 2007 presentation and save it into file.
@@ -871,17 +871,25 @@ sheet.data[1][3] = 'abc';
 - examples/pptx_server.js - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
 
-<a name="a5"/>
+<a name="a5"></a>
 ## Hackers Wonderland: ##
 
 #### How to hack into the code ####
 Right now please refer to the code itself. More information will be added later.
 
+You can also check the jsdoc documentation:
+
+```bash
+grunt jsdoc
+```
+
 #### Testing ####
 A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
 To run the tests, run the following at the command line within the project root:
 
-`npm test`
+```bash
+npm test
+```
 
 #### Debugging ####
 If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
@@ -890,14 +898,14 @@ officegen.setVerboseMode(true);
 ```
 
 
-<a name="a6"/>
+<a name="a6"></a>
 ## FAQ: ##
 
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
 
 
-<a name="a7"/>
+<a name="a7"></a>
 ## Support: ##
 
 Please visit the officegen Google Group:
@@ -905,13 +913,8 @@ Please visit the officegen Google Group:
 https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 
-<a name="a8"/>
+<a name="a8"></a>
 ## History: ##
-- Version 0.3.*:
-  - PowerPoint:
-    - Add pie chart
-    - Add bar chart
-    - Add column chart
 - Version 0.2.6:
   - PowerPoint:
     - Automatically support line breaks.
@@ -994,7 +997,7 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
 [Changelog](https://github.com/protobi/officegen/blob/master/CHANGELOG)
 
-<a name="a9"/>
+<a name="a9"></a>
 ## Roadmap: ##
 
 Features todo:
@@ -1010,15 +1013,11 @@ Features todo:
 - Better interface: (officegen will be a steam).
 - Embedded document inside another document.
 
-### Version 0.9.x: ###
-
-- Unit tests and lots of testing.
-
 ### Version 1.0.x: ###
 
 - Stable release with stable API.
 
-<a name="a10"/>
+<a name="a10"></a>
 ## License: ##
 
 (The MIT License)
@@ -1044,12 +1043,12 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-<a name="a11"/>
+<a name="a11"></a>
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
 
-<a name="a12"/>
+<a name="a12"></a>
 ## Donations: ##
 
 The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
