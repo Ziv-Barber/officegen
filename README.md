@@ -3,11 +3,11 @@
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework so you can use it for any kind of node.js application, even not
 web based. Also the output is a stream and not a file, not dependent on any output tool.
-This module should work on any environment that supports Node.js 0.10 including Linux, OSX and Windows.
-This module is a Javascript porting of my 'DuckWriteC++' library which doing the same in C++.
+This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
 I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
 
-This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.  PowerPoint charts are native objects with embedded data.
+This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
+Officegen also supporting PowerPoint native charts objects with embedded data (Windows only right now).
 
 ## Contents: ##
 
@@ -207,7 +207,7 @@ use the 'creator' option when calling the officegen function:
 ```js
 var pptx = officegen ({
     'type': 'pptx', // or 'xlsx', etc
-  'creator': '<your project name here>'
+	'creator': '<your project name here>'
 });
 ```
 
@@ -216,7 +216,7 @@ Change the document title (pptx,ppsx,docx):
 ```js
 var pptx = officegen ({
     'type': 'pptx',
-  'title': '<title>'
+	'title': '<title>'
 });
 
 // or
@@ -229,9 +229,9 @@ For Word only:
 ```js
 var docx = officegen ({
     'type': 'docx',
-  'subject': '...',
-  'keywords': '...',
-  'description': '...'
+	'subject': '...',
+	'keywords': '...',
+	'description': '...'
 });
 
 // or
