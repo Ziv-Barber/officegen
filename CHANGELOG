@@ -1,3 +1,13 @@
+- Version 0.2.11:
+	- Allow user to set options in addImage when they use createByJson to generate docx (peizhuang) and also to change the image type (Ziv Barber).
+	- Provide varying column sizes in Word tables (cgarethc).
+	- Tables in Word can have differing column widths (cgarethc).
+	- The cellColWidth option that is copied to the w:w on a w:tcW only works if the w:gridCol is a non-zero value. It is now possible to set table columns to different widths by using the cellColWidth on the columns for the first row, rather than having to set a constant column with in the table options.
+	- PPTX Widescreen Centering Fix (funnelwise).
+	- Uses pptWidth for obj cx and x calculations instead of hard coded numbers (EricR-FW).
+	- Cleaned the code and more documentations and unit tests.
+- Version 0.2.10:
+	- All the community patches since 0.2.9.
 - Version 0.2.9:
 	- Italic support to docx files by Vlampreia.
 	- Floating point support by Van Dyvk (pptx files).
