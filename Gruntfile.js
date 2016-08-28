@@ -21,7 +21,10 @@ module.exports = function ( grunt ) {
 
 		jshint: {
 			// List of all the source files to test:
-			files: [ 'gruntfile.js', 'lib/**/*.js' ],
+			files: [
+				'gruntfile.js',
+				'lib/**/*.js'
+			],
 
 			// Configure JSHint (documented at http://www.jshint.com/docs/):
 			options: {
@@ -36,11 +39,14 @@ module.exports = function ( grunt ) {
 
 		jsdoc : {
 			dist : {
-				src: ['gruntfile.js', 'lib/**/*.js'],
+				src: [
+					'gruntfile.js',
+					'lib/**/*.js'
+				],
 				options: {
 					'destination': 'doc',
 					'package': 'package.json',
-					'readme': 'README.md',
+					'readme': 'README.md'
 					// template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
 					// configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json"
 				}

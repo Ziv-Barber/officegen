@@ -61,12 +61,11 @@
 	"devDependencies": {
 		"adm-zip": "^0.4.7",
 		"chai": "^3.5.0",
-		"grunt": "^0.4.5",
-		"grunt-contrib-jshint": "^0.10.0",
-		"grunt-contrib-watch": "^0.6.1",
-		"grunt-jsdoc": "^1.0.0",
+		"grunt": "^1.0.1",
+		"grunt-contrib-jshint": "^1.0.0",
+		"grunt-jsdoc": "^2.1.0",
 		"mocha": "^3.0.2",
 		"sinon": "^1.17.5",
-		"time-grunt": "^1.0.0"
+		"time-grunt": "^1.4.0"
 	}
 }
