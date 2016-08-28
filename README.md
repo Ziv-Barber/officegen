@@ -5,6 +5,7 @@ This module is not depend on any framework so you can use it for any kind of nod
 web based. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
 I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
+We are also in [Slack](<https://zivbarber.slack.com/messages/officegen/>)
 
 This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
 Officegen also supporting PowerPoint native charts objects with embedded data (Windows only right now).
@@ -907,15 +908,18 @@ officegen.setVerboseMode(true);
 <a name="a7"></a>
 ## Support: ##
 
+The Slack team:
+
+https://zivbarber.slack.com/messages/officegen/
+
 Please visit the officegen Google Group:
 
 https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 
-
 <a name="a8"></a>
 ## History: ##
 
-[Changelog](https://github.com/protobi/officegen/blob/master/CHANGELOG)
+[Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
 
 <a name="a9"></a>
 ## Roadmap: ##
