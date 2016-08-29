@@ -283,6 +283,7 @@ Common properties that can be added to the options object for all the add based 
 - fill - the background color.
 - line - border color / line color.
 - flip_vertical: true - flip the object vertical.
+- flip_horizontal: true - flip the object horizontal
 - shape - see below.
 
 
