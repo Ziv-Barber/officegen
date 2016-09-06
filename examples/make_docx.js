@@ -4,7 +4,7 @@ var officegen = require('../lib/index.js');
 var fs = require('fs');
 var path = require('path');
 
-var docx = officegen ( 'docx' );
+var docx = officegen ( { type: 'docx', orientation: 'portrait' } );
 
 // Remove this comment in case of debugging Officegen:
 // officegen.setVerboseMode ( true );
