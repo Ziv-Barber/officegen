@@ -11,7 +11,7 @@ module.exports = function ( grunt ) {
 	function lastModified ( minutes ) {
 		return function ( filepath ) {
 			var filemod = ( require ( 'fs' ).statSync ( filepath ) ).mtime;
-			var timeago = ( new Date () ).setDate ( (new Date () ).getMinutes () - minutes );
+			var timeago = ( curDate ).setMinutes ( ( curDate ).getMinutes () - minutes );
 			return ( filemod > timeago );
 		};
 	}
@@ -20,11 +20,16 @@ module.exports = function ( grunt ) {
 		pkg: grunt.file.readJSON ( 'package.json' ),
 
 		jshint: {
-			// List of all the source files to test:
-			files: [
-				'gruntfile.js',
-				'lib/**/*.js'
-			],
+			files: {
+				// List of all the source files to test:
+				src: [
+					'gruntfile.js',
+					'lib/**/*.js'
+				],
+
+				// Run only on files been modified on the last day:
+				filter: lastModified ( 24 * 60 )
+			},
 
 			// Configure JSHint (documented at http://www.jshint.com/docs/):
 			options: {
