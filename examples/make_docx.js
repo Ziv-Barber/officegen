@@ -1,5 +1,5 @@
 var async = require ( 'async' );
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 
 var fs = require('fs');
 var path = require('path');
@@ -143,7 +143,7 @@ var tableStyle = {
 
 var pObj = docx.createTable (table, tableStyle);
 
-var out = fs.createWriteStream ( 'out.docx' );
+var out = fs.createWriteStream ( 'test_files/out.docx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );

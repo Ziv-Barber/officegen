@@ -38,7 +38,7 @@
 	"bugs": {
 		"url": "https://github.com/Ziv-Barber/officegen/issues"
 	},
-	"main": "lib/index.js",
+	"main": "index.js",
 	"directories": {
 		"lib": "lib",
 		"examples": "examples"
@@ -64,6 +64,7 @@
 		"grunt": "^1.0.1",
 		"grunt-contrib-jshint": "^1.0.0",
 		"grunt-jsdoc": "^2.1.0",
+		"jaguarjs-jsdoc": "^1.0.1",
 		"mocha": "^3.0.2",
 		"sinon": "^1.17.5",
 		"time-grunt": "^1.4.0"

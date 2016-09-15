@@ -1,5 +1,5 @@
 
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 
 var fs = require('fs');
 var path = require('path');
@@ -155,7 +155,7 @@ var data = [[{ align: 'right' }, {
 
 var pObj = docx.createByJson(data);
 
-var out = fs.createWriteStream ( 'out.docx' );
+var out = fs.createWriteStream ( 'test_files/out_json.docx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );

@@ -6,7 +6,7 @@
 // NOTE:
 // - Before changing this code please refer to the hacking the code section on README.md.
 //
-// Copyright (c) 2013 Ziv Barber;
+// Copyright (c) 2016 Ziv Barber;
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -28,13 +28,13 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-var baseobj = module.exports = require("./basicgen.js");
+var baseobj = module.exports = require("./lib/basicgen.js");
 
-require("./genpptx.js"); // Register the PPTX/PPSX support plugin.
-require("./genxlsx.js"); // Register the XLSX support plugin.
-require("./gendocx.js"); // Register the DOCX support plugin.
+require("./lib/genpptx.js"); // Register the PPTX/PPSX support plugin.
+require("./lib/genxlsx.js"); // Register the XLSX support plugin.
+require("./lib/gendocx.js"); // Register the DOCX support plugin.
 
-var officegen_info = require('../package.json');
+var officegen_info = require('./package.json');
 
 baseobj.version = officegen_info.version;
 

@@ -1,5 +1,5 @@
 
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 
 var fs = require('fs');
 
@@ -26,7 +26,7 @@ slide.back = { type: 'solid', color: '00ff00' };
 slide = ppsx.makeNewSlide ();
 slide = ppsx.makeNewSlide ();
 
-var out = fs.createWriteStream ( 'out.ppsx' );
+var out = fs.createWriteStream ( 'test_files/out.ppsx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );

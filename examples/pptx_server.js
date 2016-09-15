@@ -1,7 +1,7 @@
 // Simple server that displaying form to ask the user name and then generate PowerPoint stream with the user's name 
 // without using real files on the server side.
 
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 
 var fs = require('fs');
 var http = require("http");

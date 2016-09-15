@@ -1,5 +1,5 @@
 var async = require ( 'async' );
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 var _ = require('lodash');
 var async = require('async');
 
@@ -154,7 +154,7 @@ function generateTable(callback) {
 }
 
 function finalize() {
-  var out = fs.createWriteStream('out.pptx');
+  var out = fs.createWriteStream('test_files/out.pptx');
 
   out.on('error', function (err) {
     console.log(err);

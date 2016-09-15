@@ -24,6 +24,7 @@ module.exports = function ( grunt ) {
 				// List of all the source files to test:
 				src: [
 					'gruntfile.js',
+					'index.js',
 					'lib/**/*.js'
 				],
 
@@ -46,14 +47,14 @@ module.exports = function ( grunt ) {
 			dist : {
 				src: [
 					'gruntfile.js',
+					'index.js',
 					'lib/**/*.js'
 				],
 				options: {
-					'destination': 'doc',
-					'package': 'package.json',
-					'readme': 'README.md'
-					// template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
-					// configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json"
+					destination: 'doc',
+					package: 'package.json',
+					readme: 'README.md',
+					template: './node_modules/jaguarjs-jsdoc'
 				}
 			}
 		}
