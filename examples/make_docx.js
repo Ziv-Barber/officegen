@@ -28,11 +28,19 @@ pObj.addText ( ' and back color.', { color: '00ffff', back: '000088' } );
 
 var pObj = docx.createP ();
 
+pObj.addText ( 'Since ' );
+pObj.addText ( 'officegen 0.2.12', { back: '00ffff', shdType: 'pct12', shdColor: 'ff0000' } ); // Use pattern in the background.
+pObj.addText ( ' you can do ' );
+pObj.addText ( 'more cool ', { highlight: true } ); // Highlight!
+pObj.addText ( 'stuff!', { highlight: 'darkGreen' } ); // Different highlight color.
+
+var pObj = docx.createP ();
+
 pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
 
 var pObj = docx.createP ( { align: 'center' } );
 
-pObj.addText ( 'Center this text.' );
+pObj.addText ( 'Center this text', { border: 'dotted', borderSize: 12, borderColor: '88CCFF' } );
 
 var pObj = docx.createP ();
 pObj.options.align = 'right';

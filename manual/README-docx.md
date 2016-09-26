@@ -4,6 +4,7 @@
 
 - [Creating the document object](#basic)
 - [The document object's settings](#settings)
+- [The paragraph API](#prgapi)
 
 <a name="basic"></a>
 ## Creating the document object: ##
@@ -51,3 +52,35 @@ docx.setDocCategory ( '...' );
 docx.setDocStatus ( '...' );
 ```
 
+<a name="prgapi"></a>
+## The paragraph API: ##
+
+To create a new paragraph object:
+
+```js
+var pObj = docx.createP ( options );
+```
+
+When the options are:
+
+- align (string) - Can be either 'left' (the default), 'right', 'center' or 'justify'.
+
+### Paragraph's methods: ###
+
+```js
+pObj.addText ( textString, options );
+```
+
+When the options are:
+
+- back (string) - background color code, for example: 'ffffff' (white) or '000000' (black).
+	- shdType (string) - Optional pattern code to use: 'clear' (no pattern), 'pct10', 'pct12', 'pct15', 'diagCross', 'diagStripe', 'horzCross', 'horzStripe', 'nil', 'thinDiagCross', 'solid', etc.
+	- shdColor (string) - The front color for the pattern (used with shdType).
+- bold (boolean) - true to make the text bold.
+- border (string) - the border type: 'single', 'dashDotStroked', 'dashed', 'dashSmallGap', 'dotDash', 'dotDotDash', 'dotted', 'double', 'thick', etc.
+- color (string) - color code, for example: 'ffffff' (white) or '000000' (black).
+- italic (boolean) - true to make the text italic.
+- underline (boolean) - true to add underline.
+- font_face (string) - the font to use.
+- font_size (number) - the font size in points.
+- highlight (string) - highlight color. Either 'black', 'blue', 'cyan', 'darkBlue', 'darkCyan', 'darkGray', 'darkGreen', 'darkMagenta', 'darkRed', 'darkYellow', 'green', 'lightGray', 'magenta', 'none', 'red', 'white' or 'yellow'.
