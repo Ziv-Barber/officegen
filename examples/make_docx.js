@@ -4,7 +4,14 @@ var officegen = require('../');
 var fs = require('fs');
 var path = require('path');
 
-var docx = officegen ( { type: 'docx', orientation: 'portrait' } );
+var themeXml = fs.readFileSync ( path.resolve ( __dirname, 'themes/testTheme.xml' ), 'utf8' );
+
+var docx = officegen ( {
+	type: 'docx',
+	orientation: 'portrait'
+	// The theme support is NOT working yet...
+	// themeXml: themeXml
+} );
 
 // Remove this comment in case of debugging Officegen:
 // officegen.setVerboseMode ( true );
