@@ -47,16 +47,14 @@
 		"test": "mocha test/test-docx.js test/test-xlsx.js test/test-pptx-nocharts.js"
 	},
 	"dependencies": {
-		"archiver": "~1.0.0",
+		"archiver": "~1.1.0",
 		"async": "^2.0.1",
-		"fast-image-size": "*",
-		"lodash": "^2.4.1",
+		"fast-image-size": "^0.1.3",
+		"jszip": "^2.5.0",
+		"lodash": "^4.16.2",
 		"readable-stream": "~2.1.5",
 		"setimmediate": ">= 1.0.1",
-		"startpoint": "x",
-		"stream-buffers": "x",
-		"underscore": "~1.4.4",
-		"xmlbuilder": "^2.4.5"
+		"xmlbuilder": "^8.2.2"
 	},
 	"devDependencies": {
 		"adm-zip": "^0.4.7",

@@ -6,6 +6,7 @@
 	- Word:
 		- Paragraph's text new options:
 			- 'shdType' and 'shdColor' (used with 'back').
+			- 'border', 'borderColor' and 'borderSize'.
 			- 'highlight'.
 - Version 0.2.11:
 	- Allow user to set options in addImage when they use createByJson to generate docx (peizhuang) and also to change the image type (Ziv Barber).
