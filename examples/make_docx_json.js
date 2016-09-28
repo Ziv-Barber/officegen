@@ -155,7 +155,7 @@ var data = [[{ align: 'right' }, {
 
 var pObj = docx.createByJson(data);
 
-var out = fs.createWriteStream ( 'test_files/out_json.docx' );
+var out = fs.createWriteStream ( 'tmp/out_json.docx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );

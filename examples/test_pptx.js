@@ -483,7 +483,7 @@ function generateTable(callback) {
 }
 
 function finalize() {
-  var out = fs.createWriteStream('test_files/out2.pptx');
+  var out = fs.createWriteStream('tmp/out2.pptx');
 
   out.on('error', function (err) {
     console.log(err);
