@@ -158,7 +158,7 @@ var tableStyle = {
 
 var pObj = docx.createTable (table, tableStyle);
 
-var out = fs.createWriteStream ( 'test_files/out.docx' );
+var out = fs.createWriteStream ( 'tmp/out.docx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );

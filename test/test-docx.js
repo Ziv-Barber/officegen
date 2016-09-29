@@ -15,7 +15,6 @@ var path = require('path');
 
 var IMAGEDIR = __dirname + "/../examples/";
 var OUTDIR = __dirname + "/../tmp/";
-var TGTDIR = __dirname + '/../test_files/';
 
 var AdmZip = require('adm-zip');
 

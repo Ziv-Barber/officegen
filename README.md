@@ -4,11 +4,11 @@ This module can generate Office Open XML files for Microsoft Office 2007 and lat
 This module is not depend on any framework so you can use it for any kind of node.js application, even not
 web based. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
-I'm accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
-We are also in [Slack](<https://zivbarber.slack.com/messages/officegen/>)
+
+[Slack](<https://zivbarber.slack.com/messages/officegen/>)
 
 This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
-Officegen also supporting PowerPoint native charts objects with embedded data (Windows only right now).
+Officegen also supporting PowerPoint native charts objects with embedded data.
 
 ## Contents: ##
 
@@ -31,6 +31,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data (W
 - Generating Microsoft PowerPoint document (.pptx file):
   - Create PowerPoint document with one or more slides.
   - Support both PPT and PPS.
+  - Can create native charts.
   - Add text blocks.
   - Add images.
   - Can declare fonts, alignment, colors and background.
@@ -65,9 +66,8 @@ This module is depending on:
 - archiver
 - setimmediate
 - fast-image-size
-- Power Points native charts:
-	- xmlbuilder
-	- lodash (not underscore)
+- xmlbuilder
+- lodash
 
 <a name="a3"></a>
 ## Public API: ##
@@ -875,15 +875,15 @@ sheet.data[1][3] = 'abc';
 ## Hackers Wonderland: ##
 
 #### How to hack into the code ####
-Right now please refer to the code itself. More information will be added later.
 
-You can also check the jsdoc documentation:
+You can check the jsdoc documentation:
 
 ```bash
 grunt jsdoc
 ```
 
 #### Testing ####
+
 A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
 To run the tests, run the following at the command line within the project root:
 
@@ -892,7 +892,9 @@ npm test
 ```
 
 #### Debugging ####
+
 If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
+
 ```js
 officegen.setVerboseMode(true);
 ```
@@ -903,7 +905,6 @@ officegen.setVerboseMode(true);
 
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
-
 
 <a name="a7"></a>
 ## Support: ##
@@ -924,23 +925,15 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a9"></a>
 ## Roadmap: ##
 
-Features todo:
+Features TODO:
 
-### Version 0.3.x: ###
-
-- Break officegen into multi-npm packages.
 - Excel basic styling.
-- Word tables.
 - PowerPoint lists and tables.
-- Embedded document inside another document.
-
-### Version 0.4.x: ###
-
-- Better interface: (officegen will be a steam).
-
-### Version 1.0.x: ###
-
-- Stable release with stable API.
+- More Word features.
+- Move to use officegen itself for creating the embedded xmls file inside PowerPoint documents with charts.
+- Continue to write the reference manual.
+- Browser support.
+- Continue to code the OpenOffice support.
 
 <a name="a10"></a>
 ## License: ##

@@ -29,7 +29,7 @@ module.exports = function ( grunt ) {
 				],
 
 				// Run only on files been modified on the last day:
-				filter: lastModified ( 24 * 60 )
+				// filter: lastModified ( 24 * 60 )
 			},
 
 			// Configure JSHint (documented at http://www.jshint.com/docs/):

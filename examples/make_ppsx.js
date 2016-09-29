@@ -26,7 +26,7 @@ slide.back = { type: 'solid', color: '00ff00' };
 slide = ppsx.makeNewSlide ();
 slide = ppsx.makeNewSlide ();
 
-var out = fs.createWriteStream ( 'test_files/out.ppsx' );
+var out = fs.createWriteStream ( 'tmp/out.ppsx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );
