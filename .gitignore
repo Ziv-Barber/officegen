@@ -1,9 +1,7 @@
+.DS_Store
 node_modules
 doc
-.DS_Store
 out.*
 .idea/
-
+.vscode/
 \#*#
-
-.vscode
