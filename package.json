@@ -55,6 +55,9 @@
 		"lodash": "^4.16.2",
 		"readable-stream": "~2.1.5",
 		"setimmediate": ">= 1.0.1",
+        "startpoint": "x",
+        "stream-buffers": "x",
+        "underscore": "~1.4.4",
 		"xmlbuilder": "^3.0.0"
 	},
 	"devDependencies": {
