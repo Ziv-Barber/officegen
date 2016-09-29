@@ -1,13 +1,16 @@
-- Version 0.2.12:
+- Version 0.4.0:
 	- For all Microsoft Office based documents:
 		- Bug fix: Changing the document's properties from the document's settings didn't work.
 		- You can now change also the 'categories' and 'status' in the document's properties.
 		- 'creator' now changed to 'aurthor' (but you can still use also 'creator').
+	- PowerPoint:
+		- Charts now working again, using jszip so no need for any external tool.
 	- Word:
 		- Paragraph's text new options:
 			- 'shdType' and 'shdColor' (used with 'back').
 			- 'border', 'borderColor' and 'borderSize'.
 			- 'highlight'.
+		- All inside table borders (by cgarethc).
 - Version 0.2.11:
 	- Allow user to set options in addImage when they use createByJson to generate docx (peizhuang) and also to change the image type (Ziv Barber).
 	- Provide varying column sizes in Word tables (cgarethc).

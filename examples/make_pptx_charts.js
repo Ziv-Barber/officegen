@@ -25,6 +25,7 @@ pptx.setDocTitle('Sample PPTX Document');
 
 
 // this shows how one can get the base XML and modify it directly
+/*
 var chart0 = new OfficeChart({
   title: 'Dynamically generated',
   renderType: 'bar',
@@ -94,9 +95,10 @@ var chart0 = new OfficeChart({
       }
     }
 });
+*/
 
 var chartsData = [
-  chart0,
+  // chart0,
   {
     "title": "Marginal distribution for mpg",
     "renderType": "column",
@@ -201,6 +203,7 @@ var chartsData = [
       }
     ]
   },
+
   {
     title: 'My production',
     renderType: 'pie',
