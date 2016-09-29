@@ -16,7 +16,6 @@ var path = require('path');
 
 
 var OUTDIR = path.join(__dirname, './../tmp/');
-var TGTDIR =  path.join(__dirname, './../test_files/');
  
 
 var AdmZip = require('adm-zip');

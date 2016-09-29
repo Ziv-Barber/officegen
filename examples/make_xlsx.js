@@ -35,7 +35,7 @@ sheet.setCell ( 'I1', -3 );
 sheet.setCell ( 'I2', 31.12 );
 sheet.setCell ( 'G102', 'Hello World!' );
 
-var out = fs.createWriteStream ( 'test_files/out.xlsx' );
+var out = fs.createWriteStream ( 'tmp/out.xlsx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );
