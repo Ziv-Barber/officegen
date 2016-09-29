@@ -4,10 +4,10 @@
 	"version": "0.4.0",
 	"author": {
 		"name": "Ziv Barber",
-		"url": "https://github.com/Ziv-Barber"
+		"url": "https://github.com/ONZU"
 	},
 	"license": "MIT",
-	"url": "https://github.com/Ziv-Barber/officegen",
+	"url": "https://github.com/ONZU/officegen",
 	"engines": {
 		"node": ">= 0.10.0"
 	},
@@ -34,10 +34,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/Ziv-Barber/officegen.git"
+		"url": "git://github.com/ONZU/officegen.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Ziv-Barber/officegen/issues"
+		"url": "https://github.com/ONZU/officegen/issues"
 	},
 	"main": "index.js",
 	"directories": {
@@ -48,16 +48,13 @@
 		"test": "mocha test/test-docx.js test/test-xlsx.js test/test-pptx-nocharts.js"
 	},
 	"dependencies": {
-		"archiver": "~1.1.0",
+		"archiver": "^1.1.0",
 		"async": "^2.0.1",
 		"fast-image-size": "^0.1.3",
 		"jszip": "^2.5.0",
 		"lodash": "^4.16.2",
-		"readable-stream": "~2.1.5",
-		"setimmediate": ">= 1.0.1",
-        "startpoint": "x",
-        "stream-buffers": "x",
-        "underscore": "~1.4.4",
+		"readable-stream": "^2.1.5",
+		"setimmediate": "^1.0.5",
 		"xmlbuilder": "^3.0.0"
 	},
 	"devDependencies": {
