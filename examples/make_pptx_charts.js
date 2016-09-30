@@ -241,6 +241,52 @@ var chartsData = [
   },
 
   {
+    title: 'eSurvey chart',
+    renderType: 'stacked-column',
+    valAxisNumFmt: '$0',
+    valAxisMaxValue: 24,
+    data: [
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.6, 2.8],
+        color: 'ff0000'
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.7, 2.9],
+        color: '00ff00'
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.1, 2.2, 2.4],
+        color: '0000ff'
+      },
+      {
+        name: 'lamerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.3, 0.3, 0.3],
+        color: 'ffff00'
+      },
+      {
+        name: 'meast',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.2, 0.3, 0.3],
+        color: 'ff00ff'
+      },
+      {
+        name: 'africa',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.1, 0.1, 0.1],
+        color: '00ffff'
+      }
+
+    ]
+  },
+
+  {
     title: 'Sample bar chart',
     renderType: 'bar',
     xmlOptions: {
