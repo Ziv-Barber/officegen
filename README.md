@@ -392,7 +392,7 @@ PowerPoint slides can contain charts with embedded data.  To create a chart:
 Where `chartInfo` object is an object that takes the following attributes:
 
  - `data` -  an array of data, see examples below
- - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column", "line"`
+ - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column", "stacked-column", "line"`
  - `title` -  chart title (default: none)
  - `valAxisTitle` -  value axis title (default: none)
  - `catAxisTitle` - category axis title (default: none)
