@@ -234,8 +234,7 @@ module.exports = [
         color: '00ffff'
       }
     ]
-  }
-  /*
+  },
   {
     title: 'line chart',
     renderType: 'line',
@@ -278,5 +277,4 @@ module.exports = [
       }
     ]
   }
-  */
 ];
