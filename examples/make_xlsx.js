@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var officegen = require('../lib/index.js');
+var officegen = require('../');
 
 var xlsx = officegen ( 'xlsx' );
 
@@ -35,7 +35,7 @@ sheet.setCell ( 'I1', -3 );
 sheet.setCell ( 'I2', 31.12 );
 sheet.setCell ( 'G102', 'Hello World!' );
 
-var out = fs.createWriteStream ( 'out.xlsx' );
+var out = fs.createWriteStream ( 'tmp/out.xlsx' );
 
 out.on ( 'error', function ( err ) {
 	console.log ( err );
