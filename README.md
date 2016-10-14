@@ -284,6 +284,7 @@ Common properties that can be added to the options object for all the add based 
 - fill - the background color.
 - line - border color / line color.
 - flip_vertical: true - flip the object vertical.
+- flip_horizontal: true - flip the object horizontal
 - shape - see below.
 
 
@@ -330,9 +331,13 @@ Please note that every color property can be either:
 
 - String of the color code. For example: 'ffffff', '000000', '888800', etc.
 - Color object:
-  - 'type' - The type of the color fill to use. Right now only 'solid' supported.
+  - 'type' - The type of the color fill to use. Right now only 'solid' and 'gradient' supported.
   - 'color' - String with the color code to use.
   - 'alpha' - transparent level (0-100).
+- For 'gradient' fill:
+  - 'color' - Array of strings with the color code to use OR array of object, each object include "color" and "position" parameters. i.e. `[{"position": 0, "color": '000000'}, {}, ...]`
+  - 'alpha' - transparent level (0-100).
+  - 'angle' - (optional) the angle of gradient rotation
 
 Adding images:
 
