@@ -36,6 +36,12 @@ pObj.addText ( 'stuff!', { highlight: 'darkGreen' } ); // Different highlight co
 
 var pObj = docx.createP ();
 
+pObj.addText ('Even add ');
+pObj.addText ('external link', { link: 'https://github.com' });
+pObj.addText ('!');
+
+var pObj = docx.createP ();
+
 pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
 
 var pObj = docx.createP ( { align: 'center' } );
