@@ -1,7 +1,3 @@
-# Fork info
-
-Fork project from https://github.com/Ziv-Barber/officegen at 0.4.0.  I've made this version 0.4.1.
-
 # officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
@@ -951,7 +947,7 @@ Features TODO:
 
 (The MIT License)
 
-Copyright (c) 2013-2016 Ziv Barber;
+Copyright (c) 2013-2017 Ziv Barber;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
