@@ -626,7 +626,9 @@ pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
 
 pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
 
-pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
+pObj.addText ( ' Fonts face and size. ', { font_face: 'Arial', font_size: 40 } );
+
+pObj.addText ( 'External link', { link: 'https://github.com' } );
 ```
 
 Add an image to a paragraph:
