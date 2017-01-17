@@ -1,3 +1,9 @@
+- Version 0.4.1:
+	- Merge pull request #154 from embrialabs/master
+	- Merge pull request #151 from njcaruso/master
+	- Merge pull request #150 from andrewBalekha/bugfix/chart-scaling-issue
+	- Merge pull request #140 from tomasztunik/master
+	- Merge pull request #145 from arrowing/grid-span
 - Version 0.4.0:
 	- For all Microsoft Office based documents:
 		- Bug fix: Changing the document's properties from the document's settings didn't work.
