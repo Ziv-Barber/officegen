@@ -21,9 +21,9 @@
  * @summary Create a new pptx plugin.
  * @param {object} pluginsman Access to the plugins manager for pptx documents.
  * @constructor
- * @name makespknotesplugin
+ * @name makeexampleplugin
  */
-function makespknotesplugin ( pluginsman ) {
+function makeexampleplugin ( pluginsman ) {
 	var funcThis = this;
 
 	// You can change it if you want to support more types, since that the Word and Excel document generators also supporting very similar plugins:
@@ -77,7 +77,7 @@ function makespknotesplugin ( pluginsman ) {
  * This function extending the main document object with new API methods.
  * @param {object} docObj Document object.
  */
-makespknotesplugin.prototype.extendPptxApi = function ( docObj ) {
+makeexampleplugin.prototype.extendPptxApi = function ( docObj ) {
 	var funcThis = this;
 
 	/*
@@ -110,7 +110,7 @@ makespknotesplugin.prototype.extendPptxApi = function ( docObj ) {
  * This function extending a new created slide object with new API methods.
  * @param {object} docData Object with information about the new slide and more.
  */
-makespknotesplugin.prototype.extendPptxSlideApi = function ( docData ) {
+makeexampleplugin.prototype.extendPptxSlideApi = function ( docData ) {
 	var funcThis = this;
 	var newSlide = docData.page; // The new slide's API.
 	var slideData = docData.pageData; // Place here data related to the slide.
@@ -147,7 +147,7 @@ makespknotesplugin.prototype.extendPptxSlideApi = function ( docData ) {
  * This function should initialize the default specific data that this plugin needs for the document.
  * @param {object} docObj Document object.
  */
-makespknotesplugin.prototype.setData = function ( docObj ) {
+makeexampleplugin.prototype.setData = function ( docObj ) {
 	var funcThis = this;
 
 	// BMK_TODO:
@@ -157,7 +157,7 @@ makespknotesplugin.prototype.setData = function ( docObj ) {
  * This function been called just before starting to generate the output document zip.
  * @param {object} docObj Document object.
  */
-makespknotesplugin.prototype.beforeGen = function ( docObj ) {
+makeexampleplugin.prototype.beforeGen = function ( docObj ) {
 	var funcThis = this;
 
 	// this.pluginsman.genPrivate.pages = access to all the slides (in case that you need it).
@@ -212,7 +212,7 @@ makespknotesplugin.prototype.beforeGen = function ( docObj ) {
  */
 /*
 // Example:
-makespknotesplugin.prototype.cbMyCallback = function ( data ) {
+makeexampleplugin.prototype.cbMyCallback = function ( data ) {
 	return this.msPluginsApi.cbMakeMsOfficeBasicXml ( data ) + '<example></example>';
 }
 */
@@ -223,4 +223,4 @@ makespknotesplugin.prototype.cbMyCallback = function ( data ) {
 
 // --- just put it here ---
 
-module.exports = makespknotesplugin;
+module.exports = makeexampleplugin;
