@@ -4,16 +4,18 @@
  * To create a new feature for the pptx document generator:
  * <br /><br />
  * <ul>
- * <li>Copy this file into the lib\ folder and rename it to your plugin's name.</li>
+ * <li>Make a copy of this file and rename it to your plugin's name.</li>
  * <li>Create a new test for it.</li>
- * <li>During your test you can load your plugin using the extraPlugs options when you creating the pptx object. extraPlugs excepting an array with list of additional plugins to load.</li>
+ * <li>During your test you can load your plugin using the extraPlugs options when you creating the pptx object (see the example below).
  * <li>Follow the instructions in this file.</li>
  * </ul>
  * @example <caption>Loading your plugin:</caption>
+ * var yourPlugin = require ( 'your-plugin' ); // Load your plugin.
+ *
  * var pptx = officegen ({
  * 	type: 'pptx',
  * 	extraPlugs: [
- * 		'pptxplg-example' // The file lib/pptxplg-example.js must exists in officegen.
+ * 		yourPlugin // Tell officegen to use your plugin.
  * 	]
  * });
  * @summary Create a new pptx plugin.
@@ -23,6 +25,11 @@
  */
 function makespknotesplugin ( pluginsman ) {
 	var funcThis = this;
+
+	// You can change it if you want to support more types, since that the Word and Excel document generators also supporting very similar plugins:
+	if ( pluginsman.docType !== 'pptx' && pluginsman.docType !== 'ppsx' ) {
+		throw "[pptx-example] This plugin supporting only PowerPoint based documents.";
+	} // Endif.
 
 	this.ogPluginsApi = pluginsman.ogPluginsApi; // Generic officegen API for plugins.
 	this.msPluginsApi = pluginsman.genPrivate.plugs.type.msoffice; // msoffice plugins API.
