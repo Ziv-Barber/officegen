@@ -13,6 +13,8 @@ var officegen = require ( '../' );
 var fs = require ( 'fs' );
 var path = require ( 'path' );
 
+var pluginSpeakernotes = require ( '../lib/pptxplg-speakernotes' );
+
 var OUTDIR = __dirname + "/../tmp/";
 
 // Common error method
@@ -29,7 +31,7 @@ describe("PPTX Speaker Notes plugin", function () {
 		var pptx = officegen ({
 			type: 'pptx',
 			extraPlugs: [
-				'pptxplg-speakernotes'
+				pluginSpeakernotes // 'pptxplg-speakernotes'
 			]
 		});
 		pptx.on ( 'error', onError );
@@ -41,6 +43,8 @@ describe("PPTX Speaker Notes plugin", function () {
 		//
 
 		slide = pptx.makeNewSlide ();
+
+		slide.name = 'Title to the slide?';
 
 		// Change the background color:
 		slide.back = '000000';
@@ -80,6 +84,9 @@ describe("PPTX Speaker Notes plugin", function () {
 
 		// Add some text:
 		slide.addText ( 'This one has a speaker note', 0, 0, '100%', 20 );
+
+		// Add a speaker note:
+		slide.setSpeakerNote ( 'This is a speaker note! Using the new setSpeakerNote feature of the slide API.' );
 
 		//
 		// Slide #4:
