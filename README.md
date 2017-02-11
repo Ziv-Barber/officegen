@@ -44,6 +44,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
   - You can add images.
+  - Support header and footer.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells of type both number and string.
 
@@ -732,6 +733,20 @@ var tableStyle = {
 }
 
 docx.createTable (table, tableStyle);
+```
+
+Header and footer:
+
+```js
+// Add a header:
+var header = docx.getHeader ().createP ();
+header.addText ( 'This is the header' );
+// Please note that the object header here is a paragraph object so you can use ANY of the paragraph API methods also for header and footer.
+// The getHeader () method excepting a string parameter:
+// getHeader ( 'even' ) - change the header for even pages.
+// getHeader ( 'first' ) - change the header for the first page only.
+// to do all of that for the footer, use the getFooter instead of getHeader.
+// and sorry, right now only createP is supported (so only creating a paragraph) so no tables, etc.
 ```
 
 To Create Word Document by json:
