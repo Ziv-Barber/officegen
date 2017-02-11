@@ -41,6 +41,10 @@ describe ( "DOCX generator with header and footer", function () {
 
 		var pObj = docx.createP ();
 
+		pObj.addText ( 'Click me please!', { hyperlink: 'testBM' } );
+
+		var pObj = docx.createP ();
+
 		pObj.addText ( 'Simple' );
 		pObj.addText ( ' with color', { color: '000088' } );
 		pObj.addText ( ' and back color.', { color: '00ffff', back: '000088' } );
@@ -60,9 +64,13 @@ describe ( "DOCX generator with header and footer", function () {
 
 		var pObj = docx.createP ();
 
+		pObj.startBookmark ( 'testBM' );
+
 		pObj.addText ( 'Those two lines are in the same paragraph,' );
 		pObj.addLineBreak ();
 		pObj.addText ( 'but they are separated by a line break.' );
+
+		pObj.endBookmark ();
 
 		docx.putPageBreak ();
 

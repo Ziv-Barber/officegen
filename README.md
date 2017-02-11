@@ -45,6 +45,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
   - You can add images.
   - Support header and footer.
+  - Support bookmarks and hyperlinks.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells of type both number and string.
 
@@ -636,6 +637,15 @@ pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
 pObj.addText ( ' Fonts face and size. ', { font_face: 'Arial', font_size: 40 } );
 
 pObj.addText ( 'External link', { link: 'https://github.com' } );
+
+// Hyperlinks to bookmarks also supported:
+pObj.addText ( 'Internal link', { hyperlink: 'myBookmark' } );
+// ...
+// Start somewhere a bookmark:
+pObj.startBookmark ( 'myBookmark' );
+// ...
+// You MUST close your bookmark:
+pObj.endBookmark ();
 ```
 
 Add an image to a paragraph:
