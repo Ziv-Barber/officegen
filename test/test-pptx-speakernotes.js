@@ -28,12 +28,7 @@ describe("PPTX Speaker Notes plugin", function () {
 
 	it ( "creates a presentation with one speaker note", function ( done ) {
 		var slide;
-		var pptx = officegen ({
-			type: 'pptx',
-			extraPlugs: [
-				pluginSpeakernotes // 'pptxplg-speakernotes'
-			]
-		});
+		var pptx = officegen ( 'pptx' );
 		pptx.on ( 'error', onError );
 
 		pptx.setDocTitle ( 'Testing Speaker Notes' );

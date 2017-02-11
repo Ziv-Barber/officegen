@@ -39,6 +39,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
   - Support automatic fields like date, time and current slide number.
+  - Support speaker notes.
 - Generating Microsoft Word document (.docx file):
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
@@ -389,7 +390,16 @@ slide.addText ( 'Boom!!!', {
   color: 'cc0000', bold: true, underline: true } );
 ```
 
-#### Charts ####
+#### Speaker notes: #####
+
+PowerPoint slides can contain speaker notes, to do that use the setSpeakerNote method:
+
+```js
+slide.setSpeakerNote ( 'This is a speaker note!' );
+```
+
+#### Charts: ####
+
 PowerPoint slides can contain charts with embedded data.  To create a chart:
 
    `slide.addChart( chartInfo) `
