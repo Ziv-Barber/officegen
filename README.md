@@ -1,4 +1,4 @@
-# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework and you don't need to install Microsoft Office, so you can use it for any kind of javascript application. Also the output is a stream and not a file, not dependent on any output tool.
@@ -477,8 +477,8 @@ chartInfo = {
     }
 ```
 
-
 Examples how to add chart into the slide:
+
 ```js
 // Column chart
 slide = pptx.makeNewSlide();
@@ -932,6 +932,7 @@ sheet.data[1][3] = 'abc';
 ```
 
 <a name="a4"></a>
+
 ## Examples: ##
 
 - [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
@@ -992,6 +993,7 @@ The Slack team:
 [Slack](https://zivbarber.slack.com/messages/officegen/)
 
 <a name="a8"></a>
+
 ## History: ##
 
 [Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
@@ -1032,11 +1034,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <a name="a11"></a>
+
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
 
 <a name="a12"></a>
+
 ## Donations: ##
 
 The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
