@@ -1,2 +1,9 @@
 theme: jekyll-theme-architect
 show_downloads: true
+locale: "en-US"
+twitter:
+  username: "zivbarber"
+social:
+  links:
+    - "https://twitter.com/zivbarber"
+    - "https://www.linkedin.com/in/zivbarber/"
