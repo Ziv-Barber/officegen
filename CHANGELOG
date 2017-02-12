@@ -1,3 +1,15 @@
+- Version 0.4.2:
+	- PowerPoint:
+		- Support for speaker notes.
+		- Advanced way to set the side of the slides.
+		- Allow you to make a slide from the title slide layout.
+		- Now adding all the original Office layouts to the generated pptx document.
+		- Table support fixes (japneet121).
+	- Word:
+		- Support for header and footer.
+		- Support for bookmarks and hyperlinks.
+	- Design and development:
+		- Document type plugins system to easy adding new features.
 - Version 0.4.1:
 	- Ability to make text hyperlinks in docx - Merge pull request #154 from embrialabs/master
 	- Added support for bullets (they weren't working, and were just showing numbers) - Merge pull request #151 from njcaruso/master.
