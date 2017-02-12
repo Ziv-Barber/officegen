@@ -75,16 +75,22 @@ describe("PPTX Layouts plugin", function () {
 		// Slide #4:
 		//
 
-		slide = pptx.makeNewSlide ();
+		slide = pptx.makeTitleSlide ();
 
-		// Change the background color:
-		slide.back = '2fe722';
+		//
+		// Slide #6:
+		//
 
-		// Declare the default color to use on this slide:
-		slide.color = '000000';
+		slide = pptx.makeTitleSlide ( 'The title of this slide', 'Sub title' );
 
-		// Add some text:
-		slide.addText ( 'Just another slide', 0, 0, '100%', 20 );
+		//
+		// Slide #7:
+		//
+
+		slide = pptx.makeTitleSlide ( [
+			{ text: 'Hello ', options: { font_size: 56 } },
+			{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+		], 'Sub title' );
 
 		//
 		// Generate the pptx file:
