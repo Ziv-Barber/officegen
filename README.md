@@ -1,11 +1,10 @@
 # officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
-This module is not depend on any framework so you can use it for any kind of node.js application, even not
-web based. Also the output is a stream and not a file, not dependent on any output tool.
+This module is not depend on any framework and NOT need Microsoft Office to be installed, so you can use it for any kind of javascript application. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
 
-[Slack](<https://zivbarber.slack.com/messages/officegen/>)
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
 Officegen also supporting PowerPoint native charts objects with embedded data.
@@ -40,6 +39,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Support hidden slides.
   - Support automatic fields like date, time and current slide number.
   - Support speaker notes.
+  - Support slide layouts.
 - Generating Microsoft Word document (.docx file):
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
@@ -47,7 +47,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Support header and footer.
   - Support bookmarks and hyperlinks.
 - Generating Microsoft Excel document (.xlsx file):
-  - Create Excel document with one or more sheets. Supporting cells of type both number and string.
+  - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
 
 <a name="a2"></a>
 ## Installation: ##
@@ -253,6 +253,31 @@ Creating a new slide:
 slide = pptx.makeNewSlide ();
 ```
 
+For creating a new slide using a layout:
+
+```js
+slide = pptx.makeNewSlide ({
+	userLayout: 'title'
+});
+slide.setTitle ( 'The title' );
+slide.setSubTitle ( 'Another text' );
+```
+
+Or more advance example:
+
+```js
+slide = pptx.makeNewSlide ({
+	userLayout: 'title'
+});
+// Both setTitle and setSubTitle excepting all the parameters that you can pass to slide.addText - see below:
+slide.setTitle ([
+	// This array is like a paragraph and you can use any settings that you pass for creating a paragraph,
+	// Each object here is like a call to addText:
+	{ text: 'Hello ', options: { font_size: 56 } },
+	{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+]);
+```
+
 The returned object from makeNewSlide representing a single slide. Use it to add objects into this slide.
 You must create at last one slide on your pptx/ppsx document.
 
@@ -267,7 +292,7 @@ Properties of the slide object itself:
 
 The slide object supporting the following methods:
 
-- addText (  text, options )
+- addText ( text, options )
 - addShape ( shape, options )
 - addImage ( image, options )
 - addChart ( chartInfo )
@@ -289,8 +314,6 @@ Common properties that can be added to the options object for all the add based 
 - flip_vertical: true - flip the object vertical.
 - flip_horizontal: true - flip the object horizontal
 - shape - see below.
-
-
 
 Font properties:
 
@@ -386,7 +409,7 @@ slide.addText ( 'Office generator', {
   y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
   color: '0000ff' } );
 
-slide.addText ( 'Boom!!!', {
+slide.addText ( 'Big Red', {
   y: 250, x: 10, cx: '70%',
   font_face: 'Wide Latin', font_size: 54,
   color: 'cc0000', bold: true, underline: true } );
@@ -951,13 +974,17 @@ officegen.setVerboseMode(true);
 <a name="a7"></a>
 ## Support: ##
 
-The Slack team:
-
-https://zivbarber.slack.com/messages/officegen/
-
 Please visit the officegen Google Group:
 
-https://groups.google.com/forum/?fromgroups#!forum/node-officegen
+[officegen Google Group](https://groups.google.com/forum/?fromgroups#!forum/node-officegen)
+
+Plans for the next release:
+
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
+
+The Slack team:
+
+[Slack](https://zivbarber.slack.com/messages/officegen/)
 
 <a name="a8"></a>
 ## History: ##
@@ -967,15 +994,9 @@ https://groups.google.com/forum/?fromgroups#!forum/node-officegen
 <a name="a9"></a>
 ## Roadmap: ##
 
-Features TODO:
+Please check here:
 
-- Excel basic styling.
-- PowerPoint lists and tables.
-- More Word features.
-- Move to use officegen itself for creating the embedded xmls file inside PowerPoint documents with charts.
-- Continue to write the reference manual.
-- Browser support.
-- Continue to code the OpenOffice support.
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 <a name="a10"></a>
 ## License: ##
