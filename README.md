@@ -25,6 +25,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
 - [Donations](#a12)
 
 <a name="a1"></a>
+
 ## Features: ##
 
 - Generating Microsoft PowerPoint document (.pptx file):
@@ -50,6 +51,7 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
 
 <a name="a2"></a>
+
 ## Installation: ##
 
 via Git:
@@ -73,6 +75,7 @@ This module is depending on:
 - lodash
 
 <a name="a3"></a>
+
 ## Public API: ##
 
 ### Creating the document object: ###
@@ -474,8 +477,8 @@ chartInfo = {
     }
 ```
 
-
 Examples how to add chart into the slide:
+
 ```js
 // Column chart
 slide = pptx.makeNewSlide();
@@ -929,6 +932,7 @@ sheet.data[1][3] = 'abc';
 ```
 
 <a name="a4"></a>
+
 ## Examples: ##
 
 - [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
@@ -966,12 +970,14 @@ officegen.setVerboseMode(true);
 
 
 <a name="a6"></a>
+
 ## FAQ: ##
 
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
 
 <a name="a7"></a>
+
 ## Support: ##
 
 Please visit the officegen Google Group:
@@ -987,11 +993,13 @@ The Slack team:
 [Slack](https://zivbarber.slack.com/messages/officegen/)
 
 <a name="a8"></a>
+
 ## History: ##
 
 [Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
 
 <a name="a9"></a>
+
 ## Roadmap: ##
 
 Please check here:
@@ -999,6 +1007,7 @@ Please check here:
 [Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 <a name="a10"></a>
+
 ## License: ##
 
 (The MIT License)
@@ -1025,11 +1034,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <a name="a11"></a>
+
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
 
 <a name="a12"></a>
+
 ## Donations: ##
 
 The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
