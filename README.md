@@ -66,6 +66,12 @@ via npm:
 $ npm install officegen
 ```
 
+If you are enthusiastic about using the latest that officegen has to offer (beware - may be unstable), you can install directly from the officegen repository using:
+
+```bash
+$ npm install Ziv-Barber/officegen#master
+```
+
 This module is depending on:
 
 - archiver
