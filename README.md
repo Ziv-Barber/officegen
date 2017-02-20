@@ -269,8 +269,15 @@ slide = pptx.makeNewSlide ({
 	userLayout: 'title'
 });
 slide.setTitle ( 'The title' );
-slide.setSubTitle ( 'Another text' );
+slide.setSubTitle ( 'Another text' ); // For either 'title' and 'secHead' only.
+// for 'obj' layout use slide.setObjData ( ... ) to change the object element inside the slide.
 ```
+
+userLayout can be:
+
+- 'title': the first layout of Office (title).
+- 'obj': the 2nd layout of Office (with one title and one object).
+- 'secHead': the 3rd layout of Office.
 
 Or more advance example:
 

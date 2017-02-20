@@ -78,19 +78,34 @@ describe("PPTX Layouts plugin", function () {
 		slide = pptx.makeTitleSlide ();
 
 		//
-		// Slide #6:
+		// Slide #5:
 		//
 
 		slide = pptx.makeTitleSlide ( 'The title of this slide', 'Sub title' );
 
 		//
-		// Slide #7:
+		// Slide #6:
 		//
 
 		slide = pptx.makeTitleSlide ( [
 			{ text: 'Hello ', options: { font_size: 56 } },
 			{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
 		], 'Sub title' );
+
+		//
+		// Slide #7:
+		//
+
+		slide = pptx.makeObjSlide ( 'The title of slide 7', [
+			{ text: 'Some ', options: { font_size: 56 } },
+			{ text: 'data', options: { font_size: 56, font_face: 'Arial', color: 'ff8800' } }
+		] );
+
+		//
+		// Slide #8:
+		//
+
+		slide = pptx.makeSecHeadSlide ( 'The title of slide 8', 'Sub title' );
 
 		//
 		// Generate the pptx file:
