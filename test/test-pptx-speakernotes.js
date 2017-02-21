@@ -90,6 +90,26 @@ describe("PPTX Speaker Notes plugin", function () {
 		slide = pptx.makeNewSlide ();
 
 		// Change the background color:
+		slide.back = 'e7db19';
+
+		// Declare the default color to use on this slide:
+		slide.color = '000000';
+
+		// Add some text:
+		slide.addText ( 'This one has a speaker note with 2 lines', 0, 0, '100%', 20 );
+
+		// Add a speaker note:
+		// slide.setSpeakerNote ( 'This is a speaker note!\nUsing the new setSpeakerNote feature of the slide API.' );
+		slide.setSpeakerNote ( 'This is a speaker note!' );
+		slide.setSpeakerNote ( 'Using the new setSpeakerNote feature of the slide API.', true );
+
+		//
+		// Slide #5:
+		//
+
+		slide = pptx.makeNewSlide ();
+
+		// Change the background color:
 		slide.back = '2fe722';
 
 		// Declare the default color to use on this slide:

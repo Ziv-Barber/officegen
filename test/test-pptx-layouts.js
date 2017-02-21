@@ -101,6 +101,9 @@ describe("PPTX Layouts plugin", function () {
 			{ text: 'data', options: { font_size: 56, font_face: 'Arial', color: 'ff8800' } }
 		] );
 
+		slide.useLayout.isDate = false;
+		slide.setFooter ( 'Message in the footer' );
+
 		//
 		// Slide #8:
 		//
