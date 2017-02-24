@@ -1,5 +1,6 @@
-- Git Master:
+- Version 0.4.3:
 	- PowerPoint:
+		- Improved speaker notes support.
 		- Improved title layout API.
 	- Excel:
 		- New API to change the width of every cell instead of changing it directly. Warning! the internal format of sheet.width been changed!!!
