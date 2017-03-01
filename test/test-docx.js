@@ -60,6 +60,10 @@ describe("DOCX generator", function () {
 
     pObj.addText ( 'Center this text.' );
 
+    var pObj = docx.createP ( { align: 'left', first_line: 600 } );
+
+    pObj.addText ( 'First line support' );
+
     var pObj = docx.createP ();
     pObj.options.align = 'right';
 
