@@ -338,6 +338,7 @@ Font properties:
 - bold: true
 - underline: true
 - char_spacing: floating point number (kerning)
+- baseline: percent (of font size). Used for superscript and subscript.
 
 Text alignment properties:
 
