@@ -57,6 +57,9 @@ describe("PPTX Layouts plugin", function () {
 		slide.setTitle ( 'The title' );
 		slide.setSubTitle ( 'Another text' );
 
+		// Add a speaker note:
+		slide.setSpeakerNote ( 'This is a speaker note! Using the new setSpeakerNote feature of the slide API.' );
+
 		//
 		// Slide #3:
 		//
