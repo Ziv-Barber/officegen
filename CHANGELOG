@@ -1,3 +1,15 @@
+- Version 0.4.5:
+	- Added dot bullets.
+	- Option to append text to the content object of a slide based on the "text and content" layout.
+	- Bug: Fix creating invalid pptx files when using styles.
+	- Bug: Create invalid empty <cols> in excel files.
+	- Bug: pptx addText ( null ) crashing officegen.
+	- Bug: The title and content layout was the same as section header.
+	- Bug: Selecting a layout not effecting the slide.
+	- Add support for baseline font property (peakon).
+	- Enable cell specific formatting in PowerPoint tables (jmetric).
+- Version 0.4.4:
+	- Fix to support pptx speaker notes in Office 2013.
 - Version 0.4.3:
 	- PowerPoint:
 		- Improved speaker notes support.

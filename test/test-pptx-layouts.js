@@ -100,6 +100,7 @@ describe("PPTX Layouts plugin", function () {
 		//
 
 		slide = pptx.makeObjSlide ( 'The title of slide 7', [
+			{ text: '', options: { listType: 'dot' } },
 			{ text: 'Some ', options: { font_size: 56 } },
 			{ text: 'data', options: { font_size: 56, font_face: 'Arial', color: 'ff8800' } }
 		] );
