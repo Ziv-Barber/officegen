@@ -1,3 +1,5 @@
+- Version 0.4.6:
+  - Fixed issue with createByJson - Merge pull request #209 from goyney/master
 - Version 0.4.5:
 	- Added dot bullets.
 	- Option to append text to the content object of a slide based on the "text and content" layout.
@@ -107,7 +109,7 @@
 		- Generating invalid strings for MS-Office document properties.
 		- Better shared string support in Excel (thanks vivocha!).
 - Version 0.2.0:
-	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
+	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also
 	  the old API.
 	- Bugs:
 		- You can now listen on error events.
@@ -153,4 +155,3 @@
 	- Can generate very limited Excel file.
 	- You can change the background color of slides.
 	- Minor bug fixes.
-
