@@ -49,6 +49,10 @@ describe("XLSX generator", function () {
     sheet = xlsx.makeNewSheet ();
     sheet.name = 'Excel Test';
 
+	sheet.setColumnWidth ( 'A', 16.5 );
+	sheet.setColumnWidth ( 'E', 10.5 );
+	// sheet.setColumnCenter ( 'C' ); // NOT working yet!!!!
+
 // The direct option - two-dimensional array:
     sheet.data[0] = [];
     sheet.data[0][0] = 1;

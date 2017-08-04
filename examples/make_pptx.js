@@ -135,9 +135,10 @@ function generateExampleSlides(callback) {
   callback();
 }
 
-function generateTable(callback) {
+function generateTables(callback) {
   slide = pptx.makeNewSlide();
 
+  //Table with consistent formats
   var rows = [];
   var columnWidths = [];
   for (var i = 0; i < 12; i++) {
@@ -150,6 +151,63 @@ function generateTable(callback) {
   }
 
   slide.addTable(rows, {font_size:9, font_face:"Comic Sans MS", columnWidths:columnWidths});
+
+  //Table with various formats for cells
+  var headerRow = [{ val: 'Region',
+    opts: {
+      bold: 1
+    }},
+    { val: 'Abr.',
+      opts: {
+        bold: 1
+      }},
+    { val: 'Pop.',
+      opts: {
+        bold: 1
+      }},
+    { val: 'Sq. Km.',
+      opts: {
+        bold: 1
+      }}];
+  var dataRows = [
+    {
+      val: 'Midwest',
+      opts: {
+        font_face   : 'Verdana',
+        align       : 'l'
+      }
+    },
+    {
+      val: 'MW',
+      opts: {
+        font_face   : 'Verdana',
+        align       : 'l'
+      }
+    },
+    {
+      val  :2000000,
+      opts: {
+        font_face   : 'Verdana',
+        align       : 'r',
+        bold        : 1,
+        font_color  : 'ffffff',
+        fill_color   : '00a65a'
+      }
+    },
+    {
+      val  :45,
+      opts: {
+        font_face   : 'Verdana',
+        align       : 'r',
+        bold        : 1,
+        fill_color   : 'cccccc'
+      }
+    }
+  ];
+  var columnDefinition = [4286250,952500,952500,952500];
+
+  slide.addTable([headerRow, dataRows], {font_size:10, font_face:"Arial", columnWidths:columnDefinition});
+
   callback();
 }
 
@@ -164,6 +222,6 @@ function finalize() {
 }
 
 async.series([
-  generateTable,
+  generateTables,
   generateExampleSlides // inherited from original project
 ], finalize);

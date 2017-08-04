@@ -1,9 +1,10 @@
-# officegen
+# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
-This module is not depend on any framework so you can use it for any kind of node.js application, even not
-web based. Also the output is a stream and not a file, not dependent on any output tool.
+This module is not depend on any framework and you don't need to install Microsoft Office, so you can use it for any kind of javascript application. Also the output is a stream and not a file, not dependent on any output tool.
 This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
+
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
 Officegen also supporting PowerPoint native charts objects with embedded data.
@@ -21,8 +22,10 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
 - [Roadmap](#a9)
 - [License](#a10)
 - [Credit](#a11)
+- [Donations](#a12)
 
 <a name="a1"></a>
+
 ## Features: ##
 
 - Generating Microsoft PowerPoint document (.pptx file):
@@ -36,14 +39,49 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
   - Support shapes: Ellipse, Rectangle, Line, Arrows, etc.
   - Support hidden slides.
   - Support automatic fields like date, time and current slide number.
+  - Support speaker notes.
+  - Support slide layouts.
 - Generating Microsoft Word document (.docx file):
   - Create Word document.
   - You can add one or more paragraphs to the document and you can set the fonts, colors, alignment, etc.
   - You can add images.
+  - Support header and footer.
+  - Support bookmarks and hyperlinks.
 - Generating Microsoft Excel document (.xlsx file):
-  - Create Excel document with one or more sheets. Supporting cells of type both number and string.
-  
+  - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
+
+<a name="a2"></a>
+
+## Installation: ##
+
+via Git:
+
+```bash
+$ git clone git://github.com/Ziv-Barber/officegen.git
+```
+
+via npm:
+
+```bash
+$ npm install officegen
+```
+
+If you are enthusiastic about using the latest that officegen has to offer (beware - may be unstable), you can install directly from the officegen repository using:
+
+```bash
+$ npm install Ziv-Barber/officegen#master
+```
+
+This module is depending on:
+
+- archiver
+- setimmediate
+- fast-image-size
+- xmlbuilder
+- lodash
+
 <a name="a3"></a>
+
 ## Public API: ##
 
 ### Creating the document object: ###
@@ -224,6 +262,38 @@ Creating a new slide:
 slide = pptx.makeNewSlide ();
 ```
 
+For creating a new slide using a layout:
+
+```js
+slide = pptx.makeNewSlide ({
+	userLayout: 'title'
+});
+slide.setTitle ( 'The title' );
+slide.setSubTitle ( 'Another text' ); // For either 'title' and 'secHead' only.
+// for 'obj' layout use slide.setObjData ( ... ) to change the object element inside the slide.
+```
+
+userLayout can be:
+
+- 'title': the first layout of Office (title).
+- 'obj': the 2nd layout of Office (with one title and one object).
+- 'secHead': the 3rd layout of Office.
+
+Or more advance example:
+
+```js
+slide = pptx.makeNewSlide ({
+	userLayout: 'title'
+});
+// Both setTitle and setSubTitle excepting all the parameters that you can pass to slide.addText - see below:
+slide.setTitle ([
+	// This array is like a paragraph and you can use any settings that you pass for creating a paragraph,
+	// Each object here is like a call to addText:
+	{ text: 'Hello ', options: { font_size: 56 } },
+	{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+]);
+```
+
 The returned object from makeNewSlide representing a single slide. Use it to add objects into this slide.
 You must create at last one slide on your pptx/ppsx document.
 
@@ -238,7 +308,7 @@ Properties of the slide object itself:
 
 The slide object supporting the following methods:
 
-- addText (  text, options )
+- addText ( text, options )
 - addShape ( shape, options )
 - addImage ( image, options )
 - addChart ( chartInfo )
@@ -258,9 +328,8 @@ Common properties that can be added to the options object for all the add based 
 - fill - the background color.
 - line - border color / line color.
 - flip_vertical: true - flip the object vertical.
+- flip_horizontal: true - flip the object horizontal
 - shape - see below.
-
-
 
 Font properties:
 
@@ -269,6 +338,7 @@ Font properties:
 - bold: true
 - underline: true
 - char_spacing: floating point number (kerning)
+- baseline: percent (of font size). Used for superscript and subscript.
 
 Text alignment properties:
 
@@ -304,9 +374,13 @@ Please note that every color property can be either:
 
 - String of the color code. For example: 'ffffff', '000000', '888800', etc.
 - Color object:
-  - 'type' - The type of the color fill to use. Right now only 'solid' supported.
+  - 'type' - The type of the color fill to use. Right now only 'solid' and 'gradient' supported.
   - 'color' - String with the color code to use.
   - 'alpha' - transparent level (0-100).
+- For 'gradient' fill:
+  - 'color' - Array of strings with the color code to use OR array of object, each object include "color" and "position" parameters. i.e. `[{"position": 0, "color": '000000'}, {}, ...]`
+  - 'alpha' - transparent level (0-100).
+  - 'angle' - (optional) the angle of gradient rotation
 
 Adding images:
 
@@ -352,13 +426,22 @@ slide.addText ( 'Office generator', {
   y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
   color: '0000ff' } );
 
-slide.addText ( 'Boom!!!', {
+slide.addText ( 'Big Red', {
   y: 250, x: 10, cx: '70%',
   font_face: 'Wide Latin', font_size: 54,
   color: 'cc0000', bold: true, underline: true } );
 ```
 
-#### Charts ####
+#### Speaker notes: #####
+
+PowerPoint slides can contain speaker notes, to do that use the setSpeakerNote method:
+
+```js
+slide.setSpeakerNote ( 'This is a speaker note!' );
+```
+
+#### Charts: ####
+
 PowerPoint slides can contain charts with embedded data.  To create a chart:
 
    `slide.addChart( chartInfo) `
@@ -366,7 +449,7 @@ PowerPoint slides can contain charts with embedded data.  To create a chart:
 Where `chartInfo` object is an object that takes the following attributes:
 
  - `data` -  an array of data, see examples below
- - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column", "line"`
+ - `renderType` -  specifies base chart type, may be one of `"bar", "pie", "group-bar", "column", "stacked-column", "line"`
  - `title` -  chart title (default: none)
  - `valAxisTitle` -  value axis title (default: none)
  - `catAxisTitle` - category axis title (default: none)
@@ -408,8 +491,8 @@ chartInfo = {
     }
 ```
 
-
 Examples how to add chart into the slide:
+
 ```js
 // Column chart
 slide = pptx.makeNewSlide();
@@ -555,6 +638,32 @@ Specific options for tables (in addition to standard : x, y, cx, cy, etc.) :
 - columnWidth : width of all columns (same size for all columns). Must be a number (~1 000 000)
 - columnWidths : list of width for each columns (custom size per column). Must be array of number. This param will overwrite columnWidth if both are given
 
+Formatting can also be applied directly to a cell:
+
+```javascript
+var rows = [];
+rows.push([
+	{
+		val: "Category",
+        	opts: {
+          		font_face   : "Arial",
+          		align       : "l",
+          		bold        : 0
+        	}
+      },
+      {
+        	val  :"Average Score",
+        	opts: {
+          		font_face   : "Arial",
+          		align       : "r",
+          		bold        : 1,
+          		font_color  : "000000",
+          		fill_color  : "f5f5f5"
+        	}
+      }
+]);
+slide.addTable(rows, {});
+```
 
 ## Word: ##
 
@@ -591,7 +700,18 @@ pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
 
 pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
 
-pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
+pObj.addText ( ' Fonts face and size. ', { font_face: 'Arial', font_size: 40 } );
+
+pObj.addText ( 'External link', { link: 'https://github.com' } );
+
+// Hyperlinks to bookmarks also supported:
+pObj.addText ( 'Internal link', { hyperlink: 'myBookmark' } );
+// ...
+// Start somewhere a bookmark:
+pObj.startBookmark ( 'myBookmark' );
+// ...
+// You MUST close your bookmark:
+pObj.endBookmark ();
 ```
 
 Add an image to a paragraph:
@@ -689,6 +809,20 @@ var tableStyle = {
 }
 
 docx.createTable (table, tableStyle);
+```
+
+Header and footer:
+
+```js
+// Add a header:
+var header = docx.getHeader ().createP ();
+header.addText ( 'This is the header' );
+// Please note that the object header here is a paragraph object so you can use ANY of the paragraph API methods also for header and footer.
+// The getHeader () method excepting a string parameter:
+// getHeader ( 'even' ) - change the header for even pages.
+// getHeader ( 'first' ) - change the header for the first page only.
+// to do all of that for the footer, use the getFooter instead of getHeader.
+// and sorry, right now only createP is supported (so only creating a paragraph) so no tables, etc.
 ```
 
 To Create Word Document by json:
@@ -838,6 +972,7 @@ sheet.data[1][3] = 'abc';
 ```
 
 <a name="a4"></a>
+
 ## Examples: ##
 
 - [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
@@ -873,36 +1008,51 @@ If needed, you can activate some verbose messages (warning: this does not cover 
 officegen.setVerboseMode(true);
 ```
 
+
 <a name="a6"></a>
+
 ## FAQ: ##
 
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
 
+<a name="a7"></a>
+
+## Support: ##
+
+Please visit the officegen Google Group:
+
+[officegen Google Group](https://groups.google.com/forum/?fromgroups#!forum/node-officegen)
+
+Plans for the next release:
+
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
+
+The Slack team:
+
+[Slack](https://zivbarber.slack.com/messages/officegen/)
+
 <a name="a8"></a>
+
 ## History: ##
 
 [Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
 
 <a name="a9"></a>
+
 ## Roadmap: ##
 
-Features TODO:
+Please check here:
 
-- Excel basic styling.
-- PowerPoint lists and tables.
-- More Word features.
-- Move to use officegen itself for creating the embedded xmls file inside PowerPoint documents with charts.
-- Continue to write the reference manual.
-- Browser support.
-- Continue to code the OpenOffice support.
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 <a name="a10"></a>
+
 ## License: ##
 
 (The MIT License)
 
-Copyright (c) 2013-2016 Ziv Barber;
+Copyright (c) 2013-2017 Ziv Barber;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -924,6 +1074,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <a name="a11"></a>
+
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
+
+<a name="a12"></a>
+
+## Donations: ##
+
+The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)

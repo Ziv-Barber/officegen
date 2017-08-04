@@ -216,6 +216,60 @@ var chartsData = [
       }
     ]
   },
+  {
+    title: 'My production',
+    renderType: 'doughnut',
+    data: [
+      {
+        name: 'Oil',
+        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        values: [301, 201, 165, 139, 128, 99, 60],
+        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+      }
+    ]
+  },
+  {
+    title: 'line chart',
+    renderType: 'line',
+    data: [
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.6, 2.8],
+        color: 'ff0000'
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.7, 2.9],
+        color: '00ff00'
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.1, 2.2, 2.4],
+        color: '0000ff'
+      },
+      {
+        name: 'lamerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.3, 0.3, 0.3],
+        color: 'ffff00'
+      },
+      {
+        name: 'meast',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.2, 0.3, 0.3],
+        color: 'ff00ff'
+      },
+      {
+        name: 'africa',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.1, 0.1, 0.1],
+        color: '00ffff'
+      }
+    ]
+  },
 
   {
     title: 'eSurvey chart',
@@ -237,6 +291,73 @@ var chartsData = [
         values: [18.1, 22.8, 23.9, 25.1, 25],
         color: '00ff00'
       }
+    ]
+  },
+  {
+    title: 'eSurvey chart',
+    renderType: 'line',
+    overlap: 50,
+    gapWidth: 25,
+    valAxisNumFmt: '$0',
+    valAxisMaxValue: 24,
+    data: [
+      {
+        name: 'Income',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [23.5, 26.2, 30.1, 29.5, 24.6],
+        color: 'ff0000'
+      },
+      {
+        name: 'Expense',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [18.1, 22.8, 23.9, 25.1, 25],
+        color: '00ff00'
+      }
+    ]
+  },
+  {
+    title: 'eSurvey chart',
+    renderType: 'stacked-column',
+    valAxisNumFmt: '$0',
+    valAxisMaxValue: 24,
+    data: [
+      {
+        name: 'europe',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.6, 2.8],
+        color: 'ff0000'
+      },
+      {
+        name: 'namerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.5, 2.7, 2.9],
+        color: '00ff00'
+      },
+      {
+        name: 'asia',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [2.1, 2.2, 2.4],
+        color: '0000ff'
+      },
+      {
+        name: 'lamerica',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.3, 0.3, 0.3],
+        color: 'ffff00'
+      },
+      {
+        name: 'meast',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.2, 0.3, 0.3],
+        color: 'ff00ff'
+      },
+      {
+        name: 'africa',
+        labels: ['Y2003', 'Y2004', 'Y2005'],
+        values: [0.1, 0.1, 0.1],
+        color: '00ffff'
+      }
+
     ]
   },
 

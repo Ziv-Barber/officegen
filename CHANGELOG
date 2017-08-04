@@ -1,3 +1,41 @@
+- Version 0.4.6:
+  - Fixed issue with createByJson - Merge pull request #209 from goyney/master
+- Version 0.4.5:
+	- Added dot bullets.
+	- Option to append text to the content object of a slide based on the "text and content" layout.
+	- Bug: Fix creating invalid pptx files when using styles.
+	- Bug: Create invalid empty <cols> in excel files.
+	- Bug: pptx addText ( null ) crashing officegen.
+	- Bug: The title and content layout was the same as section header.
+	- Bug: Selecting a layout not effecting the slide.
+	- Add support for baseline font property (peakon).
+	- Enable cell specific formatting in PowerPoint tables (jmetric).
+- Version 0.4.4:
+	- Fix to support pptx speaker notes in Office 2013.
+- Version 0.4.3:
+	- PowerPoint:
+		- Improved speaker notes support.
+		- Improved title layout API.
+	- Excel:
+		- New API to change the width of every cell instead of changing it directly. Warning! the internal format of sheet.width been changed!!!
+- Version 0.4.2:
+	- PowerPoint:
+		- Support for speaker notes.
+		- Advanced way to set the side of the slides.
+		- Allow you to make a slide from the title slide layout.
+		- Now adding all the original Office layouts to the generated pptx document.
+		- Table support fixes (japneet121).
+	- Word:
+		- Support for header and footer.
+		- Support for bookmarks and hyperlinks.
+	- Design and development:
+		- Document type plugins system to easy adding new features.
+- Version 0.4.1:
+	- Ability to make text hyperlinks in docx - Merge pull request #154 from embrialabs/master
+	- Added support for bullets (they weren't working, and were just showing numbers) - Merge pull request #151 from njcaruso/master.
+	- Fixed issue with _scaling private method - Merge pull request #150 from andrewBalekha/bugfix/chart-scaling-issue
+	- pptx/bug: Multiline text using \n for splitting paragraphs would style properly only first paragraph - Merge pull request #140 from tomasztunik/master
+	- Merge pull request #145 from arrowing/grid-span - Merge pull request #145 from arrowing/grid-span
 - Version 0.4.0:
 	- For all Microsoft Office based documents:
 		- Bug fix: Changing the document's properties from the document's settings didn't work.
@@ -71,7 +109,7 @@
 		- Generating invalid strings for MS-Office document properties.
 		- Better shared string support in Excel (thanks vivocha!).
 - Version 0.2.0:
-	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also 
+	- Huge design change from 'quick patch' based code to real design with much better API while still supporting also
 	  the old API.
 	- Bugs:
 		- You can now listen on error events.
@@ -117,4 +155,3 @@
 	- Can generate very limited Excel file.
 	- You can change the background color of slides.
 	- Minor bug fixes.
-

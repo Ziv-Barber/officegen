@@ -39,7 +39,7 @@ var onError = function (err) {
 
 
 describe("PPTX generator", function () {
-	this.slow ( 500 );
+	this.slow ( 1000 );
 
   it("creates a presentation with properties and text", function (done) {
 
@@ -59,7 +59,7 @@ describe("PPTX generator", function () {
     slide.color = 'ffffff';
 
     // Basic way to add text string:
-    slide.addText('Created using Officegen version ' + officegen.version);
+    slide.addText('Created using Officegen version ' + officegen.version, 0, 0, '80%', 20 );
     slide.addText('Fast position', 0, 20);
     slide.addText('Full line', 0, 40, '100%', 20);
 
@@ -73,7 +73,7 @@ describe("PPTX generator", function () {
     // For a single text just pass a text string to addText:
     slide.addText('Office generator', { y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48, color: '0000ff' });
 
-    pObj = slide.addText('Boom\nBoom!!!', { y: 100, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true });
+    pObj = slide.addText('Big & Red\nText!', { y: 100, x: 10, cx: '70%', font_face: 'Wide Latin', font_size: 54, color: 'cc0000', bold: true, underline: true });
     pObj.options.y += 150;
 
     var FILENAME = "test-ppt1.pptx";

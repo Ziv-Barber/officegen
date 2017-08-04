@@ -138,6 +138,26 @@ module.exports = [
     ]
   },
   {
+    title: 'eSurvey chart',
+    renderType: 'stacked-column',
+    valAxisNumFmt: '$0',
+    valAxisMaxValue: 24,
+    data: [
+      {
+        name: 'Income',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [23.5, 26.2, 30.1, 29.5, 24.6],
+        color: 'ff0000'
+      },
+      {
+        name: 'Expense',
+        labels: ['2005', '2006', '2007', '2008', '2009'],
+        values: [18.1, 22.8, 23.9, 25.1, 25],
+        color: '00ff00'
+      }
+    ]
+  },
+  {
     title: 'Sample bar chart',
     renderType: 'bar',
     xmlOptions: {
@@ -234,8 +254,7 @@ module.exports = [
         color: '00ffff'
       }
     ]
-  }
-  /*
+  },
   {
     title: 'line chart',
     renderType: 'line',
@@ -278,5 +297,4 @@ module.exports = [
       }
     ]
   }
-  */
 ];

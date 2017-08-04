@@ -40,7 +40,7 @@ var onError = function (err) {
 
 
 describe("PPTX generator", function () {
-  this.slow(500);
+  this.slow(1000);
 
   it("creates a slides with charts", function (done) {
 

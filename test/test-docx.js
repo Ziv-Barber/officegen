@@ -39,7 +39,7 @@ var onError = function (err) {
 
 
 describe("DOCX generator", function () {
-	this.timeout(500);
+	this.timeout(1000);
 
   it("creates a document with text and styles", function (done) {
 
