@@ -1,11 +1,7 @@
 var async = require ( 'async' );
 var officegen = require('../');
-var _ = require('lodash');
-var async = require('async');
-
 var fs = require('fs');
 var path = require('path');
-
 var pptx = officegen('pptx');
 
 var slide;
