@@ -1,6 +1,5 @@
 var officegen = require('../');
 var OfficeChart = require('../lib/officechart.js');
-var _ = require('lodash');
 var async = require('async');
 
 var fs = require('fs');
