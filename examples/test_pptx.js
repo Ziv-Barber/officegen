@@ -1,13 +1,9 @@
 var officegen = require('../');
 var OfficeChart = require('../lib/officechart.js');
-var _ = require('lodash');
 var async = require('async');
-
 var fs = require('fs');
 var path = require('path');
-
 var pptx = officegen('pptx');
-
 var slide;
 var pObj;
 
@@ -344,7 +340,7 @@ function generateOneChart(chartInfo, callback) {
   slide = pptx.makeNewSlide();
   slide.name = 'OfficeChart slide';
   slide.back = 'ffffff';
-  slide.addChart(chartInfo, null, callback, callback);
+  slide.addChart(chartInfo, null, callback);
 }
 
 
