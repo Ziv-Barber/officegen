@@ -153,4 +153,51 @@ describe("DOCX generator", function () {
 		done ();
 	});
   });
+  it("can handle right-to-left", function (done) {
+    var docx = officegen ( 'docx' );
+    docx.on ( 'error', onError );
+  
+    var pObj = docx.createP ({rtl: true});
+    pObj.addText('نص ذو اتجاه من اليمين');
+
+    var table = [
+      [{
+        val: "من اليمين",
+        opts: {
+          b:true,
+          sz: '48',
+          shd: {
+            fill: "7F7F7F",
+            themeFill: "text1",
+            "themeFillTint": "80"
+          },
+          fontFamily: "Avenir Book",
+          rtl: true,
+        }
+      },{
+        val: "Title1",
+        opts: {
+          b:true,
+          color: "A00000",
+          align: "right",
+          shd: {
+            fill: "92CDDC",
+            themeFill: "text1",
+            "themeFillTint": "80"
+          }
+        }
+      }]];
+      var tableStyle = {
+        borders: true,
+        rtl: true
+      };
+      docx.createTable(table, tableStyle);
+      var FILENAME = "test-doc-rtl.docx";
+      var out = fs.createWriteStream(OUTDIR + FILENAME);
+      out.on ( 'error', onError );
+      docx.generate(out);
+      out.on ( 'close', function () {
+        done ();
+      });
+  });
 });
