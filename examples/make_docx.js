@@ -8,7 +8,8 @@ var themeXml = fs.readFileSync ( path.resolve ( __dirname, 'themes/testTheme.xml
 
 var docx = officegen ( {
 	type: 'docx',
-	orientation: 'portrait'
+	orientation: 'portrait',
+	pageMargins: { top: 1000, left: 1000, bottom: 1000, right: 1000 }
 	// The theme support is NOT working yet...
 	// themeXml: themeXml
 } );

@@ -38,6 +38,7 @@ var docx = officegen ({
 - description (string) - The document's properties comments (part of the Document's Properties in Office).
 - keywords (string) - The document's keywords (part of the Document's Properties in Office).
 - orientation (string) - Either 'landscape' or 'portrait'. The default is 'portrait'.
+- pageMargins (object) - Set document page margins. The default is { top: 1800, right: 1440, bottom: 1800, left: 1440 }
 - subject (string) - The document's subject (part of the Document's Properties in Office).
 - title (string) - The document's title (part of the Document's Properties in Office).
 
