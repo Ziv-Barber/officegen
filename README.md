@@ -256,6 +256,32 @@ docx.setDescription ( '...' );
 
 #### PowerPoint: ####
 
+Setting slide size:
+```
+pptx.setSlideSize ( cx, cy, type )
+```
+
+Arguments:
+- cx - width of the slide (in pixels)
+- cy - height of the slide (in pixels)
+- Supported types:
+	- '35mm'
+	- 'A3'
+	- 'A4'
+	- 'B4ISO'
+	- 'B4JIS'
+	- 'B5ISO'
+	- 'B5JIS'
+	- 'banner'
+	- 'custom'
+	- 'hagakiCard'
+	- 'ledger'
+	- 'letter'
+	- 'overhead'
+	- 'screen16x10'
+	- 'screen16x9'
+	- 'screen4x3'
+
 Creating a new slide:
 
 ```js
