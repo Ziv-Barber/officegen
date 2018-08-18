@@ -109,6 +109,10 @@ pObj.addText ( 'Backline text1' );
 
 pObj.addText ( ' text2' );
 
+var pObj = docx.createP ();
+
+pObj.addText ( 'Strikethrough text', { strikethrough: true } );
+
 var table = [
 	[{
 		val: "No.",

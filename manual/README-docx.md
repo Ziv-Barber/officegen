@@ -85,3 +85,4 @@ When the options are:
 - font_face (string) - the font to use.
 - font_size (number) - the font size in points.
 - highlight (string) - highlight color. Either 'black', 'blue', 'cyan', 'darkBlue', 'darkCyan', 'darkGray', 'darkGreen', 'darkMagenta', 'darkRed', 'darkYellow', 'green', 'lightGray', 'magenta', 'none', 'red', 'white' or 'yellow'.
+- strikethrough (boolean) - true to add strikethrough.
