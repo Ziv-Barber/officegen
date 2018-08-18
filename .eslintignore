@@ -1,0 +1,11 @@
+node_modules
+flow-typed
+doc
+.DS_Store
+
+\#*#
+
+.vscode
+tmp/
+test_files/
+

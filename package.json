@@ -1,71 +1,96 @@
 {
-	"name": "officegen",
-	"description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
-	"version": "0.4.6",
-	"author": {
-		"name": "Ziv Barber",
-		"url": "https://github.com/Ziv-Barber"
-	},
-	"license": "MIT",
-	"url": "https://github.com/Ziv-Barber/officegen",
-	"engines": {
-		"node": ">= 0.10.0"
-	},
-	"keywords": [
-		"officegen",
-		"office",
-		"microsoft",
-		"2007",
-		"word",
-		"powerpoint",
-		"excel",
-		"docx",
-		"pptx",
-		"ppsx",
-		"xlsx",
-		"charts",
-		"Office Open XML",
-		"stream",
-		"generate",
-		"create",
-		"maker",
-		"generator",
-		"creator"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/Ziv-Barber/officegen.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Ziv-Barber/officegen/issues"
-	},
-	"main": "index.js",
-	"directories": {
-		"lib": "lib",
-		"examples": "examples"
-	},
-	"scripts": {
-		"test": "mocha test/test-docx.js test/test-xlsx.js test/test-pptx-nocharts.js test/test-pptx-charts.js"
-	},
-	"dependencies": {
-		"archiver": "~1.3.0",
-		"async": "^2.0.1",
-		"fast-image-size": "^0.1.3",
-		"jszip": "^2.5.0",
-		"lodash": "^4.16.2",
-		"readable-stream": "~2.2.2",
-		"setimmediate": ">= 1.0.1",
-		"xmlbuilder": "^3.0.0"
-	},
-	"devDependencies": {
-		"adm-zip": "^0.4.7",
-		"chai": "^3.5.0",
-		"grunt": "^1.0.1",
-		"grunt-contrib-jshint": "^1.0.0",
-		"grunt-jsdoc": "^2.1.0",
-		"jaguarjs-jsdoc": "^1.0.1",
-		"mocha": "^3.0.2",
-		"sinon": "^1.17.5",
-		"time-grunt": "^1.4.0"
-	}
+  "name": "officegen",
+  "description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
+  "version": "0.4.7",
+  "author": {
+    "name": "Ziv Barber",
+    "url": "https://github.com/Ziv-Barber"
+  },
+  "license": "MIT",
+  "url": "https://github.com/Ziv-Barber/officegen",
+  "engines": {
+    "node": ">= 6"
+  },
+  "keywords": [
+    "officegen",
+    "office",
+    "microsoft",
+    "2007",
+    "word",
+    "powerpoint",
+    "excel",
+    "docx",
+    "pptx",
+    "ppsx",
+    "xlsx",
+    "charts",
+    "Office Open XML",
+    "stream",
+    "generate",
+    "create",
+    "maker",
+    "generator",
+    "creator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Ziv-Barber/officegen.git"
+  },
+  "main": "index.js",
+  "module": "dist/officegen.esm.js",
+  "browser": "dist/officegen.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest_": "npm run build",
+    "start": "cross-env NODE_ENV=development node -r \"babel-register\" index.js",
+    "lint": "cross-env NODE_ENV=development ./node_modules/.bin/eslint **/*.js",
+    "test": "cross-env NODE_ENV=development mocha --require babel-register test/test-docx.js test/test-xlsx.js test/test-pptx-nocharts.js test/test-pptx-charts.js"
+  },
+  "dependencies": {
+    "archiver": "~1.3.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "fast-image-size": "^0.1.3",
+    "jszip": "^2.5.0",
+    "lodash": "^4.16.2",
+    "readable-stream": "~2.2.2",
+    "setimmediate": ">= 1.0.1",
+    "xmlbuilder": "^3.0.0"
+  },
+  "devDependencies": {
+    "adm-zip": "^0.4.7",
+    "babel-eslint": "^8.2.5",
+    "babel-preset-flow": "^6.23.0",
+    "chai": "^4.1.2",
+    "cross-env": "^5.2.0",
+    "esdoc": "^1.1.0",
+    "esdoc-brand-plugin": "^1.0.1",
+    "esdoc-flow-type-plugin": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^4.1.18",
+    "eslint-config-mocha": "^0.0.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-flowtype": "^2.47.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^5.2.0",
+    "eslint-plugin-mocha-only": "^0.0.3",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.73.0",
+    "flow-typed": "^2.4.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jsdoc": "^2.1.0",
+    "mocha": "^5.2.0",
+    "rollup": "^0.64.1",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup-plugin-json": "^3.0.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "sinon": "^6.1.0",
+    "time-grunt": "^1.4.0"
+  }
 }

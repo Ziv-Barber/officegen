@@ -3,7 +3,9 @@ doc
 .DS_Store
 out.*
 .idea/
-
 \#*#
-
 .vscode
+dest/
+tmp/
+package-lock.json
+yarn.lock

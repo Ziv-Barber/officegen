@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "mocha/test",
+    "standard",
+    "plugin:flowtype/recommended"
+  ],
+  "rules": {
+  },
+  "parserOptions": {
+  },
+  "plugins": [
+    "flowtype"
+  ]
+}
