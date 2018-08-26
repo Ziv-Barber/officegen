@@ -1,4 +1,4 @@
-# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Dependencies Status](https://gemnasium.com/Ziv-Barber/officegen.png)](https://gemnasium.com/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 This module can generate Office Open XML files for Microsoft Office 2007 and later.
 This module is not depend on any framework and you don't need to install Microsoft Office, so you can use it for any kind of javascript application. Also the output is a stream and not a file, not dependent on any output tool.
@@ -15,17 +15,14 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
 - [Installation](#a2)
 - [Public API](#a3)
 - [Examples](#a4)
-- [Hackers Wonderland](#a5)
+- [The source](#a5)
 - [FAQ](#a6)
 - [Support](#a7)
 - [Changelog](#a8)
-- [Roadmap](#a9)
 - [License](#a10)
 - [Credit](#a11)
-- [Donations](#a12)
 
 <a name="a1"></a>
-
 ## Features: ##
 
 - Generating Microsoft PowerPoint document (.pptx file):
@@ -1036,14 +1033,12 @@ officegen.setVerboseMode(true);
 
 
 <a name="a6"></a>
-
 ## FAQ: ##
 
 - Q: Do you support also PPSX files?
 - A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
 
 <a name="a7"></a>
-
 ## Support: ##
 
 Please visit the officegen Google Group:
@@ -1051,29 +1046,19 @@ Please visit the officegen Google Group:
 [officegen Google Group](https://groups.google.com/forum/?fromgroups#!forum/node-officegen)
 
 Plans for the next release:
-
 [Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 The Slack team:
-
 [Slack](https://zivbarber.slack.com/messages/officegen/)
 
 <a name="a8"></a>
-
 ## History: ##
 
 [Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
 
 <a name="a9"></a>
 
-## Roadmap: ##
-
-Please check here:
-
-[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
-
 <a name="a10"></a>
-
 ## License: ##
 
 (The MIT License)
@@ -1104,9 +1089,3 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Credit: ##
 
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
-
-<a name="a12"></a>
-
-## Donations: ##
-
-The original author is accepting tips through [Gittip](<https://www.gittip.com/Ziv-Barber>)
