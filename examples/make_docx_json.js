@@ -132,22 +132,22 @@ var data = [[{ align: 'right' }, {
 		type: "numlist"
 	}, {
 		type: "text",
-		text: "numList1.",
+		val: "numList1.",
 	}, {
 		type: "numlist"
 	}, {
 		type: "text",
-		text: "numList2.",
+		val: "numList2.",
 	}], [{}, {
 		type: "dotlist"
 	}, {
 		type: "text",
-		text: "dotlist1.",
+		val: "dotlist1.",
 	}, {
 		type: "dotlist"
 	}, {
 		type: "text",
-		text: "dotlist2.",
+		val: "dotlist2.",
 	}], {
 		type: "pagebreak"
 	}
