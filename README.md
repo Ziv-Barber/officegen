@@ -699,7 +699,8 @@ var pObj = docx.createP ();
 Paragraph options:
 
 ```js
-pObj.options.align = 'center'; // Also 'right' or 'jestify'.
+pObj.options.align = 'center'; // Also 'right' or 'justify'.
+pObj.options.indentLeft = 1440; // Indent left 1 inch
 ```
 
 Every list item is also a paragraph so:
