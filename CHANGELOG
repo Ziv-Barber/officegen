@@ -1,3 +1,25 @@
+- Version 0.4.7:
+  - Merge pull request #278 from aug2uag/master.
+  - Merge pull request #255 from OmniCyberSecurity/master.
+  - Merge pull request #262 from bkylerussell/indent.
+  - Small fixed for the README.md.
+  - Updated the supported node.js versions.
+  - Merge pull request #270 from markau/markau-docxJSON-fixes.
+  - Fix to example JSON key name, Fix to lib to ensure createListOfNumber.
+  - Merge pull request #266 from pdesantis/master.
+  - Merge pull request #259 from textioHQ/custom-style-support.
+  - Add strikethrough option to docx addText function.
+  - Account for paragraphs without specified options.
+  - Round cx and cy values for images.
+  - Merge pull request #249 from flaviolacer/patch-1.
+  - Working Grid Width.
+  - Merge pull request #238 from danishcake/missing_require_path.
+  - Fix missing require('path').
+  - Merge pull request #228 from msenevir/docs-set-slide-size-option.
+  - update docs.
+  - Merge pull request #227 from bainweb/master.
+  - Remove unnecessary margin above tables.
+  - Merge pull request #225 from salzhrani/rtl (RTL support).
 - Version 0.4.6:
   - Fixed issue with createByJson - Merge pull request #209 from goyney/master
 - Version 0.4.5:

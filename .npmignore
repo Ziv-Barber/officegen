@@ -1,3 +1,9 @@
 node_modules/
 .DS_Store/
+doc/
+flow-typed
+package.json.save
+package-lock.json
+yarn.lock
 out.*
+.vscode

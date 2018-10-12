@@ -1,9 +1,14 @@
 node_modules
+npm-debug.log
+package.json.save
+package-lock.json
+yarn.lock
 doc
+dist
 .DS_Store
+coverage/lcov-report
+coverage/coverage-summary.json
+coverage/lcov.info
 out.*
 .idea/
-
-\#*#
-
 .vscode
