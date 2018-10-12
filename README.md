@@ -740,10 +740,12 @@ pObj.endBookmark ();
 
 Add an image to a paragraph:
 
+```
 var path = require('path');
 
 pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
 pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
+```
 
 To add a line break;
 
