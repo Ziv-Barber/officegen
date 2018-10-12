@@ -10,9 +10,13 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen)
 [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+
 ![Microsoft Office logo](logo_office.png)
 
 - [Getting Started](#getstart)
+- [External dependencies](#dependencies)
 - [Installation](#inst)
 - [The API](#ref)
 - [The source code](#code)
@@ -51,6 +55,21 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
 
+### Contributors:
+
+This project exists thanks to all the people who contribute.
+[![contributors][oc-contributors-img]]({{{prjExtra.repUrlGithubOut}}}/graphs/contributors)
+
+<a name="dependencies"></a>
+## External dependencies: ##
+
+This project is using the following awesome libraries/utilities/services:
+
+- archiver
+- jszip
+- lodash
+- xmlbuilder
+
 <a name="inst"></a>
 ## Installation: ##
 
@@ -73,7 +92,7 @@ $ npm install Ziv-Barber/officegen#master
 ```
 
 <a name="ref"></a>
-## API: ##
+## The API:
 
 ### Creating an officegen stream object:
 
@@ -1086,5 +1105,5 @@ $ npm name params
 <a name="credits"></a>
 ## Credit: ##
 
-- Created by Ziv Barber in 2012.
+- Created by Ziv Barber in 2013.
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
