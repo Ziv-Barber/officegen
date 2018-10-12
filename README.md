@@ -1,29 +1,33 @@
-# officegen [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen) [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen) [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+# officegen
 
-This module can generate Office Open XML files for Microsoft Office 2007 and later.
-This module is not depend on any framework and you don't need to install Microsoft Office, so you can use it for any kind of javascript application. Also the output is a stream and not a file, not dependent on any output tool.
-This module should work on any environment that supports Node.js 0.10 or later including Linux, OSX and Windows.
+Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office 2007 and later without external tools, just pure Javascript.
+*officegen* should work on any environment that supports Node.js including Linux, OSX and Windows.
+*officegen* also supporting PowerPoint *native* charts objects with embedded data.
+
+[![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen)
+[![dependencies](https://david-dm.org/Ziv-Barber/officegen.svg?style&#x3D;flat-square)](https://david-dm.org/Ziv-Barber/officegen)
+[![devDependencies](https://david-dm.org/Ziv-Barber/officegen/dev-status.svg?style&#x3D;flat-square)](https://david-dm.org/Ziv-Barber/officegen#info&#x3D;devDependencies)
+[![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen)
+[![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+
+![Microsoft Office logo](logo_office.png)
+
+- [Getting Started](#getstart)
+- [Installation](#inst)
+- [The API](#ref)
+- [The source code](#code)
+- [Credit](#credit)
+
+<a name="getstart"></a>
+## Getting Started: ##
 
 [Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
-This module generates Excel (.xlsx), PowerPoint (.pptx) and Word (.docx) documents.
-Officegen also supporting PowerPoint native charts objects with embedded data.
+![Microsoft Powerpoint logo](logo_powerpoint.png)
+![Microsoft Word logo](logo_word.png)
+![Microsoft Excel logo](logo_excel.png)
 
-## Contents: ##
-
-- [Features](#a1)
-- [Installation](#a2)
-- [Public API](#a3)
-- [Examples](#a4)
-- [The source](#a5)
-- [FAQ](#a6)
-- [Support](#a7)
-- [Changelog](#a8)
-- [License](#a10)
-- [Credit](#a11)
-
-<a name="a1"></a>
-## Features: ##
+### Officegen features overview:
 
 - Generating Microsoft PowerPoint document (.pptx file):
   - Create PowerPoint document with one or more slides.
@@ -47,103 +51,102 @@ Officegen also supporting PowerPoint native charts objects with embedded data.
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
 
-<a name="a2"></a>
-
+<a name="inst"></a>
 ## Installation: ##
 
-via Git:
+via [**yarn**](https://yarnpkg.com/):
 
 ```bash
-$ git clone git://github.com/Ziv-Barber/officegen.git
+$ yarn add officegen
 ```
 
-via npm:
+via **npm**:
 
 ```bash
 $ npm install officegen
 ```
 
-If you are enthusiastic about using the latest that officegen has to offer (beware - may be unstable), you can install directly from the officegen repository using:
+or if you are enthusiastic about using the latest that officegen has to offer (beware - may be unstable), you can install directly from the officegen repository using:
 
 ```bash
 $ npm install Ziv-Barber/officegen#master
 ```
 
-This module is depending on:
+<a name="ref"></a>
+## API: ##
 
-- archiver
-- setimmediate
-- fast-image-size
-- xmlbuilder
-- lodash
+### Creating an officegen stream object:
 
-<a name="a3"></a>
+First, make sure to require the officegen module:
 
-## Public API: ##
-
-### Creating the document object: ###
-
-```js
+```javascript
 var officegen = require('officegen');
 ```
 
-There are two ways to use the officegen returned function to create the document object:
+There are two ways to use the officegen returned function to create an officegen stream:
 
-```js
-var myDoc = officegen ( '<type of document to create>' );
+```javascript
+var myDoc = officegen('<type of document to create>');
 
-var myDoc = officegen ({
+// or:
+
+var myDoc = officegen({
   'type': '<type of document to create>'
   // More options here (if needed)
 });
+
+// Supported types:
+// 'pptx' or 'ppsx' - Microsoft Powerpoint based document.
+// 'docx' - Microsoft Word based document.
+// 'xlsx' - Microsoft Excel based document.
 ```
 
-Generating PowerPoint 2007 object:
+Generating an empty Microsoft PowerPoint officegen stream:
 
-```js
+```javascript
 var pptx = officegen ( 'pptx' );
 ```
 
-Generating Word 2007 object:
+Generating an empty Microsoft Word officegen stream:
 
-```js
-var docx = officegen ( 'docx' );
+```javascript
+var docx = officegen ('docx');
 ```
 
-Generating Excel 2007 object:
+Generating an empty Microsoft Excel officegen stream:
 
-```js
-var xlsx = officegen ( 'xlsx' );
+```javascript
+var xlsx = officegen ('xlsx');
 ```
 
-General events of officegen:
+General events of the officegen stream:
 
 - 'finalize' - been called after finishing to create the document.
 - 'error' - been called on error.
 
 Event examples:
 
-```js
-pptx.on ( 'finalize', function ( written ) {
-      console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-    });
+```javascript
+pptx.on('finalize', function (written) {
+  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
+});
 
-pptx.on ( 'error', function ( err ) {
-      console.log ( err );
-    });
+pptx.on('error', function (err) {
+  console.log(err);
+});
 ```
 
 Another way to register either 'finalize' or 'error' events:
 
-```js
-var pptx = officegen ({
-    'type': 'pptx', // or 'xlsx', etc
-    'onend': function ( written ) {
-        console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
-    },
-    'onerr': function ( err ) {
-        console.log ( err );
-    }
+```javascript
+var pptx = officegen({
+  'type': 'pptx', // or 'xlsx', etc
+  'onend': function (written) {
+    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
+  },
+  'onerr': function (err) {
+    console.log(err);
+  }
 });
 ```
 
@@ -155,55 +158,56 @@ an output stream to create the output Office document.
 
 Example with pptx:
 
-```js
-var out = fs.createWriteStream ( 'out.pptx' );
+```javascript
+var out = fs.createWriteStream('out.pptx');
 
-pptx.generate ( out );
-out.on ( 'close', function () {
-  console.log ( 'Finished to create the PPTX file!' );
+pptx.generate(out);
+out.on('close', function () {
+  console.log('Finished to create the PPTX file!');
 });
 ```
 
 Passing callbacks to generate:
 
-```js
-var out = fs.createWriteStream ( 'out.pptx' );
+```javascript
+var out = fs.createWriteStream('out.pptx');
 
-pptx.generate ( out, {
-  'finalize': function ( written ) {
-    console.log ( 'Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n' );
+pptx.generate(out, {
+  'finalize': function (written) {
+    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
   },
-  'error': function ( err ) {
-    console.log ( err );
+  'error': function (err) {
+    console.log(err);
   }
 });
 ```
 
-Generating HTTP stream (no file been created):
+Generating HTTP stream example (no file been created):
 
-```js
-var http = require("http");
+```javascript
+var http = require('http');
 var officegen = require('officegen');
 
-http.createServer ( function ( request, response ) {
-  response.writeHead ( 200, {
-    "Content-Type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+http.createServer(function (request, response) {
+  response.writeHead (200, {
+    'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     'Content-disposition': 'attachment; filename=surprise.pptx'
-    });
+  });
 
-  var pptx = officegen ( 'pptx' );
+  var pptx = officegen('pptx');
 
-  pptx.on ( 'finalize', function ( written ) {
-      // ...
-      });
+  pptx.on('finalize', function (written) {
+    // We don't really need it in this case.
+  });
 
-  pptx.on ( 'error', function ( err ) {
-      // ...
-      });
+  pptx.on('error', function (err) {
+    // Error handing...
+  });
 
   // ... (fill pptx with data)
 
-  pptx.generate ( response );
+  // Generate the Powerpoint document and sent it to the client via http:
+  pptx.generate(response);
 }).listen ( 3000 );
 ```
 
@@ -214,86 +218,86 @@ http.createServer ( function ( request, response ) {
 The default Author of all the documents been created by officegen is 'officegen'. If you want to put anything else please
 use the 'creator' option when calling the officegen function:
 
-```js
-var pptx = officegen ({
-    'type': 'pptx', // or 'xlsx', etc
-	'creator': '<your project name here>'
+```javascript
+var pptx = officegen({
+  'type': 'pptx', // or 'xlsx', etc.
+  'creator': '<your project name here>'
 });
 ```
 
 Change the document title (pptx,ppsx,docx):
 
-```js
-var pptx = officegen ({
-    'type': 'pptx',
-	'title': '<title>'
+```javascript
+var pptx = officegen({
+  'type': 'pptx',
+  'title': '<title>'
 });
 
 // or
 
-pptx.setDocTitle ( '<title>' );
+pptx.setDocTitle('<title>');
 ```
 
 For Word only:
 
-```js
-var docx = officegen ({
-    'type': 'docx',
-	'subject': '...',
-	'keywords': '...',
-	'description': '...'
+```javascript
+var docx = officegen({
+  'type': 'docx',
+  'subject': '...',
+  'keywords': '...',
+  'description': '...'
 });
 
 // or
 
-docx.setDocSubject ( '...' );
-docx.setDocKeywords ( '...' );
-docx.setDescription ( '...' );
+docx.setDocSubject('...');
+docx.setDocKeywords('...');
+docx.setDescription('...');
 ```
 
 #### PowerPoint: ####
 
 Setting slide size:
 ```
-pptx.setSlideSize ( cx, cy, type )
+pptx.setSlideSize( cx, cy, type)
 ```
 
 Arguments:
 - cx - width of the slide (in pixels)
 - cy - height of the slide (in pixels)
 - Supported types:
-	- '35mm'
-	- 'A3'
-	- 'A4'
-	- 'B4ISO'
-	- 'B4JIS'
-	- 'B5ISO'
-	- 'B5JIS'
-	- 'banner'
-	- 'custom'
-	- 'hagakiCard'
-	- 'ledger'
-	- 'letter'
-	- 'overhead'
-	- 'screen16x10'
-	- 'screen16x9'
-	- 'screen4x3'
+  - '35mm'
+  - 'A3'
+  - 'A4'
+  - 'B4ISO'
+  - 'B4JIS'
+  - 'B5ISO'
+  - 'B5JIS'
+  - 'banner'
+  - 'custom'
+  - 'hagakiCard'
+  - 'ledger'
+  - 'letter'
+  - 'overhead'
+  - 'screen16x10'
+  - 'screen16x9'
+  - 'screen4x3'
 
 Creating a new slide:
 
-```js
-slide = pptx.makeNewSlide ();
+```javascript
+slide = pptx.makeNewSlide();
 ```
 
 For creating a new slide using a layout:
 
-```js
-slide = pptx.makeNewSlide ({
-	userLayout: 'title'
+```javascript
+slide = pptx.makeNewSlide({
+  userLayout: 'title'
 });
-slide.setTitle ( 'The title' );
-slide.setSubTitle ( 'Another text' ); // For either 'title' and 'secHead' only.
-// for 'obj' layout use slide.setObjData ( ... ) to change the object element inside the slide.
+slide.setTitle('The title');
+slide.setSubTitle('Another text'); // For either 'title' and 'secHead' only.
+// for 'obj' layout use slide.setObjData(...) to change the object element inside the slide.
 ```
 
 userLayout can be:
@@ -304,16 +308,27 @@ userLayout can be:
 
 Or more advance example:
 
-```js
-slide = pptx.makeNewSlide ({
-	userLayout: 'title'
+```javascript
+slide = pptx.makeNewSlide({
+  userLayout: 'title'
 });
+
 // Both setTitle and setSubTitle excepting all the parameters that you can pass to slide.addText - see below:
-slide.setTitle ([
-	// This array is like a paragraph and you can use any settings that you pass for creating a paragraph,
-	// Each object here is like a call to addText:
-	{ text: 'Hello ', options: { font_size: 56 } },
-	{ text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+slide.setTitle([
+  // This array is like a paragraph and you can use any settings that you pass for creating a paragraph,
+  // Each object here is like a call to addText:
+  {
+    text: 'Hello ',
+    options: {font_size: 56}
+  },
+  {
+    text: 'World!',
+    options: {
+      font_size: 56,
+      font_face: 'Arial',
+      color: 'ffff00'
+    }
+  }
 ]);
 ```
 
@@ -414,19 +429,19 @@ Examples:
 
 Changing the background color of a slide:
 
-```js
+```javascript
 slide.back = '000088';
 ```
 
 or:
 
-```js
-slide.back = { type: 'solid', color: '008800' };
+```javascript
+slide.back = {type: 'solid', color: '008800'};
 ```
 
 Examples how to put text inside the new slide:
 
-```js
+```javascript
 // Change the background color:
 slide.back = '000000';
 
@@ -434,32 +449,32 @@ slide.back = '000000';
 slide.color = 'ffffff';
 
 // Basic way to add text string:
-slide.addText ( 'This is a test' );
-slide.addText ( 'Fast position', 0, 20 );
-slide.addText ( 'Full line', 0, 40, '100%', 20 );
+slide.addText('This is a test');
+slide.addText('Fast position', 0, 20);
+slide.addText('Full line', 0, 40, '100%', 20);
 
 // Add text box with multi colors and fonts:
-slide.addText ( [
-  { text: 'Hello ', options: { font_size: 56 } },
-  { text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
-  ], { cx: '75%', cy: 66, y: 150 } );
+slide.addText([
+  {text: 'Hello ', options: {font_size: 56}},
+  {text: 'World!', options: {font_size: 56, font_face: 'Arial', color: 'ffff00'}}
+  ], {cx: '75%', cy: 66, y: 150});
 // Please note that you can pass object as the text parameter to addText.
 
-slide.addText ( 'Office generator', {
+slide.addText('Office generator', {
   y: 66, x: 'c', cx: '50%', cy: 60, font_size: 48,
   color: '0000ff' } );
 
-slide.addText ( 'Big Red', {
+slide.addText('Big Red', {
   y: 250, x: 10, cx: '70%',
   font_face: 'Wide Latin', font_size: 54,
   color: 'cc0000', bold: true, underline: true } );
 ```
 
-#### Speaker notes: #####
+#### Speaker notes:
 
 PowerPoint slides can contain speaker notes, to do that use the setSpeakerNote method:
 
-```js
+```javascript
 slide.setSpeakerNote ( 'This is a speaker note!' );
 ```
 
@@ -467,7 +482,9 @@ slide.setSpeakerNote ( 'This is a speaker note!' );
 
 PowerPoint slides can contain charts with embedded data.  To create a chart:
 
-   `slide.addChart( chartInfo) `
+```javascript
+slide.addChart(chartInfo)
+```
 
 Where `chartInfo` object is an object that takes the following attributes:
 
@@ -516,7 +533,7 @@ chartInfo = {
 
 Examples how to add chart into the slide:
 
-```js
+```javascript
 // Column chart
 slide = pptx.makeNewSlide();
 slide.name = 'Chart slide';
@@ -692,20 +709,20 @@ slide.addTable(rows, {});
 
 All the text data in Word is saved in paragraphs. To add a new paragraph:
 
-```js
+```javascript
 var pObj = docx.createP ();
 ```
 
 Paragraph options:
 
-```js
+```javascript
 pObj.options.align = 'center'; // Also 'right' or 'justify'.
 pObj.options.indentLeft = 1440; // Indent left 1 inch
 ```
 
 Every list item is also a paragraph so:
 
-```js
+```javascript
 var pObj = docx.createListOfDots ();
 
 var pObj = docx.createListOfNumbers ();
@@ -713,7 +730,7 @@ var pObj = docx.createListOfNumbers ();
 
 Now you can fill the paragraph object with one or more text strings using the addText method:
 
-```js
+```javascript
 pObj.addText ( 'Simple' );
 
 pObj.addText ( ' with color', { color: '000088' } );
@@ -749,27 +766,27 @@ pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
 
 To add a line break;
 
-```js
+```javascript
 var pObj = docx.createP ();
 pObj.addLineBreak ();
 ```
 
 To add a page break:
 
-```js
+```javascript
 docx.putPageBreak ();
 ```
 
 To add a horizontal line:
 
-```js
+```javascript
 var pObj = docx.createP ();
 pObj.addHorizontalLine ();
 ```
 
 To add a back line:
 
-```js
+```javascript
 var pObj = docx.createP ({ backline: 'E0E0E0' });
 pObj.addText ( 'Backline text1' );
 pObj.addText ( ' text2' );
@@ -777,7 +794,7 @@ pObj.addText ( ' text2' );
 
 To add a table:
 
-```js
+```javascript
 var table = [
   [{
     val: "No.",
@@ -839,7 +856,7 @@ docx.createTable (table, tableStyle);
 
 Header and footer:
 
-```js
+```javascript
 // Add a header:
 var header = docx.getHeader ().createP ();
 header.addText ( 'This is the header' );
@@ -853,7 +870,7 @@ header.addText ( 'This is the header' );
 
 To Create Word Document by json:
 
-```js
+```javascript
 var table = [
     [{
         val: "No.",
@@ -977,14 +994,14 @@ docx.createByJson(data);
 
 #### Excel: ####
 
-```js
+```javascript
 sheet = xlsx.makeNewSheet ();
 sheet.name = 'My Excel Data';
 ```
 
 Fill cells:
 
-```js
+```javascript
 // Using setCell:
 sheet.setCell ( 'E7', 340 );
 sheet.setCell ( 'G102', 'Hello World!' );
@@ -997,19 +1014,21 @@ sheet.data[1] = [];
 sheet.data[1][3] = 'abc';
 ```
 
-<a name="a4"></a>
-
-## Examples: ##
+### Examples:
 
 - [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
 - [make_xlsx.js](examples/make_xlsx.js) - Example how to create Excel 2007 sheet and save it into file.
 - [make_docx.js](examples/make_docx.js) - Example how to create Word 2007 document and save it into file.
 - [pptx_server.js](examples/pptx_server.js) - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
-<a name="a5"></a>
-## Hackers Wonderland: ##
+### Debugging:
 
-#### How to hack into the code ####
+If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
+
+```javascript
+officegen.setVerboseMode(true);
+```
+### More documentations:
 
 You can check the jsdoc documentation:
 
@@ -1017,32 +1036,7 @@ You can check the jsdoc documentation:
 grunt jsdoc
 ```
 
-#### Testing ####
-
-A basic test suite creates XLSX, PPTX, DOCX files and compares them to reference file located under `test_files`.
-To run the tests, run the following at the command line within the project root:
-
-```bash
-npm test
-```
-
-#### Debugging ####
-
-If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
-
-```js
-officegen.setVerboseMode(true);
-```
-
-
-<a name="a6"></a>
-## FAQ: ##
-
-- Q: Do you support also PPSX files?
-- A: Yes! Just pass the type 'ppsx' to makegen instead of 'pptx'.
-
-<a name="a7"></a>
-## Support: ##
+### Support:
 
 Please visit the officegen Google Group:
 
@@ -1054,41 +1048,43 @@ Plans for the next release:
 The Slack team:
 [Slack](https://zivbarber.slack.com/messages/officegen/)
 
-<a name="a8"></a>
-## History: ##
+<a name="code"></a>
+## :coffee: The source code: ##
 
-[Changelog](https://github.com/Ziv-Barber/officegen/blob/master/CHANGELOG)
+### The project structure: ###
 
-<a name="a9"></a>
+- office/index.js - The main file.
+- office/lib/ - All the sources should be here.
+  - basicgen.js - The generic engine to build many type of document files. This module providing the basicgen plugins interface for all the document generator. Any document generator MUST use this plugins API.
+  - docplug.js - The document generator plugins interface - optional engine to create plugins API for each document generator.
+  - msofficegen.js - A template basicgen plugin to extend the default basicgen module with the common Microsoft Office stuff. All the Microsoft Office based document generators in this project are using this template plugin.
+  - genpptx.js - A document generator (basicgen plugin) to create a PPTX/PPSX document.
+  - genxlsx.js - A document generator (basicgen plugin) to create a XLSX document.
+  - gendocx.js - A document generator (basicgen plugin) to create a DOCX document.
+  - pptxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
+  - docxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
+  - xlsxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
+- officegen/test/ - All the unit tests.
+- Gruntfile.js - Grunt scripts.
 
-<a name="a10"></a>
-## License: ##
+### Npm scripts: ###
 
-(The MIT License)
+When using with **yarn** then use the following syntax:
 
-Copyright (c) 2013-2017 Ziv Barber;
+```bash
+$ yarn name params
+```
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+Or with just **npm**:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+```bash
+$ npm name params
+```
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+- TBD.
 
-<a name="a11"></a>
-
+<a name="credits"></a>
 ## Credit: ##
 
+- Created by Ziv Barber in 2012.
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
