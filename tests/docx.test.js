@@ -41,6 +41,15 @@ var onError = function (err) {
 describe('DOCX generator', function () {
   this.timeout(1000)
 
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
+      if (err) {
+      } // Endif.
+
+      done()
+    })
+  })
+
   it('creates a document with text and styles', function (done) {
     var docx = officegen('docx')
     docx.on('error', onError)

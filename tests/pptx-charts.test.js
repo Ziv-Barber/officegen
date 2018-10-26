@@ -41,6 +41,15 @@ var onError = function (err) {
 describe('PPTX generator', function () {
   this.slow(1000)
 
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
+      if (err) {
+      } // Endif.
+
+      done()
+    })
+  })
+
   it('creates a slides with charts', function (done) {
     var pptx = officegen({ type: 'pptx', tempDir: outDir })
     pptx.on('error', onError)

@@ -38,6 +38,15 @@ var onError = function (err) {
 }
 
 describe('XLSX generator', function () {
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
+      if (err) {
+      } // Endif.
+
+      done()
+    })
+  })
+
   it('creates a spreadsheet with text and numbers', function (done) {
     var xlsx = officegen('xlsx')
     xlsx.on('error', onError)

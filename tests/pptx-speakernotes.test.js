@@ -40,6 +40,15 @@ var onError = function (err) {
 describe('PPTX Speaker Notes plugin', function () {
   this.slow(1000)
 
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
+      if (err) {
+      } // Endif.
+
+      done()
+    })
+  })
+
   it('creates a presentation with one speaker note', function (done) {
     var slide
     var pptx = officegen('pptx')

@@ -42,6 +42,15 @@ var onError = function (err) {
 describe('DOCX generator with header and footer', function () {
   this.timeout(1000)
 
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
+      if (err) {
+      } // Endif.
+
+      done()
+    })
+  })
+
   it('creates a document with header and footer', function (done) {
     var docx = officegen({
       type: 'docx',

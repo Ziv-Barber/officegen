@@ -13,7 +13,7 @@
     "flowtype"
   ],
   "env": {
-    "jest": true,
+    "mocha": true,
     "browser": true,
     "node": true,
     "es6": true
