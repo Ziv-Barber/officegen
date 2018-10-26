@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "plugin:flowtype/recommended"
+  ],
+  "rules": {
+    "camelcase": 0,
+    "new-cap": 0
+  },
+  "parserOptions": {},
+  "plugins": [
+    "flowtype"
+  ],
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "settings": {
+  }
+}

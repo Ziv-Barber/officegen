@@ -3,7 +3,7 @@ npm-debug.log
 package.json.save
 package-lock.json
 yarn.lock
-doc
+docs
 dist
 .DS_Store
 coverage/lcov-report

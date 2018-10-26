@@ -1,27 +1,27 @@
 module.exports = [
   {
-    "title": "Marginal distribution for mpg",
-    "renderType": "column",
-    "valAxisNumFmt": "0%",
+    title: 'Marginal distribution for mpg',
+    renderType: 'column',
+    valAxisNumFmt: '0%',
     valAxisMaxValue: 24,
-    "data": [
+    data: [
       {
-        "name": "current",
-        "labels": [
-          "[NA]",
-          "14.1 to 16",
-          "16.1 to 18",
-          "18.1 to 20",
-          "20.1 to 22",
-          "22.1 to 24",
-          "24.1 to 26",
-          "26.1 to 28",
-          "28.1 to 30",
-          "30.1 to 32",
-          "32.1 to 34",
-          "44.1 to 46"
+        name: 'current',
+        labels: [
+          '[NA]',
+          '14.1 to 16',
+          '16.1 to 18',
+          '18.1 to 20',
+          '20.1 to 22',
+          '22.1 to 24',
+          '24.1 to 26',
+          '26.1 to 28',
+          '28.1 to 30',
+          '30.1 to 32',
+          '32.1 to 34',
+          '44.1 to 46'
         ],
-        "values": [
+        values: [
           0.024390243902439025,
           0.17073170731707318,
           0.1951219512195122,
@@ -35,17 +35,17 @@ module.exports = [
           0,
           0
         ],
-        "xml": {
-          "c:spPr": {
-            "a:solidFill": {
-              "a:schemeClr": {
-                "@val": "accent1"
+        xml: {
+          'c:spPr': {
+            'a:solidFill': {
+              'a:schemeClr': {
+                '@val': 'accent1'
               }
             },
-            "a:ln": {
-              "a:solidFill": {
-                "a:schemeClr": {
-                  "@val": "tx1"
+            'a:ln': {
+              'a:solidFill': {
+                'a:schemeClr': {
+                  '@val': 'tx1'
                 }
               }
             }
@@ -55,22 +55,22 @@ module.exports = [
       },
 
       {
-        "name": "baseline",
-        "labels": [
-          "[NA]",
-          "14.1 to 16",
-          "16.1 to 18",
-          "18.1 to 20",
-          "20.1 to 22",
-          "22.1 to 24",
-          "24.1 to 26",
-          "26.1 to 28",
-          "28.1 to 30",
-          "30.1 to 32",
-          "32.1 to 34",
-          "44.1 to 46"
+        name: 'baseline',
+        labels: [
+          '[NA]',
+          '14.1 to 16',
+          '16.1 to 18',
+          '18.1 to 20',
+          '20.1 to 22',
+          '22.1 to 24',
+          '24.1 to 26',
+          '26.1 to 28',
+          '28.1 to 30',
+          '30.1 to 32',
+          '32.1 to 34',
+          '44.1 to 46'
         ],
-        "values": [
+        values: [
           0.017241379310344827,
           0.008620689655172414,
           0,
@@ -84,17 +84,17 @@ module.exports = [
           0.034482758620689655,
           0.008620689655172414
         ],
-        "xml": {
-          "c:spPr": {
-            "a:solidFill": {
-              "a:schemeClr": {
-                "@val": "bg2"
+        xml: {
+          'c:spPr': {
+            'a:solidFill': {
+              'a:schemeClr': {
+                '@val': 'bg2'
               }
             },
-            "a:ln": {
-              "a:solidFill": {
-                "a:schemeClr": {
-                  "@val": "tx1"
+            'a:ln': {
+              'a:solidFill': {
+                'a:schemeClr': {
+                  '@val': 'tx1'
                 }
               }
             }
@@ -161,12 +161,12 @@ module.exports = [
     title: 'Sample bar chart',
     renderType: 'bar',
     xmlOptions: {
-      "c:title": {
-        "c:tx": {
-          "c:rich": {
-            "a:p": {
-              "a:r": {
-                "a:t": "Override title via XML"
+      'c:title': {
+        'c:tx': {
+          'c:rich': {
+            'a:p': {
+              'a:r': {
+                'a:t': 'Override title via XML'
               }
             }
           }
@@ -297,4 +297,4 @@ module.exports = [
       }
     ]
   }
-];
+]

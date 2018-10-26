@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/npm/node_modules/config-chain/.*
+.*/coverage/.*
+.*/dist/.*
+
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

@@ -28,22 +28,21 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-var baseobj = require("officegen");
+var baseobj = require('officegen')
 
-///
-/// @brief Extend officegen object with ??? support.
-///
-/// This method extending the given officegen object to create ??? document.
-///
-/// @param[in] genobj The object to extend.
-/// @param[in] new_type The type of object to create.
-/// @param[in] options The object's options.
-/// @param[in] gen_private Access to the internals of this object.
-/// @param[in] type_info Additional information about this type.
-///
-function makeMyType ( genobj, new_type, options, gen_private, type_info ) {
-	// ----- API for ??? documents: -----
+/**
+ * @brief Extend officegen object with ??? support.
+ *
+ * This method extending the given officegen object to create ??? document.
+ *
+ * @param[in] genobj The object to extend.
+ * @param[in] new_type The type of object to create.
+ * @param[in] options The object's options.
+ * @param[in] gen_private Access to the internals of this object.
+ * @param[in] type_info Additional information about this type.
+ */
+function makeMyType (genobj, new_type, options, gen_private, type_info) {
+  // ----- API for ??? documents: -----
 }
 
-baseobj.registerDocType ( 'mytype', makeMyType );
-
+baseobj.registerDocType('mytype', makeMyType)

@@ -28,13 +28,12 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-var baseobj = module.exports = require("./lib/basicgen.js")
+var baseobj = module.exports = require('./lib/basicgen.js')
 
-require("./lib/genpptx.js") // Register the PPTX/PPSX support plugin.
-require("./lib/genxlsx.js") // Register the XLSX support plugin.
-require("./lib/gendocx.js") // Register the DOCX support plugin.
+require('./lib/genpptx.js') // Register the PPTX/PPSX support plugin.
+require('./lib/genxlsx.js') // Register the XLSX support plugin.
+require('./lib/gendocx.js') // Register the DOCX support plugin.
 
 var officegen_info = require('./package.json')
 
 baseobj.version = officegen_info.version
-

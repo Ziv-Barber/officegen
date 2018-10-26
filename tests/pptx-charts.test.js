@@ -1,96 +1,93 @@
-//======================================================================================================================
-// TEST SUITE FOR OFFICEGEN
-// This generates small individual files that test specific aspects of the API
-// and compares them to reference files.
 //
-// The comparison is based on string comparisons of specified XML subdocuments.
-// Comparing PPTX files for exact-bytewise equality fails because the doc properties include the creation date.
-// This method tests a defined set of XML subdocuments for string equality.
-//======================================================================================================================
+// officegen: pptx charts tests
+//
+// Please put here all the pptx charts tests.
+//
+// Copyright (c) 2013 Ziv Barber;
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
 
-var assert = require('assert');
-var officegen = require('../');
-var fs = require('fs');
-var chartsData = require('../test_files/charts-data.js');
-var path = require('path');
+var assert = require('assert')
+var officegen = require('../')
+var fs = require('fs')
+var chartsData = require('../test_files/charts-data.js')
+var path = require('path')
 
+var outDir = path.join(__dirname, '../tmp/')
 
-var OUTDIR = path.join(__dirname, './../tmp/');
-
-
-var AdmZip = require('adm-zip');
-
-
-var pptxEquivalent = function (path1, path2, subdocs) {
-  var left = new AdmZip(path1);
-  var right = new AdmZip(path2);
-  for (var i = 0; i < subdocs.length; i++) {
-    //console.log([subdocs[i], left.readAsText(subdocs[i]).length,right.readAsText(subdocs[i]).length])
-    if (left.readAsText(subdocs[i]) != right.readAsText(subdocs[i])) return false;
-  }
-  return true;
+// Common error method:
+var onError = function (err) {
+  console.log(err)
+  assert(false)
 }
 
-// Common error method
-var onError = function (err) {
-  console.log(err);
-  assert(false);
-  done()
-};
+describe('PPTX generator', function () {
+  this.slow(1000)
 
+  it('creates a slides with charts', function (done) {
+    var pptx = officegen({ type: 'pptx', tempDir: outDir })
+    pptx.on('error', onError)
 
-describe("PPTX generator", function () {
-  this.slow(1000);
+    pptx.setDocTitle('Sample PPTX Document')
+    var slide = pptx.makeNewSlide()
 
-  it("creates a slides with charts", function (done) {
-
-    var pptx = officegen({ type: 'pptx', tempDir: OUTDIR });
-    pptx.on('error', onError);
-
-    pptx.setDocTitle('Sample PPTX Document');
-    var slide = pptx.makeNewSlide();
-
-    var rows = [];
+    var rows = []
     for (var i = 0; i < 12; i++) {
-      var row = [];
+      var row = []
       for (var j = 0; j < 5; j++) {
-        row.push("[" + i + "," + j + "]");
+        row.push('[' + i + ',' + j + ']')
       }
-      rows.push(row);
-    }
-    slide.addTable(rows, {});
+      rows.push(row)
+    } // End of for loop.
 
+    slide.addTable(rows, {})
 
-    var FILENAME = "test-ppt-table-1.pptx";
-    var out = fs.createWriteStream(OUTDIR + FILENAME);
-    pptx.generate(out);
+    var outFilename = 'test-ppt-table-1.pptx'
+    var out = fs.createWriteStream(path.join(outDir, outFilename))
+    pptx.generate(out)
     out.on('close', function () {
-      done();
-    });
-  });
+      done()
+    })
+  })
 
   chartsData.forEach(function (chartInfo, chartIdx) {
-    it("creates a presentation with charts >>" + chartInfo.renderType, function (done) {
-      var officegen = require('../');
-      var pptx = officegen({ type: 'pptx', tempDir: OUTDIR });
-      pptx.on('error', onError);
+    it('creates a presentation with charts >>' + chartInfo.renderType, function (done) {
+      var officegen = require('../')
+      var pptx = officegen({ type: 'pptx', tempDir: outDir })
+      pptx.on('error', onError)
 
-      pptx.setDocTitle('Sample PPTX Document');
-      var slide = pptx.makeNewSlide();
-      slide.name = 'OfficeChart slide';
-      slide.back = 'ffffff';
+      pptx.setDocTitle('Sample PPTX Document')
+      var slide = pptx.makeNewSlide()
+      slide.name = 'OfficeChart slide'
+      slide.back = 'ffffff'
 
       slide.addChart(
         chartInfo,
         function () {
-
-          var FILENAME = "test-ppt-chart-" + chartIdx + "-" + chartInfo.renderType + ".pptx";
-          var out = fs.createWriteStream(OUTDIR + FILENAME);
-          pptx.generate(out);
+          var outFilename = 'test-ppt-chart-' + chartIdx + '-' + chartInfo.renderType + '.pptx'
+          var out = fs.createWriteStream(path.join(outDir, outFilename))
+          pptx.generate(out)
           out.on('close', function () {
-            done();
-          });
-        }, onError);
+            done()
+          })
+        }, onError)
     })
   })
-});
+})

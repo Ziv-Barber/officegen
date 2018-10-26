@@ -28,27 +28,26 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-var baseobj = require("./basicgen.js");
-var msdoc = require("./msofficegen.js");
+var baseobj = require('./basicgen.js')
+var msdoc = require('./msofficegen.js')
 
-///
-/// @brief Extend officegen object with ??? support.
-///
-/// This method extending the given officegen object to create ??? document.
-///
-/// @param[in] genobj The object to extend.
-/// @param[in] new_type The type of object to create.
-/// @param[in] options The object's options.
-/// @param[in] gen_private Access to the internals of this object.
-/// @param[in] type_info Additional information about this type.
-///
-function makeMyType ( genobj, new_type, options, gen_private, type_info ) {
-	// Prepare genobj for MS-Office:
-	msdoc.makemsdoc ( genobj, new_type, options, gen_private, type_info );
-	gen_private.plugs.makeOfficeGenerator ( 'mytype', 'mytype', {} );
+/**
+ * @brief Extend officegen object with ??? support.
+ *
+ * This method extending the given officegen object to create ??? document.
+ *
+ * @param[in] genobj The object to extend.
+ * @param[in] new_type The type of object to create.
+ * @param[in] options The object's options.
+ * @param[in] gen_private Access to the internals of this object.
+ * @param[in] type_info Additional information about this type.
+ */
+function makeMyType (genobj, new_type, options, gen_private, type_info) {
+  // Prepare genobj for MS-Office:
+  msdoc.makemsdoc(genobj, new_type, options, gen_private, type_info)
+  gen_private.plugs.makeOfficeGenerator('mytype', 'mytype', {})
 
-	// ----- API for ??? documents: -----
+  // ----- API for ??? documents: -----
 }
 
-baseobj.registerDocType ( 'mytype', makeMyType );
-
+baseobj.registerDocType('mytype', makeMyType)

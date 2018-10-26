@@ -1,28 +1,27 @@
-var officegen = require('../');
-var OfficeChart = require('../lib/officechart.js');
-var _ = require('lodash');
-var async = require('async');
+var officegen = require('../')
+// var OfficeChart = require('../lib/officechart.js')
+var async = require('async')
 
-var fs = require('fs');
-var path = require('path');
+var fs = require('fs')
+var path = require('path')
 
-var pptx = officegen('pptx');
+var pptx = officegen('pptx')
 
-var slide;
-var pObj;
+var outDir = path.join(__dirname, '../tmp/')
+
+var slide
 
 pptx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
+  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
 
   // clear the temporatory files
-});
+})
 
 pptx.on('error', function (err) {
-  console.log(err);
-});
+  console.log(err)
+})
 
-pptx.setDocTitle('Sample PPTX Document');
-
+pptx.setDocTitle('Sample PPTX Document')
 
 // this shows how one can get the base XML and modify it directly
 /*
@@ -94,34 +93,34 @@ var chart0 = new OfficeChart({
         }
       }
     }
-});
+})
 */
 
 var chartsData = [
   // chart0,
   {
-    "title": "Marginal distribution for mpg",
-    "renderType": "column",
-    "valAxisNumFmt": "0%",
+    'title': 'Marginal distribution for mpg',
+    'renderType': 'column',
+    'valAxisNumFmt': '0%',
     valAxisMaxValue: 24,
-    "data": [
+    'data': [
       {
-        "name": "current",
-        "labels": [
-          "[NA]",
-          "14.1 to 16",
-          "16.1 to 18",
-          "18.1 to 20",
-          "20.1 to 22",
-          "22.1 to 24",
-          "24.1 to 26",
-          "26.1 to 28",
-          "28.1 to 30",
-          "30.1 to 32",
-          "32.1 to 34",
-          "44.1 to 46"
+        'name': 'current',
+        'labels': [
+          '[NA]',
+          '14.1 to 16',
+          '16.1 to 18',
+          '18.1 to 20',
+          '20.1 to 22',
+          '22.1 to 24',
+          '24.1 to 26',
+          '26.1 to 28',
+          '28.1 to 30',
+          '30.1 to 32',
+          '32.1 to 34',
+          '44.1 to 46'
         ],
-        "values": [
+        'values': [
           0.024390243902439025,
           0.17073170731707318,
           0.1951219512195122,
@@ -135,17 +134,17 @@ var chartsData = [
           0,
           0
         ],
-        "xml": {
-          "c:spPr": {
-            "a:solidFill": {
-              "a:schemeClr": {
-                "@val": "accent1"
+        'xml': {
+          'c:spPr': {
+            'a:solidFill': {
+              'a:schemeClr': {
+                '@val': 'accent1'
               }
             },
-            "a:ln": {
-              "a:solidFill": {
-                "a:schemeClr": {
-                  "@val": "tx1"
+            'a:ln': {
+              'a:solidFill': {
+                'a:schemeClr': {
+                  '@val': 'tx1'
                 }
               }
             }
@@ -155,22 +154,22 @@ var chartsData = [
       },
 
       {
-        "name": "baseline",
-        "labels": [
-          "[NA]",
-          "14.1 to 16",
-          "16.1 to 18",
-          "18.1 to 20",
-          "20.1 to 22",
-          "22.1 to 24",
-          "24.1 to 26",
-          "26.1 to 28",
-          "28.1 to 30",
-          "30.1 to 32",
-          "32.1 to 34",
-          "44.1 to 46"
+        'name': 'baseline',
+        'labels': [
+          '[NA]',
+          '14.1 to 16',
+          '16.1 to 18',
+          '18.1 to 20',
+          '20.1 to 22',
+          '22.1 to 24',
+          '24.1 to 26',
+          '26.1 to 28',
+          '28.1 to 30',
+          '30.1 to 32',
+          '32.1 to 34',
+          '44.1 to 46'
         ],
-        "values": [
+        'values': [
           0.017241379310344827,
           0.008620689655172414,
           0,
@@ -184,17 +183,17 @@ var chartsData = [
           0.034482758620689655,
           0.008620689655172414
         ],
-        "xml": {
-          "c:spPr": {
-            "a:solidFill": {
-              "a:schemeClr": {
-                "@val": "bg2"
+        'xml': {
+          'c:spPr': {
+            'a:solidFill': {
+              'a:schemeClr': {
+                '@val': 'bg2'
               }
             },
-            "a:ln": {
-              "a:solidFill": {
-                "a:schemeClr": {
-                  "@val": "tx1"
+            'a:ln': {
+              'a:solidFill': {
+                'a:schemeClr': {
+                  '@val': 'tx1'
                 }
               }
             }
@@ -365,12 +364,12 @@ var chartsData = [
     title: 'Sample bar chart',
     renderType: 'bar',
     xmlOptions: {
-      "c:title": {
-        "c:tx": {
-          "c:rich": {
-            "a:p": {
-              "a:r": {
-                "a:t": "Override title via XML"
+      'c:title': {
+        'c:tx': {
+          'c:rich': {
+            'a:p': {
+              'a:r': {
+                'a:t': 'Override title via XML'
               }
             }
           }
@@ -460,32 +459,29 @@ var chartsData = [
       }
     ]
   }
-];
+]
 
-
-function generateOneChart(chartInfo, callback) {
-
-  slide = pptx.makeNewSlide();
-  slide.name = 'OfficeChart slide';
-  slide.back = 'ffffff';
-  slide.addChart(chartInfo, callback, callback);
+function generateOneChart (chartInfo, callback) {
+  slide = pptx.makeNewSlide()
+  slide.name = 'OfficeChart slide'
+  slide.back = 'ffffff'
+  slide.addChart(chartInfo, callback, callback)
 }
 
-function generateCharts(callback) {
-  async.each(chartsData, generateOneChart, callback);
+function generateCharts (callback) {
+  async.each(chartsData, generateOneChart, callback)
 }
 
-
-function finalize() {
-  var out = fs.createWriteStream('tmp/out_charts.pptx');
+function finalize () {
+  var out = fs.createWriteStream(path.join(outDir, 'example_charts.pptx'))
 
   out.on('error', function (err) {
-    console.log(err);
-  });
+    console.log(err)
+  })
 
-  pptx.generate(out);
+  pptx.generate(out)
 }
 
 async.series([
-  generateCharts    // new
-], finalize);
+  generateCharts // new
+], finalize)

@@ -1,9 +1,10 @@
 node_modules/
 .DS_Store/
-doc/
+docs/
 flow-typed
 package.json.save
 package-lock.json
 yarn.lock
+tmp/
 out.*
 .vscode
