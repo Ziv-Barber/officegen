@@ -65,7 +65,7 @@
 		"grunt-jsdoc": "^2.3.0",
 		"jaguarjs-jsdoc": "^1.1.0",
 		"mocha": "^5.2.0",
-		"sinon": "^6.3.5",
+		"sinon": "^7.1.0",
 		"time-grunt": "^1.4.0"
 	}
 }

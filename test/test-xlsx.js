@@ -43,17 +43,17 @@ describe("XLSX generator", function () {
 
   it("creates a spreadsheet with text and numbers", function (done) {
 
-    var xlsx = officegen ( 'xlsx' );
-	xlsx.on ( 'error', onError );
+    var xlsx = officegen('xlsx');
+    xlsx.on('error', onError);
 
-    sheet = xlsx.makeNewSheet ();
+    sheet = xlsx.makeNewSheet();
     sheet.name = 'Excel Test';
 
-	sheet.setColumnWidth ( 'A', 16.5 );
-	sheet.setColumnWidth ( 'E', 10.5 );
-	// sheet.setColumnCenter ( 'C' ); // NOT working yet!!!!
+    sheet.setColumnWidth('A', 16.5);
+    sheet.setColumnWidth('E', 10.5);
+    // sheet.setColumnCenter ( 'C' ); // NOT working yet!!!!
 
-// The direct option - two-dimensional array:
+    // The direct option - two-dimensional array:
     sheet.data[0] = [];
     sheet.data[0][0] = 1;
     sheet.data[1] = [];
@@ -67,17 +67,17 @@ describe("XLSX generator", function () {
     sheet.data[6] = [];
     sheet.data[6][2] = 1972;
 
-// Using setCell:
-    sheet.setCell ( 'E7', 340 );
-    sheet.setCell ( 'I1', -3 );
-    sheet.setCell ( 'I2', 31.12 );
-    sheet.setCell ( 'G102', 'Hello World!' );
+    // Using setCell:
+    sheet.setCell('E7', 340);
+    sheet.setCell('I1', -3);
+    sheet.setCell('I2', 31.12);
+    sheet.setCell('G102', 'Hello World!');
 
     var FILENAME = "test-xls-1.xlsx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     xlsx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 });

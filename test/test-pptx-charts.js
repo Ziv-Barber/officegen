@@ -16,7 +16,7 @@ var path = require('path');
 
 
 var OUTDIR = path.join(__dirname, './../tmp/');
- 
+
 
 var AdmZip = require('adm-zip');
 
@@ -44,7 +44,7 @@ describe("PPTX generator", function () {
 
   it("creates a slides with charts", function (done) {
 
-    var pptx = officegen({ type: 'pptx', tempDir: OUTDIR});
+    var pptx = officegen({ type: 'pptx', tempDir: OUTDIR });
     pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
@@ -72,7 +72,7 @@ describe("PPTX generator", function () {
   chartsData.forEach(function (chartInfo, chartIdx) {
     it("creates a presentation with charts >>" + chartInfo.renderType, function (done) {
       var officegen = require('../');
-      var pptx = officegen({ type: 'pptx', tempDir:OUTDIR });
+      var pptx = officegen({ type: 'pptx', tempDir: OUTDIR });
       pptx.on('error', onError);
 
       pptx.setDocTitle('Sample PPTX Document');
@@ -84,7 +84,7 @@ describe("PPTX generator", function () {
         chartInfo,
         function () {
 
-          var FILENAME = "test-ppt-chart-"+chartIdx +"-" + chartInfo.renderType+".pptx";
+          var FILENAME = "test-ppt-chart-" + chartIdx + "-" + chartInfo.renderType + ".pptx";
           var out = fs.createWriteStream(OUTDIR + FILENAME);
           pptx.generate(out);
           out.on('close', function () {

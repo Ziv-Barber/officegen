@@ -39,12 +39,12 @@ var onError = function (err) {
 
 
 describe("PPTX generator", function () {
-	this.slow ( 1000 );
+  this.slow(1000);
 
   it("creates a presentation with properties and text", function (done) {
 
     var pptx = officegen('pptx');
-	pptx.on ( 'error', onError );
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
 
@@ -59,7 +59,7 @@ describe("PPTX generator", function () {
     slide.color = 'ffffff';
 
     // Basic way to add text string:
-    slide.addText('Created using Officegen version ' + officegen.version, 0, 0, '80%', 20 );
+    slide.addText('Created using Officegen version ' + officegen.version, 0, 0, '80%', 20);
     slide.addText('Fast position', 0, 20);
     slide.addText('Full line', 0, 40, '100%', 20);
 
@@ -79,14 +79,14 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 
   it("creates slides with shapes", function (done) {
     var pptx = officegen('pptx');
-	pptx.on ( 'error', onError );
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
     pptx.setWidescreen(false);
@@ -119,14 +119,14 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt2.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 
   it("creates presentation to widescreen", function (done) {
     var pptx = officegen('pptx');
-	pptx.on ( 'error', onError );
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
     pptx.setWidescreen(true);
@@ -159,14 +159,14 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt3.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 
   it("creates slides with images", function (done) {
     var pptx = officegen('pptx');
-	pptx.on ( 'error', onError );
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
     var IMAGEDIR = __dirname + "/../examples/";
@@ -180,7 +180,7 @@ describe("PPTX generator", function () {
     slide.addImage(path.resolve(IMAGEDIR, 'images_for_examples/image2.jpg'), { y: 0, x: 0, cy: '100%', cx: '100%' });
 
     slide = pptx.makeNewSlide();
-    slide.addImage(path.resolve(IMAGEDIR, 'images_for_examples/image3.png'), { y: 'c', x: 'c'});
+    slide.addImage(path.resolve(IMAGEDIR, 'images_for_examples/image3.png'), { y: 'c', x: 'c' });
 
     slide = pptx.makeNewSlide();
 
@@ -214,15 +214,15 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt-images.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 
-  it ("creates a native table", function(done) {
+  it("creates a native table", function (done) {
 
     var pptx = officegen('pptx');
-	pptx.on ( 'error', onError );
+    pptx.on('error', onError);
 
     pptx.setDocTitle('Sample PPTX Document');
     var slide = pptx.makeNewSlide();
@@ -241,8 +241,8 @@ describe("PPTX generator", function () {
     var FILENAME = "test-ppt-table-1.pptx";
     var out = fs.createWriteStream(OUTDIR + FILENAME);
     pptx.generate(out);
-	out.on ( 'close', function () {
-		done ();
-	});
+    out.on('close', function () {
+      done();
+    });
   });
 });

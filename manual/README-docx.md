@@ -12,22 +12,22 @@
 First, if you didn't have it yet, get access to the officegen module:
 
 ```js
-var officegen = require ( 'officegen' );
+const officegen = require('officegen')
 ```
 
 Now you have few ways to use it to create a docx based document. The simple way is to use this code:
 
 ```js
-var docx = officegen ( 'docx' );
+let docx = officegen('docx')
 ```
 
 But if you want to pass some settings then you should use the following format:
 
 ```js
-var docx = officegen ({
+let docx = officegen({
 	type: 'docx', // We want to create a Microsoft Word document.
 	... // Extra options goes here.
-});
+})
 ```
 
 <a name="settings"></a>
@@ -45,21 +45,21 @@ var docx = officegen ({
 You can always change some of these settings after creating the docx object using there methods:
 
 ```js
-docx.setDocTitle ( '...' );
-docx.setDocSubject ( '...' );
-docx.setDocKeywords ( '...' );
-docx.setDescription ( '...' );
-docx.setDocCategory ( '...' );
-docx.setDocStatus ( '...' );
+docx.setDocTitle('...')
+docx.setDocSubject('...')
+docx.setDocKeywords('...')
+docx.setDescription( '...')
+docx.setDocCategory('...')
+docx.setDocStatus('...')
 ```
 
 <a name="prgapi"></a>
 ## The paragraph API: ##
 
-To create a new paragraph object:
+To create a new paragraph in your document you need to create a parahpaph object from your main docx object:
 
 ```js
-var pObj = docx.createP ( options );
+let pObj = docx.createP(options)
 ```
 
 When the options are:
@@ -69,7 +69,7 @@ When the options are:
 ### Paragraph's methods: ###
 
 ```js
-pObj.addText ( textString, options );
+pObj.addText(textString, options)
 ```
 
 When the options are:

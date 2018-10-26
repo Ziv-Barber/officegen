@@ -8,82 +8,82 @@
 // This method tests a defined set of XML subdocuments for string equality.
 //======================================================================================================================
 
-var assert = require ( 'assert' );
-var officegen = require ( '../' );
-var fs = require ( 'fs' );
-var path = require ( 'path' );
+var assert = require('assert');
+var officegen = require('../');
+var fs = require('fs');
+var path = require('path');
 
 var OUTDIR = __dirname + "/../tmp/";
 
 // var pluginToTest = require ( '../lib/docxplg-headfoot' );
 
 // Common error method:
-var onError = function ( err ) {
-	console.log ( err );
-	assert ( false );
+var onError = function (err) {
+	console.log(err);
+	assert(false);
 };
 
-describe ( "DOCX generator with header and footer", function () {
-	this.timeout ( 1000 );
+describe("DOCX generator with header and footer", function () {
+	this.timeout(1000);
 
-	it ( "creates a document with header and footer", function ( done ) {
-		var docx = officegen ({
+	it("creates a document with header and footer", function (done) {
+		var docx = officegen({
 			type: 'docx',
 			extraPlugs: [
 				// pluginToTest // The 'docxplg-headfoot' plugin.
 			]
 		});
-		docx.on ( 'error', onError );
+		docx.on('error', onError);
 
 		// Add a header:
-		var header = docx.getHeader ().createP ();
-		header.addText ( 'This is the header' );
+		var header = docx.getHeader().createP();
+		header.addText('This is the header');
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 
-		pObj.addText ( 'Click me please!', { hyperlink: 'testBM' } );
+		pObj.addText('Click me please!', { hyperlink: 'testBM' });
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 
-		pObj.addText ( 'Simple' );
-		pObj.addText ( ' with color', { color: '000088' } );
-		pObj.addText ( ' and back color.', { color: '00ffff', back: '000088' } );
+		pObj.addText('Simple');
+		pObj.addText(' with color', { color: '000088' });
+		pObj.addText(' and back color.', { color: '00ffff', back: '000088' });
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 
-		pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
+		pObj.addText('Bold + underline', { bold: true, underline: true });
 
-		var pObj = docx.createP ( { align: 'center' } );
+		var pObj = docx.createP({ align: 'center' });
 
-		pObj.addText ( 'Center this text.' );
+		pObj.addText('Center this text.');
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 		pObj.options.align = 'right';
 
-		pObj.addText ( 'Align this text to the right.' );
+		pObj.addText('Align this text to the right.');
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 
-		pObj.startBookmark ( 'testBM' );
+		pObj.startBookmark('testBM');
 
-		pObj.addText ( 'Those two lines are in the same paragraph,' );
-		pObj.addLineBreak ();
-		pObj.addText ( 'but they are separated by a line break.' );
+		pObj.addText('Those two lines are in the same paragraph,');
+		pObj.addLineBreak();
+		pObj.addText('but they are separated by a line break.');
 
-		pObj.endBookmark ();
+		pObj.endBookmark();
 
-		docx.putPageBreak ();
+		docx.putPageBreak();
 
-		var pObj = docx.createP ();
+		var pObj = docx.createP();
 
-		pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
-		pObj.addText ( ' Fonts face and size.', { font_face: 'Arial', font_size: 40 } );
+		pObj.addText('Fonts face only.', { font_face: 'Arial' });
+		pObj.addText(' Fonts face and size.', { font_face: 'Arial', font_size: 40 });
 
 		var FILENAME = "test-docx-header-foooter-1.docx";
-		var out = fs.createWriteStream ( OUTDIR + FILENAME );
-		docx.generate ( out );
-		out.on ( 'close', function () {
-			done ();
+		var out = fs.createWriteStream(OUTDIR + FILENAME);
+		docx.generate(out);
+		out.on('close', function () {
+			done();
 		});
 	});
 });
