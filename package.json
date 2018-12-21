@@ -1,7 +1,7 @@
 {
   "name": "officegen-linebreaks-within-table-cell",
   "description": "Office Open XML Generator using Node.js streams. Supporting Microsoft Office 2007 and later Word (docx), PowerPoint (pptx,ppsx) and Excel (xlsx). This module is for all frameworks and environments. No need for any commandline tool - this module is doing everything inside it.",
-  "version": "0.4.12-0",
+  "version": "0.4.9-0",
   "author": {
     "name": "Ziv Barber",
     "url": "https://github.com/Ziv-Barber"
