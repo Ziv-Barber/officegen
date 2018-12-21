@@ -184,7 +184,7 @@ describe('DOCX generator', function () {
           }
         },
         {
-          val: 'Title Line 1\r\nTitle Line 2',
+          val: 'Title Line 1\r\n\r\nTitle Line 2',
           opts: {
             b: true,
             color: 'A00000',
@@ -223,7 +223,7 @@ describe('DOCX generator', function () {
           }
         },
         {
-          val: ['Title Line 1','Title Line 2'],
+          val: ['Title Line 1','','Title Line 2'],
           opts: {
             b: true,
             color: 'A00000',
