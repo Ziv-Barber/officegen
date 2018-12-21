@@ -60,7 +60,8 @@
     "lodash": "^4.17.11",
     "readable-stream": "~3.0.6",
     "setimmediate": ">= 1.0.1",
-    "xmlbuilder": "^3.0.0"
+    "xmlbuilder": "^3.0.0",
+    "debug": "^4.1.0"
   },
   "devDependencies": {
     "adm-zip": "^0.4.11",
