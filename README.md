@@ -854,7 +854,10 @@ var table = [
   [1,'All grown-ups were once children',''],
   [2,'there is no harm in putting off a piece of work until another day.',''],
   [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
-  [4,'watch out for the baobabs!','END'],
+  [4,'You can include CR-LF inline\r\nfor multiple lines.',''],
+  [5,['Or you can provide lines within', 'a cell in an array'],''],
+  [6,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+  [7,'watch out for the baobabs!','END'],
 ]
 
 var tableStyle = {
