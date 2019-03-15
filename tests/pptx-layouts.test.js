@@ -34,16 +34,16 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method
-var onError = function (err) {
+var onError = function(err) {
   console.log(err)
   assert(false)
 }
 
-describe('PPTX Layouts plugin', function () {
+describe('PPTX Layouts plugin', function() {
   this.slow(1000)
 
-  before(function (done) {
-    fs.mkdir(outDir, 0o777, function (err) {
+  before(function(done) {
+    fs.mkdir(outDir, 0o777, function(err) {
       if (err) {
       } // Endif.
 
@@ -51,7 +51,7 @@ describe('PPTX Layouts plugin', function () {
     })
   })
 
-  it('creates a presentation with the title layout', function (done) {
+  it('creates a presentation with the title layout', function(done) {
     var slide
     var pptx = officegen({
       type: 'pptx',
@@ -83,7 +83,9 @@ describe('PPTX Layouts plugin', function () {
     slide.setSubTitle('Another text')
 
     // Add a speaker note:
-    slide.setSpeakerNote('This is a speaker note! Using the new setSpeakerNote feature of the slide API.')
+    slide.setSpeakerNote(
+      'This is a speaker note! Using the new setSpeakerNote feature of the slide API.'
+    )
 
     //
     // Slide #3:
@@ -95,7 +97,10 @@ describe('PPTX Layouts plugin', function () {
 
     slide.setTitle([
       { text: 'Hello ', options: { font_size: 56 } },
-      { text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
+      {
+        text: 'World!',
+        options: { font_size: 56, font_face: 'Arial', color: 'ffff00' }
+      }
     ])
     slide.setSubTitle('Another text')
 
@@ -115,10 +120,16 @@ describe('PPTX Layouts plugin', function () {
     // Slide #6:
     //
 
-    slide = pptx.makeTitleSlide([
-      { text: 'Hello ', options: { font_size: 56 } },
-      { text: 'World!', options: { font_size: 56, font_face: 'Arial', color: 'ffff00' } }
-    ], 'Sub title')
+    slide = pptx.makeTitleSlide(
+      [
+        { text: 'Hello ', options: { font_size: 56 } },
+        {
+          text: 'World!',
+          options: { font_size: 56, font_face: 'Arial', color: 'ffff00' }
+        }
+      ],
+      'Sub title'
+    )
 
     //
     // Slide #7:
@@ -127,7 +138,10 @@ describe('PPTX Layouts plugin', function () {
     slide = pptx.makeObjSlide('The title of slide 7', [
       { text: '', options: { listType: 'dot' } },
       { text: 'Some ', options: { font_size: 56 } },
-      { text: 'data', options: { font_size: 56, font_face: 'Arial', color: 'ff8800' } }
+      {
+        text: 'data',
+        options: { font_size: 56, font_face: 'Arial', color: 'ff8800' }
+      }
     ])
 
     slide.useLayout.isDate = false
@@ -146,7 +160,7 @@ describe('PPTX Layouts plugin', function () {
     var outFilename = 'test-ppt-layouts-1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })

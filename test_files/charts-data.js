@@ -50,7 +50,6 @@ module.exports = [
               }
             }
           }
-
         }
       },
 
@@ -109,9 +108,25 @@ module.exports = [
     data: [
       {
         name: 'Oil',
-        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        labels: [
+          'Czech Republic',
+          'Ireland',
+          'Germany',
+          'Australia',
+          'Austria',
+          'UK',
+          'Belgium'
+        ],
         values: [301, 201, 165, 139, 128, 99, 60],
-        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+        colors: [
+          'ff0000',
+          '00ff00',
+          '0000ff',
+          'ffff00',
+          'ff00ff',
+          '00ffff',
+          '000000'
+        ]
       }
     ]
   },
@@ -210,7 +225,6 @@ module.exports = [
         values: [0.1, 0.1, 0.1],
         color: '00ffff'
       }
-
     ]
   },
   {

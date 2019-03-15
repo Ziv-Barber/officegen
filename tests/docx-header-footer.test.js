@@ -34,16 +34,16 @@ var outDir = path.join(__dirname, '../tmp/')
 // var pluginToTest = require ( '../lib/docxplg-headfoot' )
 
 // Common error method:
-var onError = function (err) {
+var onError = function(err) {
   console.log(err)
   assert(false)
 }
 
-describe('DOCX generator with header and footer', function () {
+describe('DOCX generator with header and footer', function() {
   this.timeout(1000)
 
-  before(function (done) {
-    fs.mkdir(outDir, 0o777, function (err) {
+  before(function(done) {
+    fs.mkdir(outDir, 0o777, function(err) {
       if (err) {
       } // Endif.
 
@@ -51,7 +51,7 @@ describe('DOCX generator with header and footer', function () {
     })
   })
 
-  it('creates a document with header and footer', function (done) {
+  it('creates a document with header and footer', function(done) {
     var docx = officegen({
       type: 'docx',
       extraPlugs: [
@@ -107,7 +107,7 @@ describe('DOCX generator with header and footer', function () {
     var outFilename = 'test-docx-header-foooter-1.docx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     docx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })

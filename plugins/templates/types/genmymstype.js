@@ -42,7 +42,7 @@ var msdoc = require('./msofficegen.js')
  * @param[in] gen_private Access to the internals of this object.
  * @param[in] type_info Additional information about this type.
  */
-function makeMyType (genobj, new_type, options, gen_private, type_info) {
+function makeMyType(genobj, new_type, options, gen_private, type_info) {
   // Prepare genobj for MS-Office:
   msdoc.makemsdoc(genobj, new_type, options, gen_private, type_info)
   gen_private.plugs.makeOfficeGenerator('mytype', 'mytype', {})

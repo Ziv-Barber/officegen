@@ -7,11 +7,15 @@ var ppsx = officegen('ppsx')
 
 var outDir = path.join(__dirname, '../tmp/')
 
-ppsx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint slideshow file.\nTotal bytes created: ' + written + '\n')
+ppsx.on('finalize', function(written) {
+  console.log(
+    'Finish to create a PowerPoint slideshow file.\nTotal bytes created: ' +
+      written +
+      '\n'
+  )
 })
 
-ppsx.on('error', function (err) {
+ppsx.on('error', function(err) {
   console.log(err)
 })
 
@@ -30,7 +34,7 @@ slide = ppsx.makeNewSlide()
 
 var out = fs.createWriteStream(path.join(outDir, 'example.ppsx'))
 
-out.on('error', function (err) {
+out.on('error', function(err) {
   console.log(err)
 })
 

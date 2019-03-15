@@ -33,16 +33,16 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function (err) {
+var onError = function(err) {
   console.log(err)
   assert(false)
 }
 
-describe('PPTX generator', function () {
+describe('PPTX generator', function() {
   this.slow(1000)
 
-  before(function (done) {
-    fs.mkdir(outDir, 0o777, function (err) {
+  before(function(done) {
+    fs.mkdir(outDir, 0o777, function(err) {
       if (err) {
       } // Endif.
 
@@ -50,7 +50,7 @@ describe('PPTX generator', function () {
     })
   })
 
-  it('creates a slides with charts', function (done) {
+  it('creates a slides with charts', function(done) {
     var pptx = officegen({ type: 'pptx', tempDir: outDir })
     pptx.on('error', onError)
 
@@ -71,13 +71,15 @@ describe('PPTX generator', function () {
     var outFilename = 'test-ppt-table-1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })
 
-  chartsData.forEach(function (chartInfo, chartIdx) {
-    it('creates a presentation with charts >>' + chartInfo.renderType, function (done) {
+  chartsData.forEach(function(chartInfo, chartIdx) {
+    it('creates a presentation with charts >>' + chartInfo.renderType, function(
+      done
+    ) {
       var officegen = require('../')
       var pptx = officegen({ type: 'pptx', tempDir: outDir })
       pptx.on('error', onError)
@@ -89,14 +91,17 @@ describe('PPTX generator', function () {
 
       slide.addChart(
         chartInfo,
-        function () {
-          var outFilename = 'test-ppt-chart-' + chartIdx + '-' + chartInfo.renderType + '.pptx'
+        function() {
+          var outFilename =
+            'test-ppt-chart-' + chartIdx + '-' + chartInfo.renderType + '.pptx'
           var out = fs.createWriteStream(path.join(outDir, outFilename))
           pptx.generate(out)
-          out.on('close', function () {
+          out.on('close', function() {
             done()
           })
-        }, onError)
+        },
+        onError
+      )
     })
   })
 })

@@ -1,4 +1,3 @@
-
 var officegen = require('../')
 
 var fs = require('fs')
@@ -8,57 +7,67 @@ var docx = officegen('docx')
 
 var outDir = path.join(__dirname, '../tmp/')
 
-docx.on('finalize', function (written) {
-  console.log('Finish to create Word file.\nTotal bytes created: ' + written + '\n')
+docx.on('finalize', function(written) {
+  console.log(
+    'Finish to create Word file.\nTotal bytes created: ' + written + '\n'
+  )
 })
 
-docx.on('error', function (err) {
+docx.on('error', function(err) {
   console.log(err)
 })
 
 var table = [
-  [{
-    val: 'No.',
-    opts: {
-      cellColWidth: 4261,
-      b: true,
-      sz: '48',
-      shd: {
-        fill: '7F7F7F',
-        themeFill: 'text1',
-        themeFillTint: '80'
-      },
-      fontFamily: 'Avenir Book'
-    }
-  }, {
-    val: 'Title1',
-    opts: {
-      b: true,
-      color: 'A00000',
-      align: 'right',
-      shd: {
-        fill: '92CDDC',
-        themeFill: 'text1',
-        themeFillTint: '80'
+  [
+    {
+      val: 'No.',
+      opts: {
+        cellColWidth: 4261,
+        b: true,
+        sz: '48',
+        shd: {
+          fill: '7F7F7F',
+          themeFill: 'text1',
+          themeFillTint: '80'
+        },
+        fontFamily: 'Avenir Book'
+      }
+    },
+    {
+      val: 'Title1',
+      opts: {
+        b: true,
+        color: 'A00000',
+        align: 'right',
+        shd: {
+          fill: '92CDDC',
+          themeFill: 'text1',
+          themeFillTint: '80'
+        }
+      }
+    },
+    {
+      val: 'Title2',
+      opts: {
+        align: 'center',
+        cellColWidth: 42,
+        b: true,
+        sz: '48',
+        shd: {
+          fill: '92CDDC',
+          themeFill: 'text1',
+          themeFillTint: '80'
+        }
       }
     }
-  }, {
-    val: 'Title2',
-    opts: {
-      align: 'center',
-      cellColWidth: 42,
-      b: true,
-      sz: '48',
-      shd: {
-        fill: '92CDDC',
-        themeFill: 'text1',
-        themeFillTint: '80'
-      }
-    }
-  }],
+  ],
   [1, 'All grown-ups were once children', ''],
   [2, 'there is no harm in putting off a piece of work until another day.', ''],
-  [3, 'But when it is a matter of baobabs, that always means a catastrophe.', ''],
+  [
+    3,
+    'But when it is a matter of baobabs, that always means a catastrophe.',
+    ''
+  ],
   [4, 'watch out for the baobabs!', 'END']
 ]
 
@@ -202,12 +211,15 @@ var data = [
     {},
     {
       type: 'dotlist'
-    }, {
+    },
+    {
       type: 'text',
       val: 'dotlist1.'
-    }, {
+    },
+    {
       type: 'dotlist'
-    }, {
+    },
+    {
       type: 'text',
       val: 'dotlist2.'
     }
@@ -221,7 +233,7 @@ docx.createByJson(data)
 
 var out = fs.createWriteStream(path.join(outDir, 'example_json.docx'))
 
-out.on('error', function (err) {
+out.on('error', function(err) {
   console.log(err)
 })
 

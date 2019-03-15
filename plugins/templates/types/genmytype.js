@@ -41,7 +41,7 @@ var baseobj = require('officegen')
  * @param[in] gen_private Access to the internals of this object.
  * @param[in] type_info Additional information about this type.
  */
-function makeMyType (genobj, new_type, options, gen_private, type_info) {
+function makeMyType(genobj, new_type, options, gen_private, type_info) {
   // ----- API for ??? documents: -----
 }
 

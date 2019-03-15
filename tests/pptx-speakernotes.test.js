@@ -32,16 +32,16 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function (err) {
+var onError = function(err) {
   console.log(err)
   assert(false)
 }
 
-describe('PPTX Speaker Notes plugin', function () {
+describe('PPTX Speaker Notes plugin', function() {
   this.slow(1000)
 
-  before(function (done) {
-    fs.mkdir(outDir, 0o777, function (err) {
+  before(function(done) {
+    fs.mkdir(outDir, 0o777, function(err) {
       if (err) {
       } // Endif.
 
@@ -49,7 +49,7 @@ describe('PPTX Speaker Notes plugin', function () {
     })
   })
 
-  it('creates a presentation with one speaker note', function (done) {
+  it('creates a presentation with one speaker note', function(done) {
     var slide
     var pptx = officegen('pptx')
     pptx.on('error', onError)
@@ -71,7 +71,13 @@ describe('PPTX Speaker Notes plugin', function () {
     slide.color = 'ffffff'
 
     // Add some text:
-    slide.addText('Created using Officegen version ' + officegen.version, 0, 0, '80%', 20)
+    slide.addText(
+      'Created using Officegen version ' + officegen.version,
+      0,
+      0,
+      '80%',
+      20
+    )
 
     //
     // Slide #2:
@@ -104,7 +110,9 @@ describe('PPTX Speaker Notes plugin', function () {
     slide.addText('This one has a speaker note', 0, 0, '100%', 20)
 
     // Add a speaker note:
-    slide.setSpeakerNote('This is a speaker note! Using the new setSpeakerNote feature of the slide API.')
+    slide.setSpeakerNote(
+      'This is a speaker note! Using the new setSpeakerNote feature of the slide API.'
+    )
 
     //
     // Slide #4:
@@ -124,7 +132,10 @@ describe('PPTX Speaker Notes plugin', function () {
     // Add a speaker note:
     // slide.setSpeakerNote ( 'This is a speaker note!\nUsing the new setSpeakerNote feature of the slide API.' )
     slide.setSpeakerNote('This is a speaker note!')
-    slide.setSpeakerNote('Using the new setSpeakerNote feature of the slide API.', true)
+    slide.setSpeakerNote(
+      'Using the new setSpeakerNote feature of the slide API.',
+      true
+    )
 
     //
     // Slide #5:
@@ -148,7 +159,7 @@ describe('PPTX Speaker Notes plugin', function () {
     var outFilename = 'test-ppt-notes-1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })

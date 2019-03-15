@@ -7,11 +7,13 @@ var outDir = path.join(__dirname, '../tmp/')
 
 var xlsx = officegen('xlsx')
 
-xlsx.on('finalize', function (written) {
-  console.log('Finish to create an Excel file.\nTotal bytes created: ' + written + '\n')
+xlsx.on('finalize', function(written) {
+  console.log(
+    'Finish to create an Excel file.\nTotal bytes created: ' + written + '\n'
+  )
 })
 
-xlsx.on('error', function (err) {
+xlsx.on('error', function(err) {
   console.log(err)
 })
 
@@ -40,7 +42,7 @@ sheet.setCell('G102', 'Hello World!')
 
 var out = fs.createWriteStream(path.join(outDir, 'example.xlsx'))
 
-out.on('error', function (err) {
+out.on('error', function(err) {
   console.log(err)
 })
 

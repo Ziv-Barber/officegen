@@ -33,16 +33,16 @@ var dirImages = path.join(__dirname, '../examples/')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function (err) {
+var onError = function(err) {
   console.log(err)
   assert(false)
 }
 
-describe('DOCX generator', function () {
+describe('DOCX generator', function() {
   this.timeout(1000)
 
-  before(function (done) {
-    fs.mkdir(outDir, 0o777, function (err) {
+  before(function(done) {
+    fs.mkdir(outDir, 0o777, function(err) {
       if (err) {
       } // Endif.
 
@@ -50,7 +50,7 @@ describe('DOCX generator', function () {
     })
   })
 
-  it('creates a document with text and styles', function (done) {
+  it('creates a document with text and styles', function(done) {
     var docx = officegen('docx')
     docx.on('error', onError)
 
@@ -99,12 +99,12 @@ describe('DOCX generator', function () {
     var outFilename = 'test-doc-1.docx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     docx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })
 
-  it('can handle text without spaces', function (done) {
+  it('can handle text without spaces', function(done) {
     var docx = officegen('docx')
     docx.on('error', onError)
 
@@ -114,12 +114,12 @@ describe('DOCX generator', function () {
     var outFilename = 'test-doc-3.docx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     docx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })
 
-  it('creates a document with images', function (done) {
+  it('creates a document with images', function(done) {
     var docx = officegen('docx')
     docx.on('error', onError)
 
@@ -152,12 +152,12 @@ describe('DOCX generator', function () {
     out.on('error', onError)
 
     docx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })
 
-  it('can handle right-to-left', function (done) {
+  it('can handle right-to-left', function(done) {
     var docx = officegen('docx')
     docx.on('error', onError)
 
@@ -223,7 +223,7 @@ describe('DOCX generator', function () {
           }
         },
         {
-          val: ['Title Line 1','','Title Line 2'],
+          val: ['Title Line 1', '', 'Title Line 2'],
           opts: {
             b: true,
             color: 'A00000',
@@ -244,7 +244,7 @@ describe('DOCX generator', function () {
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     out.on('error', onError)
     docx.generate(out)
-    out.on('close', function () {
+    out.on('close', function() {
       done()
     })
   })

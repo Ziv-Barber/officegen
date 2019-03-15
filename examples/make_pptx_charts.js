@@ -11,13 +11,17 @@ var outDir = path.join(__dirname, '../tmp/')
 
 var slide
 
-pptx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
+pptx.on('finalize', function(written) {
+  console.log(
+    'Finish to create a PowerPoint file.\nTotal bytes created: ' +
+      written +
+      '\n'
+  )
 
   // clear the temporatory files
 })
 
-pptx.on('error', function (err) {
+pptx.on('error', function(err) {
   console.log(err)
 })
 
@@ -99,14 +103,14 @@ var chart0 = new OfficeChart({
 var chartsData = [
   // chart0,
   {
-    'title': 'Marginal distribution for mpg',
-    'renderType': 'column',
-    'valAxisNumFmt': '0%',
+    title: 'Marginal distribution for mpg',
+    renderType: 'column',
+    valAxisNumFmt: '0%',
     valAxisMaxValue: 24,
-    'data': [
+    data: [
       {
-        'name': 'current',
-        'labels': [
+        name: 'current',
+        labels: [
           '[NA]',
           '14.1 to 16',
           '16.1 to 18',
@@ -120,7 +124,7 @@ var chartsData = [
           '32.1 to 34',
           '44.1 to 46'
         ],
-        'values': [
+        values: [
           0.024390243902439025,
           0.17073170731707318,
           0.1951219512195122,
@@ -134,7 +138,7 @@ var chartsData = [
           0,
           0
         ],
-        'xml': {
+        xml: {
           'c:spPr': {
             'a:solidFill': {
               'a:schemeClr': {
@@ -149,13 +153,12 @@ var chartsData = [
               }
             }
           }
-
         }
       },
 
       {
-        'name': 'baseline',
-        'labels': [
+        name: 'baseline',
+        labels: [
           '[NA]',
           '14.1 to 16',
           '16.1 to 18',
@@ -169,7 +172,7 @@ var chartsData = [
           '32.1 to 34',
           '44.1 to 46'
         ],
-        'values': [
+        values: [
           0.017241379310344827,
           0.008620689655172414,
           0,
@@ -183,7 +186,7 @@ var chartsData = [
           0.034482758620689655,
           0.008620689655172414
         ],
-        'xml': {
+        xml: {
           'c:spPr': {
             'a:solidFill': {
               'a:schemeClr': {
@@ -209,9 +212,25 @@ var chartsData = [
     data: [
       {
         name: 'Oil',
-        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        labels: [
+          'Czech Republic',
+          'Ireland',
+          'Germany',
+          'Australia',
+          'Austria',
+          'UK',
+          'Belgium'
+        ],
         values: [301, 201, 165, 139, 128, 99, 60],
-        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+        colors: [
+          'ff0000',
+          '00ff00',
+          '0000ff',
+          'ffff00',
+          'ff00ff',
+          '00ffff',
+          '000000'
+        ]
       }
     ]
   },
@@ -221,9 +240,25 @@ var chartsData = [
     data: [
       {
         name: 'Oil',
-        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        labels: [
+          'Czech Republic',
+          'Ireland',
+          'Germany',
+          'Australia',
+          'Austria',
+          'UK',
+          'Belgium'
+        ],
         values: [301, 201, 165, 139, 128, 99, 60],
-        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+        colors: [
+          'ff0000',
+          '00ff00',
+          '0000ff',
+          'ffff00',
+          'ff00ff',
+          '00ffff',
+          '000000'
+        ]
       }
     ]
   },
@@ -356,7 +391,6 @@ var chartsData = [
         values: [0.1, 0.1, 0.1],
         color: '00ffff'
       }
-
     ]
   },
 
@@ -413,7 +447,6 @@ var chartsData = [
         values: [0.1, 0.1, 0.1],
         color: '00ffff'
       }
-
     ]
   },
 
@@ -461,27 +494,30 @@ var chartsData = [
   }
 ]
 
-function generateOneChart (chartInfo, callback) {
+function generateOneChart(chartInfo, callback) {
   slide = pptx.makeNewSlide()
   slide.name = 'OfficeChart slide'
   slide.back = 'ffffff'
   slide.addChart(chartInfo, callback, callback)
 }
 
-function generateCharts (callback) {
+function generateCharts(callback) {
   async.each(chartsData, generateOneChart, callback)
 }
 
-function finalize () {
+function finalize() {
   var out = fs.createWriteStream(path.join(outDir, 'example_charts.pptx'))
 
-  out.on('error', function (err) {
+  out.on('error', function(err) {
     console.log(err)
   })
 
   pptx.generate(out)
 }
 
-async.series([
-  generateCharts // new
-], finalize)
+async.series(
+  [
+    generateCharts // new
+  ],
+  finalize
+)
