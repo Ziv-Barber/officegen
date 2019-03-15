@@ -5,6 +5,7 @@ package-lock.json
 yarn.lock
 docs
 dist
+tmp
 .DS_Store
 coverage/lcov-report
 coverage/coverage-summary.json
