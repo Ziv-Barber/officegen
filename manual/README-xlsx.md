@@ -52,3 +52,18 @@ xlsx.setDocCategory('...')
 xlsx.setDocStatus('...')
 ```
 
+Fill cells:
+
+```javascript
+// Using setCell:
+sheet.setCell ( 'E7', 340 );
+sheet.setCell ( 'G102', 'Hello World!' );
+
+// Direct way:
+sheet.data[0] = [];
+sheet.data[0][0] = 1;
+sheet.data[0][1] = 2;
+sheet.data[1] = [];
+sheet.data[1][3] = 'abc';
+```
+

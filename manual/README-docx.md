@@ -86,3 +86,291 @@ When the options are:
 - font_size (number) - the font size in points.
 - highlight (string) - highlight color. Either 'black', 'blue', 'cyan', 'darkBlue', 'darkCyan', 'darkGray', 'darkGreen', 'darkMagenta', 'darkRed', 'darkYellow', 'green', 'lightGray', 'magenta', 'none', 'red', 'white' or 'yellow'.
 - strikethrough (boolean) - true to add strikethrough.
+
+All the text data in Word is saved in paragraphs. To add a new paragraph:
+
+```javascript
+var pObj = docx.createP ();
+```
+
+Paragraph options:
+
+```javascript
+pObj.options.align = 'center'; // Also 'right' or 'justify'.
+pObj.options.indentLeft = 1440; // Indent left 1 inch
+```
+
+Every list item is also a paragraph so:
+
+```javascript
+var pObj = docx.createListOfDots ();
+
+var pObj = docx.createListOfNumbers ();
+```
+
+Now you can fill the paragraph object with one or more text strings using the addText method:
+
+```javascript
+pObj.addText ( 'Simple' );
+
+pObj.addText ( ' with color', { color: '000088' } );
+
+pObj.addText ( ' and back color.', { color: '00ffff', back: '000088' } );
+
+pObj.addText ( 'Bold + underline', { bold: true, underline: true } );
+
+pObj.addText ( 'Fonts face only.', { font_face: 'Arial' } );
+
+pObj.addText ( ' Fonts face and size. ', { font_face: 'Arial', font_size: 40 } );
+
+pObj.addText ( 'External link', { link: 'https://github.com' } );
+
+// Hyperlinks to bookmarks also supported:
+pObj.addText ( 'Internal link', { hyperlink: 'myBookmark' } );
+// ...
+// Start somewhere a bookmark:
+pObj.startBookmark ( 'myBookmark' );
+// ...
+// You MUST close your bookmark:
+pObj.endBookmark ();
+```
+
+Add an image to a paragraph:
+
+```
+var path = require('path');
+
+pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
+pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
+```
+
+To add a line break;
+
+```javascript
+var pObj = docx.createP ();
+pObj.addLineBreak ();
+```
+
+To add a page break:
+
+```javascript
+docx.putPageBreak ();
+```
+
+To add a horizontal line:
+
+```javascript
+var pObj = docx.createP ();
+pObj.addHorizontalLine ();
+```
+
+To add a back line:
+
+```javascript
+var pObj = docx.createP ({ backline: 'E0E0E0' });
+pObj.addText ( 'Backline text1' );
+pObj.addText ( ' text2' );
+```
+
+To add a table:
+
+```javascript
+var table = [
+  [{
+    val: "No.",
+    opts: {
+      cellColWidth: 4261,
+      b:true,
+      sz: '48',
+      shd: {
+        fill: "7F7F7F",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      },
+      fontFamily: "Avenir Book"
+    }
+  },{
+    val: "Title1",
+    opts: {
+      b:true,
+      color: "A00000",
+      align: "right",
+      shd: {
+        fill: "92CDDC",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      }
+    }
+  },{
+    val: "Title2",
+    opts: {
+      align: "center",
+      vAlign: "center",
+      cellColWidth: 42,
+      b:true,
+      sz: '48',
+      shd: {
+        fill: "92CDDC",
+        themeFill: "text1",
+        "themeFillTint": "80"
+      }
+    }
+  }],
+  [1,'All grown-ups were once children',''],
+  [2,'there is no harm in putting off a piece of work until another day.',''],
+  [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+  [4,'You can include CR-LF inline\r\nfor multiple lines.',''],
+  [5,['Or you can provide lines within', 'a cell in an array'],''],
+  [6,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+  [7,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+  tableColWidth: 4261,
+  tableSize: 24,
+  tableColor: "ada",
+  tableAlign: "left",
+  tableFontFamily: "Comic Sans MS",
+  borders: true
+}
+
+docx.createTable (table, tableStyle);
+```
+
+Header and footer:
+
+```javascript
+// Add a header:
+var header = docx.getHeader ().createP ();
+header.addText ( 'This is the header' );
+// Please note that the object header here is a paragraph object so you can use ANY of the paragraph API methods also for header and footer.
+// The getHeader () method excepting a string parameter:
+// getHeader ( 'even' ) - change the header for even pages.
+// getHeader ( 'first' ) - change the header for the first page only.
+// to do all of that for the footer, use the getFooter instead of getHeader.
+// and sorry, right now only createP is supported (so only creating a paragraph) so no tables, etc.
+```
+
+To Create Word Document by json:
+
+```javascript
+var table = [
+    [{
+        val: "No.",
+        opts: {
+            cellColWidth: 4261,
+            b:true,
+            sz: '48',
+            shd: {
+                fill: "7F7F7F",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            },
+            fontFamily: "Avenir Book"
+        }
+    },{
+        val: "Title1",
+        opts: {
+            b:true,
+            color: "A00000",
+            align: "right",
+            shd: {
+                fill: "92CDDC",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            }
+        }
+    },{
+        val: "Title2",
+        opts: {
+            align: "center",
+            cellColWidth: 42,
+            b:true,
+            sz: '48',
+            shd: {
+                fill: "92CDDC",
+                themeFill: "text1",
+                "themeFillTint": "80"
+            }
+        }
+    }],
+    [1,'All grown-ups were once children',''],
+    [2,'there is no harm in putting off a piece of work until another day.',''],
+    [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+    [4,'watch out for the baobabs!','END'],
+]
+
+var tableStyle = {
+    tableColWidth: 4261,
+    tableSize: 24,
+    tableColor: "ada",
+    tableAlign: "left",
+    tableFontFamily: "Comic Sans MS"
+}
+
+var data = [[{
+        type: "text",
+        val: "Simple"
+    }, {
+        type: "text",
+        val: " with color",
+        opt: { color: '000088' }
+    }, {
+        type: "text",
+        val: "  and back color.",
+        opt: { color: '00ffff', back: '000088' }
+    }, {
+        type: "linebreak"
+    }, {
+        type: "text",
+        val: "Bold + underline",
+        opt: { bold: true, underline: true }
+    }], {
+        type: "horizontalline"
+    }, [{ backline: 'EDEDED' }, {
+        type: "text",
+        val: "  backline text1.",
+        opt: { bold: true }
+    }, {
+        type: "text",
+        val: "  backline text2.",
+        opt: { color: '000088' }
+    }], {
+        type: "text",
+        val: "Left this text.",
+        lopt: { align: 'left' }
+    }, {
+        type: "text",
+        val: "Center this text.",
+        lopt: { align: 'center' }
+    }, {
+        type: "text",
+        val: "Right this text.",
+        lopt: { align: 'right' }
+    }, {
+        type: "text",
+        val: "Fonts face only.",
+        opt: { font_face: 'Arial' }
+    }, {
+        type: "text",
+        val: "Fonts face and size.",
+        opt: { font_face: 'Arial', font_size: 40 }
+    }, {
+        type: "table",
+        val: table,
+        opt: tableStyle
+    }, [{ // arr[0] is common option.
+        align: 'right'
+    }, {
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_001.png')
+    },{
+        type: "image",
+        path: path.resolve(__dirname, 'images_for_examples/sword_002.png')
+    }], {
+        type: "pagebreak"
+    }
+]
+
+docx.createByJson(data);
+```
