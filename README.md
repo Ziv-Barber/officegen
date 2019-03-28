@@ -13,16 +13,21 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 ![Microsoft Office logo](logo_office.png)
 
 - [Getting Started](#getstart)
-- [External dependencies](#dependencies)
-- [Installation](#inst)
-- [The API](#ref)
+  - [Installation](#install)
+  - [Getting Started with PowerPoint](#getspptx)
+  - [Getting Started with Word](#getsdocx)
+  - [Getting Started with Excel](#getsxlsx)
+- [Full documentation](manual/README.md)
+- [Support](#support)
 - [The source code](#code)
 - [Credit](#credit)
 
+## Contributors:
+
+This project exists thanks to all the people who contribute.
+
 <a name="getstart"></a>
 ## Getting Started: ##
-
-[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
 
 ![Microsoft Powerpoint logo](logo_powerpoint.png)
 ![Microsoft Word logo](logo_word.png)
@@ -52,228 +57,246 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 - Generating Microsoft Excel document (.xlsx file):
   - Create Excel document with one or more sheets. Supporting cells with either numbers or strings.
 
-### Contributors:
-
-This project exists thanks to all the people who contribute.
-
-<a name="dependencies"></a>
-## External dependencies: ##
-
-This project is using the following awesome libraries/utilities/services:
-
-- archiver
-- jszip
-- lodash
-- xmlbuilder
-
-<a name="inst"></a>
-## Installation: ##
-
-via [**yarn**](https://yarnpkg.com/):
-
-```bash
-$ yarn add officegen
-```
-
-via **npm**:
+<a name="install"></a>
+### Installation:
 
 ```bash
 $ npm install officegen
 ```
 
-or if you are enthusiastic about using the latest that officegen has to offer (beware - may be unstable), you can install directly from the officegen repository using:
+<a name="getspptx"></a>
+### Microsoft PowerPoint basic usage example:
 
-```bash
-$ npm install Ziv-Barber/officegen#master
 ```
+const officegen = require('officegen')
+const fs = require('fs')
 
-<a name="ref"></a>
-## The API:
+// Create an empty PowerPoint object:
+let pptx = officegen('pptx')
 
-### Creating an officegen stream object:
+// Officegen calling this function after finishing to generate the pptx document:
+pptx.on('finalize', function(written) {
+  console.log(
+    'Finish to create a Microsoft PowerPoint document.'
+  )
+})
 
-First, make sure to require the officegen module:
+// Officegen calling this function to report errors:
+pptx.on('error', function(err) {
+  console.log(err)
+})
 
-```javascript
-var officegen = require('officegen');
-```
+// Let's add a title slide:
 
-There are two ways to use the officegen returned function to create an officegen stream:
+let slide = pptx.makeTitleSlide('Officegen', 'Example to a PowerPoint document')
 
-```javascript
-var myDoc = officegen('<type of document to create>');
+// Pie chart slide example:
 
-// or:
-
-var myDoc = officegen({
-  'type': '<type of document to create>'
-  // More options here (if needed)
-});
-
-// Supported types:
-// 'pptx' or 'ppsx' - Microsoft Powerpoint based document.
-// 'docx' - Microsoft Word based document.
-// 'xlsx' - Microsoft Excel based document.
-```
-
-Generating an empty Microsoft PowerPoint officegen stream:
-
-```javascript
-var pptx = officegen ( 'pptx' );
-```
-
-Generating an empty Microsoft Word officegen stream:
-
-```javascript
-var docx = officegen ('docx');
-```
-
-Generating an empty Microsoft Excel officegen stream:
-
-```javascript
-var xlsx = officegen ('xlsx');
-```
-
-General events of the officegen stream:
-
-- 'finalize' - been called after finishing to create the document.
-- 'error' - been called on error.
-
-Event examples:
-
-```javascript
-pptx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
-});
-
-pptx.on('error', function (err) {
-  console.log(err);
-});
-```
-
-Another way to register either 'finalize' or 'error' events:
-
-```javascript
-var pptx = officegen({
-  'type': 'pptx', // or 'xlsx', etc
-  'onend': function (written) {
-    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
-  },
-  'onerr': function (err) {
-    console.log(err);
+slide = pptx.makeNewSlide()
+slide.name = 'Pie Chart slide'
+slide.back = 'ffff00'
+slide.addChart(
+  {
+    title: 'My production',
+    renderType: 'pie',
+    data:
+	[
+      {
+        name: 'Oil',
+        labels: ['Czech Republic', 'Ireland', 'Germany', 'Australia', 'Austria', 'UK', 'Belgium'],
+        values: [301, 201, 165, 139, 128,  99, 60],
+        colors: ['ff0000', '00ff00', '0000ff', 'ffff00', 'ff00ff', '00ffff', '000000']
+      }
+    ]
   }
-});
+)
+
+// Let's generate the PowerPoint document into a file:
+
+let out = fs.createWriteStream('example.pptx')
+
+out.on('error', function(err) {
+  console.log(err)
+})
+
+// Async call to generate the output file:
+pptx.generate(out)
 ```
 
-If you are preferring to use callbacks instead of events you can pass your callbacks to the generate method
-(see below).
+### Where to go from here?
 
-Now you should fill the object with data (we'll see below) and then you should call generate with
-an output stream to create the output Office document.
+- For more information please refer to the [full documentation](manual/README.md).
+- For some examples please [click here](#examples).
 
-Example with pptx:
+<a name="getspptx"></a>
+### Microsoft Word basic usage example:
 
-```javascript
-var out = fs.createWriteStream('out.pptx');
+```
+const officegen = require('officegen')
+const fs = require('fs')
 
-pptx.generate(out);
-out.on('close', function () {
-  console.log('Finished to create the PPTX file!');
-});
+// Create an empty Word object:
+let docx = officegen('docx')
+
+// Officegen calling this function after finishing to generate the docx document:
+docx.on('finalize', function(written) {
+  console.log(
+    'Finish to create a Microsoft Word document.'
+  )
+})
+
+// Officegen calling this function to report errors:
+pptx.on('error', function(err) {
+  console.log(err)
+})
+
+// Create a new paragraph:
+let pObj = docx.createP()
+
+pObj.addText('Simple')
+pObj.addText(' with color', { color: '000088' })
+pObj.addText(' and back color.', { color: '00ffff', back: '000088' })
+
+pObj = docx.createP()
+
+pObj.addText('Since ')
+pObj.addText('officegen 0.2.12', {
+  back: '00ffff',
+  shdType: 'pct12',
+  shdColor: 'ff0000'
+}) // Use pattern in the background.
+pObj.addText(' you can do ')
+pObj.addText('more cool ', { highlight: true }) // Highlight!
+pObj.addText('stuff!', { highlight: 'darkGreen' }) // Different highlight color.
+
+pObj = docx.createP()
+
+pObj.addText('Even add ')
+pObj.addText('external link', { link: 'https://github.com' })
+pObj.addText('!')
+
+pObj = docx.createP()
+
+pObj.addText('Bold + underline', { bold: true, underline: true })
+
+pObj = docx.createP({ align: 'center' })
+
+pObj.addText('Center this text', {
+  border: 'dotted',
+  borderSize: 12,
+  borderColor: '88CCFF'
+})
+
+pObj = docx.createP()
+pObj.options.align = 'right'
+
+pObj.addText('Align this text to the right.')
+
+pObj = docx.createP()
+
+pObj.addText('Those two lines are in the same paragraph,')
+pObj.addLineBreak()
+pObj.addText('but they are separated by a line break.')
+
+docx.putPageBreak()
+
+pObj = docx.createP()
+
+pObj.addText('Fonts face only.', { font_face: 'Arial' })
+pObj.addText(' Fonts face and size.', { font_face: 'Arial', font_size: 40 })
+
+docx.putPageBreak()
+
+pObj = docx.createP()
+
+// We can even add images:
+pObj.addImage('some-image.png')
+
+// Let's generate the Word document into a file:
+
+let out = fs.createWriteStream('example.docx')
+
+out.on('error', function(err) {
+  console.log(err)
+})
+
+// Async call to generate the output file:
+docx.generate(out)
 ```
 
-Passing callbacks to generate:
+### Where to go from here?
 
-```javascript
-var out = fs.createWriteStream('out.pptx');
+- For more information please refer to the [full documentation](manual/README.md).
+- For some examples please [click here](#examples).
 
-pptx.generate(out, {
-  'finalize': function (written) {
-    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
-  },
-  'error': function (err) {
-    console.log(err);
-  }
-});
+<a name="getspptx"></a>
+### Microsoft Excel basic usage example:
+
+```
+const officegen = require('officegen')
+const fs = require('fs')
+
+// Create an empty Excel object:
+let xlsx = officegen('xlsx')
+
+// Officegen calling this function after finishing to generate the xlsx document:
+xlsx.on('finalize', function(written) {
+  console.log(
+    'Finish to create a Microsoft Excel document.'
+  )
+})
+
+// Officegen calling this function to report errors:
+xlsx.on('error', function(err) {
+  console.log(err)
+})
+
+let sheet = xlsx.makeNewSheet()
+sheet.name = 'Officegen Excel'
+
+// Add data using setCell:
+
+sheet.setCell('E7', 42)
+sheet.setCell('I1', -3)
+sheet.setCell('I2', 3.141592653589)
+sheet.setCell('G102', 'Hello World!')
+
+// The direct option - two-dimensional array:
+
+sheet.data[0] = []
+sheet.data[0][0] = 1
+sheet.data[1] = []
+sheet.data[1][3] = 'some'
+sheet.data[1][4] = 'data'
+sheet.data[1][5] = 'goes'
+sheet.data[1][6] = 'here'
+sheet.data[2] = []
+sheet.data[2][5] = 'more text'
+sheet.data[2][6] = 900
+sheet.data[6] = []
+sheet.data[6][2] = 1972
+
+// Let's generate the Excel document into a file:
+
+let out = fs.createWriteStream('example.xlsx')
+
+out.on('error', function(err) {
+  console.log(err)
+})
+
+// Async call to generate the output file:
+xlsx.generate(out)
 ```
 
-Generating HTTP stream example (no file been created):
+### Where to go from here?
 
-```javascript
-var http = require('http');
-var officegen = require('officegen');
+- For more information please refer to the [full documentation](manual/README.md).
+- For some examples please [click here](#examples).
 
-http.createServer(function (request, response) {
-  response.writeHead (200, {
-    'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    'Content-disposition': 'attachment; filename=surprise.pptx'
-  });
+<a name="support"></a>
+## Support:
 
-  var pptx = officegen('pptx');
-
-  pptx.on('finalize', function (written) {
-    // We don't really need it in this case.
-  });
-
-  pptx.on('error', function (err) {
-    // Error handing...
-  });
-
-  // ... (fill pptx with data)
-
-  // Generate the Powerpoint document and sent it to the client via http:
-  pptx.generate(response);
-}).listen ( 3000 );
-```
-
-### Put data inside the document object: ###
-
-#### MS-Office document properties (for all document types): ###
-
-The default Author of all the documents been created by officegen is 'officegen'. If you want to put anything else please
-use the 'creator' option when calling the officegen function:
-
-```javascript
-var pptx = officegen({
-  'type': 'pptx', // or 'xlsx', etc.
-  'creator': '<your project name here>'
-});
-```
-
-Change the document title (pptx,ppsx,docx):
-
-```javascript
-var pptx = officegen({
-  'type': 'pptx',
-  'title': '<title>'
-});
-
-// or
-
-pptx.setDocTitle('<title>');
-```
-
-For Word only:
-
-```javascript
-var docx = officegen({
-  'type': 'docx',
-  'subject': '...',
-  'keywords': '...',
-  'description': '...'
-});
-
-// or
-
-docx.setDocSubject('...');
-docx.setDocKeywords('...');
-docx.setDescription('...');
-```
-
-#### Full manuel:
-
-- [See here](manual)
-
+<a name="examples"></a>
 ### Examples:
 
 - [make_pptx.js](examples/make_pptx.js) - Example how to create PowerPoint 2007 presentation and save it into file.
@@ -281,37 +304,22 @@ docx.setDescription('...');
 - [make_docx.js](examples/make_docx.js) - Example how to create Word 2007 document and save it into file.
 - [pptx_server.js](examples/pptx_server.js) - Example HTTP server that generating a PowerPoint file with your name without using files on the server side.
 
-### Debugging:
-
-If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
-
-```javascript
-officegen.setVerboseMode(true);
-```
-### More documentations:
-
-You can check the jsdoc documentation:
-
-```bash
-grunt jsdoc
-```
-
-### Support:
-
-Please visit the officegen Google Group:
+### The official officegen Google Group:
 
 [officegen Google Group](https://groups.google.com/forum/?fromgroups#!forum/node-officegen)
 
-Plans for the next release:
-[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
+### The officegen Slack team:
 
-The Slack team:
 [Slack](https://zivbarber.slack.com/messages/officegen/)
 
-<a name="code"></a>
-## :coffee: The source code: ##
+### Plans for the next release:
 
-### The project structure: ###
+[Trello](<https://trello.com/b/dkaiSGir/officegen-make-office-documents-in-javascript>)
+
+<a name="code"></a>
+## :coffee: The source code:
+
+### The project structure:
 
 - office/index.js - The main file.
 - office/lib/ - All the sources should be here.
@@ -322,26 +330,31 @@ The Slack team:
   - genxlsx.js - A document generator (basicgen plugin) to create a XLSX document.
   - gendocx.js - A document generator (basicgen plugin) to create a DOCX document.
   - pptxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
-  - docxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
-  - xlsxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Powerpoint based features.
+  - docxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Word based features.
+  - xlsxplg-*.js - docplug based plugins for genpptx.js ONLY to implement Excel based features.
 - officegen/test/ - All the unit tests.
 - Gruntfile.js - Grunt scripts.
 
-### Npm scripts: ###
+### Code documentations:
 
-When using with **yarn** then use the following syntax:
-
-```bash
-$ yarn name params
-```
-
-Or with just **npm**:
+To create the jsdoc documentation:
 
 ```bash
-$ npm name params
+grunt jsdoc
 ```
 
-- TBD.
+### External dependencies:
+
+This project is using the following awesome libraries/utilities/services:
+
+- archiver
+- jszip
+- lodash
+- xmlbuilder
+
+### How to add new features:
+
+The easiest way to add new features is by using the officegen internal [plugins system](manual/advanced/plugins/README.md).
 
 <a name="credits"></a>
 ## Credit: ##

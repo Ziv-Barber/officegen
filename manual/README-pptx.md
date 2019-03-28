@@ -81,21 +81,21 @@ Arguments:
 Creating a new slide:
 
 ```javascript
-slide = pptx.makeNewSlide();
+let slide = pptx.makeNewSlide();
 ```
 
 Using the Microsoft Office built-in layouts:
 
 ```js
-pptx.makeTitleSlide(title, subTitle)
-pptx.makeObjSlide(title, objData)
-pptx.makeSecHeadSlide(title, subTitle)
+let slide = pptx.makeTitleSlide(title, subTitle)
+let slide = pptx.makeObjSlide(title, objData)
+let slide = pptx.makeSecHeadSlide(title, subTitle)
 ```
 
 For creating a new slide using a layout (alternative):
 
 ```javascript
-slide = pptx.makeNewSlide({
+let slide = pptx.makeNewSlide({
   userLayout: 'title'
 });
 slide.setTitle('The title');
