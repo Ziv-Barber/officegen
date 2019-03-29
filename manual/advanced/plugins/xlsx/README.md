@@ -1,4 +1,4 @@
-# ???:
+# Writing a Microsoft Excel document type plugin:
 
 TBD
 

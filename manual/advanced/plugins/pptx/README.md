@@ -1,4 +1,4 @@
-# ???:
+# Writing a Microsoft PowerPoint document type plugin:
 
 TBD
 

@@ -1,4 +1,4 @@
-# ???:
+# Writing new Microsoft Office based document type:
 
 TBD
 

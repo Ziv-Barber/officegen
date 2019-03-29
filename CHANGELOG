@@ -1,3 +1,10 @@
+- Version 0.4.8:
+  - Upgraded jszip to the last version.
+  - Some packages updates.
+  - xmlbuilder 11.0.1 migration.
+  - Start cleaning the documentation.
+  - Remove missing sourcemap url (Merge pull request #295 from pdesantis/master).
+  - Update docxtable.js.
 - Version 0.4.7:
   - Merge pull request #278 from aug2uag/master.
   - Merge pull request #255 from OmniCyberSecurity/master.

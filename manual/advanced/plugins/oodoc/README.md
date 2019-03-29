@@ -1,4 +1,4 @@
-# ???:
+# Writing new OpenOffice based document type:
 
 TBD
 

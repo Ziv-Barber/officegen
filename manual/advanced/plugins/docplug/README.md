@@ -1,4 +1,4 @@
-# ???:
+# The docplug plugin helper module:
 
 TBD
 

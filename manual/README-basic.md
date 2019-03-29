@@ -19,7 +19,7 @@ var myDoc = officegen({
 })
 
 // Supported types:
-// 'pptx' or 'ppsx' - Microsoft Powerpoint based document.
+// 'pptx' or 'ppsx' - Microsoft PowerPoint based document.
 // 'docx' - Microsoft Word based document.
 // 'xlsx' - Microsoft Excel based document.
 ```
@@ -27,19 +27,19 @@ var myDoc = officegen({
 Generating an empty Microsoft PowerPoint officegen stream:
 
 ```javascript
-var pptx = officegen ('pptx')
+var pptx = officegen('pptx')
 ```
 
 Generating an empty Microsoft Word officegen stream:
 
 ```javascript
-var docx = officegen ('docx')
+var docx = officegen('docx')
 ```
 
 Generating an empty Microsoft Excel officegen stream:
 
 ```javascript
-var xlsx = officegen ('xlsx')
+var xlsx = officegen('xlsx')
 ```
 
 General events of the officegen stream:
@@ -51,11 +51,11 @@ Event examples:
 
 ```javascript
 pptx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
+  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
 })
 
 pptx.on('error', function (err) {
-  console.log(err);
+  console.log(err)
 })
 ```
 
@@ -65,10 +65,10 @@ Another way to register either 'finalize' or 'error' events:
 var pptx = officegen({
   'type': 'pptx', // or 'xlsx', etc
   'onend': function (written) {
-    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n');
+    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
   },
   'onerr': function (err) {
-    console.log(err);
+    console.log(err)
   }
 })
 ```
@@ -115,7 +115,7 @@ http.createServer(function (request, response) {
   response.writeHead (200, {
     'Content-Type': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     'Content-disposition': 'attachment; filename=surprise.pptx'
-  });
+  })
 
   var pptx = officegen('pptx')
 
@@ -158,7 +158,7 @@ var pptx = officegen({
 
 // or
 
-pptx.setDocTitle('<title>');
+pptx.setDocTitle('<title>')
 ```
 
 For Word only:
@@ -173,9 +173,9 @@ var docx = officegen({
 
 // or
 
-docx.setDocSubject('...');
-docx.setDocKeywords('...');
-docx.setDescription('...');
+docx.setDocSubject('...')
+docx.setDocKeywords('...')
+docx.setDescription('...')
 ```
 
 ## Debugging:
@@ -183,5 +183,5 @@ docx.setDescription('...');
 If needed, you can activate some verbose messages (warning: this does not cover all part of the lib yet) with :
 
 ```javascript
-officegen.setVerboseMode(true);
+officegen.setVerboseMode(true)
 ```
