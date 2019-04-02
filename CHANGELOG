@@ -1,3 +1,6 @@
+- Version 0.4.9:
+  - Redesign the lib project structure.
+  - Some packages updates.
 - Version 0.4.8:
   - Upgraded jszip to the last version.
   - Some packages updates.
