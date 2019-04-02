@@ -10,6 +10,7 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen)
 [![Join the chat at https://gitter.im/officegen/Lobby](https://badges.gitter.im/officegen/Lobby.svg)](https://gitter.im/officegen/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+![Officegen logo](logo.png)
 ![Microsoft Office logo](logo_office.png)
 
 - [Getting Started](#getstart)
