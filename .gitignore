@@ -10,6 +10,7 @@ tmp
 coverage/lcov-report
 coverage/coverage-summary.json
 coverage/lcov.info
+yarn-error.log
 out.*
 .idea/
 .vscode

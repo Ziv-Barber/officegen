@@ -5,6 +5,7 @@ flow-typed
 package.json.save
 package-lock.json
 yarn.lock
+yarn-error.log
 tmp/
 out.*
 .vscode
