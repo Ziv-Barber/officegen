@@ -123,6 +123,9 @@ pObj = docx.createP()
 
 pObj.addText('Strikethrough text', { strikethrough: true })
 
+pObj.addText('superscript', { superscript: true })
+pObj.addText('subscript', { subscript: true })
+
 var table = [
   [
     {
