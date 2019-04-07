@@ -4,6 +4,9 @@
   - Microsoft PowerPoint Document new features:
     - Custom layouts support.
     - Allow to insert direct xml code to a slide.
+	- Allow using theme's colors in a slide object.
+	- Documented how to change the theme.
+	- More customizations to the slide's size (see the documentation).
   - Redesign the lib directory structure.
   - Some packages updates.
 - Version 0.4.8:
