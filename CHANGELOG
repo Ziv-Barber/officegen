@@ -1,3 +1,5 @@
+- Version 0.5.2:
+  - Added a missing configuration option to the layout controls support in PowerPoint slides.
 - Version 0.5.1:
   - Allow using layout controls in PowerPoint slides using the ph option of addText.
 - Version 0.5.0:
