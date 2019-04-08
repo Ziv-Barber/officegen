@@ -1,3 +1,5 @@
+- Version 0.5.1:
+  - Allow using layout controls in PowerPoint slides using the ph option of addText.
 - Version 0.5.0:
   - Microsoft Word Document new features:
 	- addText now have 2 new options: superscript and subscript (fixed issue #299).

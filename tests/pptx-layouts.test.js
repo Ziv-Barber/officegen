@@ -165,8 +165,8 @@ describe('PPTX Layouts plugin', function() {
     // Create a custom layout:
     //
 
-    pptx.makeNewLayout('1_Title Slide-2lines', {
-      display: '1_Title Slide-2lines',
+    pptx.makeNewLayout('my custom layout', {
+      display: 'my custom layout',
       back: {
         type: 'solid',
         color: 'tx2',
@@ -176,16 +176,22 @@ describe('PPTX Layouts plugin', function() {
         '<p:sp><p:nvSpPr><p:cNvPr id="4" name="מלבן 3"><a:extLst><a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}"><a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{FCF6DB08-1F1C-44AA-B6F7-C031B856AC29}"/></a:ext></a:extLst></p:cNvPr><p:cNvSpPr/><p:nvPr userDrawn="1"/></p:nvSpPr><p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="9144000" cy="5143500"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:schemeClr val="accent4"/></a:solidFill><a:ln><a:noFill/></a:ln></p:spPr><p:style><a:lnRef idx="2"><a:schemeClr val="accent1"><a:shade val="50000"/></a:schemeClr></a:lnRef><a:fillRef idx="1"><a:schemeClr val="accent1"/></a:fillRef><a:effectRef idx="0"><a:schemeClr val="accent1"/></a:effectRef><a:fontRef idx="minor"><a:schemeClr val="lt1"/></a:fontRef></p:style><p:txBody><a:bodyPr rtlCol="0" anchor="ctr"/><a:lstStyle/><a:p><a:pPr algn="ctr"/><a:endParaRPr lang="en-IL"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="9" name="מלבן 8"><a:extLst><a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}"><a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{D005C2FB-DC1A-4D47-B65E-94719652F9D1}"/></a:ext></a:extLst></p:cNvPr><p:cNvSpPr/><p:nvPr userDrawn="1"/></p:nvSpPr><p:spPr><a:xfrm><a:off x="0" y="3425482"/><a:ext cx="9144000" cy="1718017"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:schemeClr val="accent3"/></a:solidFill><a:ln><a:noFill/></a:ln></p:spPr><p:style><a:lnRef idx="2"><a:schemeClr val="accent1"><a:shade val="50000"/></a:schemeClr></a:lnRef><a:fillRef idx="1"><a:schemeClr val="accent1"/></a:fillRef><a:effectRef idx="0"><a:schemeClr val="accent1"/></a:effectRef><a:fontRef idx="minor"><a:schemeClr val="lt1"/></a:fontRef></p:style><p:txBody><a:bodyPr rtlCol="0" anchor="ctr"/><a:lstStyle/><a:p><a:pPr algn="ctr"/><a:endParaRPr lang="en-IL"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="2" name="Title 1"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="ctrTitle" hasCustomPrompt="1"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="888901" y="864893"/><a:ext cx="7375868" cy="1441518"/></a:xfrm><a:noFill/></p:spPr><p:txBody><a:bodyPr anchor="t" anchorCtr="0"><a:noAutofit/></a:bodyPr><a:lstStyle><a:lvl1pPr algn="l"><a:defRPr sz="4800" b="1"><a:solidFill><a:schemeClr val="bg1"/></a:solidFill><a:latin typeface="+mj-lt"/><a:ea typeface="Open Sans Semibold" panose="020B0706030804020204" pitchFamily="34" charset="0"/><a:cs typeface="Open Sans Semibold" panose="020B0706030804020204" pitchFamily="34" charset="0"/></a:defRPr></a:lvl1pPr></a:lstStyle><a:p><a:r><a:rPr lang="en-US" sz="4800" dirty="0"/><a:t>Add Title Here</a:t></a:r><a:endParaRPr lang="en-US" dirty="0"/></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="13" name="Text Placeholder 2"><a:extLst><a:ext uri="{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}"><a16:creationId xmlns:a16="http://schemas.microsoft.com/office/drawing/2014/main" id="{6A3C93B3-F38C-45C3-82A7-C60718709D9A}"/></a:ext></a:extLst></p:cNvPr><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="32" hasCustomPrompt="1"/></p:nvPr></p:nvSpPr><p:spPr><a:xfrm><a:off x="888901" y="3961326"/><a:ext cx="7375868" cy="646329"/></a:xfrm><a:noFill/></p:spPr><p:txBody><a:bodyPr vert="horz" lIns="0" tIns="45719" rIns="0" bIns="45719" rtlCol="0" anchor="t" anchorCtr="0"><a:spAutoFit/></a:bodyPr><a:lstStyle><a:lvl1pPr marL="0" indent="0"><a:buNone/><a:defRPr lang="en-US" sz="3600" b="1" dirty="0"><a:solidFill><a:schemeClr val="bg1"/></a:solidFill><a:latin typeface="+mj-lt"/><a:ea typeface="Open Sans Semibold" panose="020B0706030804020204" pitchFamily="34" charset="0"/><a:cs typeface="Open Sans Semibold" panose="020B0706030804020204" pitchFamily="34" charset="0"/></a:defRPr></a:lvl1pPr></a:lstStyle><a:p><a:pPr marL="179384" lvl="0" indent="-179384"><a:spcBef><a:spcPct val="0"/></a:spcBef></a:pPr><a:r><a:rPr lang="en-US" dirty="0"/><a:t>Full Name</a:t></a:r></a:p></p:txBody></p:sp>'
     })
 
+    //
+    // Create a slide using the custom layout:
+    //
+
     slide = pptx.makeNewSlide({
-      useLayout: '1_Title Slide-2lines'
+      useLayout: 'my custom layout'
     })
 
-    var layoutCode =
-      '<p:sp><p:nvSpPr><p:cNvPr id="5" name="Title 4"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="ctrTitle"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang="en-US" dirty="0"/><a:t>%%text1%%</a:t></a:r><a:br><a:rPr lang="en-US" dirty="0"/></a:br><a:r><a:rPr lang="en-US" dirty="0"/><a:t>%%text2%%</a:t></a:r></a:p></p:txBody></p:sp><p:sp><p:nvSpPr><p:cNvPr id="6" name="Subtitle 5"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="subTitle" idx="32"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:endParaRPr lang="en-US" dirty="0"/></a:p></p:txBody></p:sp>'
-    layoutCode = layoutCode
-      .replace(/%%text1%%/, 'Title number 1')
-      .replace(/%%text2%%/, 'Title number 2')
-    slide.addDirectXmlCode(layoutCode)
+    slide.addText('Title text', {
+      ph: 'ctrTitle'
+    })
+
+    slide.addText('Other text', {
+      ph: 'subTitle',
+      phIdx: 32
+    })
 
     //
     // Generate the pptx file:
