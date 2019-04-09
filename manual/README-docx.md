@@ -39,6 +39,7 @@ let docx = officegen({
 - keywords (string) - The document's keywords (part of the Document's Properties in Office).
 - orientation (string) - Either 'landscape' or 'portrait'. The default is 'portrait'.
 - pageMargins (object) - Set document page margins. The default is { top: 1800, right: 1440, bottom: 1800, left: 1440 }
+- pageSize (string | object) - Set document page size. The default is A4 (support value: 'A4', 'A3', 'letter paper'). Or set customize size with { width: 11906, height: 16838 }
 - subject (string) - The document's subject (part of the Document's Properties in Office).
 - title (string) - The document's title (part of the Document's Properties in Office).
 
