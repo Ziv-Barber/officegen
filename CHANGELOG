@@ -1,4 +1,5 @@
 - Version 0.5.3:
+  - Add some docx features (Merge pull request #301).
   - Some packages updates.
 - Version 0.5.2:
   - Added a missing configuration option to the layout controls support in PowerPoint slides.
