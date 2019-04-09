@@ -184,6 +184,10 @@ var table = [
       cellColWidth: 4261,
       b:true,
       sz: '48',
+      spacingBefor: 120,
+      spacingAfter: 120,
+      spacingLine: 240,
+      spacingLineRule: 'atLeast',
       shd: {
         fill: "7F7F7F",
         themeFill: "text1",
@@ -233,10 +237,41 @@ var tableStyle = {
   tableColor: "ada",
   tableAlign: "left",
   tableFontFamily: "Comic Sans MS",
-  borders: true
+  spacingBefor: 120, // default is 100
+  spacingAfter: 120, // default is 100
+  spacingLine: 240, // default is 240
+  spacingLineRule: 'atLeast', // default is atLeast
+  fixedLayout: true, // default is false
+  borders: true, // default is false. if true, default border size is 4
+  borderSize: 2, // To use this option, the 'borders' must set as true, default is 4
 }
-
 docx.createTable (table, tableStyle);
+```
+
+If you want to customize the border style, you can use the 'borderStyle' option:
+```javascript
+  const style = {
+    '@w:val': 'single',
+    '@w:sz': '3',
+    '@w:space': '1',
+    '@w:color': 'DF0000'
+  }
+  const borderStyle = {
+    'w:top': style,
+    'w:bottom': style,
+    'w:left': style,
+    'w:right': style,
+    'w:insideH': style,
+    'w:insideV': style,
+  }
+  const tableStyle = {
+    tableColWidth: 4261,
+    tableSize: 24,
+    tableColor: 'ada',
+    tableAlign: 'left',
+    tableFontFamily: 'Comic Sans MS',
+    borderStyle: borderStyle
+  }
 ```
 
 Header and footer:
