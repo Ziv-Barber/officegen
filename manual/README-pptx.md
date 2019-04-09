@@ -29,6 +29,15 @@ let pptx = officegen({
 })
 ```
 
+To change the theme:
+
+```js
+let pptx = officegen({
+	type: 'pptx', // We want to create a Microsoft Powerpoint document.
+	themeXml: '... theme xml goes here ...' // Just copy the theme xml code from existing office document (stored in ppt\theme\theme1.xml).
+})
+```
+
 <a name="settings"></a>
 ### The document object's settings: ###
 
@@ -54,12 +63,14 @@ pptx.setDocStatus('...')
 
 Setting slide size:
 ```
-pptx.setSlideSize( cx, cy, type)
+pptx.setSlideSize(cx, cy, type, cxSLD, cySLD)
 ```
 
 Arguments:
-- cx - width of the slide (in pixels)
-- cy - height of the slide (in pixels)
+- cx - width of the slide and notes (in pixels)
+- cy - height of the slide and notes (in pixels)
+- cxSLD - width of the slide (in pixels) only if it's not the same as the notes size
+- cySLD - height of the slide (in pixels) only if it's not the same as the notes size
 - Supported types:
   - '35mm'
   - 'A3'
@@ -77,6 +88,12 @@ Arguments:
   - 'screen16x10'
   - 'screen16x9'
   - 'screen4x3'
+
+Notes:
+  - cx, cy, cxSLD and cySLD are optional and you can pass 0 if you just want to use one of the standard sizes (anything except for 'custom').
+  - If you are taking the values for cx, cy, cxSLD and cySLD from existing document then do: sourceValue / 12700
+  - cxSLD and cySLD only working in version 0.5.0 or later of officegen.
+  - if you didn't set cxSLD and cySLD then officegen will use the values of cx and cy also for cxSLD and cySLD.
 
 Creating a new slide:
 

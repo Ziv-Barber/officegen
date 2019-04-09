@@ -86,6 +86,8 @@ When the options are:
 - font_size (number) - the font size in points.
 - highlight (string) - highlight color. Either 'black', 'blue', 'cyan', 'darkBlue', 'darkCyan', 'darkGray', 'darkGreen', 'darkMagenta', 'darkRed', 'darkYellow', 'green', 'lightGray', 'magenta', 'none', 'red', 'white' or 'yellow'.
 - strikethrough (boolean) - true to add strikethrough.
+- superscript (boolean) - true to lower the text in this run below the baseline and change it to a smaller size, if a smallersize is available. Supported in officegen 0.5.0 and later.
+- subscript (boolean) - true to raise the text in this run above the baseline and change it to a smaller size, if a smaller size is available. Supported in officegen 0.5.0 and later.
 
 All the text data in Word is saved in paragraphs. To add a new paragraph:
 

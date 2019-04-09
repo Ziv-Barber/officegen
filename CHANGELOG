@@ -1,5 +1,19 @@
-- Version 0.4.9:
-  - Redesign the lib project structure.
+- Version 0.5.3:
+  - Some packages updates.
+- Version 0.5.2:
+  - Added a missing configuration option to the layout controls support in PowerPoint slides.
+- Version 0.5.1:
+  - Allow using layout controls in PowerPoint slides using the ph option of addText.
+- Version 0.5.0:
+  - Microsoft Word Document new features:
+	- addText now have 2 new options: superscript and subscript (fixed issue #299).
+  - Microsoft PowerPoint Document new features:
+    - Custom layouts support.
+    - Allow to insert direct xml code to a slide.
+	- Allow using theme's colors in a slide object.
+	- Documented how to change the theme.
+	- More customizations to the slide's size (see the documentation).
+  - Redesign the lib directory structure.
   - Some packages updates.
 - Version 0.4.8:
   - Upgraded jszip to the last version.

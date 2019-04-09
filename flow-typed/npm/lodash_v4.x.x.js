@@ -1,5 +1,5 @@
-// flow-typed signature: a9b75804169260d49cda34b56dcfabe1
-// flow-typed version: e9dac1347c/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 85643356ccdcde77e00470b66f694123
+// flow-typed version: fd2cfc021e/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
@@ -675,7 +675,7 @@ declare module "lodash" {
       iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
       orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
     ): Array<T>;
-    orderBy<V, T: Object>(
+    orderBy<V, T: {}>(
       object: T,
       iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
       orders?: $ReadOnlyArray<"asc" | "desc"> | string
