@@ -101,6 +101,7 @@ Paragraph options:
 ```javascript
 pObj.options.align = 'center'; // Also 'right' or 'justify'.
 pObj.options.indentLeft = 1440; // Indent left 1 inch
+pObj.options.indentFirstLine = 440; // Indent first line
 ```
 
 Every list item is also a paragraph so:
@@ -242,6 +243,7 @@ var tableStyle = {
   spacingAfter: 120, // default is 100
   spacingLine: 240, // default is 240
   spacingLineRule: 'atLeast', // default is atLeast
+  indent: 100, // table indent, default is 0
   fixedLayout: true, // default is false
   borders: true, // default is false. if true, default border size is 4
   borderSize: 2, // To use this option, the 'borders' must set as true, default is 4
