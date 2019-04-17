@@ -4,7 +4,7 @@ Creating Office Open XML files (Word, Excel and Powerpoint) for Microsoft Office
 *officegen* should work on any environment that supports Node.js including Linux, OSX and Windows.
 *officegen* also supporting PowerPoint *native* charts objects with embedded data.
 
-[![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen)
+[![Backers on Open Collective](https://opencollective.com/officegen/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/officegen/sponsors/badge.svg)](#sponsors) [![npm version](https://badge.fury.io/js/officegen.svg)](https://badge.fury.io/js/officegen)
 [![dependencies](https://david-dm.org/Ziv-Barber/officegen.svg?style&#x3D;flat-square)](https://david-dm.org/Ziv-Barber/officegen)
 [![devDependencies](https://david-dm.org/Ziv-Barber/officegen/dev-status.svg?style&#x3D;flat-square)](https://david-dm.org/Ziv-Barber/officegen#info&#x3D;devDependencies)
 [![Build Status](https://travis-ci.org/Ziv-Barber/officegen.png?branch=master)](https://travis-ci.org/Ziv-Barber/officegen)
@@ -362,3 +362,33 @@ The easiest way to add new features is by using the officegen internal [plugins 
 
 - Created by Ziv Barber in 2013.
 - For creating zip streams i'm using 'archiver' by cmilhench, dbrockman, paulj originally inspired by Antoine van Wel's zipstream.
+
+## Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/Ziv-Barber/officegen/graphs/contributors"><img src="https://opencollective.com/officegen/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/officegen#backer)]
+
+<a href="https://opencollective.com/officegen#backers" target="_blank"><img src="https://opencollective.com/officegen/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/officegen#sponsor)]
+
+<a href="https://opencollective.com/officegen/sponsor/0/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/1/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/2/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/3/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/4/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/5/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/6/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/7/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/8/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/officegen/sponsor/9/website" target="_blank"><img src="https://opencollective.com/officegen/sponsor/9/avatar.svg"></a>
+
+
