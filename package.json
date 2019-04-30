@@ -52,7 +52,8 @@
     "flow": "npx flow",
     "lint": "better-npm-run lint",
     "prettify": "prettier --write",
-    "prettify:all": "prettier --write \"{lib,examples,tests,plugins,test_files}/**/*.{jsx,js}\""
+    "prettify:all": "prettier --write \"{lib,examples,tests,plugins,test_files}/**/*.{jsx,js}\"",
+    "postinstall": "opencollective-postinstall"
   },
   "dependencies": {
     "archiver": "~3.0.0",
@@ -60,9 +61,11 @@
     "fast-image-size": "^0.1.3",
     "jszip": "^3.2.1",
     "lodash": "^4.17.11",
+    "opencollective-postinstall": "^2.0.2",
     "readable-stream": "~3.3.0",
     "setimmediate": "~1.0.5",
-    "xmlbuilder": "^12.0.0"
+    "xmlbuilder": "^12.0.0",
+    "opencollective": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -85,14 +88,14 @@
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^5.16.0",
     "eslint-config-mocha": "^0.0.0",
-	"eslint-config-prettier": "^4.1.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-flowtype": "^3.6.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-mocha": "^5.3.0",
     "eslint-plugin-mocha-only": "^0.0.3",
     "eslint-plugin-node": "^8.0.1",
-	"eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "flow-bin": "^0.96.0",
@@ -121,5 +124,9 @@
         "NODE_ENV": "development"
       }
     }
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/officegen"
   }
 }
