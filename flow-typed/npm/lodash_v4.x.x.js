@@ -1,5 +1,5 @@
-// flow-typed signature: 85643356ccdcde77e00470b66f694123
-// flow-typed version: fd2cfc021e/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 11c59ec61b55e07f727745ac1ee4a664
+// flow-typed version: 418c2af657/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
@@ -391,8 +391,8 @@ declare module "lodash" {
       iteratee?: ?ValueOnlyIteratee<T>
     ): Array<T>;
     tail<T>(array?: ?Array<T>): Array<T>;
-    take<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    takeRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
+    take<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
+    takeRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
     takeRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
     takeWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
     union<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
@@ -1890,10 +1890,10 @@ declare module "lodash/fp" {
     sortedUniq<T>(array: Array<T>): Array<T>;
     sortedUniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: Array<T>): Array<T>;
     tail<T>(array: Array<T>): Array<T>;
-    take<T>(n: number): (array: Array<T>) => Array<T>;
-    take<T>(n: number, array: Array<T>): Array<T>;
-    takeRight<T>(n: number): (array: Array<T>) => Array<T>;
-    takeRight<T>(n: number, array: Array<T>): Array<T>;
+    take<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
+    take<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
+    takeRight<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
+    takeRight<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
     takeLast<T>(n: number): (array: Array<T>) => Array<T>;
     takeLast<T>(n: number, array: Array<T>): Array<T>;
     takeRightWhile<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
