@@ -147,7 +147,7 @@ docx.on('finalize', function(written) {
 })
 
 // Officegen calling this function to report errors:
-pptx.on('error', function(err) {
+docx.on('error', function(err) {
   console.log(err)
 })
 
