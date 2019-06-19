@@ -77,6 +77,10 @@ pObj = docx.createP()
 pObj.addText('Fonts face only.', { font_face: 'Arial' })
 pObj.addText(' Fonts face and size.', { font_face: 'Arial', font_size: 40 })
 
+pObj = docx.createP()
+
+pObj.addText('בדיקה האם אפשר לכתוב טקסט בעברית')
+
 docx.putPageBreak()
 
 pObj = docx.createP()
