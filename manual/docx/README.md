@@ -84,7 +84,12 @@ When the options are:
 - italic (boolean) - true to make the text italic.
 - underline (boolean) - true to add underline.
 - font_face (string) - the font to use.
+- font_face_east (string) - advanced setting: the font to use for east asian. You must set also font_face.
+- font_face_cs (string) - advanced setting: the font to use (cs). You must set also font_face.
+- font_face_h (string) - advanced setting: the font to use (hAnsi). You must set also font_face.
+- font_hint (string) - optional. Either 'ascii' (the default), 'eastAsia', 'cs' or 'hAnsi'.
 - font_size (number) - the font size in points.
+- rtl (boolean) - add this to any text in rtl language.
 - highlight (string) - highlight color. Either 'black', 'blue', 'cyan', 'darkBlue', 'darkCyan', 'darkGray', 'darkGreen', 'darkMagenta', 'darkRed', 'darkYellow', 'green', 'lightGray', 'magenta', 'none', 'red', 'white' or 'yellow'.
 - strikethrough (boolean) - true to add strikethrough.
 - superscript (boolean) - true to lower the text in this run below the baseline and change it to a smaller size, if a smallersize is available. Supported in officegen 0.5.0 and later.

@@ -79,7 +79,7 @@ pObj.addText(' Fonts face and size.', { font_face: 'Arial', font_size: 40 })
 
 pObj = docx.createP()
 
-pObj.addText('בדיקה האם אפשר לכתוב טקסט בעברית')
+pObj.addText('בדיקה האם אפשר לכתוב טקסט בעברית', { rtl: true })
 
 docx.putPageBreak()
 
