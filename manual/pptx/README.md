@@ -95,6 +95,13 @@ Notes:
   - cxSLD and cySLD only working in version 0.5.0 or later of officegen.
   - if you didn't set cxSLD and cySLD then officegen will use the values of cx and cy also for cxSLD and cySLD.
 
+Changing the displayed view when opening the document in PowerPoint:
+
+```javascript
+pptx.view.restoredLeft = 15620 // This is the default value.
+pptx.view.restoredTop = 94660 // This is the default value. Set it to lower value if you want to see more of the speaker notes.
+```
+
 Creating a new slide:
 
 ```javascript

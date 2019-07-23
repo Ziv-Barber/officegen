@@ -31,6 +31,10 @@ function generateExampleSlides(callback) {
   // do the rest things here
   // console.log('finalize')
 
+  // A way to change the view:
+  pptx.view.restoredLeft = 15620 // This is also the default so it's the same as not changing it.
+  pptx.view.restoredTop = 54442 // The default is 94660
+
   // Let's create a new slide:
   slide = pptx.makeNewSlide()
 
@@ -428,7 +432,7 @@ function finalize() {
 
 async.series(
   [
-    generateTables,
+    // generateTables,
     generateExampleSlides // inherited from original project
   ],
   finalize
