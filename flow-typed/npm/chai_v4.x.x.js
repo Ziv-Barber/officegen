@@ -1,5 +1,5 @@
-// flow-typed signature: 3d012055643ffc7325a13636ed48af8a
-// flow-typed version: f04d291d8b/chai_v4.x.x/flow_>=v0.25.0
+// flow-typed signature: 375f82ecffb6c26ba73f4c3ed38d9557
+// flow-typed version: 215f65d5cb/chai_v4.x.x/flow_>=v0.53.0
 
 declare module "chai" {
   declare type ExpectChain<T> = {
@@ -47,6 +47,7 @@ declare module "chai" {
     within: (start: T & number, finish: T & number, message?: string) => ExpectChain<T>,
 
     instanceof: (constructor: mixed, message?: string) => ExpectChain<T>,
+    instanceOf: (constructor: mixed, message?: string) => ExpectChain<T>,
     nested: ExpectChain<T>,
     property: <P>(
       name: string,
@@ -54,7 +55,7 @@ declare module "chai" {
       message?: string
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
 
-    length: (value: number, message?: string) => ExpectChain<T> | ExpectChain<number>,
+    length: ExpectChain<number> & ((value: number, message?: string) => ExpectChain<T>),
     lengthOf: (value: number, message?: string) => ExpectChain<T>,
 
     match: (regex: RegExp, message?: string) => ExpectChain<T>,
@@ -161,7 +162,11 @@ declare module "chai" {
     matchSnapshot: (lang?: any, update?: boolean, msg?: any) => ExpectChain<T>
   };
 
-  declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
+
+  declare var expect: {
+    <T>(actual: T, message?: string): ExpectChain<T>,
+    fail: ((message?: string) => void) & ((actual: any, expected: any, message?: string, operator?: string) => void)
+  };
 
   declare function use(plugin: (chai: Object, utils: Object) => void): void;
 

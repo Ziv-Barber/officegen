@@ -38,7 +38,7 @@ var onError = function(err) {
 }
 
 describe('PPTX generator', function() {
-  this.slow(1000)
+  this.slow(2000)
 
   before(function(done) {
     fs.mkdir(outDir, 0o777, function(err) {

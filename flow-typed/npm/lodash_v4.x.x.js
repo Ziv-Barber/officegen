@@ -1,5 +1,5 @@
-// flow-typed signature: 11c59ec61b55e07f727745ac1ee4a664
-// flow-typed version: 418c2af657/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 7aab58aebe77066617c1bebd8202ce62
+// flow-typed version: f125eacb94/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
@@ -149,6 +149,11 @@ declare module "lodash" {
     separator?: RegExp | string
   };
 
+  declare type Cancelable = {
+    cancel: () => void,
+    flush: () => mixed
+  };
+
   declare type DebounceOptions = {
     leading?: boolean,
     maxWait?: number,
@@ -265,7 +270,7 @@ declare module "lodash" {
     ): -1;
     // alias of _.head
     first<T>(array: ?$ReadOnlyArray<T>): T;
-    flatten<T, X>(array?: ?Array<Array<T> | X>): Array<T | X>;
+    flatten<T, X>(array?: ?$ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
     flattenDeep<T>(array?: ?(any[])): Array<T>;
     flattenDepth(array?: ?(any[]), depth?: ?number): any[];
     fromPairs<A, B>(pairs?: ?Array<[A, B]>): { [key: A]: B };
@@ -486,15 +491,15 @@ declare module "lodash" {
       a4: Array<T>,
       comparator?: Comparator<T>
     ): Array<T>;
-    zip<A, B>(a1?: ?(A[]), a2?: ?(B[])): Array<[A, B]>;
-    zip<A, B, C>(a1: A[], a2: B[], a3: C[]): Array<[A, B, C]>;
-    zip<A, B, C, D>(a1: A[], a2: B[], a3: C[], a4: D[]): Array<[A, B, C, D]>;
+    zip<A, B>(a1?: ?($ReadOnlyArray<A>), a2?: ?($ReadOnlyArray<B>)): Array<[A, B]>;
+    zip<A, B, C>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>): Array<[A, B, C]>;
+    zip<A, B, C, D>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>, a4: $ReadOnlyArray<D>): Array<[A, B, C, D]>;
     zip<A, B, C, D, E>(
-      a1: A[],
-      a2: B[],
-      a3: C[],
-      a4: D[],
-      a5: E[]
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
+      a4: $ReadOnlyArray<D>,
+      a5: $ReadOnlyArray<E>
     ): Array<[A, B, C, D, E]>;
 
     zipObject<K, V>(props: Array<K>, values?: ?Array<V>): { [key: K]: V };
@@ -785,7 +790,11 @@ declare module "lodash" {
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...any[]) => any>(func: F, wait?: number, options?: DebounceOptions): F;
+    debounce<F: (...any[]) => any>(
+      func: F,
+      wait?: number,
+      options?: DebounceOptions
+    ): F & Cancelable;
     defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
     flip<R>(func: (...any[]) => R): (...any[]) => R;
@@ -805,7 +814,7 @@ declare module "lodash" {
       func: F,
       wait?: number,
       options?: ThrottleOptions
-    ): F;
+    ): F & Cancelable;
     unary<F: (...any[]) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
@@ -1245,7 +1254,7 @@ declare module "lodash" {
     ): Object;
     omitBy<A, T>(object: void | null, predicate?: ?OPredicate<A, T>): {};
     pick(object?: ?Object, ...props: Array<string>): Object;
-    pick(object?: ?Object, props: Array<string>): Object;
+    pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
     pickBy<A, T: { [id: any]: A } | { [id: number]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
@@ -1404,7 +1413,9 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
+    flow: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
+    flowRight: $Compose & ((...funcs: Array<Function>) => Function);
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
     matches(source?: ?Object): Function;
@@ -2946,8 +2957,10 @@ declare module "lodash/fp" {
       predicate: OPredicate<A>
     ): (object: T) => Object;
     omitBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object;
-    pick(props: Array<string>): (object: Object) => Object;
-    pick(props: Array<string>, object: Object): Object;
+    pick(...props: Array<string | {}>): Object;
+    pick(props: $ReadOnlyArray<string>, object: Object): Object;
+    pick(...props: Array<string>): (object: Object) => Object;
+    pick(props: $ReadOnlyArray<string>): (object: Object) => Object;
     pickAll(props: Array<string>): (object: Object) => Object;
     pickAll(props: Array<string>, object: Object): Object;
     pickBy<A, T: { [id: any]: A }>(
@@ -3170,10 +3183,15 @@ declare module "lodash/fp" {
     defaultTo<T1: number, T2>(defaultValue: T2): (value: T1) => T1 | T2;
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
+    flow: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     pipe: $ComposeReverse & ((funcs: Array<Function>) => Function);
+    pipe: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
+    flowRight: $Compose & ((...funcs: Array<Function>) => Function);
     compose: $Compose & ((funcs: Array<Function>) => Function);
+    compose: $Compose & ((...funcs: Array<Function>) => Function);
     compose(funcs: Array<Function>): Function;
+    compose(...funcs: Array<Function>): Function;
     identity<T>(value: T): T;
     iteratee(func: any): Function;
     matches(source: Object): (object: Object) => boolean;

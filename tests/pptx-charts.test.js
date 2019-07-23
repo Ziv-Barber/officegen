@@ -38,8 +38,8 @@ var onError = function(err) {
   assert(false)
 }
 
-describe('PPTX generator', function() {
-  this.slow(1000)
+describe('PPTX generator - charts', function() {
+  this.slow(2000)
 
   before(function(done) {
     fs.mkdir(outDir, 0o777, function(err) {
