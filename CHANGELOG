@@ -1,3 +1,8 @@
+- Version 0.6.1:
+  - An option to change the view of a pptx document.
+  - Fix: borderStyle does not work because of a typo.
+  - More fonts support.
+  - Some packages updates.
 - Version 0.6.0:
   - Option to change the pptx master slide layout (right now only one master slides supported).
   - Add 'indentFirstLine' attribute for paragraph, 'indent' attribute for tables (Merge pull request #302).
