@@ -69,12 +69,12 @@ function generateExampleSlides(callback) {
     y: 66,
     x: 'c',
     cx: '50%',
-    cy: 60,
+    cy: '1inch',
     font_size: 48,
     color: '0000ff'
   })
 
-  pObj = slide.addText('Boom\nBoom!!!', {
+  pObj = slide.addText('Two\nlines', {
     y: 100,
     x: 10,
     cx: '70%',
@@ -95,7 +95,7 @@ function generateExampleSlides(callback) {
     y: 'c',
     x: 0,
     cx: '100%',
-    cy: 66,
+    cy: '2cm',
     font_size: 48,
     align: 'center',
     color: { type: 'solid', color: '008800' }
