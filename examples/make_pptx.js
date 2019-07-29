@@ -394,7 +394,7 @@ function generateTables(callback) {
         font_face: 'Verdana',
         align: 'r',
         bold: 1,
-        font_color: 'ffffff',
+        // font_color: 'ffffff',
         fill_color: '00a65a'
       }
     },
@@ -432,7 +432,7 @@ function finalize() {
 
 async.series(
   [
-    // generateTables,
+    generateTables,
     generateExampleSlides // inherited from original project
   ],
   finalize

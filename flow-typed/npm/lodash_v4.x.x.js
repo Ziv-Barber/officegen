@@ -1,5 +1,5 @@
-// flow-typed signature: 7aab58aebe77066617c1bebd8202ce62
-// flow-typed version: f125eacb94/lodash_v4.x.x/flow_>=v0.63.x
+// flow-typed signature: 2f2edec1556361d0835c0af67045bf89
+// flow-typed version: 0a8e7a7f8c/lodash_v4.x.x/flow_>=v0.63.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
@@ -1413,9 +1413,7 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
-    flow: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
-    flowRight: $Compose & ((...funcs: Array<Function>) => Function);
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
     matches(source?: ?Object): Function;
@@ -3183,15 +3181,10 @@ declare module "lodash/fp" {
     defaultTo<T1: number, T2>(defaultValue: T2): (value: T1) => T1 | T2;
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
-    flow: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     pipe: $ComposeReverse & ((funcs: Array<Function>) => Function);
-    pipe: $ComposeReverse & ((...funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
-    flowRight: $Compose & ((...funcs: Array<Function>) => Function);
     compose: $Compose & ((funcs: Array<Function>) => Function);
-    compose: $Compose & ((...funcs: Array<Function>) => Function);
     compose(funcs: Array<Function>): Function;
-    compose(...funcs: Array<Function>): Function;
     identity<T>(value: T): T;
     iteratee(func: any): Function;
     matches(source: Object): (object: Object) => boolean;
