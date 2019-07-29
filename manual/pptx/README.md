@@ -189,6 +189,11 @@ Common properties that can be added to the options object for all the add based 
 - y - start vertical position. Can be either number, percentage or 'c' to center this object (vertical).
 - cx - the horizontal size of this object. Can be either number or percentage of the total horizontal size.
 - cy - the vertical size of this object. Can be either number or percentage of the total vertical size.
+- id - optional custom ID (must be unique number).
+- name - optional custom name.
+- title - optional custom title.
+- desc - optional custom description.
+- hidden - optional boolean flag. If true then this shape will be hidden.
 - color - the font color for text.
 - fill - the background color.
 - line - border color / line color.

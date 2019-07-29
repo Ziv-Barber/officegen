@@ -1,5 +1,7 @@
 - Version 0.6.1:
-  - Better units support in pptx shapes: '2inch' or '3cm'.
+  - PPTX paragraph: more auto-fit options and more dots options.
+  - PPTX shapes more options: you can now change y,x,cx and cy for ph shapes, title, desc, hidden, nvPrAttrCode and nvPrCode.
+  - Better units support in pptx shapes: '1in', '1em', '1cm', '1mm', '1pt', '1pc'.
   - An option to change the view of a pptx document.
   - Fix: borderStyle does not work because of a typo.
   - More fonts support.
