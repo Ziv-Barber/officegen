@@ -190,7 +190,14 @@ describe('PPTX Layouts plugin', function() {
 
     slide.addText('Other text', {
       ph: 'subTitle',
-      phIdx: 32
+      phIdx: 32,
+      bodyProp: {
+        normAutofit: 92500
+      },
+      x: '0em',
+      y: '3333750em',
+      cx: '9144601em',
+      cy: '1432789em'
     })
 
     //

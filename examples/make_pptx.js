@@ -57,10 +57,21 @@ function generateExampleSlides(callback) {
       { text: 'Hello ', options: { font_size: 56 } },
       {
         text: 'World!',
-        options: { font_size: 56, font_face: 'Arial', color: 'ffff00' }
+        options: {
+          font_size: 56,
+          font_face: 'Arial',
+          color: 'ffff00'
+        }
       }
     ],
-    { cx: '75%', cy: 66, y: 150 }
+    {
+      cx: '75%',
+      cy: 66,
+      y: 150,
+      bodyProp: {
+        normAutofit: 92500
+      }
+    }
   )
   // Please note that you can pass object as the text parameter to addText.
 
@@ -71,7 +82,10 @@ function generateExampleSlides(callback) {
     cx: '50%',
     cy: '1inch',
     font_size: 48,
-    color: '0000ff'
+    color: '0000ff',
+    bodyProp: {
+      normAutofit: 92500
+    }
   })
 
   pObj = slide.addText('Two\nlines', {

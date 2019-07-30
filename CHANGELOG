@@ -1,3 +1,5 @@
+- Version 0.6.2:
+  - PPTX workaround for using placeholders + custom sizes + custom fills: the disableFillSettings setting.
 - Version 0.6.1:
   - PPTX paragraph: more auto-fit options and more dots options.
   - PPTX shapes more options: you can now change y,x,cx and cy for ph shapes, title, desc, hidden, nvPrAttrCode and nvPrCode.
