@@ -1,5 +1,6 @@
 - Version 0.6.3:
   - DOCX: columns support.
+  - DOCX: Better units support for image size: '1in', '1em', '1cm', '1mm', '1pt', '1pc'.
   - Fixed the jpeg support.
 - Version 0.6.2:
   - PPTX workaround for using placeholders + custom sizes + custom fills: the disableFillSettings setting.

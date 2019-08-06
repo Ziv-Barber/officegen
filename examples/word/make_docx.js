@@ -92,9 +92,17 @@ pObj = docx.createP()
 
 pObj.addImage(path.resolve(__dirname, '../images_for_examples/image1.png'))
 
-pObj = docx.createP()
+docx.putPageBreak()
 
 pObj.addImage(path.resolve(__dirname, '../images_for_examples/image2.jpg'))
+
+docx.putPageBreak()
+
+pObj = docx.createP({
+  pStyleDef: 'Heading1'
+})
+
+pObj.addText('Header!')
 
 pObj = docx.createP()
 
@@ -197,7 +205,7 @@ var tableStyle = {
 
 pObj = docx.createTable(table, tableStyle)
 
-var out = fs.createWriteStream(path.join(outDir, 'example.docx'))
+var out = fs.createWriteStream(path.join(outDir, 'example_word.docx'))
 
 out.on('error', function(err) {
   console.log(err)
