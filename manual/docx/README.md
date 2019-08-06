@@ -42,6 +42,7 @@ let docx = officegen({
 - pageSize (string | object) - Set document page size. The default is A4 (support value: 'A4', 'A3', 'letter paper'). Or set customize size with { width: 11906, height: 16838 }
 - subject (string) - The document's subject (part of the Document's Properties in Office).
 - title (string) - The document's title (part of the Document's Properties in Office).
+- columns (number) - The number of columns in each page. The default is 1 column.
 
 You can always change some of these settings after creating the docx object using there methods:
 

@@ -1,3 +1,5 @@
+- Version 0.6.3:
+  - DOCX: columns support.
 - Version 0.6.2:
   - PPTX workaround for using placeholders + custom sizes + custom fills: the disableFillSettings setting.
 - Version 0.6.1:
