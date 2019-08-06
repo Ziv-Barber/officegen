@@ -94,6 +94,10 @@ pObj.addImage(path.resolve(__dirname, '../images_for_examples/image1.png'))
 
 pObj = docx.createP()
 
+pObj.addImage(path.resolve(__dirname, '../images_for_examples/image2.jpg'))
+
+pObj = docx.createP()
+
 pObj.addImage(path.resolve(__dirname, '../images_for_examples/sword_001.png'))
 pObj.addImage(path.resolve(__dirname, '../images_for_examples/sword_002.png'))
 pObj.addImage(path.resolve(__dirname, '../images_for_examples/sword_003.png'))
