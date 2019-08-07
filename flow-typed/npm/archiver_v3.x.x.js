@@ -1,5 +1,5 @@
-// flow-typed signature: fc1ba405514489bc1821fe6f1ba232ab
-// flow-typed version: d8c886e8ec/archiver_v3.x.x/flow_>=v0.88.x
+// flow-typed signature: 9e01e4ce0ab560895e9978fb26486fff
+// flow-typed version: c6154227d1/archiver_v3.x.x/flow_>=v0.104.x
 
 declare module "archiver" {
   import type { Stats } from "fs";
@@ -11,7 +11,8 @@ declare module "archiver" {
     prefix?: string,
     stats?: Stats,
     date?: Date | string,
-    mode?: number
+    mode?: number,
+    ...
   };
 
   declare export type EntryDataFunction = (entry: EntryData) => false | EntryData;
@@ -54,8 +55,8 @@ declare module "archiver" {
     silent?: boolean,
     strict?: boolean,
     cache?: boolean,
-    statCache?: { [string]: Stats },
-    symlinks?: { [string]: boolean },
+    statCache?: { [string]: Stats, ... },
+    symlinks?: { [string]: boolean, ... },
     sync?: boolean,
     nounique?: boolean,
     nonull?: boolean,
@@ -102,7 +103,8 @@ declare module "archiver" {
   declare export type Vending = {
     (format: Format, options?: ArchiverOptions): Archiver,
     create(format: string, options?: ArchiverOptions): Archiver,
-    registerFormat(format: string, module: (...a: any) => mixed): void
+    registerFormat(format: string, module: (...a: any) => mixed): void,
+    ...
   };
 
   declare module.exports: Vending;

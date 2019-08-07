@@ -55,7 +55,7 @@
     "prettify:all": "prettier --write \"{lib,examples,tests,plugins,test_files}/**/*.{jsx,js}\""
   },
   "dependencies": {
-    "archiver": "~3.0.3",
+    "archiver": "~3.1.1",
     "async": "^3.1.0",
     "fast-image-size": "^0.1.3",
     "jszip": "^3.2.2",
@@ -87,7 +87,7 @@
     "eslint-config-mocha": "^0.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-flowtype": "^3.12.2",
+    "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-mocha": "^6.0.0",
     "eslint-plugin-mocha-only": "^0.0.3",
@@ -96,19 +96,19 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "flow-bin": "^0.104.0",
-    "flow-typed": "^2.6.0",
+    "flow-typed": "^2.6.1",
     "mocha": "^6.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "1.18.2",
     "rimraf": "^2.6.3",
-    "rollup": "^1.17.0",
+    "rollup": "^1.19.3",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.1",
-    "sinon": "^7.3.2"
+    "sinon": "^7.4.1"
   },
   "config": {
     "commitizen": {

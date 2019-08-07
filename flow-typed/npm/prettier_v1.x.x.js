@@ -1,5 +1,5 @@
-// flow-typed signature: 5d9f7564186b12849222d06b0c689452
-// flow-typed version: a3dbb68519/prettier_v1.x.x/flow_>=v0.84.x
+// flow-typed signature: ec743a1b5c1197353e0849812930f32a
+// flow-typed version: c6154227d1/prettier_v1.x.x/flow_>=v0.104.x
 
 declare module "prettier" {
   declare export type AST = { [key: string]: any, ... };
@@ -211,7 +211,8 @@ declare module "prettier" {
     formatWithCursor: (source: string, options: CursorOptions) => CursorResult,
     resolveConfig: {
       (filePath: string, options?: ResolveConfigOptions): Promise<?Options>,
-      sync(filePath: string, options?: ResolveConfigOptions): ?Options
+      sync(filePath: string, options?: ResolveConfigOptions): ?Options,
+      ...
     },
     clearConfigCache: () => void,
     getSupportInfo: (version?: string) => SupportInfo
