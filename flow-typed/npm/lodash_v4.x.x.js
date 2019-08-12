@@ -1,5 +1,5 @@
-// flow-typed signature: 71e8d508a9d597e28ea97f69666da4b7
-// flow-typed version: c6154227d1/lodash_v4.x.x/flow_>=v0.104.x
+// flow-typed signature: db39be5932cc1d51f70fd1020cff8e08
+// flow-typed version: d381f02c43/lodash_v4.x.x/flow_>=v0.104.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
@@ -223,7 +223,7 @@ declare module "lodash" {
 
   declare class Lodash {
     // Array
-    chunk<T>(array?: ?Array<T>, size?: ?number): Array<Array<T>>;
+    chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
     compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
     concat<T>(
       base?: ?$ReadOnlyArray<T>,
