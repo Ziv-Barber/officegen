@@ -66,7 +66,9 @@ pObj.addText('Align this text to the right.')
 
 pObj = docx.createP()
 
-pObj.addText('Those two lines are in the same paragraph,\nbut they are separated by a line break.')
+pObj.addText(
+  'Those two lines are in the same paragraph,\nbut they are separated by a line break.'
+)
 
 docx.putPageBreak()
 

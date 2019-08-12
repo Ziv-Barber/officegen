@@ -21,7 +21,7 @@ docx.on('error', function(err) {
   console.log(err)
 })
 
-pObj = docx.createP()
+var pObj = docx.createP()
 pObj.setStyle('Heading1')
 pObj.addText('Header!')
 
