@@ -1,4 +1,6 @@
 - Version 0.6.3:
+  - DOCX: Add paragraph spacing option.
+  - DOCX: Fix image relationships for header/footer.
   - DOCX: columns support.
   - DOCX: Better units support for image size: '1in', '1em', '1cm', '1mm', '1pt', '1pc'.
   - Fixed the jpeg support.
