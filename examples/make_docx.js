@@ -107,13 +107,51 @@ pObj.addImage(path.resolve(__dirname, 'images_for_examples/image1.png'))
 
 docx.putPageBreak()
 
+//Add an unordered list
+pObj = docx.createListOfDots()
+
+pObj.addText('Unordered Option 1')
+
+pObj = docx.createNestedUnOrderedList({
+  "level":2
+})
+
+pObj.addText('Unordered Nested Option 1')
+
+pObj = docx.createListOfDots()
+
+pObj.addText('Unordered Option 2')
+
+docx.putPageBreak()
+
+//Add an ordered list
 pObj = docx.createListOfNumbers()
 
-pObj.addText('Option 1')
+pObj.addText('Ordered Option 1')
+
+//Add a nested list
+pObj = docx.createNestedOrderedList({
+  "level":2
+})
+
+pObj.addText('Second Level Option 1')
+
+//Add a nested third level list
+pObj = docx.createNestedOrderedList({
+  "level":3
+})
+
+pObj.addText('Third Level Option 1')
+
+pObj = docx.createNestedOrderedList({
+  "level":2
+})
+
+pObj.addText('Second Level Option 2')
 
 pObj = docx.createListOfNumbers()
 
-pObj.addText('Option 2')
+pObj.addText('Ordered Option 2')
 
 pObj.addHorizontalLine()
 
