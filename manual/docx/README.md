@@ -118,6 +118,18 @@ var pObj = docx.createListOfDots ();
 var pObj = docx.createListOfNumbers ();
 ```
 
+You can create ordered and ordered nested lists as below. You can pass the list level as input to the function.
+
+```javascript
+pObj = docx.createNestedUnOrderedList({
+  "level":2
+})
+
+pObj = docx.createNestedOrderedList({
+  "level":2
+})
+```
+
 Now you can fill the paragraph object with one or more text strings using the addText method:
 
 ```javascript
