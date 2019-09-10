@@ -1,3 +1,6 @@
+- Version 0.6.4:
+  - DOCX: Feature request: ability to specify list level/depth.
+  - Documentation: Fixed the addImage example for DOCX.
 - Version 0.6.3:
   - DOCX: addText() now supporting newline.
   - DOCX: Add paragraph spacing option.

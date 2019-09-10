@@ -162,36 +162,36 @@ Add an image to a paragraph:
 ```
 var path = require('path');
 
-pObj.addImage ( path.resolve(__dirname, 'myFile.png' ) );
-pObj.addImage ( path.resolve(__dirname, 'myFile.png', { cx: 300, cy: 200 } ) );
+pObj.addImage(path.resolve(__dirname, 'myFile.png'))
+pObj.addImage(path.resolve(__dirname, 'myFile.png'), {cx: 300, cy: 200})
 ```
 
 To add a line break;
 
 ```javascript
-var pObj = docx.createP ();
-pObj.addLineBreak ();
+var pObj = docx.createP()
+pObj.addLineBreak()
 ```
 
 To add a page break:
 
 ```javascript
-docx.putPageBreak ();
+docx.putPageBreak()
 ```
 
 To add a horizontal line:
 
 ```javascript
-var pObj = docx.createP ();
-pObj.addHorizontalLine ();
+var pObj = docx.createP()
+pObj.addHorizontalLine()
 ```
 
 To add a back line:
 
 ```javascript
-var pObj = docx.createP ({ backline: 'E0E0E0' });
-pObj.addText ( 'Backline text1' );
-pObj.addText ( ' text2' );
+var pObj = docx.createP({backline: 'E0E0E0'})
+pObj.addText('Backline text1')
+pObj.addText(' text2')
 ```
 
 To add a table:
