@@ -1,4 +1,10 @@
-# Creating an officegen stream object:
+# How to create documents using officegen:
+
+- Create an officegen object
+- Fill the officegen object with data
+- Generate the document itself into the given node.js streaming object
+
+## Creating an officegen object:
 
 First, make sure to require the officegen module:
 
@@ -6,7 +12,7 @@ First, make sure to require the officegen module:
 var officegen = require('officegen')
 ```
 
-There are two ways to use the officegen returned function to create an officegen stream:
+There are two ways to use the officegen returned function to create an officegen object:
 
 ```javascript
 var myDoc = officegen('<type of document to create>')
@@ -24,49 +30,39 @@ var myDoc = officegen({
 // 'xlsx' - Microsoft Excel based document.
 ```
 
-Generating an empty Microsoft PowerPoint officegen stream:
+Creating an empty Microsoft PowerPoint officegen object:
 
 ```javascript
 var pptx = officegen('pptx')
 ```
 
-Generating an empty Microsoft Word officegen stream:
+Creating an empty Microsoft Word officegen object:
 
 ```javascript
 var docx = officegen('docx')
 ```
 
-Generating an empty Microsoft Excel officegen stream:
+Creating an empty Microsoft Excel officegen object:
 
 ```javascript
 var xlsx = officegen('xlsx')
 ```
 
-General events of the officegen stream:
+## Using officegen stream events:
 
-- 'finalize' - been called after finishing to create the document.
-- 'error' - been called on error.
-
-Event examples:
+Right now officegen sending error events to itself so you'll need to catch the 'error' events on the officegen object:
 
 ```javascript
-pptx.on('finalize', function (written) {
-  console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
-})
-
 pptx.on('error', function (err) {
   console.log(err)
 })
 ```
 
-Another way to register either 'finalize' or 'error' events:
+Another (old) way to register the 'error' event:
 
 ```javascript
 var pptx = officegen({
   'type': 'pptx', // or 'xlsx', etc
-  'onend': function (written) {
-    console.log('Finish to create a PowerPoint file.\nTotal bytes created: ' + written + '\n')
-  },
   'onerr': function (err) {
     console.log(err)
   }
@@ -79,15 +75,22 @@ If you are preferring to use callbacks instead of events you can pass your callb
 Now you should fill the object with data (we'll see below) and then you should call generate with
 an output stream to create the output Office document.
 
+Except for the officegen 'error' event, you should receive all the other events from the output stream that you are using.
+Normally a node.js stream object is sending the following events:
+
+'error' - error events.
+'final' or 'close' (depending on the stream type) - end of creating the output document.
+
 Example with pptx:
 
 ```javascript
 var out = fs.createWriteStream('out.pptx')
 
-pptx.generate(out)
 out.on('close', function () {
   console.log('Finished to create the PPTX file!')
 })
+
+pptx.generate(out)
 ```
 
 Passing callbacks to generate:
