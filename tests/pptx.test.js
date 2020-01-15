@@ -67,7 +67,7 @@ describe('PPTX generator', function() {
 
     // Basic way to add text string:
     slide.addText(
-      'Created using Officegen version ' + officegen.version,
+      'Created using Officegen version \x0b' + officegen.version,
       0,
       0,
       '80%',
