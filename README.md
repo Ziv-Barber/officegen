@@ -72,7 +72,7 @@ $ npm install officegen
 <a name="getspptx"></a>
 ### Microsoft PowerPoint basic usage example:
 
-```
+```js
 const officegen = require('officegen')
 const fs = require('fs')
 
@@ -136,7 +136,7 @@ pptx.generate(out)
 <a name="getspptx"></a>
 ### Microsoft Word basic usage example:
 
-```
+```js
 const officegen = require('officegen')
 const fs = require('fs')
 
@@ -237,7 +237,7 @@ docx.generate(out)
 <a name="getspptx"></a>
 ### Microsoft Excel basic usage example:
 
-```
+```js
 const officegen = require('officegen')
 const fs = require('fs')
 
