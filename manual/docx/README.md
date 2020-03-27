@@ -58,7 +58,7 @@ docx.setDocStatus('...')
 <a name="prgapi"></a>
 ## The paragraph API: ##
 
-To create a new paragraph in your document you need to create a parahpaph object from your main docx object:
+To create a new paragraph in your document you need to create a paragraph object from your main docx object:
 
 ```js
 let pObj = docx.createP(options)
@@ -66,7 +66,8 @@ let pObj = docx.createP(options)
 
 When the options are:
 
-- align (string) - Can be either 'left' (the default), 'right', 'center' or 'justify'.
+- align (string) - Horizontal alignment, can be either 'left' (the default), 'right', 'center' or 'justify'.
+- textAlignment (string) - Vertical alignment, can be 'center', 'top', 'bottom' or 'baseline'.
 
 ### Paragraph's methods: ###
 
@@ -192,7 +193,7 @@ var table = [
       cellColWidth: 4261,
       b:true,
       sz: '48',
-      spacingBefor: 120,
+      spacingBefore: 120,
       spacingAfter: 120,
       spacingLine: 240,
       spacingLineRule: 'atLeast',
@@ -253,6 +254,7 @@ var tableStyle = {
   fixedLayout: true, // default is false
   borders: true, // default is false. if true, default border size is 4
   borderSize: 2, // To use this option, the 'borders' must set as true, default is 4
+  columns: [{ width: 4261 }, { width: 1 }, { width: 42 }], // Table logical columns
 }
 docx.createTable (table, tableStyle);
 ```
