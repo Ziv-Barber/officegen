@@ -1,11 +1,10 @@
-- Version 0.6.5:
+- Version 0.6.4:
   - Apple Pages compatibility and more options (thanks apsavin!).
   - Merge pull request #349 from isdh/patch-1.
   - More options for tables.
   - Extend encoding of text to also remove invalid XML characters.
   - Round cx and cy values for images in a:ext tag.
   - Packages updates.
-- Version 0.6.4:
   - DOCX: Feature request: ability to specify list level/depth.
   - Documentation: Fixed the addImage example for DOCX.
 - Version 0.6.3:
