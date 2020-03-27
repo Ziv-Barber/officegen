@@ -8,7 +8,7 @@ var path = require('path')
  * Example how to create a simple PowerPoint file using officegen and node.js fs API.
  * We'll just write 'Hello World' into the generated file.
  */
-function makePptxFile () {
+function makePptxFile() {
   var pptx = officegen('pptx')
 
   // Example how to set the title (You can see it in the document properties):
@@ -29,24 +29,26 @@ function makePptxFile () {
   slide.addText('Hello World!!!')
 
   // Create a file stream so we'll output the generated pptx data into this file:
-  var out = fs.createWriteStream(path.join(__dirname, '../../tmp/simple_hello_world.pptx'))
+  var out = fs.createWriteStream(
+    path.join(__dirname, '../../tmp/simple_hello_world.pptx')
+  )
 
   //
   // Generating part - let's do it into a file:
   //
 
   // This one catch only the officegen errors:
-  pptx.on('error', function(err) {
+  pptx.on('error', function (err) {
     console.log(err)
   })
 
   // Catch fs errors:
-  out.on('error', function(err) {
+  out.on('error', function (err) {
     console.log(err)
   })
 
   // End event after creating the PowerPoint file:
-  out.on('close', function() {
+  out.on('close', function () {
     console.log('Finished to create the PowerPoint file')
   })
 
@@ -54,8 +56,4 @@ function makePptxFile () {
   pptx.generate(out)
 }
 
-async.series(
-  [
-    makePptxFile
-  ]
-)
+async.series([makePptxFile])

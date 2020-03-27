@@ -11,7 +11,7 @@ function postRequest(request, response, callback) {
   if (typeof callback !== 'function') return null
 
   if (request.method === 'POST') {
-    request.on('data', function(data) {
+    request.on('data', function (data) {
       queryData += data
       if (queryData.length > 100) {
         queryData = ''
@@ -20,7 +20,7 @@ function postRequest(request, response, callback) {
       }
     })
 
-    request.on('end', function() {
+    request.on('end', function () {
       response.post = querystring.parse(queryData)
       callback()
     })
@@ -31,7 +31,7 @@ function postRequest(request, response, callback) {
 }
 
 http
-  .createServer(function(request, response) {
+  .createServer(function (request, response) {
     if (request.method === 'GET') {
       response.writeHead(200, 'OK', { 'Content-Type': 'text/html' })
       response.write('<html>\n<head></head>\n<body>\n')
@@ -42,7 +42,7 @@ http
       response.write('</body>\n</html>\n')
       response.end()
     } else {
-      postRequest(request, response, function() {
+      postRequest(request, response, function () {
         // console.log ( response.post )
 
         response.writeHead(200, {
@@ -63,7 +63,7 @@ http
 
         var pptx = officegen('pptx')
 
-        pptx.on('finalize', function(written) {
+        pptx.on('finalize', function (written) {
           console.log(
             'Finish to create the surprise PowerPoint stream and send it to ' +
               response.post.name +
@@ -73,7 +73,7 @@ http
           )
         })
 
-        pptx.on('error', function(err) {
+        pptx.on('error', function (err) {
           console.log(err)
         })
 

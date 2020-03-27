@@ -32,16 +32,16 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function(err) {
+var onError = function (err) {
   console.log(err)
   assert(false)
 }
 
-describe('PPTX Speaker Notes plugin', function() {
+describe('PPTX Speaker Notes plugin', function () {
   this.slow(2000)
 
-  before(function(done) {
-    fs.mkdir(outDir, 0o777, function(err) {
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
       if (err) {
       } // Endif.
 
@@ -49,7 +49,7 @@ describe('PPTX Speaker Notes plugin', function() {
     })
   })
 
-  it('creates a presentation with one speaker note', function(done) {
+  it('creates a presentation with one speaker note', function (done) {
     var slide
     var pptx = officegen('pptx')
     pptx.on('error', onError)
@@ -159,7 +159,7 @@ describe('PPTX Speaker Notes plugin', function() {
     var outFilename = 'test-ppt-notes-1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })

@@ -32,14 +32,14 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function(err) {
+var onError = function (err) {
   console.log(err)
   assert(false)
 }
 
-describe('XLSX generator', function() {
-  before(function(done) {
-    fs.mkdir(outDir, 0o777, function(err) {
+describe('XLSX generator', function () {
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
       if (err) {
       } // Endif.
 
@@ -47,7 +47,7 @@ describe('XLSX generator', function() {
     })
   })
 
-  it('creates a spreadsheet with text and numbers', function(done) {
+  it('creates a spreadsheet with text and numbers', function (done) {
     var xlsx = officegen('xlsx')
     xlsx.on('error', onError)
 
@@ -81,7 +81,7 @@ describe('XLSX generator', function() {
     var outFilename = 'test-xls-1.xlsx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     xlsx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })

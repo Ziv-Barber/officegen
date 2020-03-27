@@ -17,7 +17,7 @@ var docx = officegen({
 // Remove this comment if you want to debug Officegen:
 // officegen.setVerboseMode ( true )
 
-docx.on('error', function(err) {
+docx.on('error', function (err) {
   console.log(err)
 })
 
@@ -27,21 +27,21 @@ pObj.addText('Header!')
 
 var out = fs.createWriteStream(path.join(outDir, 'example_word.docx'))
 
-out.on('error', function(err) {
+out.on('error', function (err) {
   console.log(err)
 })
 
 async.parallel(
   [
-    function(done) {
-      out.on('close', function() {
+    function (done) {
+      out.on('close', function () {
         console.log('Finish to create a DOCX file.')
         done(null)
       })
       docx.generate(out)
     }
   ],
-  function(err) {
+  function (err) {
     if (err) {
       console.log('error: ' + err)
     } // Endif.

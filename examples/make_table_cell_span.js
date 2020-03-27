@@ -7,13 +7,13 @@ var outDir = path.join(__dirname, '../tmp/')
 
 var docx = officegen('docx')
 
-docx.on('finalize', function(written) {
+docx.on('finalize', function (written) {
   console.log(
     'Finish to create Word file.\nTotal bytes created: ' + written + '\n'
   )
 })
 
-docx.on('error', function(err) {
+docx.on('error', function (err) {
   console.log(err)
 })
 
@@ -82,7 +82,7 @@ var out = fs.createWriteStream(
   path.join(outDir, 'example_table_cell_span.docx')
 )
 
-out.on('error', function(err) {
+out.on('error', function (err) {
   console.log(err)
 })
 

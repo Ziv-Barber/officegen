@@ -11,7 +11,7 @@ var outDir = path.join(__dirname, '../tmp/')
 var slide
 var pObj
 
-pptx.on('finalize', function(written) {
+pptx.on('finalize', function (written) {
   console.log(
     'Finish to create a PowerPoint file.\nTotal bytes created: ' +
       written +
@@ -21,7 +21,7 @@ pptx.on('finalize', function(written) {
   // clear the temporatory files
 })
 
-pptx.on('error', function(err) {
+pptx.on('error', function (err) {
   console.log(err)
 })
 
@@ -437,7 +437,7 @@ function generateTables(callback) {
 function finalize() {
   var out = fs.createWriteStream(path.join(outDir, 'example.pptx'))
 
-  out.on('error', function(err) {
+  out.on('error', function (err) {
     console.log(err)
   })
 

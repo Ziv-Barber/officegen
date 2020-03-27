@@ -32,16 +32,16 @@ var path = require('path')
 var outDir = path.join(__dirname, '../tmp/')
 
 // Common error method:
-var onError = function(err) {
+var onError = function (err) {
   console.log(err)
   assert(false)
 }
 
-describe('PPTX generator', function() {
+describe('PPTX generator', function () {
   this.slow(2000)
 
-  before(function(done) {
-    fs.mkdir(outDir, 0o777, function(err) {
+  before(function (done) {
+    fs.mkdir(outDir, 0o777, function (err) {
       if (err) {
       } // Endif.
 
@@ -49,7 +49,7 @@ describe('PPTX generator', function() {
     })
   })
 
-  it('creates a presentation with properties and text', function(done) {
+  it('creates a presentation with properties and text', function (done) {
     var pptx = officegen('pptx')
     pptx.on('error', onError)
 
@@ -115,12 +115,12 @@ describe('PPTX generator', function() {
     var outFilename = 'test-ppt1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })
 
-  it('creates slides with shapes', function(done) {
+  it('creates slides with shapes', function (done) {
     var pptx = officegen('pptx')
     pptx.on('error', onError)
 
@@ -233,12 +233,12 @@ describe('PPTX generator', function() {
     var outFilename = 'test-ppt2.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })
 
-  it('creates presentation to widescreen', function(done) {
+  it('creates presentation to widescreen', function (done) {
     var pptx = officegen('pptx')
     pptx.on('error', onError)
 
@@ -352,12 +352,12 @@ describe('PPTX generator', function() {
     var outFilename = 'test-ppt3.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })
 
-  it('creates slides with images', function(done) {
+  it('creates slides with images', function (done) {
     var pptx = officegen('pptx')
     pptx.on('error', onError)
 
@@ -480,12 +480,12 @@ describe('PPTX generator', function() {
     var outFilename = 'test-ppt-images.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })
 
-  it('creates a native table', function(done) {
+  it('creates a native table', function (done) {
     var pptx = officegen('pptx')
     pptx.on('error', onError)
 
@@ -507,7 +507,7 @@ describe('PPTX generator', function() {
     var outFilename = 'test-ppt-table-1.pptx'
     var out = fs.createWriteStream(path.join(outDir, outFilename))
     pptx.generate(out)
-    out.on('close', function() {
+    out.on('close', function () {
       done()
     })
   })

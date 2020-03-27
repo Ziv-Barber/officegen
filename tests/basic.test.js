@@ -32,9 +32,9 @@ var expect = chai.expect
 // The package under test:
 var officegen = require('../')
 
-describe('Officegen internals test suits', function() {
-  describe('basicgen test suit', function() {
-    it('plugins#getPrototypeByName ()', function() {
+describe('Officegen internals test suits', function () {
+  describe('basicgen test suit', function () {
+    it('plugins#getPrototypeByName ()', function () {
       expect(officegen.plugins.getPrototypeByName('msoffice')).to.be.an(
         'object'
       )

@@ -19,7 +19,7 @@ var docx = officegen({
 // Remove this comment in case of debugging Officegen:
 // officegen.setVerboseMode ( true )
 
-docx.on('error', function(err) {
+docx.on('error', function (err) {
   console.log(err)
 })
 
@@ -107,13 +107,13 @@ pObj.addImage(path.resolve(__dirname, 'images_for_examples/image1.png'))
 
 docx.putPageBreak()
 
-//Add an unordered list
+// Add an unordered list
 pObj = docx.createListOfDots()
 
 pObj.addText('Unordered Option 1')
 
 pObj = docx.createNestedUnOrderedList({
-  "level":2
+  level: 2
 })
 
 pObj.addText('Unordered Nested Option 1')
@@ -124,27 +124,27 @@ pObj.addText('Unordered Option 2')
 
 docx.putPageBreak()
 
-//Add an ordered list
+// Add an ordered list
 pObj = docx.createListOfNumbers()
 
 pObj.addText('Ordered Option 1')
 
-//Add a nested list
+// Add a nested list
 pObj = docx.createNestedOrderedList({
-  "level":2
+  level: 2
 })
 
 pObj.addText('Second Level Option 1')
 
-//Add a nested third level list
+// Add a nested third level list
 pObj = docx.createNestedOrderedList({
-  "level":3
+  level: 3
 })
 
 pObj.addText('Third Level Option 1')
 
 pObj = docx.createNestedOrderedList({
-  "level":2
+  level: 2
 })
 
 pObj.addText('Second Level Option 2')
@@ -234,21 +234,21 @@ pObj = docx.createTable(table, tableStyle)
 
 var out = fs.createWriteStream(path.join(outDir, 'example.docx'))
 
-out.on('error', function(err) {
+out.on('error', function (err) {
   console.log(err)
 })
 
 async.parallel(
   [
-    function(done) {
-      out.on('close', function() {
+    function (done) {
+      out.on('close', function () {
         console.log('Finish to create a DOCX file.')
         done(null)
       })
       docx.generate(out)
     }
   ],
-  function(err) {
+  function (err) {
     if (err) {
       console.log('error: ' + err)
     } // Endif.

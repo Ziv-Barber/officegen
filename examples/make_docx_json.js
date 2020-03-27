@@ -7,13 +7,13 @@ var docx = officegen('docx')
 
 var outDir = path.join(__dirname, '../tmp/')
 
-docx.on('finalize', function(written) {
+docx.on('finalize', function (written) {
   console.log(
     'Finish to create Word file.\nTotal bytes created: ' + written + '\n'
   )
 })
 
-docx.on('error', function(err) {
+docx.on('error', function (err) {
   console.log(err)
 })
 
@@ -233,7 +233,7 @@ docx.createByJson(data)
 
 var out = fs.createWriteStream(path.join(outDir, 'example_json.docx'))
 
-out.on('error', function(err) {
+out.on('error', function (err) {
   console.log(err)
 })
 

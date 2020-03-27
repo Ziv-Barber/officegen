@@ -58,22 +58,22 @@ function MakeExamplePlugin(pluginsman) {
   //
 
   // We want to extend the main API of the pptx document object:
-  pluginsman.registerCallback('makeDocApi', function(docObj) {
+  pluginsman.registerCallback('makeDocApi', function (docObj) {
     funcThis.extendPptxApi(docObj)
   })
 
   // We want to extend the slide object API:
-  pluginsman.registerCallback('newPage', function(docData) {
+  pluginsman.registerCallback('newPage', function (docData) {
     funcThis.extendPptxSlideApi(docData)
   })
 
   // This event tell us that we need to re-create the default data:
-  pluginsman.registerCallback('setData', function(docObj) {
+  pluginsman.registerCallback('setData', function (docObj) {
     funcThis.setData(docObj)
   })
 
   // This event tell us that the generator is about to start working:
-  pluginsman.registerCallback('beforeGen', function(docObj) {
+  pluginsman.registerCallback('beforeGen', function (docObj) {
     funcThis.beforeGen(docObj)
   })
 
@@ -88,7 +88,7 @@ function MakeExamplePlugin(pluginsman) {
  * This function extending the main document object with new API methods.
  * @param {object} docObj Document object.
  */
-MakeExamplePlugin.prototype.extendPptxApi = function(docObj) {
+MakeExamplePlugin.prototype.extendPptxApi = function (docObj) {
   // var funcThis = this
   /*
   NOTE:
@@ -117,7 +117,7 @@ MakeExamplePlugin.prototype.extendPptxApi = function(docObj) {
  * This function extending a new created slide object with new API methods.
  * @param {object} docData Object with information about the new slide and more.
  */
-MakeExamplePlugin.prototype.extendPptxSlideApi = function(docData) {
+MakeExamplePlugin.prototype.extendPptxSlideApi = function (docData) {
   // var funcThis = this
   // var newSlide = docData.page // The new slide's API.
   // var slideData = docData.pageData // Place here data related to the slide.
@@ -150,7 +150,7 @@ MakeExamplePlugin.prototype.extendPptxSlideApi = function(docData) {
  * This function should initialize the default specific data that this plugin needs for the document.
  * @param {object} docObj Document object.
  */
-MakeExamplePlugin.prototype.setData = function(docObj) {
+MakeExamplePlugin.prototype.setData = function (docObj) {
   // BMK_TODO:
 }
 
@@ -158,7 +158,7 @@ MakeExamplePlugin.prototype.setData = function(docObj) {
  * This function been called just before starting to generate the output document zip.
  * @param {object} docObj Document object.
  */
-MakeExamplePlugin.prototype.beforeGen = function(docObj) {
+MakeExamplePlugin.prototype.beforeGen = function (docObj) {
   // var funcThis = this
   // this.pluginsman.genPrivate.pages = access to all the slides (in case that you need it).
   // BMK_TODO:
