@@ -131,7 +131,7 @@ return new Promise((resolve, reject) => {
 
 Since that officegen is using node.js events you can also create a document directly into a http respons stream:
 
-```
+```js
 const officegen = require('officegen')
 const http = require('http')
 
