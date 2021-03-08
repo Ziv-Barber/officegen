@@ -67,3 +67,12 @@ sheet.data[1] = [];
 sheet.data[1][3] = 'abc';
 ```
 
+Merge cells:
+
+```js
+sheet.mergeCells = ['A3:E3'];
+// or some
+sheet.mergeCells = ['B4:D4', 'C5:C6'];
+
+```
+
