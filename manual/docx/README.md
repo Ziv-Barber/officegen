@@ -240,7 +240,8 @@ var table = [
         fill: "92CDDC",
         themeFill: "text1",
         "themeFillTint": "80"
-      }
+      },
+      textDirection: 'btLr' // to rotate text, or 'tbRl' to another direction
     }
   }],
   [1,'All grown-ups were once children',''],
