@@ -118,6 +118,20 @@ function generateExampleSlides(callback) {
 
   slide = pptx.makeNewSlide()
 
+  pObj = slide.addText('Office generator', {
+    y: 'c',
+    x: 0,
+    cx: '100%',
+    cy: '2cm',
+	font_face: 'Rubik',
+	pitch_family: 2,
+	charset: -79,
+    font_size: 74,
+    align: 'center'
+  })
+
+  slide = pptx.makeNewSlide()
+
   slide.show = false
   slide.addText('Red line', 'ff0000')
   slide.addShape(pptx.shapes.OVAL, {
