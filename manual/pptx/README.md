@@ -120,14 +120,14 @@ For creating a new slide using a layout (alternative):
 
 ```javascript
 let slide = pptx.makeNewSlide({
-  userLayout: 'title'
+  useLayout: 'title'
 });
 slide.setTitle('The title');
 slide.setSubTitle('Another text'); // For either 'title' and 'secHead' only.
 // for 'obj' layout use slide.setObjData(...) to change the object element inside the slide.
 ```
 
-userLayout can be:
+useLayout can be:
 
 - 'title': the first layout of Office (title).
 - 'obj': the 2nd layout of Office (with one title and one object).
@@ -137,7 +137,7 @@ Or more advance example:
 
 ```javascript
 slide = pptx.makeNewSlide({
-  userLayout: 'title'
+  useLayout: 'title'
 });
 
 // Both setTitle and setSubTitle excepting all the parameters that you can pass to slide.addText - see below:
