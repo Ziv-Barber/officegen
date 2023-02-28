@@ -69,6 +69,23 @@ pObj.addText('Those two lines are in the same paragraph,')
 pObj.addLineBreak()
 pObj.addText('but they are separated by a line break.')
 
+pObj = docx.createP({border:{
+    bottom:{
+      color: '000088',
+      val: 'dashed',
+      space: "8",
+      sz : '4'
+    }
+  },})
+pObj.addText('This is a paragraph with a bottom border, and the blue dotted lines are spaced 8. You can also extend the border in other directions.')
+pObj = docx.createP({border:{
+    left:{},
+    right:{},
+    top:{},
+    bottom:{}
+  },})
+pObj.addText('This is a paragraph with a border around it,top right bottom left')
+
 docx.putPageBreak()
 
 pObj = docx.createP()
