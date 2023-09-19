@@ -1,4 +1,5 @@
 - Version 0.6.5:
+  - PPTX: Fix table font color not being applied
   - PPTX: Better fonts support in pptx: new options parameter for addText: pitch_family and charset.
 - Version 0.6.4:
   - Apple Pages compatibility and more options (thanks apsavin!).
